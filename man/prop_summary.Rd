@@ -18,11 +18,7 @@ prop_summary(data, var_name, levels_1, levels_0, strat_vars = NULL)
 \item{strat_vars}{Character vector - the variables by which to stratify the estimates}
 }
 \value{
-Returns two data tables:
-\itemize{
-\item "data_points", the proportions of ever-smokers at age 25 observed in the survey data;
-\item "predicted_values", the model predictions up to the time horizon.
-}
+Returns the estimate and standard error.
 }
 \description{
 Uses the 'survey' package to estimate the percentages with uncertainty that accounts for survey sampling
