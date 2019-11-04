@@ -33,7 +33,7 @@
 #'
 #' }
 #'
-read_2016 <- function(
+read_2017 <- function(
   root = c("X:/", "/Volumes/Shared/"),
   file = "ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"
 ) {
