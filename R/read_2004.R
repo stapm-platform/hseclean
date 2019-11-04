@@ -1,0 +1,254 @@
+
+
+#' Read HSE 2004
+#'
+#' Reads and does basic cleaning on the Health Survey for England 2004.
+#'
+#' The Health Survey for England 2004 was designed to provide data at both national and regional level
+#' about the population living in private households in England. The sample design of the 2004 survey
+#' had two parts: a general population sample that followed the same pattern as in previous years and a
+#' minority ethnic ‘boost’ sample, designed solely to yield interviews with members of seven largest
+#' minority ethnic groups in England: Black Caribbean, Black African, Indian, Pakistani, Bangladeshi,
+#' Chinese and Irish.
+#'
+#' The general population sample was half the size of the usual sample, and involved selection 6,552
+#' addresses from the Postcode Address File (PAF) in 312 wards, issued over a twelve-month period
+#' from January to December 2004. Up to ten adults and up to two children in each household were
+#' interviewed, and a nurse visit arranged for those participants in minority ethnic groups who
+#' consented.
+#'
+#' In the ethnic boost sample, 41,436 addresses were randomly selected from PAF, within another 483
+#' wards, issued over the same 12 month period, January to December 2004. All sampled addresses were
+#' fully screened and only informants from the specified minority ethnic groups were eligible for
+#' inclusion in the survey. Among those eligible informants at an address, up to four adults and three
+#' children were selected for interview, with a random selection of participants if there was more than
+#' this number in an eligible household.
+#' In order to increase further the number of Chinese informants in 2004, the sample was supplemented
+#' with a extra sample consisting of people with ‘Chinese sounding’ surnames obtained from the
+#' Electoral Register (for further information see HSE 2004 report, Volume 2, Methodology and
+#'                     documentation).
+#'
+#' For informants from the specified minority ethnic groups (whether identified in the general population
+#'                                                           sample or the minority ethnic sample), an interview with each eligible person was followed by a nurse
+#' visit both using computer assisted interviewing. The main focus of the 2004 survey for adults from
+#' minority ethnic backgrounds was cardiovascular disease (CVD) and related risk factors. At the nurse
+#' visit, questions were asked about prescribed medication, vitamin supplements and nicotine
+#' replacements. The nurse took the blood pressure of those aged 5 and over, measured lung function of
+#' those aged 7-15, and made waist and hip measurements for those aged 11and over. Saliva samples
+#' were collected from 4-15 year olds and blood samples from those aged 11 and over including fasting
+#' blood from those aged 16 and over. Blood and saliva samples were sent to a laboratory for analysis.
+#'
+#' Informants in the general population sample, unless they were members of the specified minority
+#' ethnic groups, were given a shortened version of the questionnaire covering core topics only.
+#' For all informants, information was obtained directly from persons aged 13 and over. Information
+#' about children under 13 was obtained from a parent with the child present.
+#'
+#' WEIGHTING
+#'
+#' General Population Data (HSE04gpa.sav)
+#'
+#' Prior to 2003, the weighting strategy for the core sample in the HSE was to apply selection weights
+#' only – no attempt was made to reduce non-response bias through weighting. However, following a
+#' review of the weighting, non-response was also included in the weighting strategy for the HSE 2003.
+#' We have followed the same approach for weighting the HSE 2004 general population sample data.
+#'
+#' Two sets of non-response weights have been generated for the general population sample: household
+#' weights which adjust for non-contact and refusal of households, and interview weights which also
+#' adjust for the additional non-response among individuals in participating households.
+#'
+#' The household weight (wt_ hhld) is a household level weight that corrects the distribution of
+#' household members to match population estimates for sex/age groups and GOR. These weights were
+#' generated using calibration weighting, with the household selection weights as starting values. (The
+#' household selection weights correct for where the limit of three households are selected at addresses
+#' with more than three.) Note that the population control totals used for the calibration weighting were
+#' the ONS projected mid-year population estimates for 2004, but with a small adjustment to exclude
+#' (our best estimate of) the population aged 65 and over living in communal establishments.
+#'
+#' For analyses at the individual level, the weighting variable to use is wt_int. These weights are
+#' generated separately for adults and children:
+#' \itemize{
+#' \item for adults (aged 16 or more), the interview weights are a combination of the household weight
+#' and a component which adjusts the sample to reduce bias from individual non-response within
+#' households;
+#' \item for children (aged 0 to 15), the weights are generated from the household weights and the child
+#' selection weights – the selection weights correct for only including a maximum of two children in
+#' a household. The combined household and child selection weight were adjusted to ensure that the
+#' weighted age/sex distribution matched that of all children in co-operating households.
+#' }
+#' For analysis of children aged 0-15 in the General Population Sample, taking into account child
+#' selection only and not adjusting for non-response, the child_wt variable can be used.
+#'
+#' Minority Ethnic Group Data (HSE04etha.sav)
+#'
+#' For the HSE 2004, as well as the general population sample, boost samples were selected in areas
+#' with (relatively) higher proportions of people in minority ethnic groups. All respondents, whether
+#' from the general population sample or the boost sample, are included in the minority ethnic group
+#' sample. As well as the main interview, respondents in the minority ethnic group sample were also
+#' eligible for nurse visits and to have blood taken. Therefore, three sets of weights were generated:
+#' interview weights, plus nurse and blood weights.
+#'
+#' The first stage of the weighting process was to generate weights for the probability of selecting an
+#' address in the minority ethnic sample. Addresses in areas with different ethnic profiles had different
+#' chances of being selected for the HSE - selection weight were generated which corrected for this.
+#' These weights were combined with the selection weights for household within addresses and for
+#' individuals within household to give the interview weights (wt_int).
+#'
+#' All respondents in the minority ethnic group sample were eligible for a nurse visit and were also
+#' asked to give a sample of blood (if aged 11 or more). As there was drop-out at both these stages,
+#' separate weights were generated for the nurse visit sample (wt_nurse) and blood sample (wt_ blood).
+#'
+#' MISSING VALUES
+#'
+#' \itemize{
+#' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
+#' usually because of internal routing. For example, men in women only questions.
+#' \item -2 Schedule not applicable: Used mainly for variables on the self-completions when the
+#' respondent was not of the given age range, also used for children without legal guardians in the
+#' home who could not participate in the nurse schedule.
+#' \item -6 Schedule not obtained: Used to signify that a particular variable was not answered because the
+#' respondent did not complete or agree to a particular schedule (i.e. nurse schedule or selfcompletions).
+#' \item -7 Refused/ not obtained: Used only for variables on the nurse schedules, this code indicates that a
+#' respondent refused a particular measurement or test or the measurement was attempted but not
+#' obtained or not attempted.
+#' \item -8 Don't know, Can't say.
+#' \item -9 No answer/ Refused
+#' }
+#'
+#' @param root Character - the root directory.
+#' @param file_generalpop Character - the file path and name of the general population data file.
+#' @param file_ethnicboost Character - the file path and name of the ethnic boost data file.
+#'
+#' @return Returns a data table. Note that:
+#' \itemize{
+#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
+#' except -8 ("don't know") as this is data.
+#' \item All variable names are converted to lower case.
+#' \item The cluster and probabilistic sampling unit have the year appended to them.
+#' }
+#' @export
+#'
+#' @examples
+#'
+#' \dontrun{
+#'
+#' data_2004 <- read_2004(
+#'   root = "X:/",
+#'   file_generalpop = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+#'   file_ethnicboost = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+#' )
+#'
+#' }
+#'
+read_2004 <- function(
+  root = c("X:/", "/Volumes/Shared/"),
+  file_generalpop = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+  file_ethnicboost = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+) {
+
+  ##################################################################################
+  # General population
+
+  data <- fread(
+    paste0(root[1], file_generalpop),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
+  )
+
+  setnames(data, names(data), tolower(names(data)))
+
+  alc_vars <- colnames(data[ , 1507:1574])
+  smk_vars <- colnames(data[ , 1436:1506])
+  health_vars <- paste0("compm", 1:14)
+
+  other_vars <- Hmisc::Cs(
+    mintb,
+    area, cluster, wt_int,
+    age, sex,
+    ethcind,
+    imd2004, econact, nssec3, nssec8,
+    #econact2, #paidwk,
+    activb, #HHInc,
+    children, infants,
+    educend, topqual3,
+    #eqv5,
+    eqvinc,
+
+    marstatb, # marital status inc cohabitees
+
+    # how much they weigh
+    htval, wtval)
+
+  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+
+  names <- tolower(names)
+
+  data <- data[ , ..names]
+
+  setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
+           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
+
+  data[ , psu := paste0("2004_", psu)]
+  data[ , cluster := paste0("2004_", cluster)]
+
+  data[ , year := 2004]
+
+  data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
+  data[ , mintb := NULL]
+
+  ##################################################################################
+  # Ethnic boost sample
+
+  data_ethnicboost <- fread(
+    paste0(root[1], file_ethnicboost),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
+  )
+
+  setnames(data_ethnicboost, names(data_ethnicboost), tolower(names(data_ethnicboost)))
+
+  data_ethnicboost <- data_ethnicboost[ , ..names]
+
+  setnames(data_ethnicboost, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
+           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
+
+  data_ethnicboost[ , psu := paste0("2004_", psu)]
+  data_ethnicboost[ , cluster := paste0("2004_", cluster)]
+
+  data_ethnicboost[ , year := 2004]
+
+  data_ethnicboost[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
+  data_ethnicboost[ , mintb := NULL]
+
+return(rbindlist(list(data, data_ethnicboost), use.names = T))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
