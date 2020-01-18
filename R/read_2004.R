@@ -217,7 +217,7 @@ read_2004 <- function(
   data_ethnicboost[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data_ethnicboost[ , mintb := NULL]
 
-return(rbindlist(list(data, data_ethnicboost), use.names = T))
+return(rbindlist(list(data, data_ethnicboost), use.names = T)[])
 }
 
 

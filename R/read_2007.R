@@ -156,7 +156,7 @@ read_2007 <- function(
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
-return(data)
+return(data[])
 }
 
 

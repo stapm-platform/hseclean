@@ -111,7 +111,7 @@ read_2015 <- function(
 
   data[ , year := 2015]
 
-return(data)
+return(data[])
 }
 
 
