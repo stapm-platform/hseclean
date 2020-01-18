@@ -19,7 +19,6 @@
 #' @param data Data table - the Health Survey for England dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#' @param year The year of data being processed.
 #'
 #' @return
 #' \itemize{
@@ -45,11 +44,12 @@
 alc_sevenday_child <- function(
   data,
   abv_data = hseclean::abv_data,
-  alc_volume_data = hseclean::alc_volume_data,
-  year
+  alc_volume_data = hseclean::alc_volume_data
 ) {
 
-  yearset1 <- c(2001:2006, 2008:2016)
+  year <- as.integer(unique(data[ , year][1]))
+  
+  yearset1 <- c(2001:2006, 2008:2100)
   yearset2 <- 2007
 
   # Beer

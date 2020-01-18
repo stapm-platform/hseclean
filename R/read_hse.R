@@ -39,6 +39,7 @@ read_hse <- function(
   if(year == 2014) data <- hseclean::read_2014(root = root[1])
   if(year == 2015) data <- hseclean::read_2015(root = root[1])
   if(year == 2016) data <- hseclean::read_2016(root = root[1])
+  if(year == 2017) data <- hseclean::read_2017(root = root[1])
 
 return(data)
 }

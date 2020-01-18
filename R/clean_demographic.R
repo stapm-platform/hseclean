@@ -76,11 +76,11 @@ clean_demographic <- function(
   data[year %in% 2011:2014 & ethnicity_raw %in% 14:16, ethnicity := "black"]
   data[year %in% 2011:2014 & ethnicity_raw == 18, ethnicity := "asian_other"]
 
-  data[year %in% 2015:2016 & ethnicity_raw == 1, ethnicity := "white"]
-  data[year %in% 2015:2016 & ethnicity_raw == 4, ethnicity := "mixed"]
-  data[year %in% 2015:2016 & ethnicity_raw == 3, ethnicity := "asian_other"]
-  data[year %in% 2015:2016 & ethnicity_raw == 2, ethnicity := "black"]
-  data[year %in% 2015:2016 & ethnicity_raw == 5, ethnicity := "asian_other"]
+  data[year %in% 2015:2100 & ethnicity_raw == 1, ethnicity := "white"]
+  data[year %in% 2015:2100 & ethnicity_raw == 4, ethnicity := "mixed"]
+  data[year %in% 2015:2100 & ethnicity_raw == 3, ethnicity := "asian_other"]
+  data[year %in% 2015:2100 & ethnicity_raw == 2, ethnicity := "black"]
+  data[year %in% 2015:2100 & ethnicity_raw == 5, ethnicity := "asian_other"]
 
   data[ , ethnicity_4cat := ethnicity]
   data[ , ethnicity_2cat := ethnicity]

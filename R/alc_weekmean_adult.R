@@ -24,7 +24,6 @@
 #' @param data Data table - the Health Survey for England dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#' @param year - the year of data being processed
 #'
 #' @return
 #' \itemize{
@@ -62,12 +61,13 @@
 alc_weekmean_adult <- function(
   data,
   abv_data = hseclean::abv_data,
-  volume_data = hseclean::alc_volume_data,
-  year
+  volume_data = hseclean::alc_volume_data
 ) {
 
+  year <- as.integer(unique(data[ , year][1]))
+  
   year_set1 <- 2001:2002
-  year_set2 <- 2011:2016
+  year_set2 <- 2011:2100
 
 
   #################################################################

@@ -25,7 +25,7 @@
 select_data <- function(
   data,
   ages = 8:89,
-  years = 2001:2016,
+  years = 2001:2017,
   keep_vars = c("age", "sex", "imd_quintile"),
   complete_vars = c("age", "sex", "imd_quintile")
 ) {
