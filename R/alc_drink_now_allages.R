@@ -22,7 +22,7 @@
 #' @examples
 #'
 #' \dontrun{
-#' data <- read_2016()
+#' data <- read_2017()
 #' data <- clean_age(data)
 #' data <- alc_drink_now_allages(data)
 #' }

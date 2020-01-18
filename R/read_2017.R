@@ -48,7 +48,7 @@ read_2017 <- function(
 
   setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , c(50, 61, 749:801, 925:969 , 1535:1578)])
+  alc_vars <- colnames(data[ , c(50, 61, 749:801, 925:969, 1180:1203, 1535:1578)])
   smk_vars <- colnames(data[ , c(44, 55, 62, 727:748, 905:924, 1019:1043, 1204:1332, 1579:1592)])
   health_vars <- paste0("complst", 1:14)
 
