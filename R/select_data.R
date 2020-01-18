@@ -30,6 +30,8 @@ select_data <- function(
   complete_vars = c("age", "sex", "imd_quintile")
 ) {
 
+  keep_vars <- intersect(names(data), keep_vars)
+  
   data <- data[ , ..keep_vars]
 
   for(cv in complete_vars) {
