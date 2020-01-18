@@ -30,13 +30,13 @@ clean_surveyweights <- function(
   data[ , wt_int := wt_int / sum(wt_int, na.rm = T), by = "year"]
 
   # Adjust weights by population size
-  data <- merge(data, pop_data, by = c("year", "age", "sex", "imd_quintile"), all.x = T)
-  data[ , sample_n := .N, by = c("year", "age", "sex", "imd_quintile")]
-  data[ , wt_pop := sample_n / N]
-  data[ , wt_int := wt_pop * wt_int]
-  data[ , wt_int := wt_int / sum(wt_int, na.rm = T), by = "year"]
+  #data <- merge(data, pop_data, by = c("year", "age", "sex", "imd_quintile"), all.x = T)
+  #data[ , sample_n := .N, by = c("year", "age", "sex", "imd_quintile")]
+  #data[ , wt_pop := sample_n / N]
+  #data[ , wt_int := wt_pop * wt_int]
+  #data[ , wt_int := wt_int / sum(wt_int, na.rm = T), by = "year"]
 
-  data[ , `:=`(sample_n = NULL, N = NULL, wt_pop = NULL)]
+  #data[ , `:=`(sample_n = NULL, N = NULL, wt_pop = NULL)]
 
 return(data)
 }
