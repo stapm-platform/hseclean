@@ -83,7 +83,8 @@ read_2017 <- function(
   data[ , cluster := paste0("2017_", cluster)]
 
   data[ , year := 2017]
-
+  data[ , country := "England"]
+  
 return(data[])
 }
 

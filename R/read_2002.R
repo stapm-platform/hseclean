@@ -146,7 +146,8 @@ read_2002 <- function(
   data[ , cluster := "2002_all"]
 
   data[ , year := 2002]
-
+  data[ , country := "England"]
+  
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 

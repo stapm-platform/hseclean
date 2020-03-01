@@ -1,11 +1,7 @@
 Package: hseclean
-Title: Tidy the Health Survey for England Data on tobacco and alcohol
-Version: 0.1.0
-Authors@R: 
-    person(given = "Duncan",
-           family = "Gillespie",
-           role = c("aut", "cre"),
-           email = "duncan.gillespie@sheffield.ac.uk")
+Title: Tidy the data on tobacco and alcohol in the Health Surveys for England and Scotland
+Version: 0.2.0
+Authors@R: Author: c(person(given = "Duncan", family = "Gillespie", role = c("aut", "cre"), email = "duncan.gillespie@sheffield.ac.uk"), person(given = "Laura", family = "Webster", role = c("aut")))
 Description: Functions to read the data, rename, organise and process the variables required, impute missing data, and summarise data.
 License: For internal University of Sheffield use only
 Encoding: UTF-8
@@ -17,7 +13,7 @@ Imports:
 Depends: 
     data.table,
     survey
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests: 
     knitr,
     rmarkdown

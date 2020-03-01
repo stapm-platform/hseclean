@@ -4,9 +4,13 @@
 \alias{read_2004}
 \title{Read HSE 2004}
 \usage{
-read_2004(root = c("X:/", "/Volumes/Shared/"),
-  file_generalpop = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
-  file_ethnicboost = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab")
+read_2004(
+  root = c("X:/", "/Volumes/Shared/"),
+ 
+    file_generalpop = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+ 
+    file_ethnicboost = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}

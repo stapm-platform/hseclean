@@ -190,7 +190,8 @@ read_2004 <- function(
   data[ , cluster := paste0("2004_", cluster)]
 
   data[ , year := 2004]
-
+  data[ , country := "England"]
+  
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
@@ -213,7 +214,8 @@ read_2004 <- function(
   data_ethnicboost[ , cluster := paste0("2004_", cluster)]
 
   data_ethnicboost[ , year := 2004]
-
+  data_ethnicboost[ , country := "England"]
+  
   data_ethnicboost[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data_ethnicboost[ , mintb := NULL]
 
