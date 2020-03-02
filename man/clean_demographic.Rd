@@ -7,7 +7,7 @@
 clean_demographic(data)
 }
 \arguments{
-\item{data}{Data table - the Health Survey for England dataset.}
+\item{data}{Data table - the Health Survey for England/Scotland Health Survey dataset.}
 }
 \value{
 \itemize{
@@ -22,21 +22,34 @@ Processes demographic variables.
 }
 \details{
 ETHNICITY
-Previous SAPM modelling has used a simple white/non-white classification. The ONS recommend a harmonised ethnicity measure
-for use in social surveys (\href{https://gss.civilservice.gov.uk/wp-content/uploads/2017/08/Ethnic-Group-June-17.pdf}{ONS, 2017}).
-The use of ethnicity measures is also discussed in \href{https://journals.sagepub.com/doi/full/10.1177/2059799116642885}{Connelly et al. 2016},
-who recommend testing the sensitivity of analyses to different specifications. We try to map the HSE categories to the ONS
-recommended groups for England. However, over the years, the HSE is not clear or consistent in how they have categorised
-chinese and arab as 'asian' or 'other'. In an attempt to harmonise, we have pooled the asian and other categories.
+Previous SAPM modelling has used a simple white/non-white classification. 
+The ONS recommend a harmonised ethnicity measure for use in social surveys 
+(\href{https://gss.civilservice.gov.uk/wp-content/uploads/2017/08/Ethnic-Group-June-17.pdf}{ONS, 2017}).
+The use of ethnicity measures is also discussed in 
+\href{https://journals.sagepub.com/doi/full/10.1177/2059799116642885}{Connelly et al. 2016}, 
+who recommend testing the sensitivity of analyses to different specifications. We try to map the 
+HSE categories to the ONS recommended groups for England. However, over the years, the HSE is not 
+clear or consistent in how they have categorised chinese and arab as 'asian' or 'other'. 
+In an attempt to harmonise, we have pooled the asian and other categories.  
 \itemize{
 \item White (English, Irish, Scottish, Welsh, other European)
 \item Mixed / multiple ethnic groups
-\item Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi),
-plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)
-\item Black / African / Caribbean / Black British (includes Caribbean, African)
+\item Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi), plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)
+\item Black / African / Caribbean / Black British (includes Caribbean, African)  
 }
-On the basis of this look at the data, the white/non-white classification does look appropriate, especially given
-the likely limited sample sizes - so this 2 level variable has also been created.
+Following inspection of the data, the white/non-white classification does look appropriate, 
+especially given the likely limited sample sizes - so the 2 level variable has also been created.  
+
+For 2008-2013 of the Scottish Health Survey, we can create the same 4-category variable as for the HSE, howvere for 2014 onwards, 
+the Scottish Health Survey 2018 only identifies 5 groups of ethnicity: 
+\itemize{
+\item White (Scottish)
+\item White (Other British)
+\item White (Other)
+\item Asian
+\item Other minority ethnic
+}
+On the basis of this, only the 2 level variable (white/non-white) has been created for all years for Scotland.
 }
 \examples{
 

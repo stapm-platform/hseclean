@@ -54,6 +54,21 @@ clean_economic_status <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
+  
+  if(!("econact" %in% colnames(data))) {
+    data[ , econact := NA_real_]
+  }
+  if(!("activb" %in% colnames(data))) {
+    data[ , activb := NA_real_]
+  }
+  if(!("econac12" %in% colnames(data))) {
+    data[ , econac12 := NA_real_]
+  }
+  if(!("nactiv" %in% colnames(data))) {
+    data[ , nactiv := NA_real_]
+  }
+  
   ####################################################################
   # NS-SEC
 
@@ -71,8 +86,7 @@ clean_economic_status <- function(
   # Employment status
 
   # For years after 2010, base initially on whether in paid work
-
-  if(max(data[ , year]) >= 2010) {
+  if(country == "England" & max(data[ , year]) >= 2010) {
 
     data[paidwk == 1, employ2cat := "employed"]
     data[paidwk == 2, employ2cat := "unemployed"]
@@ -81,15 +95,19 @@ clean_economic_status <- function(
 
   }
 
-  data[year < 2010, employ2cat := NA_character_]
-  data[year >= 2015, econact := NA_integer_]
+
+    
+  data[year < 2010 |country == "Scotland", employ2cat := NA_character_]
+  data[country == "England" & year >= 2015, econact := NA_integer_]
 
   # Fill missing with info from other variables that indicate employment or not
-  data[is.na(employ2cat) & (econact == 1 | activb == 2), employ2cat := "employed"]
+  data[is.na(employ2cat) & (econact == 1 | activb == 2 | econac12 == 2 | nactiv == 2), employ2cat := "employed"]
+  
+  data[country == "England" & year < 2015 & is.na(employ2cat) & (econact %in% 2:4 | activb %in% c(1, 3:10)), employ2cat := "unemployed"]
+  data[country == "England" & year >= 2015 & is.na(employ2cat) & (econact %in% 2:4 | activb %in% c(1, 3:9)), employ2cat := "unemployed"]
 
-  data[year < 2015 & is.na(employ2cat) & (econact %in% 2:4 | activb %in% c(1, 3:10)), employ2cat := "unemployed"]
-  data[year >= 2015 & is.na(employ2cat) & (econact %in% 2:4 | activb %in% c(1, 3:9)), employ2cat := "unemployed"]
-
+  data[country == "Scotland" & (econac12 %in% c(1, 3:7) | nactiv %in% c(1, 3:11)), employ2cat := "unemployed"]
+  
   data[is.na(employ2cat) & age < 16, employ2cat := "unemployed"]
 
 
@@ -112,23 +130,23 @@ clean_economic_status <- function(
   ####################################################################
   # Activity status for last week combined with economic activity variable
 
-  data[year < 2015 & activb == 10, activity_lstweek := "home_or_family"]
-  data[year >= 2015 & activb == 9, activity_lstweek := "home_or_family"]
+  data[year < 2015 & (econac12 == 6 | activb == 10), activity_lstweek := "home_or_family"]
+  data[year >= 2015 & (econac12 == 6 | activb == 9), activity_lstweek := "home_or_family"]
 
-  data[year < 2015 & activb %in% c(1, 3), activity_lstweek := "education"]
-  data[year >= 2015 & activb == 1, activity_lstweek := "education"]
+  data[year < 2015 & (econac12 == 1 |activb %in% c(1, 3)), activity_lstweek := "education"]
+  data[year >= 2015 & (econac12 == 1  |activb == 1), activity_lstweek := "education"]
 
-  data[year < 2015 & (econact == 3 | activb == 9), activity_lstweek := "retired"]
-  data[year >= 2015 & (econact == 3 | activb == 8), activity_lstweek := "retired"]
+  data[year < 2015 & (econac12 == 5 | econact == 3 | activb == 9), activity_lstweek := "retired"]
+  data[year >= 2015 & (econac12 == 5 | econact == 3 | activb == 8), activity_lstweek := "retired"]
 
-  data[year < 2015 & (econact == 2 | activb %in% c(5, 6)), activity_lstweek := "unemployed"]
-  data[year >= 2015 & (econact == 2 | activb %in% c(4, 5)), activity_lstweek := "unemployed"]
+  data[year < 2015 & (econac12 == 4 | econact == 2 | activb %in% c(5, 6)), activity_lstweek := "unemployed"]
+  data[year >= 2015 & (econac12 == 4 | econact == 2 | activb %in% c(4, 5)), activity_lstweek := "unemployed"]
 
-  data[year < 2015 & activb %in% 7:8, activity_lstweek := "sick_ill_disab"]
-  data[year >= 2015 & activb %in% 6:7, activity_lstweek := "sick_ill_disab"]
+  data[year < 2015 & (econac12 == 3 | activb %in% 7:8), activity_lstweek := "sick_ill_disab"]
+  data[year >= 2015 & (econac12 == 3 | activb %in% 6:7), activity_lstweek := "sick_ill_disab"]
 
-  data[year < 2015 & (econact == 1 | activb %in% c(2, 4)), activity_lstweek := "employed"]
-  data[year >= 2015 & (econact == 1 | activb %in% c(2, 3)), activity_lstweek := "employed"]
+  data[year < 2015 & (econac12 == 2 | econact == 1 | activb %in% c(2, 4)), activity_lstweek := "employed"]
+  data[year >= 2015 & (econac12 == 2 | econact == 1 | activb %in% c(2, 3)), activity_lstweek := "employed"]
 
   # Fill missing using information on age
   data[is.na(activity_lstweek) & age < 16, activity_lstweek := "education"]
@@ -137,7 +155,7 @@ clean_economic_status <- function(
 
 
   # Remove variables not needed
-  data[ , `:=`(econact = NULL, activb = NULL, nssec8 = NULL, nssec3 = NULL)]
+  data[ , `:=`(econact = NULL, activb = NULL, econac12 = NULL, nssec8 = NULL, nssec3 = NULL)]
 
 
 return(data)

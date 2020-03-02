@@ -46,7 +46,8 @@
 smk_amount <- function(
   data
 ) {
-
+  
+  country <- unique(data[ , country][1])
 
   ####################################################
   # Number of cigarettes smoked per day
@@ -55,6 +56,8 @@ smk_amount <- function(
   data[cig_smoker_status == "current" & cigwday >= 0 & cigwend >= 0, cigs_per_day := ((5 * cigwday) + (2 * cigwend)) / 7]
 
   # Children 8-15 years
+  if(country == "England"){
+    
   data[cig_smoker_status == "current" & age < 16 & kcignum > 0, cigs_per_day := kcignum / 7]
   data[cig_smoker_status == "current" & age < 16 & kcignum == 0, cigs_per_day := 1 / 7]
 
@@ -66,14 +69,29 @@ smk_amount <- function(
 
   # I smoke more than six cigarettes a week
   data[cig_smoker_status == "current" & age < 16 & is.na(cigs_per_day) & kcigreg == 6, cigs_per_day := 7]
-
+  
+  data[ , `:=` (kcigreg = NULL, kcignum = NULL, kcigweek = NULL, kcigregg = NULL)]
+  
   # For missing, fill with average for each age, sex and IMD quintile
   data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = T)
+  
+  }
+  
+  # In SHeS, no smoking data for children
+  if(country == "Scotland") {
+    
+    data[age < 16 , cigs_per_day := NA]
+    
+    # For missing, fill with average for each age, sex and IMD quintile, above 16
+    data <- impute_mean(data, "cigs_per_day", remove_zeros = T)
+  }
+  
+
 
   # For non-smokers = 0
   data[cig_smoker_status %in% c("never", "former"), cigs_per_day := 0]
 
-  remove_vars <- c("cigwday", "cigwend", "cigdyal", "kcignum", "kcigreg", "kcigweek", "kcigregg")
+  remove_vars <- c("cigwday", "cigwend")
   data[ , (remove_vars) := NULL]
 
 
@@ -99,14 +117,11 @@ smk_amount <- function(
 
   # Do this based on "cigtyp" - the main type of cigarette smoked
   # This variable is the only question on cigarette type that is asked consistently across years
-
+  if(country == "England"){
   data[cig_smoker_status %in% c("never", "former"), cig_type := "non_smoker"]
   data[cig_smoker_status == "current" & cigtyp == 1, cig_type := "tipped"]
   data[cig_smoker_status == "current" & cigtyp == 2, cig_type := "plain_untipped"]
   data[cig_smoker_status == "current" & cigtyp == 3, cig_type := "rollups"]
-
-  data[ , cigtyp := NULL]
-
 
   ####################################################
   # Time from waking until smoking
@@ -120,8 +135,9 @@ smk_amount <- function(
   # For children, assume time from waking to first cigarette is longest
   data[cig_smoker_status == "current" & age < 16 & is.na(time_to_first_cig), time_to_first_cig := "one_hour_or_more"]
 
-  data[ , firstcig := NULL]
-
+  remove_vars <- c("cigdyal", "cigtyp", "firstcig")
+  data[ , (remove_vars) := NULL]
+  }
 
 return(data)
 }

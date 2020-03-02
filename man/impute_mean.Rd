@@ -4,8 +4,12 @@
 \alias{impute_mean}
 \title{Fills missing values with subgroup mean value}
 \usage{
-impute_mean(data, var_names, remove_zeros = FALSE,
-  strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
+impute_mean(
+  data,
+  var_names,
+  remove_zeros = FALSE,
+  strat_vars = c("year", "sex", "imd_quintile", "age_cat")
+)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England data}

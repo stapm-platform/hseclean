@@ -58,13 +58,22 @@ clean_education <- function(
 
   ############################################################
   # Top qualification - degree or not
-
-  data[topqual3 == 1, degree := "degree"]
-  data[topqual3 %in% 2:7, degree := "no_degree"]
+  if("topqual3" %in% colnames(data)){
+    data[topqual3 == 1, degree := "degree"]
+    data[topqual3 %in% 2:7, degree := "no_degree"]
+    
+    data[ , topqual3 := NULL]
+  }
+  
+  if("hedqul08" %in% colnames(data)){
+    data[hedqul08 %in% 1:2, degree := "degree"]
+    data[hedqul08 %in% 3:6, degree := "no_degree"]
+    
+    data[ , hedqul08 := NULL]
+  }
 
   data[is.na(degree) & age < 18, degree := "no_degree"]
 
-  data[ , topqual3 := NULL]
 
 
 return(data)

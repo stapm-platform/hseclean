@@ -58,8 +58,27 @@ clean_health_and_bio <- function(
   data[compm1 == 0, hse_cancer := "no_cancer"]
   data[compm1 == 1, hse_cancer := "cancer"]
 
+  if("compm2" %in% colnames(data)){
   data[compm2 == 0, hse_endocrine := "no_endocrine"]
   data[compm2 == 1, hse_endocrine := "endocrine"]
+  
+  data[compm7 == 0, hse_heart := "no_heart"]
+  data[compm7 == 1, hse_heart := "heart"]
+  
+  data[ , `:=`(compm2 = NULL, compm7 = NULL)]
+  
+  }
+  
+  if("compm2a" %in% colnames(data)){
+  data[compm2a == 0 | compm2b == 0, hse_endocrine := "no_endocrine"]
+  data[compm2a == 1 | compm2b == 1, hse_endocrine := "endocrine"]
+  
+  data[compm7a == 0 | compm7b == 0 | compm7c == 0 | compm7d == 0 | compm7e == 0, hse_heart := "no_heart"]
+  data[compm7a == 1 | compm7b == 1 | compm7c == 1 | compm7d == 1 | compm7e == 1, hse_heart := "heart"]
+  
+  data[ , `:=`(compm2a = NULL, compm2b = NULL, compm7a = NULL, compm7b = NULL, compm7c = NULL, compm7d = NULL, compm7e = NULL)]
+  
+  }
 
   data[compm3 == 0, hse_mental := "no_mental"]
   data[compm3 == 1, hse_mental := "mental"]
@@ -72,9 +91,6 @@ clean_health_and_bio <- function(
 
   data[compm6 == 0, hse_ear := "no_ear"]
   data[compm6 == 1, hse_ear := "ear"]
-
-  data[compm7 == 0, hse_heart := "no_heart"]
-  data[compm7 == 1, hse_heart := "heart"]
 
   data[compm8 == 0, hse_respir := "no_respir"]
   data[compm8 == 1, hse_respir := "respir"]
@@ -99,7 +115,8 @@ clean_health_and_bio <- function(
 
 
   # Remove variables no longer needed
-  data[ , `:=`(paste0("compm", 1:14), NULL)]
+  data[ , `:=`(compm1 = NULL, compm3 = NULL, compm4 = NULL, compm5 = NULL, compm6 = NULL)]
+  data[ , `:=`(paste0("compm", 8:14), NULL)]
 
 
   ################################################################
@@ -107,7 +124,7 @@ clean_health_and_bio <- function(
 
   # Replace missing values for weight and height with the subgroup mean value
 
-  data <- hseclean::impute_mean(data, c("wtval", "htval"), remove_zeros = T)
+  data <- impute_mean(data, c("wtval", "htval"), remove_zeros = T)
 
   setnames(data, c("wtval", "htval"), c("weight", "height"))
 

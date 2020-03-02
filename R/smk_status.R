@@ -34,6 +34,8 @@ smk_status <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
+  
   ######################################################################
   # Regular cigarette smoking status (age >= 16)
 
@@ -64,7 +66,7 @@ smk_status <- function(
 
   ##
   # Never smokers (age 8-15)
-
+  if(country == "England"){
   # If never smoked cigarettes
   data[kcigevr == 2, cig_smoker_status := "never"]
 
@@ -86,7 +88,13 @@ smk_status <- function(
 
   # If less than age 8, assume never smoker
   data[age < 8, cig_smoker_status := "never"]
-
+  
+  data[ , kcigevr := NULL]
+  }
+  
+  if(country == "Scotland"){
+    data[age < 16, cig_smoker_status := NA_real_]
+  }
 
   ######################################################################
   # Ever regular cigarette smoker
@@ -96,7 +104,7 @@ smk_status <- function(
 
 
   # Remove variables no longer needed
-  remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", "kcigevr", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
+  remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
   data[ , (remove_vars) := NULL]
 
 

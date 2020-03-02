@@ -53,6 +53,12 @@ smk_life_history <- function(
 
   #############################################
   # Basic tidying
+  
+    if(!("kcigage" %in% colnames(data))) {
+      
+      data[ , kcigage := NA_real_]
+      
+    }
 
   data[ , startsmk := as.double(startsmk)]
   data[ , dcigage := as.double(dcigage)]
@@ -70,7 +76,7 @@ smk_life_history <- function(
 
   data[cig_ever == "ever_smoker", smk_start_age := as.double(startsmk)]
 
-    data[cig_smoker_status == "former" & is.na(smk_start_age), smk_start_age := as.double(age - years_since_quit - years_reg_smoker)]
+  data[cig_smoker_status == "former" & is.na(smk_start_age), smk_start_age := as.double(age - years_since_quit - years_reg_smoker)]
 
   data[cig_ever == "ever_smoker" & is.na(smk_start_age), smk_start_age := as.double(dcigage)]
   data[cig_ever == "ever_smoker" & is.na(smk_start_age), smk_start_age := as.double(kcigage)]

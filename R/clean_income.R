@@ -69,6 +69,20 @@ clean_income <- function(
   }
 
 
+  if("eqv5_15" %in% colnames(data)) {
+    
+    data[eqv5_15 == 1, income5cat := "5_highest_income"]
+    data[eqv5_15 == 2, income5cat := "4"]
+    data[eqv5_15 == 3, income5cat := "3"]
+    data[eqv5_15 == 4, income5cat := "2"]
+    data[eqv5_15 == 5, income5cat := "1_lowest_income"]
+    
+    data[ , eqv5_15 := NULL]
+    
+  }
+
+  
+  
 return(data)
 }
 

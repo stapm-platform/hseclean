@@ -36,13 +36,15 @@ smk_former <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
+  
   #############################################################
   # How long ago did you stop smoking cigarettes?
   # Asked to former smokers who smoked regularly or ocassionally
   # If less than 1 year = 0
-  data[year >= 2015, endsmoke := NA_real_]
+  data[year >= 2015 & country == "England", endsmoke := NA_real_]
   data[ , endsmoke := as.double(endsmoke)]
-  data[year < 2015 & (endsmoke >= 97 | endsmoke < 0), endsmoke := NA_real_]
+  data[(year < 2015 | country == "Scotland") & (endsmoke >= 97 | endsmoke < 0), endsmoke := NA_real_]
 
   data[cig_smoker_status == "former", years_since_quit := endsmoke]
 
@@ -51,9 +53,9 @@ smk_former <- function(
   #############################################################
   # For approximately how many years did you smoke cigarettes regularly?
   # If less than 1 year = 0
-  data[year >= 2015, smokyrs := NA_real_]
+  data[year >= 2015 & country == "England", smokyrs := NA_real_]
   data[ , smokyrs := as.double(smokyrs)]
-  data[year < 2015 & (smokyrs >= 97 | smokyrs < 0), smokyrs := NA_real_]
+  data[(year < 2015 | country == "Scotland") & (smokyrs >= 97 | smokyrs < 0), smokyrs := NA_real_]
 
   data[cig_smoker_status == "former", years_reg_smoker := smokyrs]
 
@@ -65,7 +67,7 @@ smk_former <- function(
   # endsmoke
 
   data[ , endsmoke_cat := NA_character_]
-  data[year < 2015, endsmokg := NA]
+  data[year < 2015 | country == "Scotland", endsmokg := NA]
 
   data[endsmokg == 1 & cig_smoker_status == "former", endsmoke_cat := "0-4"]
   data[endsmokg == 2 & cig_smoker_status == "former", endsmoke_cat := "5-9"]
@@ -86,7 +88,7 @@ smk_former <- function(
   # smokyrs
 
   data[ , smokyrs_cat := NA_character_]
-  data[year < 2015, smokyrsg := NA]
+  data[year < 2015 | country == "Scotland", smokyrsg := NA]
 
   data[smokyrsg == 1 & cig_smoker_status == "former", smokyrs_cat := "0-4"]
   data[smokyrsg == 2 & cig_smoker_status == "former", smokyrs_cat := "5-9"]

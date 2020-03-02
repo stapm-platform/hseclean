@@ -5,23 +5,36 @@
 #' Processes demographic variables.
 #'
 #' ETHNICITY
-#' Previous SAPM modelling has used a simple white/non-white classification. The ONS recommend a harmonised ethnicity measure
-#' for use in social surveys (\href{https://gss.civilservice.gov.uk/wp-content/uploads/2017/08/Ethnic-Group-June-17.pdf}{ONS, 2017}).
-#' The use of ethnicity measures is also discussed in \href{https://journals.sagepub.com/doi/full/10.1177/2059799116642885}{Connelly et al. 2016},
-#' who recommend testing the sensitivity of analyses to different specifications. We try to map the HSE categories to the ONS
-#' recommended groups for England. However, over the years, the HSE is not clear or consistent in how they have categorised
-#' chinese and arab as 'asian' or 'other'. In an attempt to harmonise, we have pooled the asian and other categories.
+#' Previous SAPM modelling has used a simple white/non-white classification. 
+#' The ONS recommend a harmonised ethnicity measure for use in social surveys 
+#' (\href{https://gss.civilservice.gov.uk/wp-content/uploads/2017/08/Ethnic-Group-June-17.pdf}{ONS, 2017}).
+#' The use of ethnicity measures is also discussed in 
+#' \href{https://journals.sagepub.com/doi/full/10.1177/2059799116642885}{Connelly et al. 2016}, 
+#' who recommend testing the sensitivity of analyses to different specifications. We try to map the 
+#' HSE categories to the ONS recommended groups for England. However, over the years, the HSE is not 
+#' clear or consistent in how they have categorised chinese and arab as 'asian' or 'other'. 
+#' In an attempt to harmonise, we have pooled the asian and other categories.  
 #' \itemize{
 #' \item White (English, Irish, Scottish, Welsh, other European)
 #' \item Mixed / multiple ethnic groups
-#' \item Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi),
-#' plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)
-#' \item Black / African / Caribbean / Black British (includes Caribbean, African)
+#' \item Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi), plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)
+#' \item Black / African / Caribbean / Black British (includes Caribbean, African)  
 #' }
-#' On the basis of this look at the data, the white/non-white classification does look appropriate, especially given
-#' the likely limited sample sizes - so this 2 level variable has also been created.
+#' Following inspection of the data, the white/non-white classification does look appropriate, 
+#' especially given the likely limited sample sizes - so the 2 level variable has also been created.  
+#' 
+#' For 2008-2013 of the Scottish Health Survey, we can create the same 4-category variable as for the HSE, howvere for 2014 onwards, 
+#' the Scottish Health Survey 2018 only identifies 5 groups of ethnicity: 
+#' \itemize{
+#' \item White (Scottish)
+#' \item White (Other British)
+#' \item White (Other)
+#' \item Asian
+#' \item Other minority ethnic
+#' }
+#' On the basis of this, only the 2 level variable (white/non-white) has been created for all years for Scotland.
 #'
-#' @param data Data table - the Health Survey for England dataset.
+#' @param data Data table - the Health Survey for England/Scotland Health Survey dataset.
 #'
 #' @return
 #' \itemize{
@@ -46,9 +59,12 @@ clean_demographic <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
+  
   ###################################################
   # Categorise ethnicity
-
+  if(country == "England"){
+    
   data[year %in% 2001:2007 & ethnicity_raw == 1, ethnicity := "white"]
   data[year %in% 2001:2007 & ethnicity_raw == 2, ethnicity := "mixed"]
 
@@ -86,9 +102,37 @@ clean_demographic <- function(
   data[ , ethnicity_2cat := ethnicity]
   data[ethnicity %in% c("mixed", "asian_other", "black"), ethnicity_2cat := "non_white"]
 
-  data[ , `:=`(ethnicity_raw = NULL, ethnicity = NULL)]
+  }
+  
+  if(country == "Scotland"){
+    data[year == 2008 & ethnicity_raw %in% 1:4, ethnicity := "white"]
+    data[year == 2008 & ethnicity_raw == 5 , ethnicity := "mixed"]
+    data[year == 2008 & ethnicity_raw %in% c(6:9, 13) , ethnicity := "asian_other"]
+    data[year == 2008 & ethnicity_raw %in% 10:12, ethnicity := "black"]
+    
+    data[year %in% 2009:2011 & ethnicity_raw %in% 1:9, ethnicity := "white"]
+    data[year %in% 2009:2011 & ethnicity_raw == 10 , ethnicity := "mixed"]
+    data[year %in% 2009:2011 & ethnicity_raw %in% c(11:15, 20:21) , ethnicity := "asian_other"]
+    data[year %in% 2009:2011 & ethnicity_raw %in% 16:19, ethnicity := "black"]
+    
+    data[year %in% 2012:2013 & ethnicity_raw %in% 1:6, ethnicity := "white"]
+    data[year %in% 2012:2013 & ethnicity_raw == 7 , ethnicity := "mixed"]
+    data[year %in% 2012:2013 & ethnicity_raw %in% c(8:12, 18:19) , ethnicity := "asian_other"]
+    data[year %in% 2012:2013 & ethnicity_raw %in% 13:17, ethnicity := "black"]
+    
+    data[year %in% 2014:2100, ethnicity := NA]
+    
+    data[ , ethnicity_4cat := ethnicity]
+    data[ , ethnicity_2cat := ethnicity]
+    
+    data[year %in% 2014:2100 & ethnicity_raw %in% 1:3, ethnicity_2cat := "white"]
+    data[year %in% 2014:2100 & ethnicity_raw %in% 4:5, ethnicity_2cat := "non_white"]
+    data[ethnicity %in% c("mixed", "asian_other", "black"), ethnicity_2cat := "non_white"]
+    
+  }
 
-
+  data[ , `:=`(ethnicity_raw = NULL,  ethnicity = NULL)]
+  
   ###################################################
   # Label the sexes
 
@@ -97,7 +141,7 @@ clean_demographic <- function(
 
   ###################################################
   # Label index of multiple deprivation quintiles
-
+  if(country == "England"){
   data[qimd == 5, imd_quintile := "5_most_deprived"]
   data[qimd == 4, imd_quintile := "4"]
   data[qimd == 3, imd_quintile := "3"]
@@ -105,7 +149,18 @@ clean_demographic <- function(
   data[qimd == 1, imd_quintile := "1_least_deprived"]
 
   data[ , qimd := NULL]
-
+  }
+  
+  # Scottish IMD quintiles
+  if(country == "Scotland"){
+  data[simd == 5, imd_quintile := "5_most_deprived"]
+  data[simd == 4, imd_quintile := "4"]
+  data[simd == 3, imd_quintile := "3"]
+  data[simd == 2, imd_quintile := "2"]
+  data[simd == 1, imd_quintile := "1_least_deprived"]
+  
+  data[ , simd := NULL]
+  }
 
 return(data)
 }

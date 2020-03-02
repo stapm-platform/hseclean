@@ -28,6 +28,7 @@ the number of children in the household is
 not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset).
 Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed.
 
+
 RELATIONSHIP STATUS
 
 In previous versions of modelling (e.g. the alcohol binge model) relationship status has been described as

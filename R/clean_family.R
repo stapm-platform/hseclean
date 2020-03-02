@@ -46,16 +46,14 @@ clean_family <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
+  
   #####################################################
   # Number of children in household
 
-  # This variable now not possible to get from data 2015+
+  # This variable now not possible to get from data 2015+ or from SHeS
   # for years 2015+, set the number of children and infants to NA
-  data[year >= 2015, `:=`(infants = NA, children = NA)]
-
-  # For other years, if the response was 'don't know', then set this to NA
-  data[children == -8, children := NA]
-  data[infants == -8, infants := NA]
+  data[year >= 2015 | country == "Scotland", `:=`(infants = NA, children = NA)]
 
   # Sum the number of infants and children
   data[ , kids := children + infants]
@@ -68,15 +66,15 @@ clean_family <- function(
   # For years < 2015,
   # if number of children is missing and age is less than 16 years,
   # assume no children
-  data[is.na(kids) & age < 16, kids := "0"]
+  data[country == "England" & year < 2015 & is.na(kids) & age < 16, kids := "0"]
 
   # Remove variables no longer required
   data[ , `:=`(infants = NULL, children = NULL)]
 
 
   #####################################################
-  # Relationship status
-
+  # Relationship status (England)
+  if(country == "England"){
   data[marstat == 1, relationship_status := "single"]
 
   # Married, civil partnership or cohabiting
@@ -88,10 +86,23 @@ clean_family <- function(
 
   # If under 16 and missing, assume single
   data[is.na(relationship_status) & age < 16, relationship_status := "single"]
-
   data[ , marstat := NULL]
+  }
 
-
+  # Relationship status (Scotland)
+  if(country == "Scotland"){
+  data[maritalg == 3, relationship_status := "single"]
+  
+  # Married, civil partnership or cohabiting
+  data[maritalg %in% 1:2, relationship_status := "married"]
+  
+  # Separated, divorced or widowed
+  data[maritalg %in% c(4, 5, 6), relationship_status := "sep_div_wid"]
+  
+  # If under 16 and missing, assume single
+  data[is.na(relationship_status) & age < 16, relationship_status := "single"]
+  data[ , maritalg := NULL]
+  }
 
 return(data)
 }
