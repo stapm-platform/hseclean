@@ -11,12 +11,8 @@
 #' In 2007 new questions were added asking which glass size was used when wine was consumed.
 #' Therefore the post HSE 2007 unit calculations are not directly comparable to previous years’ data.
 #'
-#' MISSING DATA
 #'
-#' Normally, if one of the constituent variables was missing, the whole variable would be marked as missing.
-#' However, due to high missingness, we just assume any missing = 0, and so are likely to make underestimates.
-#'
-#' @param data Data table - the Health Survey for England dataset
+#' @param data Data table - the health survey dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
 #'
@@ -71,8 +67,13 @@ alc_sevenday_adult <- function(
   # Adults - Consumption on heaviest drinking day in past 7 days
 
   # Normal beer
+  # SHeS 2010 does not have nberqbt7
+  if(!("nberqbt7" %in% colnames(data))){
+    data[, nberqbt7 := 0] 
+  }  
+  
   data <- hseclean::impute_mean(data, c("nberqhp7", "nberqsm7", "nberqlg7", "nberqbt7", "nberqpt7"))
-
+  
   data[ , d7vol_nbeer := 0]
   data[d7typ1 == 1, d7vol_nbeer := nberqhp7 * alc_volume_data[beverage == "nbeerhalfvol", volume]]
   data[d7typ1 == 1, d7vol_nbeer := d7vol_nbeer + nberqsm7 * alc_volume_data[beverage == "nbeerscanvol", volume]]
@@ -84,6 +85,11 @@ alc_sevenday_adult <- function(
 
 
   # Strong beer
+  # SHeS 2010 does not have sberqbt7
+  if(!("sberqbt7" %in% colnames(data))){
+    data[, sberqbt7 := 0] 
+  }  
+  
   data <- hseclean::impute_mean(data, c("sberqhp7", "sberqsm7", "sberqlg7", "sberqbt7", "sberqpt7"))
 
   data[ , d7vol_sbeer := 0]
@@ -173,18 +179,29 @@ alc_sevenday_adult <- function(
     data[ , popsqlg7 := 0]
 
   }
+  
+  # In SHeS, there are two separate measures for small cans and small bottles 
+  if(!("popsqsmc7" %in% colnames(data))) {
+    
+    data[ , popsqsmc7 := 0]
+    
+  }
+  
 
-  data <- hseclean::impute_mean(data, c("popsqsm7", "popsqlg7"))
+  data <- hseclean::impute_mean(data, c("popsqsm7", "popsqlg7", "popsqsmc7"))
 
   data[ , d7vol_pops := 0]
 
   # Small cans/bottles
   data[d7typ6 == 1, d7vol_pops := popsqsm7 * alc_volume_data[beverage == "popsscvol", volume]]
 
+  # Small cans in SHeS
+  data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqsmc7 * alc_volume_data[beverage == "popsscvol", volume]]
+  
   # Large bottles
   data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqlg7 * alc_volume_data[beverage == "popslbvol", volume]]
 
-  data[ , `:=`(popsqsm7 = NULL, popsqlg7 = NULL)]
+  data[ , `:=`(popsqsm7 = NULL, popsqlg7 = NULL, popsqsmc7 = NULL)]
 
 
   #################################################################
@@ -224,12 +241,21 @@ alc_sevenday_adult <- function(
   data[n_days_drink > 0 & peakday >= 8 & sex == "Male", binge_cat := "binge"]
   data[n_days_drink > 0 & peakday >= 6 & sex == "Female", binge_cat := "binge"]
 
-
+  if(!("drinker_cat" %in% colnames(data))) {
+    
+    message("Run the functions alc_drink_now_allages() and alc_weekmean_adult() first to properly impute missing data")
+    
+  } else {
+  
+    data[is.na(binge_cat) & (weekmean == 0 | drinker_cat == "abstainer"), binge_cat := "did_not_drink"]
+  
+  }
+  
   # Remove variables no longer needed
   remove_vars <- c("drnksame", "whichday", colnames(data)[stringr::str_detect(colnames(data), "d7")])
   data[ , (remove_vars) := NULL]
 
 
-return(data)
+return(data[])
 }
 

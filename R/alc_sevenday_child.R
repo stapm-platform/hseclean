@@ -35,8 +35,8 @@
 #' data <- clean_age(data)
 #' data <- clean_demographic(data)
 #' data <- alc_drink_now_allages(data)
-#' data <- alc_sevenday_adult(data)
 #' data <- alc_weekmean_adult(data)
+#' data <- alc_sevenday_adult(data)
 #' data <- alc_sevenday_child(data)
 #'
 #' }

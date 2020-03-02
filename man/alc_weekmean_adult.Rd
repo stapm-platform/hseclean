@@ -4,8 +4,11 @@
 \alias{alc_weekmean_adult}
 \title{Alcohol average weekly consumption (adults)}
 \usage{
-alc_weekmean_adult(data, abv_data = hseclean::abv_data,
-  volume_data = hseclean::alc_volume_data, year)
+alc_weekmean_adult(
+  data,
+  abv_data = hseclean::abv_data,
+  volume_data = hseclean::alc_volume_data
+)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset}
@@ -13,8 +16,6 @@ alc_weekmean_adult(data, abv_data = hseclean::abv_data,
 \item{abv_data}{Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)}
 
 \item{volume_data}{Data table - our assumptions on the volume of different drinks (ml).}
-
-\item{year}{- the year of data being processed}
 }
 \value{
 \itemize{
@@ -23,10 +24,10 @@ alc_weekmean_adult(data, abv_data = hseclean::abv_data,
 \item spirit_units - average weekly units of spirits
 \item rtd_units - average weekly units of alcopops
 \item weekmean - total average weekly units
-\item perc_spirit_units - proportion of consumption that is spirits
-\item perc_wine_units - proportion of consumption that is wine
-\item perc_rtd_units - proportion of consumption that is alcopops
-\item perc_beer_units - proportion of consumption that is beer
+\item perc_spirit_units - percentage of consumption that is spirits
+\item perc_wine_units - percentage of consumption that is wine
+\item perc_rtd_units - percentage of consumption that is alcopops
+\item perc_beer_units - percentage of consumption that is beer
 \item drinker_cat - categories of average weekly consumption
 \item spirits_pref_cat - whether doesn't drink, drinks some or mostly drinks spirits
 \item wine_pref_cat - whether doesn't drink, drinks some or mostly drinks wine

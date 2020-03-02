@@ -4,15 +4,16 @@
 \alias{alc_sevenday_child}
 \title{Alcohol consumption in last seven-days (children)}
 \usage{
-alc_sevenday_child(data, abv_data = hseclean::abv_data,
-  alc_volume_data = hseclean::alc_volume_data, year)
+alc_sevenday_child(
+  data,
+  abv_data = hseclean::abv_data,
+  alc_volume_data = hseclean::alc_volume_data
+)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset}
 
 \item{abv_data}{Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)}
-
-\item{year}{The year of data being processed.}
 
 \item{volume_data}{Data table - our assumptions on the volume of different drinks (ml).}
 }
@@ -31,6 +32,7 @@ We estimate the number of
 UK standard units of alcohol drunk in the last 7 days by using the data on how many of what size measures of
 different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content.
 
+
 MISSING DATA
 
 Normally, if one of the constituent variables was missing, the whole variable would be marked as missing.
@@ -44,8 +46,8 @@ data <- read_2001()
 data <- clean_age(data)
 data <- clean_demographic(data)
 data <- alc_drink_now_allages(data)
-data <- alc_sevenday_adult(data)
 data <- alc_weekmean_adult(data)
+data <- alc_sevenday_adult(data)
 data <- alc_sevenday_child(data)
 
 }

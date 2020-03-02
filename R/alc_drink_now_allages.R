@@ -42,7 +42,7 @@ alc_drink_now_allages <- function(
   # Assign drink frequency
   data[dnoft %in% 1:8, drink_freq_7d := hseclean::alc_drink_freq(dnoft)]
 
-  # Class never and only a few times a year as non-drinker
+  # Class not having drink in last 12 months as non-drinker
   data[dnoft == 8, drinks_now := "non_drinker"]
 
   # If missing, supplement with whether drink nowadays
@@ -58,7 +58,10 @@ alc_drink_now_allages <- function(
 
   ###################################################################
   # Children age 8-15 years
-
+  # No alcohol data for children in SHeS
+  
+  if("adrinkof" %in% colnames(data)){
+    
   # How often alcoholic drink
   data[is.na(drinks_now) & adrinkof %in% 1:6, drinks_now := "drinker"]
   data[is.na(drinks_now) & adrinkof == 7, drinks_now := "non_drinker"]
@@ -76,6 +79,7 @@ alc_drink_now_allages <- function(
 
   # Class 6 months ago or more as non-drinker
   data[is.na(drinks_now) & adrlast == 7, drinks_now := "non_drinker"]
+  }
 
   # If separate section for 8-12 years (just 2001)
   if("cdrinkof" %in% colnames(data)) {

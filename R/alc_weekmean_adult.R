@@ -32,10 +32,10 @@
 #' \item spirit_units - average weekly units of spirits
 #' \item rtd_units - average weekly units of alcopops
 #' \item weekmean - total average weekly units
-#' \item perc_spirit_units - proportion of consumption that is spirits
-#' \item perc_wine_units - proportion of consumption that is wine
-#' \item perc_rtd_units - proportion of consumption that is alcopops
-#' \item perc_beer_units - proportion of consumption that is beer
+#' \item perc_spirit_units - percentage of consumption that is spirits
+#' \item perc_wine_units - percentage of consumption that is wine
+#' \item perc_rtd_units - percentage of consumption that is alcopops
+#' \item perc_beer_units - percentage of consumption that is beer
 #' \item drinker_cat - categories of average weekly consumption
 #' \item spirits_pref_cat - whether doesn't drink, drinks some or mostly drinks spirits
 #' \item wine_pref_cat - whether doesn't drink, drinks some or mostly drinks wine
@@ -65,6 +65,7 @@ alc_weekmean_adult <- function(
 ) {
 
   year <- as.integer(unique(data[ , year][1]))
+  country <- unique(data[ , country][1])
   
   year_set1 <- 2001:2002
   year_set2 <- 2011:2100
@@ -73,7 +74,7 @@ alc_weekmean_adult <- function(
   #################################################################
   # Frequency of drinking in days per week
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     data[ , nbeer := hseclean::alc_drink_freq(nbeer)] # normal beer
     data[ , sbeer := hseclean::alc_drink_freq(sbeer)] # strong beer
@@ -84,7 +85,7 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% year_set2) {
+  if(year %in% year_set2 | country == "Scotland") {
 
     setnames(data, "scspirit", "scspirits")
 
@@ -104,7 +105,7 @@ alc_weekmean_adult <- function(
 
   # Normal beer
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     data[ , vol_nbeer := 0]
     data[nbeerm1 == 1 & !is.na(nbeerq1) & nbeerq1 > 0, vol_nbeer := nbeerq1 * volume_data[beverage == "nbeerhalfvol", volume]]
@@ -121,11 +122,9 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% year_set1) {
+  if(year %in% year_set1 & country == "England") {
 
     data[!is.na(nbeerq5) & nbeerq5 > 0, vol_nbeer := vol_nbeer + nbeerq5 * 2 * volume_data[beverage == "nbeerhalfvol", volume]]
-
-    data[nbeerq5 == -8, vol_nbeer := NA]
 
     data[ , nbeerq5 := NULL]
 
@@ -133,7 +132,7 @@ alc_weekmean_adult <- function(
 
   # Strong beer
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     data[ , vol_sbeer := 0]
     data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
@@ -150,11 +149,9 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% year_set1) {
+  if(year %in% year_set1 & country == "England") {
 
     data[!is.na(sbeerq5) & sbeerq5 > 0, vol_sbeer := vol_sbeer + sbeerq5 * 2 * volume_data[beverage == "sbeerhalfvol", volume]]
-
-    data[sbeerq5 == -8, vol_sbeer := NA]
 
     data[ , sbeerq5 := NULL]
 
@@ -165,19 +162,17 @@ alc_weekmean_adult <- function(
   # If variables are not present, create them with NA so code works
 
   # For years 2001-2006, assume wine measured in number of 125ml glasses
-  if(year %in% year_set1) {
+  if(year %in% year_set1 & country == "England") {
 
     data[ , vol_wine := 0]
 
     data[!is.na(wineqgs) & wineqgs > 0, vol_wine := wineqgs * alc_volume_data[beverage == "winesglassvol", volume]]
 
-    data[wineqgs == -8, vol_wine := NA]
-
-    #data[ , wineqgs := NULL]
+    data[ , wineqgs := NULL]
 
   }
 
-  if(year %in% year_set2) {
+  if(year %in% year_set2 & country == "England") {
 
     data[ , vol_wine := 0]
     data[bwineq2 == 1 & !is.na(wineq) & wineq > 0, vol_wine := wineq * volume_data[beverage == "winesglassvol", volume]]
@@ -185,35 +180,42 @@ alc_weekmean_adult <- function(
     data[bwineq2 == 3 & !is.na(wineq) & wineq > 0, vol_wine := vol_wine + wineq * volume_data[beverage == "winelglassvol", volume]]
     data[bwineq2 == 4 & !is.na(wineq) & wineq > 0, vol_wine := vol_wine + wineq * volume_data[beverage == "winebtlvol", volume]]
 
-    data[wineq == -8, vol_wine := NA]
-
-    #data[ , `:=` (bwineq2 = NULL, wineq = NULL)]
+    data[ , `:=` (bwineq2 = NULL, wineq = NULL)]
   }
 
 
+  if(country == "Scotland") {
+    
+    data[ , vol_wine := 0]
+    data[wqglz1 == 1 & !is.na(q250glz) & q250glz > 0, vol_wine := q250glz * volume_data[beverage == "winelglassvol", volume]]
+    data[wqglz2 == 2 & !is.na(q175glz) & q175glz > 0, vol_wine := vol_wine + q175glz * volume_data[beverage == "wineglassvol", volume]]
+    data[wqglz3 == 3 & !is.na(q125glz) & q125glz > 0, vol_wine := vol_wine + q125glz * volume_data[beverage == "winesglassvol", volume]]
+    # if measure used is both bottles and glasses or just bottle
+    data[wineq %in% c(1, 3) & !is.na(wqbt) & wqbt > 0, vol_wine := vol_wine + wqbt * volume_data[beverage == "winesglassvol", volume]]
+    
+    
+    data[ , `:=` (wqglz1 = NULL, wqglz2 = NULL, wqglz3 = NULL, q250glz = NULL, q175glz = NULL, q125glz = NULL)]
+  }
+  
   # Fortified wine (Sherry)
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     data[ , vol_sherry := 0]
 
     data[!is.na(sherryq) & sherryq > 0, vol_sherry := sherryq * volume_data[beverage == "sherryvol", volume]]
 
-    data[sherryq == -8, vol_sherry := NA]
-
-    #data[ , sherryq := NULL]
+    data[ , sherryq := NULL]
 
   }
 
   # Spirits
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     data[ , vol_spirits := 0]
 
     data[!is.na(spiritsq) & spiritsq > 0, vol_spirits := spiritsq * volume_data[beverage == "spiritsvol", volume]]
-
-    data[spiritsq == -8, vol_spirits := NA]
 
     data[ , spiritsq := NULL]
 
@@ -221,19 +223,17 @@ alc_weekmean_adult <- function(
 
   # RTDs
 
-  if(year %in% year_set1) {
+  if(year %in% year_set1 & country == "England") {
 
     data[ , vol_pops := 0]
 
     data[!is.na(popsqsm) & popsqsm > 0, vol_pops := popsqsm * alc_volume_data[beverage == "popsscvol", volume]]
 
-    data[popsqsm == -8, vol_pops := NA]
-
     data[ , popsqsm := NULL]
 
   }
 
-  if(year %in% year_set2) {
+  if(year %in% year_set2 | country == "Scotland") {
 
     data[ , vol_pops := 0]
     data[popsly11 == 1 & !is.na(popsq111) & popsq111 > 0, vol_pops := popsq111 * volume_data[beverage == "popsscvol", volume]]
@@ -251,7 +251,7 @@ alc_weekmean_adult <- function(
   ##
   # Repeat with self-complete questions
 
-  if(year %in% year_set2) {
+  if(year %in% year_set2 | country == "Scotland") {
 
     # Normal beer
     data[ , vol_scnbeer := 0]
@@ -329,7 +329,7 @@ alc_weekmean_adult <- function(
   #################################################################
   # Combine amount usually drunk with frequencies to get natural volumes per week
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     data[ , vol_nbeer := vol_nbeer * nbeer]
     data[ , vol_sbeer := vol_sbeer * sbeer]
@@ -342,7 +342,7 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% c(year_set2)) {
+  if(year %in% c(year_set2) | country == "Scotland") {
 
     data[ , vol_scnbeer := vol_scnbeer * scnbeer]
     data[ , vol_scsbeer := vol_scsbeer * scsbeer]
@@ -372,7 +372,7 @@ alc_weekmean_adult <- function(
   #################################################################
   # Convert natural volumes (ml of beverage) into units
 
-  if(year %in% c(year_set1, year_set2)) {
+  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
     # divide by 1000 because
     # first divide by 100 to convert % abv into a proportion

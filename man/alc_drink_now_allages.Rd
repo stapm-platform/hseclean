@@ -27,7 +27,7 @@ supplemented by responses to if currently drinks or if always non-drinker.
 \examples{
 
 \dontrun{
-data <- read_2016()
+data <- read_2017()
 data <- clean_age(data)
 data <- alc_drink_now_allages(data)
 }
