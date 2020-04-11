@@ -1,4 +1,4 @@
-# hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;width:25px;height:25px;" />
+# hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="50" height="50" />
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
