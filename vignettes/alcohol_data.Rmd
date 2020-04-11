@@ -99,7 +99,7 @@ test_2017 <- read_2017(root = root_dir)
 ```
 
 # Processing socioeconomic variables
-There are separate functions to process each socioeconomic variables - detailed descriptions of what these functions do are given in the `Covariate data` vignette to the hseclean package.   
+There are separate functions to process each socioeconomic variables - detailed descriptions of what these functions do are given in `vignette("covariate_data")`.   
 
 ```{r cleanses, eval = F}
 

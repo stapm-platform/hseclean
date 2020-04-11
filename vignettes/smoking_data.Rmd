@@ -35,7 +35,7 @@ The Health Survey for England (HSE) is a series of annual surveys covering healt
 To support the processing of the HSE data, there is the `hseclean` R package, which contains a collection of functions to read, process and summarise the HSE data. The purpose of this vignette is to explain how we use the HSE data to inform the patterns of cigarette consumption, and to explain how the `hseclean` package supports this.  
 
 # Demographic and socio-economic variables
-The `hseclean` package contains a range of functions to clean covariates in the data, which are explained more thoroughly in the vignette on covariates. Here we describe the important things to consider for the processing of smoking data.  
+The `hseclean` package contains a range of functions to clean covariates in the data, which are explained more thoroughly in `vignette("covariate_data")`. Here we describe the important things to consider for the processing of smoking data.  
 
 # Cigarette smoking variables
 Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991. We use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.[HSE 2015](https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf).  

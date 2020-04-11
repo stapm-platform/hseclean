@@ -109,6 +109,7 @@ each year, e.g. `read_SHeS_2008()`.
 ### Processing sociodemographic variables
 
 There are separate functions to process each socioeconomic variables.
+See `vignette("covariate_data")`.
 
 ``` r
 temp <- read_2017(root = root_dir) %>%
@@ -123,9 +124,9 @@ temp <- read_2017(root = root_dir) %>%
 
 ### Alcohol data
 
-Detailed description of how to clean the alcohol data are given in the
-vignette. As an example, here is the workflow to plot the frquency of
-drinking among people who drank in 2017.
+Detailed description of how to clean the alcohol data are given in
+`vignette("alcohol_data")`. As an example, here is the workflow to plot
+the frquency of drinking among people who drank in 2017.
 
 ``` r
 # Frequency of drinking in 2017 among drinkers
@@ -143,6 +144,9 @@ read_2017(root = "X:/") %>%
 ```
 
 ### Clean all years of smoking and alcohol data
+
+See
+`vignette("smoking_data")`.
 
 ``` r
 # Wrap the individual cleaning functions in another function for applying to each year
@@ -250,7 +254,7 @@ prop_smokers <- prop_summary(
 ### Missing data imputation
 
 `hseclean` uses the R package `mice`, implemented in a basic way by the
-`impute_data_mice()` function.
+`impute_data_mice()` function. See `vignette("missing_data")`.
 
 ``` r
 # Run the imputation (takes a long time)
