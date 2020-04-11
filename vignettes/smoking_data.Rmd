@@ -1,37 +1,32 @@
 ---
-title: "Cigarette consumption"
-author: "Duncan Gillespie"
-date: "`r Sys.Date()`"
+title: "Process data on tobacco smoking"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Cigarette consumption}
+  %\VignetteIndexEntry{Process data on tobacco smoking}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 bibliography: consumption-refs.bib
-header-includes:
-  \usepackage{float}
-  \usepackage{amsmath}
 link-citations: yes
 citation_package: natbib
 biblio-style: vancouver
 urlcolor: blue
 ---
 
-```{r setup, include = FALSE, results = 'hide', warning = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.pos = 'H'
 )
+```
 
-#library(readxl)
-#library(data.table)
+```{r setup, include = FALSE, results = 'hide', warning = FALSE, eval = F}
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(testthat))
 suppressPackageStartupMessages(library(ggplot2))
-#library(cowplot)
-
-#knitr::opts_knit$set(root.dir = "/Volumes/Shared/ScHARR/PR_STAPM/Code/R_packages/tobalcepi")
-#knitr::opts_knit$set(root.dir = "X:/ScHARR/PR_STAPM/Code/R_packages/tobalcepi")
-
+suppressPackageStartupMessages(library(hseclean))
 ```
 
 # Introduction
@@ -43,7 +38,7 @@ To support the processing of the HSE data, there is the `hseclean` R package, wh
 The `hseclean` package contains a range of functions to clean covariates in the data, which are explained more thoroughly in the vignette on covariates. Here we describe the important things to consider for the processing of smoking data.  
 
 # Cigarette smoking variables
-Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991. We use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g. \href{https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf}{HSE 2015}.  
+Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991. We use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.[HSE 2015](https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf).  
 
 ## Cigarette smoking status
 The function `smk_status()` categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers, but people who have only tried a cigarette once or twice are classified as never smokers. We create this variable for children aged 8-15 years and adults aged >= 16 years. Ever-smokers are people who are either current or former smokers.  
@@ -68,7 +63,7 @@ The function `smk_amount()` cleans the variables that describe how much, what an
 
 We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend. We currently don't use those questions because they were not asked in all years.  
 
-We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette. This latter variable has a high level of missingness. Together these categorical variables allow calculation of \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/}{the heaviness of smoking index}.  
+We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette. This latter variable has a high level of missingness. Together these categorical variables allow calculation of [the heaviness of smoking index](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/).  
 
 # Using hseclean
 
@@ -77,10 +72,6 @@ We also categorise the amount smoked, and use information on the time from wakin
 The data is stored in `X:/ScHARR/PR_Consumption_TA/Data/`. The following code will read, clean, filter and combine the data. 
 
 ```{r read data, eval = F}
-# Install and load the package
-install.packages("X:/ScHARR/PR_STAPM/Code/R_packages/hseclean_0.1.0.zip", repos = NULL)
-library(hseclean)
-
 # Write a bespoke function that does just the cleaning jobs required.
 cleandata <- function(data) {
   data <- clean_surveyweights(data)
@@ -141,165 +132,5 @@ prop_smokers <- prop_summary(
 
 ```
 
-```{r smoking trends, eval = T, echo=F, warning=F, out.extra='', fig.width = 7, fig.height = 6, fig.cap = "Trends in the proportion of smokers."}
-
-readRDS("X:/ScHARR/PR_STAPM/Code/R_packages/hseclean/vignettes/current_smoking_sex_imd_trend.rds")
-
-```  
-
-## Impute data
-
-### Imputation during data cleaning
-There has already been some filling-in of missing data done by the cleaning functions described above.  
-
-- For 2015+, the `clean_age()` function has randomly assigned single years of age within each age category.  
-- If someone is classified as a current smoker, is younger than 16 and has missing data on the time between waking and having their first cigarette, we assume that this time is one hour or more.  
-- If someone is younger than age 16 and has missing data on their number of children (for survey years prior to 2015), we assume that they had no children.  
-- If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.
-
-### Selecting complete cases
-In the data preparation code above, we also have the option to filter the data to retain only complete cases for certain variables. Currently, we retain only records with full information on age, sex, smoking status and the survey design variables. We then multiply impute missing values for key socio-demographic variables.  
-
-### Multiple imputation
-To conduct our multiple imputation, we use the R package `mice` [@Rmice]. Since the process of running the multiple imputation can take a long time and consume a lot of RAM, it might be easiest to run on the `heta_study` virtual machine. There is a range of `mice` documentation and tutorials online that is worth getting into. In `hseclean`, multiple imputation is implemented by the `impute_data_mice()` function, although this is currently written rather simply and could be checked and developed to include more optionality and potentially also diagnostic checks.  
-
-`mice` basically fits a chained series of regression equations that predict the missing values of successive variables based on the existing relationships between those variables and selected other variables in the data. The current usage only imputes categorical variables, which could be one of three types: "logreg" - binary Logistic regression; "polr" - ordered Proportional odds model; "polyreg" - unordered Polytomous logistic regression.  
-
-In running the multiple imputation, the number of desired iterations of the imputed data is selected (I current generate five to keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "", otherwise to one of "logreg", "polr" or "polyreg".  
-
-```{r mi example, eval = F}
-# First inspect variables
-table(hse_data$kids, useNA = "ifany")
-
-# Set a broader age category variable
-hse_data[ , agegroup := 
-            c("12-16", "16-17", "18-24", "25-34", "35-49", "50-64", "65-74", "75-89")[
-              findInterval(age, c(-10, 16, 18, 25, 35, 50, 65, 75, 1000))]]
-
-# Run the imputation (takes a long time)
-imp <- impute_data_mice(data = hse_data,
-                        var_names = c("smk.state", "agegroup", "sex", 
-                                      "imd_quintile", "degree", "kids", "income5cat",
-                                      "relationship_status", "employ2cat", "social_grade"),
-                        var_methods = c("", "", "", 
-                                        "polr", "logreg", "polr", "polr",
-                                        "polyreg", "logreg", "logreg"),
-                        n_imputations = 5)
-
-# imp$data is a single data.table containing all 5 imputed versions of the data
-hse_data_smoking <- copy(imp$data)
-```
 
 # References
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

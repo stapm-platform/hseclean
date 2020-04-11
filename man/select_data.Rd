@@ -4,13 +4,9 @@
 \alias{select_data}
 \title{Select variables and apply filters}
 \usage{
-select_data(
-  data,
-  ages = 8:89,
-  years = 2001:2017,
-  keep_vars = c("age", "sex", "imd_quintile"),
-  complete_vars = c("age", "sex", "imd_quintile")
-)
+select_data(data, ages = 8:89, years = 2001:2017,
+  keep_vars = c("age", "sex", "imd_quintile"), complete_vars = c("age",
+  "sex", "imd_quintile"))
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset.}

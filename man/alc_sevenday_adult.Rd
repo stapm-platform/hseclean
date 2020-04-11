@@ -4,11 +4,8 @@
 \alias{alc_sevenday_adult}
 \title{Alcohol consumption in last seven-days (adults)}
 \usage{
-alc_sevenday_adult(
-  data,
-  abv_data = hseclean::abv_data,
-  alc_volume_data = hseclean::alc_volume_data
-)
+alc_sevenday_adult(data, abv_data = hseclean::abv_data,
+  alc_volume_data = hseclean::alc_volume_data)
 }
 \arguments{
 \item{data}{Data table - the health survey dataset}

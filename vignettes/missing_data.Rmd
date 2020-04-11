@@ -1,0 +1,176 @@
+---
+title: "Imputation of missing data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Imputation of missing data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: consumption-refs.bib
+link-citations: yes
+citation_package: natbib
+biblio-style: vancouver
+urlcolor: blue
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.pos = 'H'
+)
+```
+
+```{r setup, include = FALSE, results = 'hide', warning = FALSE, eval = F}
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(testthat))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(hseclean))
+```
+
+# Clean tobacco and alcohol data
+Do the setup for imputation by carrying out all the data cleaning functions.
+
+There has already been some filling-in of missing data done by the cleaning functions described above.  
+
+- For 2015+, the `clean_age()` function has randomly assigned single years of age within each age category.  
+- If someone is classified as a current smoker, is younger than 16 and has missing data on the time between waking and having their first cigarette, we assume that this time is one hour or more.  
+- If someone is younger than age 16 and has missing data on their number of children (for survey years prior to 2015), we assume that they had no children.  
+- If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.  
+
+In the data preparation code above, we also have the option to filter the data to retain only complete cases for certain variables. Currently, we retain only records with full information on age, sex, smoking status and the survey design variables. We then multiply impute missing values for key socio-demographic variables.  
+
+```{r cleanhse, eval = F}
+
+#root_dir <- "X:/"
+root_dir <- str_split_fixed(here(), "ScHARR", 2)[1]
+
+# Wrap the individual cleaning functions in another function
+# that can then be applied to each year of HSE data
+cleandata <- function(data) {
+  
+  data %<>%
+    clean_age %>%
+    clean_family %>%
+    clean_demographic %>% 
+    clean_education %>%
+    clean_economic_status %>%
+    clean_income %>%
+    clean_health_and_bio %>%
+    smk_status %>%
+    smk_former %>%
+    smk_life_history %>%
+    smk_amount %>%
+    alc_drink_now_allages %>%
+    alc_weekmean_adult %>%
+    alc_sevenday_adult %>%
+    alc_sevenday_child %>%
+    
+    select_data(
+      ages = 12:89,
+      years = 2001:2017,
+      
+      
+      # The variables to retain
+      keep_vars = c("wt_int", "psu", "cluster", "year", "quarter",
+                    "age", "age_cat", "censor_age", "sex", "imd_quintile",
+                    
+                    "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
+                    
+                    "cig_smoker_status", "smk_start_age", "years_since_quit",
+                    "cigs_per_day", "smoker_cat",
+                    
+                    "drinks_now", 
+                    "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",
+                    "beer_units", "wine_units", "spirit_units", "rtd_units", 
+                    "weekmean", 
+                    "perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units", 
+                    "drinker_cat", 
+                    "spirits_pref_cat", "wine_pref_cat", "rtd_pref_cat", "beer_pref_cat", 
+                    "total_units7_ch"
+      ),
+      
+      # The variables that must have complete cases
+      complete_vars = c("age", "sex", "year", "quarter", "psu", "cluster")
+    )
+  
+  return(data)
+}
+
+# Read and clean each year of data and bind them together in one big dataset
+data <- combine_years(list(
+  cleandata(read_2001(root = root_dir)),
+  cleandata(read_2002(root = root_dir)),
+  cleandata(read_2003(root = root_dir)),
+  cleandata(read_2004(root = root_dir)),
+  cleandata(read_2005(root = root_dir)),
+  cleandata(read_2006(root = root_dir)),
+  cleandata(read_2007(root = root_dir)),
+  cleandata(read_2008(root = root_dir)),
+  cleandata(read_2009(root = root_dir)),
+  cleandata(read_2010(root = root_dir)),
+  cleandata(read_2011(root = root_dir)),
+  cleandata(read_2012(root = root_dir)),
+  cleandata(read_2013(root = root_dir)),
+  cleandata(read_2014(root = root_dir)),
+  cleandata(read_2015(root = root_dir)),
+  cleandata(read_2016(root = root_dir)),
+  cleandata(read_2017(root = root_dir))
+))
+
+##
+# Apply any tests
+
+# check that all current smokers have an amount smoked per data that is greater than zero
+testthat::expect_equal(nrow(data[cig_smoker_status == "current" & cigs_per_day == 0]), 0, 
+                       info = "some current smokers smoke 0 cigs per day")
+
+##
+# Apply any filters
+
+# select only data with a coherent time since quit
+data[ , years_since_quit := as.double(ceiling(years_since_quit))]
+data <- data[!(cig_smoker_status == "former" & years_since_quit < 1)]
+##
+
+# clean the survey weights
+data <- clean_surveyweights(data)
+```
+
+# Multiple imputation
+To conduct our multiple imputation, we use the R package `mice` [@Rmice]. Since the process of running the multiple imputation can take a long time and consume a lot of RAM, it might be easiest to run on the `heta_study` virtual machine. There is a range of `mice` documentation and tutorials online that is worth getting into. In `hseclean`, multiple imputation is implemented by the `impute_data_mice()` function, although this is currently written rather simply and could be checked and developed to include more optionality and potentially also diagnostic checks.  
+
+`mice` basically fits a chained series of regression equations that predict the missing values of successive variables based on the existing relationships between those variables and selected other variables in the data. The current usage only imputes categorical variables, which could be one of three types: "logreg" - binary Logistic regression; "polr" - ordered Proportional odds model; "polyreg" - unordered Polytomous logistic regression.  
+
+In running the multiple imputation, the number of desired iterations of the imputed data is selected (I current generate five to keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "", otherwise to one of "logreg", "polr" or "polyreg".  
+
+```{r mi example, eval = F}
+# First inspect variables
+table(hse_data$kids, useNA = "ifany")
+
+# Set a broader age category variable
+hse_data[ , agegroup := 
+            c("12-16", "16-17", "18-24", "25-34", "35-49", "50-64", "65-74", "75-89")[
+              findInterval(age, c(-10, 16, 18, 25, 35, 50, 65, 75, 1000))]]
+
+# Run the imputation (takes a long time)
+imp <- impute_data_mice(data = hse_data,
+                        var_names = c("smk.state", "agegroup", "sex", 
+                                      "imd_quintile", "degree", "kids", "income5cat",
+                                      "relationship_status", "employ2cat", "social_grade"),
+                        var_methods = c("", "", "", 
+                                        "polr", "logreg", "polr", "polr",
+                                        "polyreg", "logreg", "logreg"),
+                        n_imputations = 5)
+
+# imp$data is a single data.table containing all 5 imputed versions of the data
+hse_data_smoking <- copy(imp$data)
+
+```
+
+# References
+
+
+
+

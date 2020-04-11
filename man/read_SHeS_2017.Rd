@@ -4,11 +4,8 @@
 \alias{read_SHeS_2017}
 \title{Read Scottish Health Survey 2017}
 \usage{
-read_SHeS_2017(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2017/UKDA-8398-tab/tab/shes_17i_archive_v1.tab"
-)
+read_SHeS_2017(root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2017/UKDA-8398-tab/tab/shes_17i_archive_v1.tab")
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -33,8 +30,7 @@ Reads and does basic cleaning on the Scottish Health Survey 2017.
 \details{
 The Scottish Health Survey is designed to yield a representative sample of the general population
 living in private households in Scotland every year. In 2017, across all sample types, interviews 
-were held in 3,062 households with 3,697 adults (aged 16 and over), and 1,603 children (aged 0-15). 
-
+were held in 3,062 households with 3,697 adults (aged 16 and over), and 1,603 children (aged 0-15).
 
 MISSING VALUES
 

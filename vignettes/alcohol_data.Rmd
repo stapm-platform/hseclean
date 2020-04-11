@@ -1,41 +1,32 @@
 ---
-title: "Alcohol data"
-author: "Duncan Gillespie"
-date: "`r Sys.Date()`"
+title: "Process data on alcohol consumption"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Alcohol data}
-  \usepackage[utf8]{inputenc}
+  %\VignetteIndexEntry{Process data on alcohol consumption}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 bibliography: consumption-refs.bib
-header-includes:
-  \usepackage{float}
-  \usepackage{amsmath}
 link-citations: yes
 citation_package: natbib
 biblio-style: vancouver
 urlcolor: blue
-editor_options: 
-  chunk_output_type: console
 ---
 
-```{r setup, include = FALSE, results = 'hide', warning = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.pos = 'H'
 )
+```
 
+```{r setup, include = FALSE, results = 'hide', warning = FALSE, eval = F}
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(magrittr))
 suppressPackageStartupMessages(library(data.table))
 suppressPackageStartupMessages(library(testthat))
 suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(hseclean))
-
-#knitr::opts_knit$set(root.dir = "/Volumes/Shared/ScHARR/PR_STAPM/Code/R_packages/tobalcepi")
-#knitr::opts_knit$set(root.dir = "X:/ScHARR/PR_STAPM/Code/R_packages/tobalcepi")
-
 ```
 
 # Introduction
@@ -155,7 +146,7 @@ For children (aged 8-15 years) we infer whether someone drinks or not (`drinks_n
 
 Missing data on whether or not a child currently drinks (`drinks_now`) is supplemented by responses to when they last had an alcoholic drink (`adrlast`): if the last drink was less than six months ago, then we classify them as a drinker; if the last drink was six months or more ago, then we classify them as a non-drinker.  
 
-```{r drinkyn, eval = T, fig.width = 7, fig.height = 4}
+```{r drinkyn, eval = F, fig.width = 7, fig.height = 4}
 
 # Number of sampled drinkers and non-drinkers in 2017
 read_2017(root = "X:/") %>%
@@ -172,7 +163,7 @@ read_2017(root = "X:/") %>%
   
 ```
 
-```{r drinkfreq, eval = T, fig.width = 7, fig.height = 6}
+```{r drinkfreq, eval = F, fig.width = 7, fig.height = 6}
 
 # Frequency of drinking in 2017 among drinkers
 read_2017(root = "X:/") %>%
@@ -198,7 +189,7 @@ Alcohol content assumptions are the expected percentages of alcohol that each be
 
 Beverage volume assumptions are the expected volumes (ml) of different beverage containers / serving sizes. We use separate values for normal and strong beer (half pint 284ml, small can 330ml, large can 440ml, bottle 330ml), spirits (serving 25ml), sherry (serving 50ml), wine (small glass 125ml, standard glass 175ml, large glass 250ml, bottle 750ml), and alcopops (small can 250ml, small bottle 275ml, large bottle 700ml).   
 
-```{r abv}
+```{r abv, eval = F}
 # These data are stored within the hseclean package for easy use
 # they can be accessed by typing 
 
@@ -231,7 +222,7 @@ The processing is done by the function `alc_weekmean_adult()`. The calculation h
 - Calculate total weekly units but summing across beverage categories.  
 - Cap the total units consumed in a week at 300 units, assuming that above this already very high level of consumption estimates of variation in consumption are less reliable.  
 
-```{r alc_12month, fig.width = 7, fig.height = 6}
+```{r alc_12month, eval = F, fig.width = 7, fig.height = 6}
 
 # Average weekly units drunk in 2017
 read_2017(root = "X:/") %>%
@@ -249,7 +240,7 @@ read_2017(root = "X:/") %>%
 
 ```
 
-```{r alc_12month_cat, eval = T, fig.width = 7, fig.height = 4}
+```{r alc_12month_cat, eval = F, fig.width = 7, fig.height = 4}
 
 # Number of sampled people in each drinker category in 2017
 read_2017(root = "X:/") %>%
@@ -283,7 +274,7 @@ Note that in 2007 new questions were added asking which glass size was used when
 
 Missing data is imputed using the means of people who did drink in the last seven days, stratified by year, sex, IMD quintile and age category (0-1, 2-4, 5-7, 8-10, 11-12, 13-15, 16-17, 18-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90+).   
 
-```{r alc_7day_adult, fig.width = 7, fig.height = 6}
+```{r alc_7day_adult, eval = F, fig.width = 7, fig.height = 6}
 
 # drinking in last 7 days in 2017
 read_2017(root = "X:/") %>%
@@ -305,7 +296,7 @@ read_2017(root = "X:/") %>%
 
 ```
 
-```{r alc_adult_binge_cat, eval = T, fig.width = 7, fig.height = 4}
+```{r alc_adult_binge_cat, eval = F, fig.width = 7, fig.height = 4}
 
 # Number of sampled people in each binge drinker category in 2017
 read_2017(root = "X:/") %>%
@@ -335,7 +326,7 @@ The information from this question is also used to update the `drinks_now` varia
 
 Due to high missingness in this variable, we assume that anyone who has missing data for this variable does not drink. This means that we are likely to under-estimate the number of children who drink.      
 
-```{r alc_drinks_now_plus_kids, fig.width = 7, fig.height = 6}
+```{r alc_drinks_now_plus_kids, eval = F, fig.width = 7, fig.height = 6}
 
 # drinking by age in 2017
 read_2017(root = "X:/") %>%
@@ -357,7 +348,7 @@ read_2017(root = "X:/") %>%
   
 ```
 
-```{r alc_weekly_consumption_allages, fig.width = 7, fig.height = 6}
+```{r alc_weekly_consumption_allages, eval = F, fig.width = 7, fig.height = 6}
 
 # drinking by age in 2017
 read_2017(root = "X:/") %>%
@@ -378,94 +369,3 @@ read_2017(root = "X:/") %>%
   ylab("expected number of units drunk in a week")
   
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

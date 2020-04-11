@@ -1,39 +1,72 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-Whilst the package is usable, there are still a number of bugs and further developments that we are working through.  
+The package is usable but there are still a number of bugs and further
+developments that we are working through i.e. some code and
+documentation is still incomplete or in need of being refined. The code
+and documentation are still undergoing internal review by The University
+of Sheffield team.
 
 ## Motivation
-This package was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research, The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model, which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.   
 
-The original motivation for the package was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The suite of functions within `hseclean` reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.   
+This package was created as part of a programme of work on the health
+economics of tobacco and alcohol at the School of Health and Related
+Research, The University of Sheffield. This programme is based around
+the construction of the Sheffield Tobacco and Alcohol Policy Model,
+which aims to use comparable methodologies to evaluate the impacts of
+tobacco and alcohol policies, and investigate the consequences of
+clustering and interactions between tobacco and alcohol consumption
+behaviours.
 
-We have subsequently added functions to process the Scottish Health Survey (SHeS) into a form that matches our processing of the Health Survey for England.  
+The original motivation for the package was to standardised the way that
+the Health Survey for England (HSE) data were cleaned and prepared for
+our analyses and inputs to our decision-analytic models. The suite of
+functions within `hseclean` reads the data for each year since 2001,
+renames, organises and processes the variables that we use for our
+analyses. The package also includes functions to multiply impute missing
+data, and to summarise data considering survey design.
 
- > Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service.  
- 
----
+We have subsequently added functions to process the Scottish Health
+Survey (SHeS) into a form that matches our processing of the Health
+Survey for England.
 
-`hseclean` is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data. This includes functionality to:  
+> Health Survey for England and Scottish Health Survey data are accessed
+> via the UK Data Service.
 
-1. Read tobacco and alcohol related variables and the information on individual characteristics that we use in our analyses.  
-1. Clean alcohol consumption data, applying assumptions about beverage size and alcohol content.  
-1. Clean data on current smoking and smoking history.  
-1. Clean data on individual characteristics including age, sex, ethnicity, economic status, family, health and income.  
-1. Multiply impute missing data.  
-1. Summarise categorical variables using proportions, considering survey design.  
+-----
+
+`hseclean` is a package for reading and cleaning the Health Survey for
+England and Scottish Health Survey data. This includes functionality to:
+
+1.  Read tobacco and alcohol related variables and the information on
+    individual characteristics that we use in our analyses.  
+2.  Clean alcohol consumption data, applying assumptions about beverage
+    size and alcohol content.  
+3.  Clean data on current smoking and smoking history.  
+4.  Clean data on individual characteristics including age, sex,
+    ethnicity, economic status, family, health and income.  
+5.  Multiply impute missing data.  
+6.  Summarise categorical variables using proportions, considering
+    survey design.
 
 ## Installation
 
+Please see file LICENCE.
+
 You can install the development version of `hseclean` from github with:
 
-```{r gh_installation, message=FALSE, eval = FALSE}
+``` r
 #install.packages("devtools")
 devtools::install_github("dosgillespie/hseclean")
 ```
 
-```{r pkgs, eval = F}
+``` r
 # Load the package
 library(hseclean)
 
@@ -45,30 +78,38 @@ library(ggplot2)
 
 ## Getting started
 
-To be able to **download data from the UK Data Service**, you will need to **register with the UK Data Service website**, which will enable you to request access to the datasets. Instructions on how to do this can be found [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).  
+To be able to **download data from the UK Data Service**, you will need
+to **register with the UK Data Service website**, which will enable you
+to request access to the datasets. Instructions on how to do this can be
+found
+[here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).
 
 ## Basic functionality
 
 ### Reading the HSE data files
-There are separate functions in `hseclean` to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socioeconomic and other descriptor variables.   
 
-```{r readhse, eval = F}
+There are separate functions in `hseclean` to read each year of HSE
+data. You must specify the link to where the data is stored. The
+functions read in all variables related to tobacco and alcohol and
+selected socioeconomic and other descriptor variables.
+
+``` r
 test_2001 <- read_2001(
   root = "X:/",
   file = "ScHARR/PR_Consumption_TA/HSE/HSE 2001/UKDA-4628-tab/tab/hse01ai.tab"
 )
 ```
 
----
+-----
 
-`hseclean` contains separate functions for reading the survey data for each year, e.g. `read_SHeS_2008()`. 
-
+`hseclean` contains separate functions for reading the survey data for
+each year, e.g. `read_SHeS_2008()`.
 
 ### Processing sociodemographic variables
 
-There are separate functions to process each socioeconomic variables.   
+There are separate functions to process each socioeconomic variables.
 
-```{r cleanses, eval = F}
+``` r
 temp <- read_2017(root = root_dir) %>%
   clean_age %>%
   clean_family %>%
@@ -80,9 +121,12 @@ temp <- read_2017(root = root_dir) %>%
 ```
 
 ### Alcohol data
-Detailed description of how to clean the alcohol data are given in the vignette. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.  
 
-```{r drinkfreq, eval = T, fig.width = 7, fig.height = 6}
+Detailed description of how to clean the alcohol data are given in the
+vignette. As an example, here is the workflow to plot the frquency of
+drinking among people who drank in 2017.
+
+``` r
 # Frequency of drinking in 2017 among drinkers
 read_2017(root = "X:/") %>%
   clean_age %>%
@@ -99,7 +143,7 @@ read_2017(root = "X:/") %>%
 
 ### Clean all years of smoking and alcohol data
 
-```{r readalldata, eval = F}
+``` r
 # Wrap the individual cleaning functions in another function for applying to each year
 
 cleandata <- function(data) {
@@ -185,9 +229,14 @@ data <- clean_surveyweights(data)
 ```
 
 ### Summarise data
-The `survey` package is used by the function `prop_summary()` in `hseclean` to estimate the uncertainty around proportions calculated from a binary variable - `prop_summary()` was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.   
 
-```{r ex2, eval = F}
+The `survey` package is used by the function `prop_summary()` in
+`hseclean` to estimate the uncertainty around proportions calculated
+from a binary variable - `prop_summary()` was designed to simplify the
+process of estimating smoking prevalence from the HSE data, stratified
+by a specified set of variables.
+
+``` r
 prop_smokers <- prop_summary(
   data = hse_data,
   var_name = "smk.state",
@@ -195,14 +244,14 @@ prop_smokers <- prop_summary(
   levels_0 = c("former", "never"),
   strat_vars = c("year", "sex", "imd_quintile")
 )
-
 ```
 
 ### Missing data imputation
 
-`hseclean` uses the R package `mice`, implemented in a basic way by the `impute_data_mice()` function.  
+`hseclean` uses the R package `mice`, implemented in a basic way by the
+`impute_data_mice()` function.
 
-```{r miexample, eval = F}
+``` r
 # Run the imputation (takes a long time)
 imp <- impute_data_mice(data = hse_data,
                         var_names = c("smk.state", "agegroup", "sex", 
@@ -216,5 +265,3 @@ imp <- impute_data_mice(data = hse_data,
 # imp$data is a single data.table containing all 5 imputed versions of the data
 hse_data_smoking <- copy(imp$data)
 ```
-
-

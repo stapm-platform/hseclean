@@ -24,7 +24,7 @@ Note that if some smokes either regularly or ocassionally, then they are classif
  cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers, but
  people who have only tried a cigarette once or twice are classified as never smokers.
 
- This variable is created for adults aged >= 16 years, and children aged 8-15 years.
+This variable is created for adults aged >= 16 years, and children aged 8-15 years.
 }
 \examples{
 

@@ -4,10 +4,8 @@
 \alias{read_2007}
 \title{Read HSE 2007}
 \usage{
-read_2007(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2007/UKDA-6112-tab/tab/hse07ai.tab"
-)
+read_2007(root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2007/UKDA-6112-tab/tab/hse07ai.tab")
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -93,7 +91,6 @@ For analysis of children aged 0-15 in both the Core and the Boost sample, taking
 account child selection only and not adjusting for non-response, the (wt_child) variable can
 be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb)
 variable can
-
 
 MISSING VALUES
 

@@ -4,11 +4,8 @@
 \alias{read_SHeS_2009}
 \title{Read Scottish Health Survey 2009}
 \usage{
-read_SHeS_2009(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab"
-)
+read_SHeS_2009(root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab")
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -39,7 +36,6 @@ comprising of
 \item 4,312 addresses formed an additional child booster sample, 
 \item 768 addresses formed the Health Board boost.
 }
-
 
 MISSING VALUES
 

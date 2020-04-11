@@ -4,11 +4,8 @@
 \alias{alc_weekmean_adult}
 \title{Alcohol average weekly consumption (adults)}
 \usage{
-alc_weekmean_adult(
-  data,
-  abv_data = hseclean::abv_data,
-  volume_data = hseclean::alc_volume_data
-)
+alc_weekmean_adult(data, abv_data = hseclean::abv_data,
+  volume_data = hseclean::alc_volume_data)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset}

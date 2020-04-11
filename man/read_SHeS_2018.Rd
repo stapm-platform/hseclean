@@ -4,11 +4,8 @@
 \alias{read_SHeS_2018}
 \title{Read Scottish Health Survey 2018}
 \usage{
-read_SHeS_2018(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"
-)
+read_SHeS_2018(root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab")
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -34,7 +31,6 @@ Reads and does basic cleaning on the Scottish Health Survey 2018.
 The Scottish Health Survey is designed to yield a representative sample of the general population
 living in private households in Scotland every year. A sample of 11,801 addresses was drawn from the
 Postcode Address File (PAF) in 2018.
-
 
 MISSING VALUES
 

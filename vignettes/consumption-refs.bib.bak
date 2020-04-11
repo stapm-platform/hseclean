@@ -1,0 +1,62 @@
+% Encoding: UTF-8
+
+@Manual{Rsurvey,
+  title  = {{survey: analysis of complex survey samples}},
+  author = {{Thomas Lumley}},
+  year   = {2019},
+  note   = {{R package version 3.35-1}},
+}
+﻿
+
+@Article{Connelly2016,
+  author        = {Connelly, Roxanne and Gayle, Vernon and Lambert, Paul S.},
+  title         = {Ethnicity and ethnic group measures in social survey research},
+  journal       = {Methodological Innovations},
+  year          = {2016},
+  volume        = {9},
+  issn          = {2059-7991
+2059-7991},
+  __markedentry = {[cm1dog:6]},
+  doi           = {10.1177/2059799116642885},
+  type          = {Journal Article},
+}
+
+@Article{Connelly2016a,
+  author        = {Connelly, Roxanne and Gayle, Vernon and Lambert, Paul S.},
+  title         = {A Review of occupation-based social classifications for social survey research},
+  journal       = {Methodological Innovations},
+  year          = {2016},
+  volume        = {9},
+  issn          = {2059-7991
+2059-7991},
+  __markedentry = {[cm1dog:6]},
+  doi           = {10.1177/2059799116638003},
+  type          = {Journal Article},
+}
+
+@Article{Hiscock2012,
+  author        = {Hiscock, R. and Bauld, L. and Amos, A. and Platt, S.},
+  title         = {Smoking and socioeconomic status in England: the rise of the never smoker and the disadvantaged smoker},
+  journal       = {Journal of Public Health},
+  year          = {2012},
+  volume        = {34},
+  number        = {3},
+  pages         = {390-396},
+  __markedentry = {[cm1dog:6]},
+  doi           = {10.1093/pubmed/fds012},
+  type          = {Journal Article},
+  url           = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3425348/pdf/fds012.pdf},
+}
+
+@Article{Rmice,
+  author  = {{Stef {van Buuren} and Karin Groothuis-Oudshoorn}},
+  title   = {{{mice}: Multivariate Imputation by Chained Equations in R}},
+  journal = {{Journal of Statistical Software}},
+  year    = {2011},
+  volume  = {45},
+  number  = {3},
+  pages   = {1-67},
+  url     = {{https://www.jstatsoft.org/v45/i03/}},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

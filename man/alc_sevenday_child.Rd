@@ -4,11 +4,8 @@
 \alias{alc_sevenday_child}
 \title{Alcohol consumption in last seven-days (children)}
 \usage{
-alc_sevenday_child(
-  data,
-  abv_data = hseclean::abv_data,
-  alc_volume_data = hseclean::alc_volume_data
-)
+alc_sevenday_child(data, abv_data = hseclean::abv_data,
+  alc_volume_data = hseclean::alc_volume_data)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset}
@@ -31,7 +28,6 @@ and if so, how much of each was drunk.
 We estimate the number of
 UK standard units of alcohol drunk in the last 7 days by using the data on how many of what size measures of
 different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content.
-
 
 MISSING DATA
 
