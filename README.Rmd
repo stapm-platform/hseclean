@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 # hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3748784.svg)](https://doi.org/10.5281/zenodo.3748784)
 
 The package is usable but there are still a number of bugs and further developments that we are working through i.e. some code and documentation is still incomplete or in need of being refined. The code and documentation are still undergoing internal review by The University of Sheffield team.   
 
