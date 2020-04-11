@@ -1,9 +1,11 @@
-# hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="50" height="50" />
+# hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  
+
+Whilst the package is usable, there are still a number of bugs and further developments that we are working through.  
 
 ## Motivation
-This package is a work in progress and was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research, The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model, which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.   
+This package was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research, The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model, which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.   
 
 The original motivation for the package was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The suite of functions within `hseclean` reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.   
 
