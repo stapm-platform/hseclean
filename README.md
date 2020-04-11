@@ -1,18 +1,4 @@
----
-output:
-  rmarkdown::github_document
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
-# hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" />
+# hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;width:128px;height:128px;" />
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
