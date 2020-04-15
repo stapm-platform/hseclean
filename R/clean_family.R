@@ -15,7 +15,7 @@
 #'
 #' RELATIONSHIP STATUS
 #'
-#' In previous versions of modelling (e.g. the alcohol binge model) relationship status has been described as
+#' In previous versions of modelling (the SAPM alcohol binge model) relationship status has been described as
 #' married/not-married. Here, we include more detail by using:
 #' \itemize{
 #' \item single
@@ -104,5 +104,5 @@ clean_family <- function(
   data[ , maritalg := NULL]
   }
 
-return(data)
+return(data[])
 }

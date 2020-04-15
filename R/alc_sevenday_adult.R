@@ -241,12 +241,8 @@ alc_sevenday_adult <- function(
   data[n_days_drink > 0 & peakday >= 8 & sex == "Male", binge_cat := "binge"]
   data[n_days_drink > 0 & peakday >= 6 & sex == "Female", binge_cat := "binge"]
 
-  if(!("drinker_cat" %in% colnames(data))) {
+  if("weekmean" %in% colnames(data) & "drinker_cat" %in% colnames(data)) {
     
-    message("Run the functions alc_drink_now_allages() and alc_weekmean_adult() first to properly impute missing data")
-    
-  } else {
-  
     data[is.na(binge_cat) & (weekmean == 0 | drinker_cat == "abstainer"), binge_cat := "did_not_drink"]
   
   }

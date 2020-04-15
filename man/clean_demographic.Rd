@@ -22,15 +22,7 @@ Processes demographic variables.
 }
 \details{
 ETHNICITY
-Previous SAPM modelling has used a simple white/non-white classification. 
-The ONS recommend a harmonised ethnicity measure for use in social surveys 
-(\href{https://gss.civilservice.gov.uk/wp-content/uploads/2017/08/Ethnic-Group-June-17.pdf}{ONS, 2017}).
-The use of ethnicity measures is also discussed in 
-\href{https://journals.sagepub.com/doi/full/10.1177/2059799116642885}{Connelly et al. 2016}, 
-who recommend testing the sensitivity of analyses to different specifications. We try to map the 
-HSE categories to the ONS recommended groups for England. However, over the years, the HSE is not 
-clear or consistent in how they have categorised chinese and arab as 'asian' or 'other'. 
-In an attempt to harmonise, we have pooled the asian and other categories.  
+In an attempt to harmonise different years of data to the receomended definitions, we have pooled the asian and other categories.  
 \itemize{
 \item White (English, Irish, Scottish, Welsh, other European)
 \item Mixed / multiple ethnic groups

@@ -30,40 +30,40 @@ suppressPackageStartupMessages(library(hseclean))
 ```
 
 # Introduction
-The Health Survey for England (HSE) is a series of annual surveys covering health and health-related behaviours. For the Sheffield Tobacco Policy Model (STPM) we use data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see the `smoke.trans` R package). Our upper age limit is 89 years, but otherwise we make use of all ages and incorporate all booster samples (e.g. in 2004 there was an ethnicity booster sample).  
+For the Sheffield Tobacco Policy Model (STPM) we use HSE data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our `smoke.trans` R package). Our upper age limit is 89 years, but otherwise we make use of all ages.      
 
-To support the processing of the HSE data, there is the `hseclean` R package, which contains a collection of functions to read, process and summarise the HSE data. The purpose of this vignette is to explain how we use the HSE data to inform the patterns of cigarette consumption, and to explain how the `hseclean` package supports this.  
+The purpose of this vignette is to explain how we use the HSE data to inform the patterns of tobacco smoking, and to explain how `hseclean` supports this.    
 
 # Demographic and socio-economic variables
-The `hseclean` package contains a range of functions to clean covariates in the data, which are explained more thoroughly in `vignette("covariate_data")`. Here we describe the important things to consider for the processing of smoking data.  
+`hseclean` contains functions to clean covariates in the data, which are explained in `vignette("covariate_data")`. Here we mention only the important things to consider for the processing of smoking data.    
 
 # Cigarette smoking variables
-Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991. We use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.[HSE 2015](https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf).  
+Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991 - we use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.[HSE 2015](https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf).     
 
 ## Cigarette smoking status
-The function `smk_status()` categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers, but people who have only tried a cigarette once or twice are classified as never smokers. We create this variable for children aged 8-15 years and adults aged >= 16 years. Ever-smokers are people who are either current or former smokers.  
+The function `smk_status()` categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers; people who have only tried a cigarette once or twice are classified as never smokers. We create a smoking status variable for children aged 8-15 years and adults aged >= 16 years. Ever-smokers are people who are either current or former smokers.    
 
 ## Former smoking
-The function `smk_former()` cleans the data on the time since quitting and time spent as a regular smoker among former smokers. The main issue to be overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using `num_sim()`. We also fill missing data: 
+The function `smk_former()` cleans the data for former smokers on the time since quitting and time spent as a regular smoker. The main issue to overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using `num_sim()`. We then fill missing data for these variables as follows:   
 
-- For children 8-15 years, we assume that missing values for former smokers = 1 year.
-- For adults, we fill missing values with the average value for each age, sex and IMD quintile subgroup.  
+- For children 8-15 years, we assume that missing values for former smokers' time since quitting and time spent as a former smoker = 1 year.   
+- For adults, we fill missing values for former smokers' time since quitting and time spent as a former smoker with the average value for each age, sex and IMD quintile subgroup.   
 
 ## Smoking life-histories
-The function `smk_life_history()` cleans the ages that define when smokers started and stopped being regular cigarette smokers. For each individual smoker, the data recorded in the HSE implies a single age at which a smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and stopping multiple times.  
+The function `smk_life_history()` cleans the data on the ages when smokers started and stopped being regular cigarette smokers. For each individual smoker, the data recorded in the HSE implies a single age at which a smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and stopping multiple times.    
 
-Both the start age and stop age will have error in them e.g. due to uncertainty in respondent recall, and, for years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute introducing random error. Start age is likely to be biased towards earlier ages, because for adults with missing values we use the age first tried a cigarette, and for children the variable for start age does not necessarily mean the start of regular smoking, it is just the age at which they started to smoke.
+Both the start age and stop age will have error in them e.g. due to uncertainty in respondent recall, and, for years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute introducing random error. Start age is likely to be biased towards earlier ages, because for adult smokers and former smokers with missing values we use the age first tried a cigarette, and for children the reported start age does not necessarily mean the start of regular smoking, it is just the age at which they started to smoke.    
 
-We also create a variable for the age at which an individual was censored from our data sample - this is their age at the survey + 1 year.  
+We also create a variable for the age at which an individual was censored from our data sample - this is their age at the survey + 1 year.    
 
-Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.  
+Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.    
 
 ## Amount and type of cigarette smoked by current smokers
-The function `smk_amount()` cleans the variables that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.  
+The function `smk_amount()` cleans the data that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.  
 
-We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend. We currently don't use those questions because they were not asked in all years.  
+We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In later years of the HSE, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend.     
 
-We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette. This latter variable has a high level of missingness. Together these categorical variables allow calculation of [the heaviness of smoking index](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/).  
+We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette (this latter variable has a high level of missingness). Together these two variables allow calculation of [the heaviness of smoking index](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/).    
 
 # Using hseclean
 
@@ -74,7 +74,6 @@ The data is stored in `X:/ScHARR/PR_Consumption_TA/Data/`. The following code wi
 ```{r read data, eval = F}
 # Write a bespoke function that does just the cleaning jobs required.
 cleandata <- function(data) {
-  data <- clean_surveyweights(data)
   data <- clean_age(data)
   data <- clean_demographic(data)
   data <- smk_status(data)
@@ -82,7 +81,7 @@ cleandata <- function(data) {
   data <- smk_life_history(data)
   data <- smk_amount(data)
   data <- select_data(
-    data, ages = 12:89, years = 2001:2016,
+    data, ages = 12:89, years = 2001:2017,
     
     # The variables to retain
     keep_vars = c("wt_int", "psu", "cluster", "year", 
@@ -95,6 +94,7 @@ cleandata <- function(data) {
 return(data)
 }
 
+# Choose the required years and combine
 hse_data <- combine_years(list(
   cleandata(read_2014()), cleandata(read_2015()), cleandata(read_2016())
 ))
@@ -105,14 +105,6 @@ hse_data <- clean_surveyweights(hse_data)
 # change some variable names
 setnames(hse_data, c("smk_start_age", "cig_smoker_status", "years_since_quit"),
          c("start_age", "smk.state", "time_since_quit"))
-
-# check that all current smokers have an amount smoked per data that is greater than zero
-testthat::expect_equal(nrow(hse_data[smk.state == "current" & cigs_per_day == 0]), 0,
-                       info = "some current smokers smoke 0 cigs per day")
-
-# select only data with a coherent time since quit
-hse_data[ , time_since_quit := as.double(ceiling(time_since_quit))]
-hse_data <- hse_data[!(smk.state == "former" & time_since_quit < 1)]
 ```
 
 ## Summarise data
@@ -129,8 +121,6 @@ prop_smokers <- prop_summary(
   levels_0 = c("former", "never"),
   strat_vars = c("year", "sex", "imd_quintile")
 )
-
 ```
-
 
 # References

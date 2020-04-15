@@ -81,9 +81,7 @@ clean_income <- function(
     
   }
 
-  
-  
-return(data)
+return(data[])
 }
 
 

@@ -57,7 +57,7 @@
       <a href="articles/alcohol_data.html">Process data on alcohol consumption</a>
     </li>
     <li>
-      <a href="articles/covariate_data.html">Process data on individual socio-demographic characteristics</a>
+      <a href="articles/covariate_data.html">Process data on individual socioeconomic, demographic and health characteristics</a>
     </li>
     <li>
       <a href="articles/missing_data.html">Imputation of missing data</a>
@@ -88,15 +88,15 @@
 <a href="#hseclean" class="anchor"></a>hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100">
 </h1></div>
 
-<p>The package is usable but there are still a number of bugs and further developments that we are working through i.e. some code and documentation is still incomplete or in need of being refined. The code and documentation are still undergoing internal review by The University of Sheffield team.</p>
+<p>The package is usable but there are still bugs and further developments that are being worked through i.e. some code and documentation is still incomplete or in need of being refined. The code and documentation are still undergoing internal review by the analyst team.</p>
 <div id="motivation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
-<p>This package was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research, The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model, which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.</p>
-<p>The original motivation for the package was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The suite of functions within <code>hseclean</code> reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.</p>
+<p><code>hseclean</code> was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research, The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.</p>
+<p>The original motivation for <code>hseclean</code> was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The suite of functions within <code>hseclean</code> reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.</p>
 <p>We have subsequently added functions to process the Scottish Health Survey (SHeS) into a form that matches our processing of the Health Survey for England.</p>
 <blockquote>
-<p>Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service.</p>
+<p>Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service. <code>hseclean</code> is designed to read the tab delimited files.</p>
 </blockquote>
 <hr>
 <p><code>hseclean</code> is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data. This includes functionality to:</p>
@@ -133,6 +133,7 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <p>To be able to <strong>download data from the UK Data Service</strong>, you will need to <strong>register with the UK Data Service website</strong>, which will enable you to request access to the datasets. Instructions on how to do this can be found <a href="https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx">here</a>.</p>
+<p>At The University of Sheffield, the data is stored in the university networked X-drive folder <code>PR_Consumption_TA</code>, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level Health Survey for England or Scottish Health Survey data is included within this package on Github.</p>
 </div>
 <div id="basic-functionality" class="section level2">
 <h2 class="hasAnchor">
@@ -148,10 +149,10 @@
 <hr>
 <p><code>hseclean</code> contains separate functions for reading the survey data for each year, e.g. <code><a href="reference/read_SHeS_2008.html">read_SHeS_2008()</a></code>.</p>
 </div>
-<div id="processing-sociodemographic-variables" class="section level3">
+<div id="processing-socioeconomic-demographic-and-health-variables" class="section level3">
 <h3 class="hasAnchor">
-<a href="#processing-sociodemographic-variables" class="anchor"></a>Processing sociodemographic variables</h3>
-<p>There are separate functions to process each socioeconomic variables. See <code><a href="articles/covariate_data.html">vignette("covariate_data")</a></code>.</p>
+<a href="#processing-socioeconomic-demographic-and-health-variables" class="anchor"></a>Processing socioeconomic, demographic and health variables</h3>
+<p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code><a href="articles/covariate_data.html">vignette("covariate_data")</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_family</span> <span class="kw">%&gt;%</span>
@@ -254,14 +255,6 @@
   <span class="fu">cleandata</span>(<span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>))
 ))
 
-<span class="co"># check that all current smokers have an amount smoked per data that is greater than zero</span>
-<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/testthat/man/equality-expectations.html">expect_equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">data</span>[<span class="no">cig_smoker_status</span> <span class="kw">==</span> <span class="st">"current"</span> <span class="kw">&amp;</span> <span class="no">cigs_per_day</span> <span class="kw">==</span> <span class="fl">0</span>]), <span class="fl">0</span>,
-                       <span class="kw">info</span> <span class="kw">=</span> <span class="st">"some current smokers smoke 0 cigs per day"</span>)
-
-<span class="co"># select only data with a coherent time since quit</span>
-<span class="no">data</span>[ , <span class="no">years_since_quit</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span>(<span class="no">years_since_quit</span>))]
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="no">data</span>[!(<span class="no">cig_smoker_status</span> <span class="kw">==</span> <span class="st">"former"</span> <span class="kw">&amp;</span> <span class="no">years_since_quit</span> <span class="kw">&lt;</span> <span class="fl">1</span>)]
-
 <span class="co"># clean the survey weights</span>
 <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/clean_surveyweights.html">clean_surveyweights</a></span>(<span class="no">data</span>)</pre></div>
 </div>
@@ -292,7 +285,7 @@
                         <span class="kw">n_imputations</span> <span class="kw">=</span> <span class="fl">5</span>)
 
 <span class="co"># imp$data is a single data.table containing all 5 imputed versions of the data</span>
-<span class="no">hse_data_smoking</span> <span class="kw">&lt;-</span> <span class="fu">copy</span>(<span class="no">imp</span>$<span class="no">data</span>)</pre></div>
+<span class="no">hse_data_imputed</span> <span class="kw">&lt;-</span> <span class="fu">copy</span>(<span class="no">imp</span>$<span class="no">data</span>)</pre></div>
 </div>
 </div>
 </div>

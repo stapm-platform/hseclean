@@ -38,5 +38,5 @@ clean_surveyweights <- function(
 
   #data[ , `:=`(sample_n = NULL, N = NULL, wt_pop = NULL)]
 
-return(data)
+return(data[])
 }

@@ -116,6 +116,10 @@ clean_age <- function(
   # Calculate birth cohort
   data[ , cohort := year - age]
 
+  # Set cohort, year and age as integers
+  #data[ , cohort := as.integer(cohort)]
+  #data[ , year := as.integer(year)]
+  #data[ , age := as.integer(age)]
 
-return(data)
+return(data[])
 }

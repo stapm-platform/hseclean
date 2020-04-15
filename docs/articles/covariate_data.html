@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Process data on individual socio-demographic characteristics • hseclean</title>
+<title>Process data on individual socioeconomic, demographic and health characteristics • hseclean</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Process data on individual socio-demographic characteristics">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Process data on individual socioeconomic, demographic and health characteristics">
 <meta property="og:description" content="hseclean">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -57,7 +57,7 @@
       <a href="../articles/alcohol_data.html">Process data on alcohol consumption</a>
     </li>
     <li>
-      <a href="../articles/covariate_data.html">Process data on individual socio-demographic characteristics</a>
+      <a href="../articles/covariate_data.html">Process data on individual socioeconomic, demographic and health characteristics</a>
     </li>
     <li>
       <a href="../articles/missing_data.html">Imputation of missing data</a>
@@ -84,7 +84,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Process data on individual socio-demographic characteristics</h1>
+      <h1 data-toc-skip>Process data on individual socioeconomic, demographic and health characteristics</h1>
             
       
       
@@ -98,14 +98,14 @@
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
 <p>The Health Survey for England (HSE) is a series of annual surveys covering health and health-related behaviours. For the Sheffield Tobacco Policy Model (STPM) we use data from years 2001 to the latest available. Our upper age limit is 89 years, but otherwise we make use of all ages and incorporate all booster samples (e.g. in 2004 there was an ethnicity booster sample).</p>
-<p>One important thing to note is that the suppliers of the HSE data introduced tighter information governance rules in 2015, which meant they stopped providing variables that could be used to identify the age in single years of an individual, and also stopped providing information on number of children in the household. These variables can still be obtained, but only after applying for the secure-access version of the data, which also costs £1000 for each application. In our process of the standard-access version of the data, we use imputation methods to overcome the added restrictions.</p>
-<p>The <code>hseclean</code> package is a collection of functions to read and process the HSE data into a suitable form for use in our modelling. Here we describe the background to how we use it to clean and calculate the covariates used in our analyses.</p>
+<p>One important thing to note is that the suppliers of the HSE data introduced tighter information governance rules in 2015, which meant that they stopped providing variables that could be used to identify the age in single years of an individual, and also stopped providing information on number of children in the household. These variables can still be obtained, but only after applying for the secure-access version of the data, which we do not do. Therefore, in our processing of the standard-access version of the data, we use imputation methods to overcome the added restrictions.</p>
+<p><code>hseclean</code> is a collection of functions to read and process the HSE data into a suitable form for use in our modelling. Here we describe how we use it to clean and calculate the covariates used in our analyses.</p>
 </div>
 <div id="survey-design-variables" class="section level1">
 <h1 class="hasAnchor">
 <a href="#survey-design-variables" class="anchor"></a>Survey design variables</h1>
 <p>The first thing to consider is the influence of survey sampling design, which is variable among years. The variables that describe the sampling structure are <code>cluster</code> and <code>PSU</code> (probabilistic sampling unit).</p>
-<p>In most years there are also survey weights, which are calculated after the survey data has been collected, that when applied are supposed to make the survey sample representative of the general population e.g. if a particular subgroup has been under-sampled, then it receives a higher survey weight. The definition and structure of the survey weights tends to vary between years, and is described in the dataset documentation. For example,</p>
+<p>In most years there are also survey weights, which are calculated after the survey data has been collected, that when applied are supposed to make the survey sample representative of the general population e.g. if a particular subgroup has been under-sampled, then it receives a higher survey weight. As I understand it, the survey weights supplied with the data consider only the age and sex distribution of the population, and do not consider the distribution of socio-economic or health characteristics. The definition and structure of the survey weights provided with the data tends to vary between years, and is described in the dataset documentation for each year of data. For example, some key changes</p>
 <ul>
 <li>For 2001, there were not survey weights for adults but there were for children (to correct for the sampling design that not all children in the household being surveyed).<br>
 </li>
@@ -120,12 +120,12 @@
 <div id="age" class="section level1">
 <h1 class="hasAnchor">
 <a href="#age" class="anchor"></a>Age</h1>
-<p>From 2015 onwards, the HSE no longer supplies age in single years (to prevent individual identification). For our modelling, we require age in single years, so we apply a method that randomly assigns an age in single years to individuals for whom we only have an age category. The age categories we work with are: 0-1, 2-4, 5-7, 8-10, 11-12, 13-15, 16-17, 18-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90+. These categories are the finest scale version of age that is available for years 2015+. We then select only individuals younger than 90 years for our modelling.</p>
+<p>From 2015 onwards, the HSE no longer supplies age in single years (to prevent individual identification). For our modelling, we require age in single years, so we apply a method that randomly assigns an age in single years to individuals for who we only have an age category. The age categories we work with are: 0-1, 2-4, 5-7, 8-10, 11-12, 13-15, 16-17, 18-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90+. These categories are the finest scale version of age that is available for years 2015+. We then select only individuals younger than 90 years for our modelling.</p>
 <p>This processing is done by the function <code><a href="../reference/clean_age.html">clean_age()</a></code> that calls the function <code><a href="../reference/num_sim.html">num_sim()</a></code> to simulate single years of age. For years 2015+, we also use <code><a href="../reference/num_sim.html">num_sim()</a></code> to convert the categorical variables for years since quitting smoking and years spent as a smoker to single years of age.</p>
 </div>
-<div id="demographic-variables" class="section level1">
+<div id="other-demographic-variables" class="section level1">
 <h1 class="hasAnchor">
-<a href="#demographic-variables" class="anchor"></a>Demographic variables</h1>
+<a href="#other-demographic-variables" class="anchor"></a>Other demographic variables</h1>
 <p>The function <code><a href="../reference/clean_demographic.html">clean_demographic()</a></code> creates variables for ethnicity, sex and quintiles of the Index of Multiple Deprivation (IMDq).</p>
 <div id="sex" class="section level2">
 <h2 class="hasAnchor">
@@ -147,20 +147,20 @@
 <li>Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi), plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)</li>
 <li>Black / African / Caribbean / Black British (includes Caribbean, African)</li>
 </ul>
-<p>Following inspection of the data, the white/non-white classification does look appropriate, especially given the likely limited sample sizes - so the 2 level variable has also been created.</p>
+<p>Following inspection of the data, the white/non-white classification does look appropriate, especially given the likely limited sample sizes - so the 2 level variable has also been created. Previous Sheffield modelling in the Sheffield Alcohol Policy Model has also used the white/non-white classification.</p>
 </div>
 </div>
 <div id="townsend-quintiles-of-deprivation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#townsend-quintiles-of-deprivation" class="anchor"></a>Townsend quintiles of deprivation</h1>
-<p>The code to estimate the likely Townsend deprivation quintile of each individual was added as part of the costs of alcohol to primary care project. It was needed because the THIN primary care database records deprivation in terms of Townsend rather than IMD quintile.</p>
+<p>Individuals in the HSE are not assigned a Townsend quintile of deprivation, but for a project that investigated the cost of alcohol to primary care in England, we needed to predict the Townsend quintile of each individual so that we could use it to stratify our summary of alcohol consumption.</p>
 <p>The function <code><a href="../reference/use_townsend.html">use_townsend()</a></code> adds a Townsend variable to the data. It produces a version of the Health Survey for England data that has the Townsend Index in it, based on the probabilistic mapping between the 2015 English Index of Multiple Deprivation and the Townsend Index from the 2001 census.</p>
 <p>It does so based on a matrix (stored in <code><a href="../reference/imdq_to_townsend.html">hseclean::imdq_to_townsend</a></code>) that maps quintiles of the Index of Multiple Deprivation onto the Townsend Index of Deprviation. To produce this we used <a href="https://census.ukdataservice.ac.uk/get-data/related/deprivation">area-level Office for National Statistics data</a> to estimate the statistical association between the two metrics of deprivation. We used estimates of the Townsend Index from 2001 Census data at Ward level, and the Index of Multiple Deprivation 2015 (IMD 2015) at Lower-layer Super Output Area (LSOA) level. First, we mapped the <a href="https://data.gov.uk/dataset/fe6e0ebc-8def-4cc6-a228-1968ccca3dd2/lower-layer-super-output-area-2001-to-ward-2001-lookup-in-england-and-wales">2001 definitions of Wards to the 2001 definitions of LSOAs</a>. Second, we mapped the <a href="https://data.gov.uk/dataset/afc2ed54-f1c5-44f3-b8bb-6454eb0153d0/lower-layer-super-output-area-2001-to-lower-layer-super-output-area-2011-to-local-authority-district-2011-lookup-in-england-and-wales">2001 definitions of LSOAs to the 2011 definitions of LSOAs that are used by the IMD 2015</a>.</p>
 <div id="economic-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#economic-status" class="anchor"></a>Economic status</h2>
 <p>The function <code><a href="../reference/clean_economic_status.html">clean_economic_status()</a></code> creates a variety of variables to classify economic status.</p>
-<p>The issues around using occupation-based social classifications for social survey research are discussed by Connelly et al. <span class="citation">(<a href="#ref-Connelly2016a">2016</a>)</span>. They advise using a range of alternative measures, but not creating new measures beyond what is already established.</p>
+<p>The issues around using occupation-based social classifications for social survey research are discussed by Connelly et al. <span class="citation">(<a href="#ref-Connelly2016a">2016</a>)</span>. They advise using a range of alternative measures, and not creating new measures beyond what is already established.</p>
 <p>The classifications considered are:</p>
 <ul>
 <li>Employed / in paid work or not.</li>
@@ -198,12 +198,12 @@
 <div id="number-of-children-in-the-household" class="section level3">
 <h3 class="hasAnchor">
 <a href="#number-of-children-in-the-household" class="anchor"></a>Number of children in the household</h3>
-<p>Categorised into: 0, 1, 2, 3+. The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see the later section on multiple imputation).</p>
+<p>Categorised into: 0, 1, 2, 3+. The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see vignette(missing_data)).</p>
 </div>
 <div id="relationship-status" class="section level3">
 <h3 class="hasAnchor">
 <a href="#relationship-status" class="anchor"></a>Relationship status</h3>
-<p>In previous versions of modelling (e.g. the alcohol binge model) relationship status has been described as married/not-married. Here, we include more detail by using:</p>
+<p>In previous versions of modelling for the Sheffield Alcohol Policy Model, relationship status has been described as married/not-married. Here, we include more detail by using:</p>
 <ul>
 <li>single<br>
 </li>
@@ -217,9 +217,9 @@
 <h2 class="hasAnchor">
 <a href="#income" class="anchor"></a>Income</h2>
 <p>The function <code><a href="../reference/clean_income.html">clean_income()</a></code> processes the data on income.</p>
-<p>There are a few different options for classifying income - the need to have a measure that is consistent across years of the Health Survey for England has led us to use equivalised income quintiles only. Past SAPM modelling has used years of the Health Survey for England for which a continous variable for equivalised income was provided. From this, we calculated our own income groups. In later years, this continuous income variable is not available (except if we were to apply for a secure access version of the data).</p>
-<p>In the past a measure of in poverty / not in poverty has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty. But it will coincide approximately with the lowest 2 income quintiles.</p>
-<p>It would also be possible from the Health Survey for England to classify people as being in receipt of benefits or not. This is not done currently, and would have to have some thought on how to deal with the changing definitions of benefits over time.</p>
+<p>There are a few different options for classifying income - the need to have a measure that is consistent across years of the Health Survey for England has led us to use equivalised income quintiles only. (Past SAPM modelling has used years of the HSE for which a continous variable for equivalised income was provided - and calculated our own income groups - but in later years, this continuous income variable is not available.)</p>
+<p>In the past SAPM modelling, a measure of in “poverty” vs. “not in poverty” has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty, but being in poverty will coincide approximately with the lowest 2 income quintiles.</p>
+<p>It would also be possible from the Health Survey for England to classify people as being in receipt of benefits or not, but this is not currently implemented in <code>hseclean</code>, and would have to have some thought on how to deal with the changing definitions of benefits over time.</p>
 </div>
 </div>
 <div id="health-and-biometric-variables" class="section level1">
@@ -229,7 +229,7 @@
 <div id="health-conditions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#health-conditions" class="anchor"></a>Health conditions</h2>
-<p>There are a set of 14 categories of conditions that are ascertained consistently across all years of the Heath Survey for England. These are:<br>
+<p>There are a set of 14 categories of conditions that are ascertained consistently across all years of the HSE. These are:<br>
 - Cancer<br>
 - Endocrine or metabolic condition<br>
 - Mental health condition<br>

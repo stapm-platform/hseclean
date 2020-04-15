@@ -75,6 +75,5 @@ clean_education <- function(
   data[is.na(degree) & age < 18, degree := "no_degree"]
 
 
-
-return(data)
+return(data[])
 }

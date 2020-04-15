@@ -54,6 +54,9 @@ smk_amount <- function(
 
   # Adults age >= 16 years
   data[cig_smoker_status == "current" & cigwday >= 0 & cigwend >= 0, cigs_per_day := ((5 * cigwday) + (2 * cigwend)) / 7]
+  
+  # current smokers should have an amount smoked per day that is greater than zero
+  data[cig_smoker_status == "current" & cigs_per_day == 0, cigs_per_day := NA]
 
   # Children 8-15 years
   if(country == "England"){
@@ -95,6 +98,8 @@ smk_amount <- function(
   data[ , (remove_vars) := NULL]
 
 
+  
+  
   ####################################################
   # Categorise daily smoking
 
@@ -139,6 +144,6 @@ smk_amount <- function(
   data[ , (remove_vars) := NULL]
   }
 
-return(data)
+return(data[])
 }
 

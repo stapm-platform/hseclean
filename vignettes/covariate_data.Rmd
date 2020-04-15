@@ -1,5 +1,5 @@
 ---
-title: "Process data on individual socio-demographic characteristics"
+title: "Process data on individual socioeconomic, demographic and health characteristics"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Process data on individual socio-demographic characteristics}
@@ -30,16 +30,16 @@ suppressPackageStartupMessages(library(hseclean))
 ```
 
 # Introduction
-The Health Survey for England (HSE) is a series of annual surveys covering health and health-related behaviours. For the Sheffield Tobacco Policy Model (STPM) we use data from years 2001 to the latest available. Our upper age limit is 89 years, but otherwise we make use of all ages and incorporate all booster samples (e.g. in 2004 there was an ethnicity booster sample).   
+The Health Survey for England (HSE) is a series of annual surveys covering health and health-related behaviours. For the Sheffield Tobacco Policy Model (STPM) we use data from years 2001 to the latest available. Our upper age limit is 89 years, but otherwise we make use of all ages and incorporate all booster samples (e.g. in 2004 there was an ethnicity booster sample).    
 
-One important thing to note is that the suppliers of the HSE data introduced tighter information governance rules in 2015, which meant they stopped providing variables that could be used to identify the age in single years of an individual, and also stopped providing information on number of children in the household. These variables can still be obtained, but only after applying for the secure-access version of the data, which also costs £1000 for each application. In our process of the standard-access version of the data, we use imputation methods to overcome the added restrictions.  
+One important thing to note is that the suppliers of the HSE data introduced tighter information governance rules in 2015, which meant that they stopped providing variables that could be used to identify the age in single years of an individual, and also stopped providing information on number of children in the household. These variables can still be obtained, but only after applying for the secure-access version of the data, which we do not do. Therefore, in our processing of the standard-access version of the data, we use imputation methods to overcome the added restrictions.     
 
-The `hseclean` package is a collection of functions to read and process the HSE data into a suitable form for use in our modelling. Here we describe the background to how we use it to clean and calculate the covariates used in our analyses.  
+`hseclean` is a collection of functions to read and process the HSE data into a suitable form for use in our modelling. Here we describe how we use it to clean and calculate the covariates used in our analyses.    
   
 # Survey design variables
 The first thing to consider is the influence of survey sampling design, which is variable among years. The variables that describe the sampling structure are `cluster` and `PSU` (probabilistic sampling unit).  
 
-In most years there are also survey weights, which are calculated after the survey data has been collected, that when applied are supposed to make the survey sample representative of the general population e.g. if a particular subgroup has been under-sampled, then it receives a higher survey weight. The definition and structure of the survey weights tends to vary between years, and is described in the dataset documentation. For example,  
+In most years there are also survey weights, which are calculated after the survey data has been collected, that when applied are supposed to make the survey sample representative of the general population e.g. if a particular subgroup has been under-sampled, then it receives a higher survey weight. As I understand it, the survey weights supplied with the data consider only the age and sex distribution of the population, and do not consider the distribution of socio-economic or health characteristics. The definition and structure of the survey weights provided with the data tends to vary between years, and is described in the dataset documentation for each year of data. For example, some key changes  
 
 - For 2001, there were not survey weights for adults but there were for children (to correct for the sampling design that not all children in the household being surveyed).  
 - For 2002, there were different weights for children, young adults (< 25 years) and older adults. These weights again were just to correct for the sampling design.  
@@ -49,11 +49,11 @@ In most years there are also survey weights, which are calculated after the surv
 `hseclean` contains separate functions for reading the survey data for each year, e.g. `read_2001()`, and a description of the survey weights has been added to the help files of those functions. Any processing or combining of survey weights is done in the functions that read each year of data. The function `clean_surveyweights()` assigns any missing weights the average weight for each year, and standardises the weights to sum to 1 within each year. The resulting survey weight variable for each year is `wt_int`.   
 
 # Age
-From 2015 onwards, the HSE no longer supplies age in single years (to prevent individual identification). For our modelling, we require age in single years, so we apply a method that randomly assigns an age in single years to individuals for whom we only have an age category. The age categories we work with are: 0-1, 2-4, 5-7, 8-10, 11-12, 13-15, 16-17, 18-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90+. These categories are the finest scale version of age that is available for years 2015+. We then select only individuals younger than 90 years for our modelling.  
+From 2015 onwards, the HSE no longer supplies age in single years (to prevent individual identification). For our modelling, we require age in single years, so we apply a method that randomly assigns an age in single years to individuals for who we only have an age category. The age categories we work with are: 0-1, 2-4, 5-7, 8-10, 11-12, 13-15, 16-17, 18-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90+. These categories are the finest scale version of age that is available for years 2015+. We then select only individuals younger than 90 years for our modelling.  
 
 This processing is done by the function `clean_age()` that calls the function `num_sim()` to simulate single years of age. For years 2015+, we also use `num_sim()` to convert the categorical variables for years since quitting smoking and years spent as a smoker to single years of age.  
 
-# Demographic variables
+# Other demographic variables
 The function `clean_demographic()` creates variables for ethnicity, sex and quintiles of the Index of Multiple Deprivation (IMDq).  
 
 ## Sex
@@ -71,10 +71,10 @@ The use of ethnicity measures is also discussed in [Connelly et al. 2016](https:
 - Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi), plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)
 - Black / African / Caribbean / Black British (includes Caribbean, African)  
 
-Following inspection of the data, the white/non-white classification does look appropriate, especially given the likely limited sample sizes - so the 2 level variable has also been created.  
+Following inspection of the data, the white/non-white classification does look appropriate, especially given the likely limited sample sizes - so the 2 level variable has also been created. Previous Sheffield modelling in the Sheffield Alcohol Policy Model has also used the white/non-white classification.    
 
 # Townsend quintiles of deprivation
-The code to estimate the likely Townsend deprivation quintile of each individual was added as part of the costs of alcohol to primary care project. It was needed because the THIN primary care database records deprivation in terms of Townsend rather than IMD quintile.  
+Individuals in the HSE are not assigned a Townsend quintile of deprivation, but for a project that investigated the cost of alcohol to primary care in England, we needed to predict the Townsend quintile of each individual so that we could use it to stratify our summary of alcohol consumption.   
 
 The function `use_townsend()` adds a Townsend variable to the data. It produces a version of the Health Survey for England data that has the Townsend Index in it, based on the probabilistic mapping between the 2015 English Index of Multiple Deprivation and the Townsend Index from the 2001 census.  
 
@@ -84,7 +84,7 @@ It does so based on a matrix (stored in `hseclean::imdq_to_townsend`) that maps 
 The function `clean_economic_status()` creates a variety of variables to classify economic status.  
 
 The issues around using occupation-based social classifications for social survey research are discussed by
-Connelly et al. [-@Connelly2016a]. They advise using a range of alternative measures, but not creating new measures beyond what is already established.  
+Connelly et al. [-@Connelly2016a]. They advise using a range of alternative measures, and not creating new measures beyond what is already established.  
 
 The classifications considered are:  
 
@@ -105,38 +105,37 @@ The main education variable produced by the function `clean_education()` is a fo
 - left at 19 years or over.    
 
 
-If someone was still in full time education at the time of the survey, then if they were younger than 18 years, we assumed they would leave at 16-18, and if they were older than 18 years, we assumed they would leave at 19 years or over.  
+If someone was still in full time education at the time of the survey, then if they were younger than 18 years, we assumed they would leave at 16-18, and if they were older than 18 years, we assumed they would leave at 19 years or over.    
 
-A further education variable is also produced - which indicates whether an individual reached a degree as their top qualification or not. Here a degree is defined as an "NVQ4/NVQ5/Degree or equiv".  
+A further education variable is also produced - which indicates whether an individual reached a degree as their top qualification or not. Here a degree is defined as an "NVQ4/NVQ5/Degree or equiv".    
 
 ## Family
-The function `clean_family()` processes the data on the number of children in the household and the relationship status of each respondent.
+The function `clean_family()` processes the data on the number of children in the household and the relationship status of each respondent.   
 
 ### Number of children in the household
-Categorised into: 0, 1, 2, 3+. The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see the later section on multiple imputation).
+Categorised into: 0, 1, 2, 3+. The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see vignette(missing_data)).   
 
 ### Relationship status
-In previous versions of modelling (e.g. the alcohol binge model) relationship status has been described as married/not-married. Here, we include more detail by using:  
+In previous versions of modelling for the Sheffield Alcohol Policy Model, relationship status has been described as married/not-married. Here, we include more detail by using:    
 
 - single  
 - married, civil partnership or cohabiting  
 - separated, divorced, widowed    
 
-
 ## Income
 The function `clean_income()` processes the data on income.    
 
-There are a few different options for classifying income - the need to have a measure that is consistent across years of the Health Survey for England has led us to use equivalised income quintiles only. Past SAPM modelling has used years of the Health Survey for England for which a continous variable for equivalised income was provided. From this, we calculated our own income groups. In later years, this continuous income variable is not available (except if we were to apply for a secure access version of the data).    
+There are a few different options for classifying income - the need to have a measure that is consistent across years of the Health Survey for England has led us to use equivalised income quintiles only. (Past SAPM modelling has used years of the HSE for which a continous variable for equivalised income was provided - and calculated our own income groups - but in later years, this continuous income variable is not available.)       
 
-In the past a measure of in poverty / not in poverty has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty. But it will coincide approximately with the lowest 2 income quintiles.    
+In the past SAPM modelling, a measure of in "poverty" vs. "not in poverty" has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty,  but being in poverty will coincide approximately with the lowest 2 income quintiles.    
 
-It would also be possible from the Health Survey for England to classify people as being in receipt of benefits or not. This is not done currently, and would have to have some thought on how to deal with the changing definitions of benefits over time.
+It would also be possible from the Health Survey for England to classify people as being in receipt of benefits or not, but this is not currently implemented in `hseclean`, and would have to have some thought on how to deal with the changing definitions of benefits over time.   
 
 # Health and biometric variables
 The function `clean_health_and_bio()` cleans data on presence/absence of certain categories of health condition, and on height and weight.  
 
 ## Health conditions
-There are a set of 14 categories of conditions that are ascertained consistently across all years of the Heath Survey for England.  These are:   
+There are a set of 14 categories of conditions that are ascertained consistently across all years of the HSE.  These are:   
 - Cancer  
 - Endocrine or metabolic condition  
 - Mental health condition  

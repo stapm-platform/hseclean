@@ -24,18 +24,13 @@ managerial and professional occupations, intermediate occupations and routine an
 Process the data on employment and occupation.
 }
 \details{
-The issues around using occupation-based social classifications for social survey research are discussed by
- \href{https://journals.sagepub.com/doi/full/10.1177/2059799116638003}{Connelly et al. 2016}. They advise using a range of alternative measures,
- but not creating new measures beyond what is already established.
-
 The classifications considered are:
 
 \itemize{
 \item Employed / in paid work or not.
-\item The \href{https://www.ons.gov.uk/methodology/classificationsandstandards/otherclassifications/thenationalstatisticssocioeconomicclassificationnssecrebasedonsoc2010}{NS-SEC measure}
-which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
+\item The NS-SEC measure, which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
 therefore not that good at classifying people who are not employed for various reasons.
-\item The \href{https://humanrights.brightblue.org.uk/blog-1/2016/5/6/measuring-social-class}{NRS social grade system}. This measure is the one used in the
+\item The NRS social grade system. This measure is the one used in the
 Tobacco and Alcohol Toolkit studies, but is not reported in the Health Survey for England. We create this variable by recategorising the NS-SEC 8 level variable.
 This is important to facilitate the link of analysis to the Toolkit Study.
 \item Manual vs. non-manual occupation. In the 2017 Tobacco control plan for England, there was a specific target to reduce the difference in rates of smoking

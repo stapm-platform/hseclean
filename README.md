@@ -8,24 +8,23 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3748784.svg)](https://doi.org/10.5281/zenodo.3748784)
 
-The package is usable but there are still a number of bugs and further
-developments that we are working through i.e. some code and
-documentation is still incomplete or in need of being refined. The code
-and documentation are still undergoing internal review by The University
-of Sheffield team.
+The package is usable but there are still bugs and further developments
+that are being worked through i.e. some code and documentation is still
+incomplete or in need of being refined. The code and documentation are
+still undergoing internal review by the analyst team.
 
 ## Motivation
 
-This package was created as part of a programme of work on the health
+`hseclean` was created as part of a programme of work on the health
 economics of tobacco and alcohol at the School of Health and Related
 Research, The University of Sheffield. This programme is based around
-the construction of the Sheffield Tobacco and Alcohol Policy Model,
-which aims to use comparable methodologies to evaluate the impacts of
-tobacco and alcohol policies, and investigate the consequences of
-clustering and interactions between tobacco and alcohol consumption
-behaviours.
+the construction of the Sheffield Tobacco and Alcohol Policy Model
+(STAPM), which aims to use comparable methodologies to evaluate the
+impacts of tobacco and alcohol policies, and investigate the
+consequences of clustering and interactions between tobacco and alcohol
+consumption behaviours.
 
-The original motivation for the package was to standardised the way that
+The original motivation for `hseclean` was to standardised the way that
 the Health Survey for England (HSE) data were cleaned and prepared for
 our analyses and inputs to our decision-analytic models. The suite of
 functions within `hseclean` reads the data for each year since 2001,
@@ -38,7 +37,8 @@ Survey (SHeS) into a form that matches our processing of the Health
 Survey for England.
 
 > Health Survey for England and Scottish Health Survey data are accessed
-> via the UK Data Service.
+> via the UK Data Service. `hseclean` is designed to read the tab
+> delimited files.
 
 -----
 
@@ -85,6 +85,12 @@ to request access to the datasets. Instructions on how to do this can be
 found
 [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).
 
+At The University of Sheffield, the data is stored in the university
+networked X-drive folder `PR_Consumption_TA`, which is accessible only
+to team members who are using data according to the purposes stated to
+the UK Data Service. No individual-level Health Survey for England or
+Scottish Health Survey data is included within this package on Github.
+
 ## Basic functionality
 
 ### Reading the HSE data files
@@ -106,10 +112,11 @@ test_2001 <- read_2001(
 `hseclean` contains separate functions for reading the survey data for
 each year, e.g. `read_SHeS_2008()`.
 
-### Processing sociodemographic variables
+### Processing socioeconomic, demographic and health variables
 
-There are separate functions to process each socioeconomic variables.
-See `vignette("covariate_data")`.
+There are separate functions that focus on processing a different theme
+of socioeconomic, demographic and health variables. See
+`vignette("covariate_data")`.
 
 ``` r
 temp <- read_2017(root = root_dir) %>%
@@ -221,14 +228,6 @@ data <- combine_years(list(
   cleandata(read_2017(root = root_dir))
 ))
 
-# check that all current smokers have an amount smoked per data that is greater than zero
-testthat::expect_equal(nrow(data[cig_smoker_status == "current" & cigs_per_day == 0]), 0, 
-                       info = "some current smokers smoke 0 cigs per day")
-
-# select only data with a coherent time since quit
-data[ , years_since_quit := as.double(ceiling(years_since_quit))]
-data <- data[!(cig_smoker_status == "former" & years_since_quit < 1)]
-
 # clean the survey weights
 data <- clean_surveyweights(data)
 ```
@@ -268,5 +267,5 @@ imp <- impute_data_mice(data = hse_data,
                         n_imputations = 5)
 
 # imp$data is a single data.table containing all 5 imputed versions of the data
-hse_data_smoking <- copy(imp$data)
+hse_data_imputed <- copy(imp$data)
 ```

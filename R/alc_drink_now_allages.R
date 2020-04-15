@@ -114,6 +114,6 @@ alc_drink_now_allages <- function(
   #                 colnames(data)[stringr::str_detect(colnames(data), "dnoft")])
   #data[ , (remove_vars) := NULL]
 
-return(data)
+return(data[])
 }
 

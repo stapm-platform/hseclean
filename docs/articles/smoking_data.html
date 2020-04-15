@@ -57,7 +57,7 @@
       <a href="../articles/alcohol_data.html">Process data on alcohol consumption</a>
     </li>
     <li>
-      <a href="../articles/covariate_data.html">Process data on individual socio-demographic characteristics</a>
+      <a href="../articles/covariate_data.html">Process data on individual socioeconomic, demographic and health characteristics</a>
     </li>
     <li>
       <a href="../articles/missing_data.html">Imputation of missing data</a>
@@ -97,46 +97,47 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The Health Survey for England (HSE) is a series of annual surveys covering health and health-related behaviours. For the Sheffield Tobacco Policy Model (STPM) we use data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see the <code>smoke.trans</code> R package). Our upper age limit is 89 years, but otherwise we make use of all ages and incorporate all booster samples (e.g. in 2004 there was an ethnicity booster sample).</p>
-<p>To support the processing of the HSE data, there is the <code>hseclean</code> R package, which contains a collection of functions to read, process and summarise the HSE data. The purpose of this vignette is to explain how we use the HSE data to inform the patterns of cigarette consumption, and to explain how the <code>hseclean</code> package supports this.</p>
+<p>For the Sheffield Tobacco Policy Model (STPM) we use HSE data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our <code>smoke.trans</code> R package). Our upper age limit is 89 years, but otherwise we make use of all ages.</p>
+<p>The purpose of this vignette is to explain how we use the HSE data to inform the patterns of tobacco smoking, and to explain how <code>hseclean</code> supports this.</p>
 </div>
 <div id="demographic-and-socio-economic-variables" class="section level1">
 <h1 class="hasAnchor">
 <a href="#demographic-and-socio-economic-variables" class="anchor"></a>Demographic and socio-economic variables</h1>
-<p>The <code>hseclean</code> package contains a range of functions to clean covariates in the data, which are explained more thoroughly in <code><a href="../articles/covariate_data.html">vignette("covariate_data")</a></code>. Here we describe the important things to consider for the processing of smoking data.</p>
+<p><code>hseclean</code> contains functions to clean covariates in the data, which are explained in <code><a href="../articles/covariate_data.html">vignette("covariate_data")</a></code>. Here we mention only the important things to consider for the processing of smoking data.</p>
 </div>
 <div id="cigarette-smoking-variables" class="section level1">
 <h1 class="hasAnchor">
 <a href="#cigarette-smoking-variables" class="anchor"></a>Cigarette smoking variables</h1>
-<p>Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991. We use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.<a href="https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf">HSE 2015</a>.</p>
+<p>Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991 - we use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.<a href="https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf">HSE 2015</a>.</p>
 <div id="cigarette-smoking-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cigarette-smoking-status" class="anchor"></a>Cigarette smoking status</h2>
-<p>The function <code><a href="../reference/smk_status.html">smk_status()</a></code> categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers, but people who have only tried a cigarette once or twice are classified as never smokers. We create this variable for children aged 8-15 years and adults aged &gt;= 16 years. Ever-smokers are people who are either current or former smokers.</p>
+<p>The function <code><a href="../reference/smk_status.html">smk_status()</a></code> categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers; people who have only tried a cigarette once or twice are classified as never smokers. We create a smoking status variable for children aged 8-15 years and adults aged &gt;= 16 years. Ever-smokers are people who are either current or former smokers.</p>
 </div>
 <div id="former-smoking" class="section level2">
 <h2 class="hasAnchor">
 <a href="#former-smoking" class="anchor"></a>Former smoking</h2>
-<p>The function <code><a href="../reference/smk_former.html">smk_former()</a></code> cleans the data on the time since quitting and time spent as a regular smoker among former smokers. The main issue to be overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using <code><a href="../reference/num_sim.html">num_sim()</a></code>. We also fill missing data:</p>
+<p>The function <code><a href="../reference/smk_former.html">smk_former()</a></code> cleans the data for former smokers on the time since quitting and time spent as a regular smoker. The main issue to overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using <code><a href="../reference/num_sim.html">num_sim()</a></code>. We then fill missing data for these variables as follows:</p>
 <ul>
-<li>For children 8-15 years, we assume that missing values for former smokers = 1 year.</li>
-<li>For adults, we fill missing values with the average value for each age, sex and IMD quintile subgroup.</li>
+<li>For children 8-15 years, we assume that missing values for former smokers’ time since quitting and time spent as a former smoker = 1 year.<br>
+</li>
+<li>For adults, we fill missing values for former smokers’ time since quitting and time spent as a former smoker with the average value for each age, sex and IMD quintile subgroup.</li>
 </ul>
 </div>
 <div id="smoking-life-histories" class="section level2">
 <h2 class="hasAnchor">
 <a href="#smoking-life-histories" class="anchor"></a>Smoking life-histories</h2>
-<p>The function <code><a href="../reference/smk_life_history.html">smk_life_history()</a></code> cleans the ages that define when smokers started and stopped being regular cigarette smokers. For each individual smoker, the data recorded in the HSE implies a single age at which a smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and stopping multiple times.</p>
-<p>Both the start age and stop age will have error in them e.g. due to uncertainty in respondent recall, and, for years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute introducing random error. Start age is likely to be biased towards earlier ages, because for adults with missing values we use the age first tried a cigarette, and for children the variable for start age does not necessarily mean the start of regular smoking, it is just the age at which they started to smoke.</p>
+<p>The function <code><a href="../reference/smk_life_history.html">smk_life_history()</a></code> cleans the data on the ages when smokers started and stopped being regular cigarette smokers. For each individual smoker, the data recorded in the HSE implies a single age at which a smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and stopping multiple times.</p>
+<p>Both the start age and stop age will have error in them e.g. due to uncertainty in respondent recall, and, for years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute introducing random error. Start age is likely to be biased towards earlier ages, because for adult smokers and former smokers with missing values we use the age first tried a cigarette, and for children the reported start age does not necessarily mean the start of regular smoking, it is just the age at which they started to smoke.</p>
 <p>We also create a variable for the age at which an individual was censored from our data sample - this is their age at the survey + 1 year.</p>
 <p>Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.</p>
 </div>
 <div id="amount-and-type-of-cigarette-smoked-by-current-smokers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#amount-and-type-of-cigarette-smoked-by-current-smokers" class="anchor"></a>Amount and type of cigarette smoked by current smokers</h2>
-<p>The function <code><a href="../reference/smk_amount.html">smk_amount()</a></code> cleans the variables that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.</p>
-<p>We categorise cigarette preferences based on the answer to ‘what is the main type of cigarette smoked’. In later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend. We currently don’t use those questions because they were not asked in all years.</p>
-<p>We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette. This latter variable has a high level of missingness. Together these categorical variables allow calculation of <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/">the heaviness of smoking index</a>.</p>
+<p>The function <code><a href="../reference/smk_amount.html">smk_amount()</a></code> cleans the data that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.</p>
+<p>We categorise cigarette preferences based on the answer to ‘what is the main type of cigarette smoked’. In later years of the HSE, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend.</p>
+<p>We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette (this latter variable has a high level of missingness). Together these two variables allow calculation of <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/">the heaviness of smoking index</a>.</p>
 </div>
 </div>
 <div id="using-hseclean" class="section level1">
@@ -148,7 +149,6 @@
 <p>The data is stored in <code>X:/ScHARR/PR_Consumption_TA/Data/</code>. The following code will read, clean, filter and combine the data.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Write a bespoke function that does just the cleaning jobs required.</span>
 <span class="no">cleandata</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span>(<span class="no">data</span>)
   <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_age.html">clean_age</a></span>(<span class="no">data</span>)
   <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_demographic.html">clean_demographic</a></span>(<span class="no">data</span>)
   <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_status.html">smk_status</a></span>(<span class="no">data</span>)
@@ -156,7 +156,7 @@
   <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_life_history.html">smk_life_history</a></span>(<span class="no">data</span>)
   <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_amount.html">smk_amount</a></span>(<span class="no">data</span>)
   <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/select_data.html">select_data</a></span>(
-    <span class="no">data</span>, <span class="kw">ages</span> <span class="kw">=</span> <span class="fl">12</span>:<span class="fl">89</span>, <span class="kw">years</span> <span class="kw">=</span> <span class="fl">2001</span>:<span class="fl">2016</span>,
+    <span class="no">data</span>, <span class="kw">ages</span> <span class="kw">=</span> <span class="fl">12</span>:<span class="fl">89</span>, <span class="kw">years</span> <span class="kw">=</span> <span class="fl">2001</span>:<span class="fl">2017</span>,
 
     <span class="co"># The variables to retain</span>
     <span class="kw">keep_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>,
@@ -169,6 +169,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">data</span>)
 }
 
+<span class="co"># Choose the required years and combine</span>
 <span class="no">hse_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/combine_years.html">combine_years</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
   <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2014.html">read_2014</a></span>()), <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2015.html">read_2015</a></span>()), <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2016.html">read_2016</a></span>())
 ))
@@ -178,15 +179,7 @@
 
 <span class="co"># change some variable names</span>
 <span class="fu">setnames</span>(<span class="no">hse_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"smk_start_age"</span>, <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span>),
-         <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start_age"</span>, <span class="st">"smk.state"</span>, <span class="st">"time_since_quit"</span>))
-
-<span class="co"># check that all current smokers have an amount smoked per data that is greater than zero</span>
-<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/testthat/man/equality-expectations.html">expect_equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">hse_data</span>[<span class="no">smk.state</span> <span class="kw">==</span> <span class="st">"current"</span> <span class="kw">&amp;</span> <span class="no">cigs_per_day</span> <span class="kw">==</span> <span class="fl">0</span>]), <span class="fl">0</span>,
-                       <span class="kw">info</span> <span class="kw">=</span> <span class="st">"some current smokers smoke 0 cigs per day"</span>)
-
-<span class="co"># select only data with a coherent time since quit</span>
-<span class="no">hse_data</span>[ , <span class="no">time_since_quit</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span>(<span class="no">time_since_quit</span>))]
-<span class="no">hse_data</span> <span class="kw">&lt;-</span> <span class="no">hse_data</span>[!(<span class="no">smk.state</span> <span class="kw">==</span> <span class="st">"former"</span> <span class="kw">&amp;</span> <span class="no">time_since_quit</span> <span class="kw">&lt;</span> <span class="fl">1</span>)]</pre></body></html></div>
+         <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start_age"</span>, <span class="st">"smk.state"</span>, <span class="st">"time_since_quit"</span>))</pre></body></html></div>
 </div>
 <div id="summarise-data" class="section level2">
 <h2 class="hasAnchor">

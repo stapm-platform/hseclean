@@ -108,5 +108,5 @@ smk_status <- function(
   data[ , (remove_vars) := NULL]
 
 
-return(data)
+return(data[])
 }

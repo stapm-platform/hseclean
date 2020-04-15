@@ -43,7 +43,7 @@ select_data <- function(
   data <- data[age %in% ages & year %in% years]
 
 
-return(data)
+return(data[])
 }
 
 

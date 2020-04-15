@@ -115,12 +115,20 @@ smk_former <- function(
   # For children 8-15, assume any missing time as smoker is 1 year
   data[is.na(years_reg_smoker) & cig_smoker_status == "former" & age < 16, years_reg_smoker := 1]
 
+  # Years since quitting
+  data[years_since_quit < 1, years_since_quit := NA]
+  data[cig_smoker_status == "former" & years_since_quit < .5, cig_smoker_status := "current"]
+  data[cig_smoker_status == "former" & years_since_quit >= .5 & years_since_quit < 1, years_since_quit := 1]
+  
+  # Mean-impute missing values for years since quitting and years regular smoker
   data <- hseclean::impute_mean(data, c("years_since_quit", "years_reg_smoker"))
 
   data[cig_smoker_status != "former", `:=`(years_since_quit = NA, years_reg_smoker = NA)]
 
+  data[, years_since_quit := as.double(ceiling(years_since_quit))]
+  data[, years_reg_smoker := as.double(ceiling(years_reg_smoker))]
 
-return(data)
+return(data[])
 }
 
 
