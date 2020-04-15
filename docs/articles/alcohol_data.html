@@ -119,26 +119,11 @@
 <p>Due to the variability in recording, we only consider data on the amount drunk by adults and children from 2011 onwards.</p>
 <p>We analyse beverage-specific alcohol consumption in terms of beer (combining normal beer, strong beer), wine (combining wine and sherry), spirits, and alcopops.</p>
 </div>
-<div id="the-hseclean-r-package" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-hseclean-r-package" class="anchor"></a>The hseclean R package</h1>
-<p>The package <code>hseclean</code> contains functions to read and process these data. It contains separate functions to process each type of question on alcohol consumption.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r">
-<span class="co"># Load the package of R functions developed to do the data cleaning and processing</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"dosgillespie/hseclean"</span>, <span class="kw">upgrade</span> <span class="kw">=</span> <span class="st">"never"</span>, <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="no">T</span>)
-
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">hseclean</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">testthat</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">data.table</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)</pre></body></html></div>
-</div>
 <div id="reading-the-hse-data-files" class="section level1">
 <h1 class="hasAnchor">
 <a href="#reading-the-hse-data-files" class="anchor"></a>Reading the HSE data files</h1>
 <p>There are separate functions in the hseclean package to read each year of HSE data e.g. <code><a href="../reference/read_2016.html">read_2016()</a></code>. These functions link to where the data is stored in the project folder <code>PR_Consumption_TA</code>. They read in all variables related to alcohol and selected socioeconomic and other descriptor variables.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r">
+<div class="sourceCode" id="cb1"><html><body><pre class="r">
 <span class="co"># First test that each year of data can be read successfully</span>
 
 <span class="co"># If on uni system set the root directory as</span>
@@ -168,7 +153,7 @@
 <h1 class="hasAnchor">
 <a href="#processing-socioeconomic-variables" class="anchor"></a>Processing socioeconomic variables</h1>
 <p>There are separate functions to process each socioeconomic variables - detailed descriptions of what these functions do are given in <code><a href="../articles/covariate_data.html">vignette("covariate_data")</a></code>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">
+<div class="sourceCode" id="cb2"><html><body><pre class="r">
 <span class="co"># Test each cleaning function on one year of data</span>
 
 <span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>) <span class="kw">%&gt;%</span>
@@ -217,32 +202,32 @@
 <li>“Only a few times a year” = 0.058 days a week</li>
 </ul>
 <p>Missing data on whether or not a child currently drinks (<code>drinks_now</code>) is supplemented by responses to when they last had an alcoholic drink (<code>adrlast</code>): if the last drink was less than six months ago, then we classify them as a drinker; if the last drink was six months or more ago, then we classify them as a non-drinker.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r">
+<div class="sourceCode" id="cb3"><html><body><pre class="r">
 <span class="co"># Number of sampled drinkers and non-drinkers in 2017</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">8</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">imd_quintile</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tally.html">count</a></span>(<span class="no">drinks_now</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">drinks_now</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">imd_quintile</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb5"><html><body><pre class="r">
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">8</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">imd_quintile</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">count</span>(<span class="no">drinks_now</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">drinks_now</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">imd_quintile</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r">
 <span class="co"># Frequency of drinking in 2017 among drinkers</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">8</span>, <span class="no">drinks_now</span> <span class="kw">==</span> <span class="st">"drinker"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">imd_quintile</span>, <span class="no">age_cat</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">av_freq</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">drink_freq_7d</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">imd_quintile</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">av_freq</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">age_cat</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"average number of days drink in a week"</span>)</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">8</span>, <span class="no">drinks_now</span> <span class="kw">==</span> <span class="st">"drinker"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">imd_quintile</span>, <span class="no">age_cat</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">summarise</span>(<span class="kw">av_freq</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">drink_freq_7d</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">imd_quintile</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">av_freq</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">age_cat</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"average number of days drink in a week"</span>)</pre></body></html></div>
 </div>
 <div id="average-amount-of-alcohol-consumed" class="section level1">
 <h1 class="hasAnchor">
@@ -253,7 +238,7 @@
 <p>Some standard assumptions are made about the volume and alcohol content of the beverages that are reported to be drunk. The values that we use for these assumptions are based on those used by Natcen to create the derived variables for units of alcohol consumed in the HSE. We have made our own adjustments to the values used based on further information from market research data and figures from academic publications.</p>
 <p>Alcohol content assumptions are the expected percentages of alcohol that each beverage contains (alcohol by volume, ABV). We use separate values for normal beer (4.4%), strong beer (8.4%), spirits (38%), sherry (17%), wine (12.5%), and alcopops (also known as “ready to drink” or RTD) (4.5%).</p>
 <p>Beverage volume assumptions are the expected volumes (ml) of different beverage containers / serving sizes. We use separate values for normal and strong beer (half pint 284ml, small can 330ml, large can 440ml, bottle 330ml), spirits (serving 25ml), sherry (serving 50ml), wine (small glass 125ml, standard glass 175ml, large glass 250ml, bottle 750ml), and alcopops (small can 250ml, small bottle 275ml, large bottle 700ml).</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># These data are stored within the hseclean package for easy use</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># These data are stored within the hseclean package for easy use</span>
 <span class="co"># they can be accessed by typing </span>
 
 <span class="kw pkg">hseclean</span><span class="kw ns">::</span><span class="no"><a href="../reference/abv_data.html">abv_data</a></span>
@@ -299,36 +284,36 @@
 </li>
 <li>Cap the total units consumed in a week at 300 units, assuming that above this already very high level of consumption estimates of variation in consumption are less reliable.</li>
 </ul>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">
+<div class="sourceCode" id="cb6"><html><body><pre class="r">
 <span class="co"># Average weekly units drunk in 2017</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">imd_quintile</span>, <span class="no">age_cat</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">av_amount</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">weekmean</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">imd_quintile</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">av_amount</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">age_cat</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"average number of units drunk in a week"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r">
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">imd_quintile</span>, <span class="no">age_cat</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">summarise</span>(<span class="kw">av_amount</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">weekmean</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">imd_quintile</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">av_amount</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">age_cat</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"average number of units drunk in a week"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r">
 <span class="co"># Number of sampled people in each drinker category in 2017</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">imd_quintile</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tally.html">count</a></span>(<span class="no">drinker_cat</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">drinker_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">drinker_cat</span>,
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">imd_quintile</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">count</span>(<span class="no">drinker_cat</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">drinker_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">drinker_cat</span>,
     <span class="kw">levels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"abstainer"</span>, <span class="st">"lower_risk"</span>, <span class="st">"increasing_risk"</span>, <span class="st">"higher_risk"</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">drinker_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">imd_quintile</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">drinker_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">imd_quintile</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
 </div>
 <div id="adult-consumption-on-the-heaviest-drinking-day-in-the-last-week" class="section level2">
 <h2 class="hasAnchor">
@@ -343,7 +328,7 @@
 <p>Binge drinking status is then categorised into the variable <code>binge_cat</code>, with levels <code>did_not_drink</code>, <code>binge</code> and <code>no_binge</code>, where a binge day in defined by males drinking over 8 units and females drinking over 6 units.</p>
 <p>Note that in 2007 new questions were added asking which glass size was used when wine was consumed. Therefore the post HSE 2007 unit calculations are not directly comparable to previous years’ data.</p>
 <p>Missing data is imputed using the means of people who did drink in the last seven days, stratified by year, sex, IMD quintile and age category (0-1, 2-4, 5-7, 8-10, 11-12, 13-15, 16-17, 18-19, 20-24, 25-29, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90+).</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r">
+<div class="sourceCode" id="cb8"><html><body><pre class="r">
 <span class="co"># drinking in last 7 days in 2017</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
@@ -351,17 +336,17 @@
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_sevenday_adult</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">imd_quintile</span>, <span class="no">age_cat</span>, <span class="no">sex</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">n_days7</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">n_days_drink</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>),
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">imd_quintile</span>, <span class="no">age_cat</span>, <span class="no">sex</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">summarise</span>(<span class="kw">n_days7</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">n_days_drink</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>),
             <span class="kw">amount7</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">peakday</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">n_days7</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">amount7</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">age_cat</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">sex</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~ <span class="no">imd_quintile</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"average amount drunk on heaviest drinking day"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"average number of days drunk on in last 7"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb10"><html><body><pre class="r">
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">n_days7</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">amount7</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">age_cat</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">sex</span>)) +
+  <span class="fu">geom_point</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.5</span>) +
+  <span class="fu">facet_wrap</span>(~ <span class="no">imd_quintile</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"average amount drunk on heaviest drinking day"</span>) +
+  <span class="fu">xlab</span>(<span class="st">"average number of days drunk on in last 7"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r">
 <span class="co"># Number of sampled people in each binge drinker category in 2017</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
@@ -369,15 +354,15 @@
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_sevenday_adult</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">imd_quintile</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tally.html">count</a></span>(<span class="no">binge_cat</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">binge_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">binge_cat</span>,
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">16</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">imd_quintile</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">count</span>(<span class="no">binge_cat</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">binge_cat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">binge_cat</span>,
     <span class="kw">levels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"did_not_drink"</span>, <span class="st">"no_binge"</span>, <span class="st">"binge"</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">binge_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">imd_quintile</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">binge_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">imd_quintile</span>)) +
+  <span class="fu">geom_bar</span>(<span class="kw">stat</span> <span class="kw">=</span> <span class="st">"identity"</span>, <span class="kw">position</span> <span class="kw">=</span> <span class="st">"dodge"</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
 </div>
 <div id="childrens-consumption-in-the-last-week" class="section level2">
 <h2 class="hasAnchor">
@@ -386,6 +371,24 @@
 <p>We estimate the number of UK standard units of alcohol drunk in the last 7 days by using the data on how many of what size measures of different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content.</p>
 <p>The information from this question is also used to update the <code>drinks_now</code> variable to make it a variable that describes whether or not adults and children drink.</p>
 <p>Due to high missingness in this variable, we assume that anyone who has missing data for this variable does not drink. This means that we are likely to under-estimate the number of children who drink.</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r">
+<span class="co"># drinking by age in 2017</span>
+<span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
+  <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
+  <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
+  <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
+  <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
+  <span class="no">alc_sevenday_adult</span> <span class="kw">%&gt;%</span>
+  <span class="no">alc_sevenday_child</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">13</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">age_cat</span>, <span class="no">sex</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">count</span>(<span class="no">drinks_now</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">drinks_now</span> <span class="kw">==</span> <span class="st">"drinker"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">age_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">sex</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">sex</span>)) +
+  <span class="fu">geom_point</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.5</span>) +
+  <span class="fu">facet_wrap</span>(~ <span class="no">sex</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb11"><html><body><pre class="r">
 <span class="co"># drinking by age in 2017</span>
 <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
@@ -395,33 +398,15 @@
   <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_sevenday_adult</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_sevenday_child</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">13</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">age_cat</span>, <span class="no">sex</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tally.html">count</a></span>(<span class="no">drinks_now</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">drinks_now</span> <span class="kw">==</span> <span class="st">"drinker"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">age_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">n</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">sex</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">sex</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~ <span class="no">sex</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"number of observations"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r">
-<span class="co"># drinking by age in 2017</span>
-<span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
-  <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
-  <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
-  <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
-  <span class="no">alc_weekmean_adult</span> <span class="kw">%&gt;%</span>
-  <span class="no">alc_sevenday_adult</span> <span class="kw">%&gt;%</span>
-  <span class="no">alc_sevenday_child</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">13</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">weekamount</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">age</span> <span class="kw">%in%</span> <span class="fl">13</span>:<span class="fl">15</span>, <span class="no">total_units7_ch</span>, <span class="no">weekmean</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">age_cat</span>, <span class="no">sex</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="kw">av_amount</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">weekamount</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">age_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">av_amount</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">sex</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">sex</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.5</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~ <span class="no">sex</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"expected number of units drunk in a week"</span>)</pre></body></html></div>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">age</span> <span class="kw">&lt;</span> <span class="fl">90</span>, <span class="no">age</span> <span class="kw">&gt;=</span> <span class="fl">13</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">weekamount</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">age</span> <span class="kw">%in%</span> <span class="fl">13</span>:<span class="fl">15</span>, <span class="no">total_units7_ch</span>, <span class="no">weekmean</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">age_cat</span>, <span class="no">sex</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">summarise</span>(<span class="kw">av_amount</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">weekamount</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="no">T</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">age_cat</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">av_amount</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">sex</span>, <span class="kw">shape</span> <span class="kw">=</span> <span class="no">sex</span>)) +
+  <span class="fu">geom_point</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.5</span>) +
+  <span class="fu">facet_wrap</span>(~ <span class="no">sex</span>, <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>) +
+  <span class="fu">theme_minimal</span>() +
+  <span class="fu">ylab</span>(<span class="st">"expected number of units drunk in a week"</span>)</pre></body></html></div>
 </div>
 </div>
   </div>

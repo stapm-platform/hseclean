@@ -49,22 +49,6 @@ Due to the variability in recording, we only consider data on the amount drunk b
 
 We analyse beverage-specific alcohol consumption in terms of beer (combining normal beer, strong beer), wine (combining wine and sherry), spirits, and alcopops.  
 
-# The hseclean R package
-The package `hseclean` contains functions to read and process these data. It contains separate functions to process each type of question on alcohol consumption.     
-
-```{r loadpackage, eval = F}
-
-# Load the package of R functions developed to do the data cleaning and processing
-devtools::install_github("dosgillespie/hseclean", upgrade = "never", build_vignettes = T)
-
-library(hseclean)
-library(ggplot2)
-library(testthat)
-library(dplyr)
-library(data.table)
-library(magrittr)
-
-```
 
 # Reading the HSE data files
 There are separate functions in the hseclean package to read each year of HSE data e.g. `read_2016()`. These functions link to where the data is stored in the project folder `PR_Consumption_TA`. They read in all variables related to alcohol and selected socioeconomic and other descriptor variables.   
