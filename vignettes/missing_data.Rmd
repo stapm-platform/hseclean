@@ -30,24 +30,22 @@ suppressPackageStartupMessages(library(hseclean))
 ```
 
 # Clean tobacco and alcohol data
-Do the setup for imputation by carrying out all the data cleaning functions.
-
-There has already been some filling-in of missing data done by the cleaning functions described above.  
+Do the setup for imputation by carrying out all the data cleaning functions. There has already been some filling-in of missing data done by these cleaning functions - using simple rules, 
 
 - For 2015+, the `clean_age()` function has randomly assigned single years of age within each age category.  
 - If someone is classified as a current smoker, is younger than 16 and has missing data on the time between waking and having their first cigarette, we assume that this time is one hour or more.  
 - If someone is younger than age 16 and has missing data on their number of children (for survey years prior to 2015), we assume that they had no children.  
 - If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.  
+- Information on education, employment and socioeconomic status is triangulated across several variables.  
 
-In the data preparation code above, we also have the option to filter the data to retain only complete cases for certain variables. Currently, we retain only records with full information on age, sex, smoking status and the survey design variables. We then multiply impute missing values for key socio-demographic variables.  
+The function `select_data()` has the option to filter the data to retain only complete cases for certain variables e.g. the user might wish to retain only records with full information on age, sex, smoking status and the survey design variables.   
 
 ```{r cleanhse, eval = F}
+# Prepare the data by applying all cleaning functions 
+# and retaining all derived variables
 
-#root_dir <- "X:/"
-root_dir <- str_split_fixed(here(), "ScHARR", 2)[1]
+root_dir <- "/Volumes/Shared/"
 
-# Wrap the individual cleaning functions in another function
-# that can then be applied to each year of HSE data
 cleandata <- function(data) {
   
   data %<>%
@@ -71,12 +69,17 @@ cleandata <- function(data) {
       ages = 12:89,
       years = 2001:2017,
       
-      
-      # The variables to retain
+      # variables to retain
       keep_vars = c("wt_int", "psu", "cluster", "year", "quarter",
                     "age", "age_cat", "censor_age", "sex", "imd_quintile",
-                    
+                    "ethnicity_4cat", "ethnicity_2cat",
                     "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
+                    "nssec3_lab", "man_nonman", "activity_lstweek", "eduend4cat",
+                    
+                    "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
+                    "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
+                    
+                    "weight", "height",
                     
                     "cig_smoker_status", "smk_start_age", "years_since_quit",
                     "cigs_per_day", "smoker_cat",
@@ -118,21 +121,6 @@ data <- combine_years(list(
   cleandata(read_2016(root = root_dir)),
   cleandata(read_2017(root = root_dir))
 ))
-
-##
-# Apply any tests
-
-# check that all current smokers have an amount smoked per data that is greater than zero
-testthat::expect_equal(nrow(data[cig_smoker_status == "current" & cigs_per_day == 0]), 0, 
-                       info = "some current smokers smoke 0 cigs per day")
-
-##
-# Apply any filters
-
-# select only data with a coherent time since quit
-data[ , years_since_quit := as.double(ceiling(years_since_quit))]
-data <- data[!(cig_smoker_status == "former" & years_since_quit < 1)]
-##
 
 # clean the survey weights
 data <- clean_surveyweights(data)

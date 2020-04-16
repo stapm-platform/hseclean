@@ -97,8 +97,7 @@
 <div id="clean-tobacco-and-alcohol-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#clean-tobacco-and-alcohol-data" class="anchor"></a>Clean tobacco and alcohol data</h1>
-<p>Do the setup for imputation by carrying out all the data cleaning functions.</p>
-<p>There has already been some filling-in of missing data done by the cleaning functions described above.</p>
+<p>Do the setup for imputation by carrying out all the data cleaning functions. There has already been some filling-in of missing data done by these cleaning functions - using simple rules,</p>
 <ul>
 <li>For 2015+, the <code><a href="../reference/clean_age.html">clean_age()</a></code> function has randomly assigned single years of age within each age category.<br>
 </li>
@@ -106,15 +105,16 @@
 </li>
 <li>If someone is younger than age 16 and has missing data on their number of children (for survey years prior to 2015), we assume that they had no children.<br>
 </li>
-<li>If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.</li>
+<li>If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.<br>
+</li>
+<li>Information on education, employment and socioeconomic status is triangulated across several variables.</li>
 </ul>
-<p>In the data preparation code above, we also have the option to filter the data to retain only complete cases for certain variables. Currently, we retain only records with full information on age, sex, smoking status and the survey design variables. We then multiply impute missing values for key socio-demographic variables.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r">
-<span class="co">#root_dir &lt;- "X:/"</span>
-<span class="no">root_dir</span> <span class="kw">&lt;-</span> <span class="fu">str_split_fixed</span>(<span class="fu">here</span>(), <span class="st">"ScHARR"</span>, <span class="fl">2</span>)[<span class="fl">1</span>]
+<p>The function <code><a href="../reference/select_data.html">select_data()</a></code> has the option to filter the data to retain only complete cases for certain variables e.g. the user might wish to retain only records with full information on age, sex, smoking status and the survey design variables.</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Prepare the data by applying all cleaning functions </span>
+<span class="co"># and retaining all derived variables</span>
 
-<span class="co"># Wrap the individual cleaning functions in another function</span>
-<span class="co"># that can then be applied to each year of HSE data</span>
+<span class="no">root_dir</span> <span class="kw">&lt;-</span> <span class="st">"/Volumes/Shared/"</span>
+
 <span class="no">cleandata</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
 
   <span class="no">data</span> <span class="kw">%&lt;&gt;%</span>
@@ -138,12 +138,17 @@
       <span class="kw">ages</span> <span class="kw">=</span> <span class="fl">12</span>:<span class="fl">89</span>,
       <span class="kw">years</span> <span class="kw">=</span> <span class="fl">2001</span>:<span class="fl">2017</span>,
 
-
-      <span class="co"># The variables to retain</span>
+      <span class="co"># variables to retain</span>
       <span class="kw">keep_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>,
                     <span class="st">"age"</span>, <span class="st">"age_cat"</span>, <span class="st">"censor_age"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>,
-
+                    <span class="st">"ethnicity_4cat"</span>, <span class="st">"ethnicity_2cat"</span>,
                     <span class="st">"degree"</span>, <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,
+                    <span class="st">"nssec3_lab"</span>, <span class="st">"man_nonman"</span>, <span class="st">"activity_lstweek"</span>, <span class="st">"eduend4cat"</span>,
+
+                    <span class="st">"hse_cancer"</span>, <span class="st">"hse_endocrine"</span>, <span class="st">"hse_heart"</span>, <span class="st">"hse_mental"</span>, <span class="st">"hse_nervous"</span>, <span class="st">"hse_eye"</span>, <span class="st">"hse_ear"</span>, <span class="st">"hse_respir"</span>,
+                    <span class="st">"hse_disgest"</span>, <span class="st">"hse_urinary"</span>, <span class="st">"hse_skin"</span>, <span class="st">"hse_muscskel"</span>, <span class="st">"hse_infect"</span>, <span class="st">"hse_blood"</span>,
+
+                    <span class="st">"weight"</span>, <span class="st">"height"</span>,
 
                     <span class="st">"cig_smoker_status"</span>, <span class="st">"smk_start_age"</span>, <span class="st">"years_since_quit"</span>,
                     <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>,
@@ -185,21 +190,6 @@
   <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2016.html">read_2016</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>)),
   <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>))
 ))
-
-<span class="co">##</span>
-<span class="co"># Apply any tests</span>
-
-<span class="co"># check that all current smokers have an amount smoked per data that is greater than zero</span>
-<span class="kw pkg">testthat</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/testthat/man/equality-expectations.html">expect_equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">data</span>[<span class="no">cig_smoker_status</span> <span class="kw">==</span> <span class="st">"current"</span> <span class="kw">&amp;</span> <span class="no">cigs_per_day</span> <span class="kw">==</span> <span class="fl">0</span>]), <span class="fl">0</span>,
-                       <span class="kw">info</span> <span class="kw">=</span> <span class="st">"some current smokers smoke 0 cigs per day"</span>)
-
-<span class="co">##</span>
-<span class="co"># Apply any filters</span>
-
-<span class="co"># select only data with a coherent time since quit</span>
-<span class="no">data</span>[ , <span class="no">years_since_quit</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span>(<span class="no">years_since_quit</span>))]
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="no">data</span>[!(<span class="no">cig_smoker_status</span> <span class="kw">==</span> <span class="st">"former"</span> <span class="kw">&amp;</span> <span class="no">years_since_quit</span> <span class="kw">&lt;</span> <span class="fl">1</span>)]
-<span class="co">##</span>
 
 <span class="co"># clean the survey weights</span>
 <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span>(<span class="no">data</span>)</pre></body></html></div>

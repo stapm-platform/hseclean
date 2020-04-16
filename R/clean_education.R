@@ -72,8 +72,11 @@ clean_education <- function(
     data[ , hedqul08 := NULL]
   }
 
+  # Fill some missing values
   data[is.na(degree) & age < 18, degree := "no_degree"]
-
-
+  data[is.na(degree) & eduend4cat %in% c("16-18", "15_or_under", "never_went_to_school"), degree := "no_degree"]
+  data[is.na(degree) & eduend4cat == "19_or_over", degree := "degree"]
+  
+  
 return(data[])
 }

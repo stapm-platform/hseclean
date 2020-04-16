@@ -77,6 +77,8 @@ library(magrittr)
 library(ggplot2)
 ```
 
+The code within `hseclean` uses the `data.table` package.
+
 ## Getting started
 
 To be able to **download data from the UK Data Service**, you will need
@@ -88,8 +90,10 @@ found
 At The University of Sheffield, the data is stored in the university
 networked X-drive folder `PR_Consumption_TA`, which is accessible only
 to team members who are using data according to the purposes stated to
-the UK Data Service. No individual-level Health Survey for England or
-Scottish Health Survey data is included within this package on Github.
+the UK Data Service.
+
+No individual-level Health Survey for England or Scottish Health Survey
+data is included within this package on Github.
 
 ## Basic functionality
 
@@ -184,8 +188,14 @@ cleandata <- function(data) {
       # variables to retain
       keep_vars = c("wt_int", "psu", "cluster", "year", "quarter",
                     "age", "age_cat", "censor_age", "sex", "imd_quintile",
-                    
+                    "ethnicity_4cat", "ethnicity_2cat",
                     "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
+                    "nssec3_lab", "man_nonman", "activity_lstweek", "eduend4cat",
+                    
+                    "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
+                    "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
+                    
+                    "weight", "height",
                     
                     "cig_smoker_status", "smk_start_age", "years_since_quit",
                     "cigs_per_day", "smoker_cat",

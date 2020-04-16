@@ -6,51 +6,28 @@ library(hseclean)
 # apply functions to create the variables for analysis and to retain only the required variables
 
 # The variables to retain
-keep_vars <- c(
-  "wt_int",
-  "psu",
-  "cluster",
-  "year",
-  "quarter",
-  "age",
-  "age_cat",
-  "censor_age",
-  "sex",
-  "imd_quintile",
-  
-  "degree",
-  "relationship_status",
-  "employ2cat",
-  "social_grade",
-  "kids",
-  "income5cat",
-  
-  "cig_smoker_status",
-  "smk_start_age",
-  "years_since_quit",
-  "cigs_per_day",
-  "smoker_cat",
-  
-  "drinks_now",
-  "drink_freq_7d",
-  "n_days_drink",
-  "peakday",
-  "binge_cat",
-  "beer_units",
-  "wine_units",
-  "spirit_units",
-  "rtd_units",
-  "weekmean",
-  "perc_spirit_units",
-  "perc_wine_units",
-  "perc_rtd_units",
-  "perc_beer_units",
-  "drinker_cat",
-  "spirits_pref_cat",
-  "wine_pref_cat",
-  "rtd_pref_cat",
-  "beer_pref_cat",
-  "total_units7_ch"
+keep_vars <- c("wt_int", "psu", "cluster", "year", "quarter",
+              "age", "age_cat", "censor_age", "sex", "imd_quintile",
+              "ethnicity_4cat", "ethnicity_2cat",
+              "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
+              "nssec3_lab", "man_nonman", "activity_lstweek", "eduend4cat",
+              
+              "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
+              "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
+              
+              "weight", "height",
+              
+              "cig_smoker_status", "smk_start_age", "years_since_quit",
+              "cigs_per_day", "smoker_cat",
+              
+              "drinks_now", 
+              "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",
+              "beer_units", "wine_units", "spirit_units", "rtd_units", 
+              "weekmean", 
+              "perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units", 
+              "drinker_cat", 
+              "spirits_pref_cat", "wine_pref_cat", "rtd_pref_cat", "beer_pref_cat", 
+              "total_units7_ch"
 )
 
 # The variables that must have complete cases

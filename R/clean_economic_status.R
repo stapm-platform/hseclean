@@ -39,9 +39,9 @@
 #'
 #' \dontrun{
 #'
-#' data_2016 <- read_2016()
+#' data <- read_2016(root = "/Volumes/Shared/")
 #'
-#' data_2016 <- clean_economic_status(data = data_2016)
+#' data <- clean_economic_status(data = data)
 #'
 #' }
 #'
@@ -72,10 +72,7 @@ clean_economic_status <- function(
   data[nssec3 == 2 , nssec3_lab := "intermediate"]
   data[nssec3 == 3 , nssec3_lab := "routinemanual"]
   data[nssec3 == 99 , nssec3_lab := "other"]
-
-  # Fill missing for children with 'other'
-  data[is.na(nssec3_lab) & age < 16, nssec3_lab := "other"]
-
+  
 
   ####################################################################
   # Employment status
@@ -101,23 +98,8 @@ clean_economic_status <- function(
 
   data[country == "Scotland" & (econac12 %in% c(1, 3:7) | nactiv %in% c(1, 3:11)), employ2cat := "unemployed"]
   
+  # Fill missing for children with 'unemployed'
   data[is.na(employ2cat) & age < 16, employ2cat := "unemployed"]
-
-
-  ####################################################################
-  # NRS social grade
-
-  # Match nssec8 to the NRS social grade classification used in the Toolkit study
-  data[nssec8 %in% 1:3, social_grade := "ABC1"]
-  data[nssec8 %in% 4:99 , social_grade := "C2DE"]
-
-
-  ####################################################################
-  # Manual vs. non-manual occupation
-
-  data[ , man_nonman := nssec3_lab]
-  data[nssec3_lab %in% c("managprof", "intermediate"), man_nonman := "nonmanual"]
-  data[nssec3_lab == "routinemanual", man_nonman := "manual"]
 
 
   ####################################################################
@@ -142,14 +124,50 @@ clean_economic_status <- function(
   data[year >= 2015 & (econac12 == 2 | econact == 1 | activb %in% c(2, 3)), activity_lstweek := "employed"]
 
   # Fill missing using information on age
-  data[is.na(activity_lstweek) & age < 16, activity_lstweek := "education"]
-  data[is.na(activity_lstweek) & age >= 16 & age < 65 & employ2cat == "no", activity_lstweek := "unemployed"]
+  data[is.na(activity_lstweek) & age < 18, activity_lstweek := "education"]
+  data[is.na(activity_lstweek) & age >= 18 & age < 65 & (employ2cat == "unemployed" | is.na(employ2cat)), activity_lstweek := "unemployed"]
   data[is.na(activity_lstweek) & age >= 65, activity_lstweek := "retired"]
 
 
+  ####################################################################
+  # Fixes to fll some missing values
+  
+  data[is.na(nssec3_lab) & activity_lstweek == "home_or_family", nssec3_lab := "other"]
+  data[is.na(nssec3_lab) & activity_lstweek == "sick_ill_disab", nssec3_lab := "other"]
+  data[is.na(nssec3_lab) & activity_lstweek == "education", nssec3_lab := "not applicable"]
+  data[is.na(nssec3_lab) & age < 18, nssec3_lab := "not applicable"]
+  
+  data[is.na(employ2cat) & nssec3_lab %in% c("routinemanual", "intermediate", "managprof"), employ2cat := "employed"]
+  data[is.na(employ2cat) & activity_lstweek %in% c("education", "unemployed", "home_or_family", "retired", "sick_ill_disab"), employ2cat := "unemployed"]
+  data[is.na(activity_lstweek) & employ2cat == "employed", employ2cat := "activity_lstweek"]
+  
+  ####################################################################
+  # Manual vs. non-manual occupation
+  
+  data[ , man_nonman := nssec3_lab]
+  data[nssec3_lab %in% c("managprof", "intermediate"), man_nonman := "nonmanual"]
+  data[nssec3_lab == "routinemanual", man_nonman := "manual"]
+  
+  
+  ####################################################################
+  # NRS social grade
+  
+  # Match nssec8 to the NRS social grade classification used in the Toolkit study
+  data[nssec8 %in% 1:3, social_grade := "ABC1"]
+  data[nssec8 %in% 4:99 , social_grade := "C2DE"]
+  
+  
+  # Fill some missing data
+  data[is.na(social_grade) & activity_lstweek == "home_or_family", social_grade := "other"]
+  data[is.na(social_grade) & activity_lstweek == "sick_ill_disab", social_grade := "other"]
+  data[is.na(social_grade) & activity_lstweek == "education", social_grade := "not applicable"]
+  data[is.na(social_grade) & age < 18, social_grade := "not applicable"]
+  data[nssec3_lab == "other", social_grade := "other"]
+  
+
   # Remove variables not needed
   data[ , `:=`(econact = NULL, activb = NULL, econac12 = NULL, nssec8 = NULL, nssec3 = NULL)]
-
-
+  
+  
 return(data[])
 }

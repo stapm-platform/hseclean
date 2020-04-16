@@ -128,12 +128,14 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)</pre></div>
+<p>The code within <code>hseclean</code> uses the <code>data.table</code> package.</p>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <p>To be able to <strong>download data from the UK Data Service</strong>, you will need to <strong>register with the UK Data Service website</strong>, which will enable you to request access to the datasets. Instructions on how to do this can be found <a href="https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx">here</a>.</p>
-<p>At The University of Sheffield, the data is stored in the university networked X-drive folder <code>PR_Consumption_TA</code>, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level Health Survey for England or Scottish Health Survey data is included within this package on Github.</p>
+<p>At The University of Sheffield, the data is stored in the university networked X-drive folder <code>PR_Consumption_TA</code>, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service.</p>
+<p>No individual-level Health Survey for England or Scottish Health Survey data is included within this package on Github.</p>
 </div>
 <div id="basic-functionality" class="section level2">
 <h2 class="hasAnchor">
@@ -211,8 +213,14 @@
       <span class="co"># variables to retain</span>
       <span class="kw">keep_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>,
                     <span class="st">"age"</span>, <span class="st">"age_cat"</span>, <span class="st">"censor_age"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>,
-
+                    <span class="st">"ethnicity_4cat"</span>, <span class="st">"ethnicity_2cat"</span>,
                     <span class="st">"degree"</span>, <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,
+                    <span class="st">"nssec3_lab"</span>, <span class="st">"man_nonman"</span>, <span class="st">"activity_lstweek"</span>, <span class="st">"eduend4cat"</span>,
+
+                    <span class="st">"hse_cancer"</span>, <span class="st">"hse_endocrine"</span>, <span class="st">"hse_heart"</span>, <span class="st">"hse_mental"</span>, <span class="st">"hse_nervous"</span>, <span class="st">"hse_eye"</span>, <span class="st">"hse_ear"</span>, <span class="st">"hse_respir"</span>,
+                    <span class="st">"hse_disgest"</span>, <span class="st">"hse_urinary"</span>, <span class="st">"hse_skin"</span>, <span class="st">"hse_muscskel"</span>, <span class="st">"hse_infect"</span>, <span class="st">"hse_blood"</span>,
+
+                    <span class="st">"weight"</span>, <span class="st">"height"</span>,
 
                     <span class="st">"cig_smoker_status"</span>, <span class="st">"smk_start_age"</span>, <span class="st">"years_since_quit"</span>,
                     <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>,

@@ -44,9 +44,9 @@ by grouping Managerial and professional with intermediate occupations to give th
 
 \dontrun{
 
-data_2016 <- read_2016()
+data <- read_2016(root = "/Volumes/Shared/")
 
-data_2016 <- clean_economic_status(data = data_2016)
+data <- clean_economic_status(data = data)
 
 }
 
