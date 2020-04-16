@@ -94,10 +94,10 @@
 
     
     
-<div id="clean-tobacco-and-alcohol-data" class="section level1">
+<div id="preparing-the-data" class="section level1">
 <h1 class="hasAnchor">
-<a href="#clean-tobacco-and-alcohol-data" class="anchor"></a>Clean tobacco and alcohol data</h1>
-<p>Do the setup for imputation by carrying out all the data cleaning functions. There has already been some filling-in of missing data done by these cleaning functions - using simple rules,</p>
+<a href="#preparing-the-data" class="anchor"></a>Preparing the data</h1>
+<p>To prepare for the process that imputes missing data, run the full set of functions to read and clean the data. It is important to note that there has already been some filling-in of missing data done by these cleaning functions - using simple rules,</p>
 <ul>
 <li>For 2015+, the <code><a href="../reference/clean_age.html">clean_age()</a></code> function has randomly assigned single years of age within each age category.<br>
 </li>
@@ -109,7 +109,7 @@
 </li>
 <li>Information on education, employment and socioeconomic status is triangulated across several variables.</li>
 </ul>
-<p>The function <code><a href="../reference/select_data.html">select_data()</a></code> has the option to filter the data to retain only complete cases for certain variables e.g. the user might wish to retain only records with full information on age, sex, smoking status and the survey design variables.</p>
+<p>The function <code><a href="../reference/select_data.html">select_data()</a></code> has the option to filter the data to retain only complete cases for certain variables. To prepare the data, the example code below filters out any incomplete data on key survey variables (age, sex, year, quarter, psu, cluster, imd_quintile). It also filters out any incomplete information on the key smoking and drinking variables, “cig_smoker_status” and “drinks_now”.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Prepare the data by applying all cleaning functions </span>
 <span class="co"># and retaining all derived variables</span>
 
@@ -150,8 +150,9 @@
 
                     <span class="st">"weight"</span>, <span class="st">"height"</span>,
 
-                    <span class="st">"cig_smoker_status"</span>, <span class="st">"smk_start_age"</span>, <span class="st">"years_since_quit"</span>,
-                    <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>,
+                    <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span>, <span class="st">"years_reg_smoker"</span>, <span class="st">"cig_ever"</span>,
+                    <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span>,
+                    <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"censor_age"</span>,
 
                     <span class="st">"drinks_now"</span>,
                     <span class="st">"drink_freq_7d"</span>, <span class="st">"n_days_drink"</span>, <span class="st">"peakday"</span>, <span class="st">"binge_cat"</span>,
@@ -164,10 +165,10 @@
       ),
 
       <span class="co"># The variables that must have complete cases</span>
-      <span class="kw">complete_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>)
+      <span class="kw">complete_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"cig_smoker_status"</span>, <span class="st">"drinks_now"</span>)
     )
 
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">data</span>)
 }
 
 <span class="co"># Read and clean each year of data and bind them together in one big dataset</span>
@@ -197,29 +198,63 @@
 <div id="multiple-imputation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#multiple-imputation" class="anchor"></a>Multiple imputation</h1>
-<p>To conduct our multiple imputation, we use the R package <code>mice</code> <span class="citation">(Stef van Buuren and Karin Groothuis-Oudshoorn <a href="#ref-Rmice">2011</a>)</span>. Since the process of running the multiple imputation can take a long time and consume a lot of RAM, it might be easiest to run on the <code>heta_study</code> virtual machine. There is a range of <code>mice</code> documentation and tutorials online that is worth getting into. In <code>hseclean</code>, multiple imputation is implemented by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function, although this is currently written rather simply and could be checked and developed to include more optionality and potentially also diagnostic checks.</p>
-<p><code>mice</code> basically fits a chained series of regression equations that predict the missing values of successive variables based on the existing relationships between those variables and selected other variables in the data. The current usage only imputes categorical variables, which could be one of three types: “logreg” - binary Logistic regression; “polr” - ordered Proportional odds model; “polyreg” - unordered Polytomous logistic regression.</p>
-<p>In running the multiple imputation, the number of desired iterations of the imputed data is selected (I current generate five to keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "“, otherwise to one of”logreg“,”polr" or “polyreg”.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># First inspect variables</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">hse_data</span>$<span class="no">kids</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>)
+<p>The variables with the most missingness in the data are income5cat (19% missing) and kids (14% missing). The missingness for children is mainly due to this variable not being reported in the non-secure version of the HSE from the year 2015. In this example, the other variables to be imputed are: ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.</p>
+<p>To conduct the multiple imputation, we use the R package <code>mice</code> <span class="citation">(Stef van Buuren and Karin Groothuis-Oudshoorn <a href="#ref-Rmice">2011</a>)</span>. The process of running the multiple imputation can take a long time and consume a lot of RAM. There is a range of <code>mice</code> documentation and tutorials online.</p>
+<p>In <code>hseclean</code>, multiple imputation is implemented in a basic way by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function.</p>
+<p><code>mice</code> fits a chained series of regression equations that predict the missing values of variables based on their relationships with other selected variables in the data. The <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function currently only imputes categorical variables, which could be one of three types: “logreg” - binary Logistic regression; “polr” - ordered Proportional odds model; “polyreg” - unordered Polytomous logistic regression.</p>
+<p>In running the multiple imputation, the number of iterations of the imputed data is selected (choosing a small number e.g. &lt; 5 helps keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "“, otherwise to one of”logreg“,”polr" or “polyreg”.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># variables with missingness</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">ethnicity_4cat</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 350 missing (0.2%)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">eduend4cat</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 179 missing</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">degree</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 94 missing</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">relationship_status</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 7210 missing</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">kids</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 24,710 missing</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">income5cat</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 35,072 missing</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">nssec3_lab</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 552 missing</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">activity_lstweek</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>)
+
 
 <span class="co"># Set a broader age category variable</span>
-<span class="no">hse_data</span>[ , <span class="no">agegroup</span> <span class="kw">:=</span>
-            <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"12-16"</span>, <span class="st">"16-17"</span>, <span class="st">"18-24"</span>, <span class="st">"25-34"</span>, <span class="st">"35-49"</span>, <span class="st">"50-64"</span>, <span class="st">"65-74"</span>, <span class="st">"75-89"</span>)[
-              <span class="fu"><a href="https://rdrr.io/r/base/findInterval.html">findInterval</a></span>(<span class="no">age</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">10</span>, <span class="fl">16</span>, <span class="fl">18</span>, <span class="fl">25</span>, <span class="fl">35</span>, <span class="fl">50</span>, <span class="fl">65</span>, <span class="fl">75</span>, <span class="fl">1000</span>))]]
+<span class="no">data</span>[, <span class="no">agegroup</span> <span class="kw">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"12-16"</span>,
+                     <span class="st">"16-17"</span>,
+                     <span class="st">"18-24"</span>,
+                     <span class="st">"25-34"</span>,
+                     <span class="st">"35-49"</span>,
+                     <span class="st">"50-64"</span>,
+                     <span class="st">"65-74"</span>,
+                     <span class="st">"75-89"</span>)[<span class="fu"><a href="https://rdrr.io/r/base/findInterval.html">findInterval</a></span>(<span class="no">age</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">10</span>, <span class="fl">16</span>, <span class="fl">18</span>, <span class="fl">25</span>, <span class="fl">35</span>, <span class="fl">50</span>, <span class="fl">65</span>, <span class="fl">75</span>, <span class="fl">1000</span>))]]
 
-<span class="co"># Run the imputation (takes a long time)</span>
-<span class="no">imp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/impute_data_mice.html">impute_data_mice</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">hse_data</span>,
-                        <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"smk.state"</span>, <span class="st">"agegroup"</span>, <span class="st">"sex"</span>,
-                                      <span class="st">"imd_quintile"</span>, <span class="st">"degree"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,
-                                      <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span>),
-                        <span class="kw">var_methods</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>,
-                                        <span class="st">"polr"</span>, <span class="st">"logreg"</span>, <span class="st">"polr"</span>, <span class="st">"polr"</span>,
-                                        <span class="st">"polyreg"</span>, <span class="st">"logreg"</span>, <span class="st">"logreg"</span>),
-                        <span class="kw">n_imputations</span> <span class="kw">=</span> <span class="fl">5</span>)
+<span class="co"># Run the imputation</span>
+<span class="no">imp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/impute_data_mice.html">impute_data_mice</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">data</span>,
+  <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+    <span class="st">"agegroup"</span>,
+    <span class="st">"sex"</span>,
+    <span class="st">"imd_quintile"</span>,
+    <span class="st">"ethnicity_4cat"</span>,
+    <span class="st">"eduend4cat"</span>,
+    <span class="st">"degree"</span>,
+    <span class="st">"relationship_status"</span>,
+    <span class="st">"kids"</span>,
+    <span class="st">"income5cat"</span>,
+    <span class="st">"nssec3_lab"</span>,
+    <span class="st">"activity_lstweek"</span>
+  ),
+  <span class="kw">var_methods</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+    <span class="st">""</span>,
+    <span class="st">""</span>,
+    <span class="st">""</span>,
+    <span class="st">"polyreg"</span>,
+    <span class="st">"polyreg"</span>,
+    <span class="st">"logreg"</span>,
+    <span class="st">"polyreg"</span>,
+    <span class="st">"polyreg"</span>,
+    <span class="st">"polyreg"</span>,
+    <span class="st">"polyreg"</span>,
+    <span class="st">"polyreg"</span>
+  ), <span class="kw">n_imputations</span> <span class="kw">=</span> <span class="fl">1</span>)
 
-<span class="co"># imp$data is a single data.table containing all 5 imputed versions of the data</span>
-<span class="no">hse_data_smoking</span> <span class="kw">&lt;-</span> <span class="fu">copy</span>(<span class="no">imp</span>$<span class="no">data</span>)</pre></body></html></div>
+
+<span class="no">data_imp</span> <span class="kw">&lt;-</span> <span class="fu">copy</span>(<span class="no">imp</span>$<span class="no">data</span>)</pre></body></html></div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">

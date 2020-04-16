@@ -139,7 +139,7 @@ clean_economic_status <- function(
   
   data[is.na(employ2cat) & nssec3_lab %in% c("routinemanual", "intermediate", "managprof"), employ2cat := "employed"]
   data[is.na(employ2cat) & activity_lstweek %in% c("education", "unemployed", "home_or_family", "retired", "sick_ill_disab"), employ2cat := "unemployed"]
-  data[is.na(activity_lstweek) & employ2cat == "employed", employ2cat := "activity_lstweek"]
+  data[is.na(activity_lstweek) & employ2cat == "employed", activity_lstweek := "employed"]
   
   ####################################################################
   # Manual vs. non-manual occupation

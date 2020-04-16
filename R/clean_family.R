@@ -84,8 +84,8 @@ clean_family <- function(
   # Separated, divorced or widowed
   data[marstat %in% c(3, 4, 5), relationship_status := "sep_div_wid"]
 
-  # If under 16 and missing, assume single
-  data[is.na(relationship_status) & age < 16, relationship_status := "single"]
+  # If under 18 and missing, assume single
+  data[is.na(relationship_status) & age < 18, relationship_status := "single"]
   data[ , marstat := NULL]
   }
 
@@ -99,10 +99,11 @@ clean_family <- function(
   # Separated, divorced or widowed
   data[maritalg %in% c(4, 5, 6), relationship_status := "sep_div_wid"]
   
-  # If under 16 and missing, assume single
-  data[is.na(relationship_status) & age < 16, relationship_status := "single"]
+  # If under 18 and missing, assume single
+  data[is.na(relationship_status) & age < 18, relationship_status := "single"]
   data[ , maritalg := NULL]
   }
+  
 
 return(data[])
 }

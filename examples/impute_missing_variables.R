@@ -34,19 +34,14 @@ cleandata <- function(data) {
       
       # variables to retain
       keep_vars = c("wt_int", "psu", "cluster", "year", "quarter",
-                    "age", "age_cat", "censor_age", "sex", "imd_quintile",
-                    "ethnicity_4cat", "ethnicity_2cat",
-                    "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
-                    "nssec3_lab", "man_nonman", "activity_lstweek", "eduend4cat",
+                    "age", "sex", "imd_quintile", "ethnicity_4cat",
+                    "eduend4cat", "degree", 
+                    "relationship_status", "kids",
+                    "employ2cat",  "income5cat", "nssec3_lab", "activity_lstweek",
                     
-                    "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
-                    "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
-                    
-                    "weight", "height",
-                    
-                    "cig_smoker_status", "years_since_quit", "years_reg_smoker", "cig_ever",
+                    "cig_smoker_status", "years_since_quit", "years_reg_smoker",
                     "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig",
-                    "smk_start_age", "smk_stop_age", "censor_age",
+                    "smk_start_age", "smk_stop_age",
                     
                     "drinks_now", 
                     "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",
@@ -59,10 +54,10 @@ cleandata <- function(data) {
       ),
       
       # The variables that must have complete cases
-      complete_vars = c("age", "sex", "year", "quarter", "psu", "cluster")
+      complete_vars = c("age", "sex", "year", "quarter", "psu", "wt_int", "cluster", "cig_smoker_status", "drinks_now")
     )
   
-  return(data)
+return(data)
 }
 
 # Read and clean each year of data and bind them together in one big dataset
@@ -94,36 +89,50 @@ data <- clean_surveyweights(data)
 # Impute missing values
 
 # variables with missingness
-table(data$kids, useNA = "ifany")
-table(data$relationship_status, useNA = "ifany")
-table(data$ethnicity_4cat, useNA = "ifany")
-table(data$imd_quintile, useNA = "ifany")
-table(data$eduend4cat, useNA = "ifany")
-table(data$degree, useNA = "ifany")
+table(data$ethnicity_4cat, useNA = "ifany") # 350 missing (0.2%)
+table(data$eduend4cat, useNA = "ifany") # 179 missing
+table(data$degree, useNA = "ifany") # 94 missing
+table(data$relationship_status, useNA = "ifany") # 7210 missing
+table(data$kids, useNA = "ifany") # 24,710 missing
+table(data$income5cat, useNA = "ifany") # 35,072 missing
+table(data$nssec3_lab, useNA = "ifany") # 552 missing
+table(data$activity_lstweek, useNA = "ifany")
 
-
-table(data$employ2cat, useNA = "ifany")
-table(data$social_grade, useNA = "ifany")
-
-
-summary(data$weight)
 
 # Set a broader age category variable
 data[ , agegroup := c("12-16", "16-17", "18-24", "25-34", "35-49", "50-64", "65-74", "75-89")[findInterval(age, c(-10, 16, 18, 25, 35, 50, 65, 75, 1000))]]
 
+# Run the imputation
 imp <- impute_data_mice(data = data,
-                        var_names = c("smk.state", "agegroup", "sex", "imd_quintile", "degree", "kids", "income5cat",
-                                      "relationship_status", "employ2cat", "social_grade"),
-                        var_methods = c("", "", "", "polr", "logreg", "polr", "polr",
-                                        "polyreg", "logreg", "logreg"),
-                        n_imputations = 5)
+  var_names = c(
+    "agegroup",
+    "sex",
+    "imd_quintile",
+    "ethnicity_4cat",
+    "eduend4cat",
+    "degree",
+    "relationship_status",
+    "kids",
+    "income5cat",
+    "nssec3_lab",
+    "activity_lstweek"
+  ),
+  var_methods = c(
+    "",
+    "",
+    "",
+    "polyreg",
+    "polyreg",
+    "logreg",
+    "polyreg",
+    "polyreg",
+    "polyreg",
+    "polyreg",
+    "polyreg"
+  ), n_imputations = 1)
 
 
 data_imp <- copy(imp$data)
-
-# write imputed data
-write.table(data_imp, paste0(root_dir, "ScHARR/PR_Consumption_TA/Projects/Clean HSE data/output/", Sys.Date(), "HSE_2001_to_2017_imputed.txt"), sep = "\t", row.names = F)
-
 
 
 

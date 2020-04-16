@@ -187,7 +187,7 @@ cleandata <- function(data) {
       
       # variables to retain
       keep_vars = c("wt_int", "psu", "cluster", "year", "quarter",
-                    "age", "age_cat", "censor_age", "sex", "imd_quintile",
+                    "age", "age_cat", "sex", "imd_quintile",
                     "ethnicity_4cat", "ethnicity_2cat",
                     "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
                     "nssec3_lab", "man_nonman", "activity_lstweek", "eduend4cat",

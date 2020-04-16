@@ -29,8 +29,8 @@ suppressPackageStartupMessages(library(ggplot2))
 suppressPackageStartupMessages(library(hseclean))
 ```
 
-# Clean tobacco and alcohol data
-Do the setup for imputation by carrying out all the data cleaning functions. There has already been some filling-in of missing data done by these cleaning functions - using simple rules, 
+# Preparing the data
+To prepare for the process that imputes missing data, run the full set of functions to read and clean the data. It is important to note that there has already been some filling-in of missing data done by these cleaning functions - using simple rules,
 
 - For 2015+, the `clean_age()` function has randomly assigned single years of age within each age category.  
 - If someone is classified as a current smoker, is younger than 16 and has missing data on the time between waking and having their first cigarette, we assume that this time is one hour or more.  
@@ -38,7 +38,7 @@ Do the setup for imputation by carrying out all the data cleaning functions. The
 - If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.  
 - Information on education, employment and socioeconomic status is triangulated across several variables.  
 
-The function `select_data()` has the option to filter the data to retain only complete cases for certain variables e.g. the user might wish to retain only records with full information on age, sex, smoking status and the survey design variables.   
+The function `select_data()` has the option to filter the data to retain only complete cases for certain variables. To prepare the data, the example code below filters out any incomplete data on key survey variables (age, sex, year, quarter, psu, cluster, imd_quintile). It also filters out any incomplete information on the key smoking and drinking variables, "cig_smoker_status" and "drinks_now".    
 
 ```{r cleanhse, eval = F}
 # Prepare the data by applying all cleaning functions 
@@ -81,8 +81,9 @@ cleandata <- function(data) {
                     
                     "weight", "height",
                     
-                    "cig_smoker_status", "smk_start_age", "years_since_quit",
-                    "cigs_per_day", "smoker_cat",
+                    "cig_smoker_status", "years_since_quit", "years_reg_smoker", "cig_ever",
+                    "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig",
+                    "smk_start_age", "smk_stop_age", "censor_age",
                     
                     "drinks_now", 
                     "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",
@@ -95,10 +96,10 @@ cleandata <- function(data) {
       ),
       
       # The variables that must have complete cases
-      complete_vars = c("age", "sex", "year", "quarter", "psu", "cluster")
+      complete_vars = c("age", "sex", "year", "quarter", "psu", "cluster", "cig_smoker_status", "drinks_now")
     )
   
-  return(data)
+return(data)
 }
 
 # Read and clean each year of data and bind them together in one big dataset
@@ -127,34 +128,69 @@ data <- clean_surveyweights(data)
 ```
 
 # Multiple imputation
-To conduct our multiple imputation, we use the R package `mice` [@Rmice]. Since the process of running the multiple imputation can take a long time and consume a lot of RAM, it might be easiest to run on the `heta_study` virtual machine. There is a range of `mice` documentation and tutorials online that is worth getting into. In `hseclean`, multiple imputation is implemented by the `impute_data_mice()` function, although this is currently written rather simply and could be checked and developed to include more optionality and potentially also diagnostic checks.  
+The variables with the most missingness in the data are income5cat (19% missing) and kids (14% missing). The missingness for children is mainly due to this variable not being reported in the non-secure version of the HSE from the year 2015. In this example, the other variables to be imputed are: ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.   
 
-`mice` basically fits a chained series of regression equations that predict the missing values of successive variables based on the existing relationships between those variables and selected other variables in the data. The current usage only imputes categorical variables, which could be one of three types: "logreg" - binary Logistic regression; "polr" - ordered Proportional odds model; "polyreg" - unordered Polytomous logistic regression.  
+To conduct the multiple imputation, we use the R package `mice` [@Rmice]. The process of running the multiple imputation can take a long time and consume a lot of RAM. There is a range of `mice` documentation and tutorials online.    
 
-In running the multiple imputation, the number of desired iterations of the imputed data is selected (I current generate five to keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "", otherwise to one of "logreg", "polr" or "polyreg".  
+In `hseclean`, multiple imputation is implemented in a basic way by the `impute_data_mice()` function.    
+
+`mice` fits a chained series of regression equations that predict the missing values of variables based on their relationships with other selected variables in the data. The `impute_data_mice()` function currently only imputes categorical variables, which could be one of three types: "logreg" - binary Logistic regression; "polr" - ordered Proportional odds model; "polyreg" - unordered Polytomous logistic regression.    
+
+In running the multiple imputation, the number of iterations of the imputed data is selected (choosing a small number e.g. < 5 helps keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "", otherwise to one of "logreg", "polr" or "polyreg".     
 
 ```{r mi example, eval = F}
-# First inspect variables
-table(hse_data$kids, useNA = "ifany")
+# variables with missingness
+table(data$ethnicity_4cat, useNA = "ifany") # 350 missing (0.2%)
+table(data$eduend4cat, useNA = "ifany") # 179 missing
+table(data$degree, useNA = "ifany") # 94 missing
+table(data$relationship_status, useNA = "ifany") # 7210 missing
+table(data$kids, useNA = "ifany") # 24,710 missing
+table(data$income5cat, useNA = "ifany") # 35,072 missing
+table(data$nssec3_lab, useNA = "ifany") # 552 missing
+table(data$activity_lstweek, useNA = "ifany")
+
 
 # Set a broader age category variable
-hse_data[ , agegroup := 
-            c("12-16", "16-17", "18-24", "25-34", "35-49", "50-64", "65-74", "75-89")[
-              findInterval(age, c(-10, 16, 18, 25, 35, 50, 65, 75, 1000))]]
+data[, agegroup := c("12-16",
+                     "16-17",
+                     "18-24",
+                     "25-34",
+                     "35-49",
+                     "50-64",
+                     "65-74",
+                     "75-89")[findInterval(age, c(-10, 16, 18, 25, 35, 50, 65, 75, 1000))]]
 
-# Run the imputation (takes a long time)
-imp <- impute_data_mice(data = hse_data,
-                        var_names = c("smk.state", "agegroup", "sex", 
-                                      "imd_quintile", "degree", "kids", "income5cat",
-                                      "relationship_status", "employ2cat", "social_grade"),
-                        var_methods = c("", "", "", 
-                                        "polr", "logreg", "polr", "polr",
-                                        "polyreg", "logreg", "logreg"),
-                        n_imputations = 5)
+# Run the imputation
+imp <- impute_data_mice(data = data,
+  var_names = c(
+    "agegroup",
+    "sex",
+    "imd_quintile",
+    "ethnicity_4cat",
+    "eduend4cat",
+    "degree",
+    "relationship_status",
+    "kids",
+    "income5cat",
+    "nssec3_lab",
+    "activity_lstweek"
+  ),
+  var_methods = c(
+    "",
+    "",
+    "",
+    "polyreg",
+    "polyreg",
+    "logreg",
+    "polyreg",
+    "polyreg",
+    "polyreg",
+    "polyreg",
+    "polyreg"
+  ), n_imputations = 1)
 
-# imp$data is a single data.table containing all 5 imputed versions of the data
-hse_data_smoking <- copy(imp$data)
 
+data_imp <- copy(imp$data)
 ```
 
 # References
