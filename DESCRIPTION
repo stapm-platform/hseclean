@@ -27,7 +27,8 @@ LazyData: true
 Imports: 
     mice,
     Hmisc,
-    stringr
+    stringr,
+    magrittr
 Depends: 
     data.table,
     survey
