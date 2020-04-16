@@ -86,7 +86,8 @@ cleandata <- function(data) {
     # The variables to retain
     keep_vars = c("wt_int", "psu", "cluster", "year", 
                   "age", "age_cat", "censor_age", "sex", "imd_quintile",
-                  "cig_smoker_status", "smk_start_age", "years_since_quit"),
+                  "cig_smoker_status", "smk_start_age", "smk_stop_age", "years_since_quit",
+                  "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig"),
     
     # The variables that must have complete cases
     complete_vars = c("cig_smoker_status", "wt_int", "psu", "cluster", "year", "censor_age")

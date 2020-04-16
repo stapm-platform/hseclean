@@ -93,7 +93,8 @@ smk_amount <- function(
 
   # For non-smokers = 0
   data[cig_smoker_status %in% c("never", "former"), cigs_per_day := 0]
-
+  data[is.na(cig_smoker_status), cigs_per_day := NA]
+  
   remove_vars <- c("cigwday", "cigwend")
   data[ , (remove_vars) := NULL]
 
@@ -144,6 +145,10 @@ smk_amount <- function(
   data[ , (remove_vars) := NULL]
   }
 
+  
+  data[, cigs_per_day := as.double(ceiling(cigs_per_day))]
+  
+  
 return(data[])
 }
 

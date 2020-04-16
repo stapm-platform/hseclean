@@ -44,8 +44,9 @@ cleandata <- function(data) {
                     
                     "weight", "height",
                     
-                    "cig_smoker_status", "smk_start_age", "years_since_quit",
-                    "cigs_per_day", "smoker_cat",
+                    "cig_smoker_status", "years_since_quit", "years_reg_smoker", "cig_ever",
+                    "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig",
+                    "smk_start_age", "smk_stop_age", "censor_age",
                     
                     "drinks_now", 
                     "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",

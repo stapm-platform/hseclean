@@ -107,8 +107,8 @@ smk_life_history <- function(
   # Missing data
   data <- hseclean::impute_mean(data, c("smk_start_age", "smk_stop_age"), remove_zeros = T)
 
-  data[cig_smoker_status != "former", smk_stop_age := NA_real_]
-  data[cig_smoker_status == "never", smk_start_age := NA_real_]
+  data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), smk_stop_age := NA_real_]
+  data[is.na(cig_smoker_status) | cig_smoker_status == "never", smk_start_age := NA_real_]
 
 
 return(data[])

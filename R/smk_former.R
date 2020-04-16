@@ -47,7 +47,7 @@ smk_former <- function(
   data[(year < 2015 | country == "Scotland") & (endsmoke >= 97 | endsmoke < 0), endsmoke := NA_real_]
 
   data[cig_smoker_status == "former", years_since_quit := endsmoke]
-
+  
   data[ , endsmoke := NULL]
 
   #############################################################
@@ -120,14 +120,19 @@ smk_former <- function(
   data[cig_smoker_status == "former" & years_since_quit < .5, cig_smoker_status := "current"]
   data[cig_smoker_status == "former" & years_since_quit >= .5 & years_since_quit < 1, years_since_quit := 1]
   
+  # Back-fill missing data in smoker status
+  data[is.na(cig_smoker_status) & years_since_quit >= 1, cig_smoker_status := "former"]
+  data[is.na(cig_smoker_status) & years_reg_smoker >= 1, cig_smoker_status := "former"]
+  
   # Mean-impute missing values for years since quitting and years regular smoker
   data <- hseclean::impute_mean(data, c("years_since_quit", "years_reg_smoker"))
 
-  data[cig_smoker_status != "former", `:=`(years_since_quit = NA, years_reg_smoker = NA)]
+  data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), `:=`(years_since_quit = NA, years_reg_smoker = NA)]
 
   data[, years_since_quit := as.double(ceiling(years_since_quit))]
   data[, years_reg_smoker := as.double(ceiling(years_reg_smoker))]
 
+  
 return(data[])
 }
 
