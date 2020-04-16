@@ -72,7 +72,7 @@ read_2014 <- function(
   health_vars <- paste0("complst", 1:14)
 
   other_vars <- Hmisc::Cs(
-    mintb,
+    mintb, addnum,
     psu, cluster, wt_int,
     age90, sex,
     Origin3,

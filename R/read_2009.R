@@ -90,7 +90,7 @@ read_2009 <- function(
   health_vars <- paste0("compm", 1:14)
 
   other_vars <- Hmisc::Cs(
-    mintb,
+    mintb, addnum,
     psu, cluster, wt_int,
     age, sex,
     origin,

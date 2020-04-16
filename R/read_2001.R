@@ -70,7 +70,7 @@ read_2001 <- function(
 
   other_vars <- Hmisc::Cs(
 
-    mintb,
+    mintb, addnum,
 
     area, child_wt, #cluster, #, #wt_int,
 

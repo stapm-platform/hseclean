@@ -77,7 +77,7 @@ read_2016 <- function(
   health_vars <- paste0("complst", 1:14)
 
   other_vars <- Hmisc::Cs(
-    qrtint,
+    qrtint, addnum,
     psu, cluster, wt_int, wt_sc,
     age16g5, age35g, sex,
     origin2,

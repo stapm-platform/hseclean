@@ -104,7 +104,7 @@ read_2002 <- function(
   health_vars <- paste0("compm", 1:14)
 
   other_vars <- Hmisc::Cs(
-    mintb,
+    mintb, addnum,
     area, child_wt, #tablewt,#cluster, #wt_int,
     age, sex,
     ethnici,
