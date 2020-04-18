@@ -28,9 +28,13 @@ We have subsequently added functions to process the Scottish Health Survey (SHeS
 
  > Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service. `hseclean` is designed to read the tab delimited files.    
  
----
+## Usage
 
-`hseclean` is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data. This includes functionality to:  
+`hseclean` is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data. 
+
+The **inputs** are the raw survey data files for each year.   
+
+The **processes** applied by the functions in `hseclean` give options to:
 
 1. Read tobacco and alcohol related variables and the information on individual characteristics that we use in our analyses.  
 1. Clean alcohol consumption data, applying assumptions about beverage size and alcohol content.  
@@ -38,6 +42,8 @@ We have subsequently added functions to process the Scottish Health Survey (SHeS
 1. Clean data on individual characteristics including age, sex, ethnicity, economic status, family, health and income.  
 1. Multiply impute missing data.  
 1. Summarise categorical variables using proportions, considering survey design.  
+
+The **output** of these processes is a cleaned dataset that is ready for further analysis. This dataset can be saved so that you don't need to run the cleaning processes in `hseclean` each time you want to use the cleaned data.  
 
 ## Installation
 
@@ -50,17 +56,27 @@ You can install the development version of `hseclean` from github with:
 devtools::install_github("dosgillespie/hseclean")
 ```
 
+---
+
+On Windows, there might be an error with `install_github()` due to long file paths (Windows has a limit on file path length). One possible work-around is 
+
+1. Download the package "tarball" by copying this into your internet browser (making sure the numbers at the end indicate the latest version) `https://github.com/dosgillespie/hseclean/tarball/0.3.2`. When the window pops up, choose where to save the file. The file I downloaded was dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz and I saved it to Downloads.    
+
+2. Go to the Terminal window in R Studio (or a console window in Windows by searching for "cmd") and install the package from the downloaded file by typing `R CMD INSTALL Downloads/dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz`.  
+
+---
+
+Then load the package, and some other packages that are useful. Note that the code within `hseclean` uses the `data.table::data.table()` syntax.  
+
 ```{r pkgs, eval = F}
 # Load the package
 library(hseclean)
 
 # Other useful packages
-library(dplyr)
-library(magrittr)
-library(ggplot2)
+library(dplyr) # for data manipulation and summary
+library(magrittr) # for pipes
+library(ggplot2) # for plotting
 ```
-
-The code within `hseclean` uses the `data.table` package.  
 
 ## Getting started
 
@@ -92,6 +108,8 @@ test_2001 <- read_2001(
 There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See `vignette("covariate_data")`.     
 
 ```{r cleanses, eval = F}
+library(magrittr)
+
 temp <- read_2017(root = root_dir) %>%
   clean_age %>%
   clean_family %>%
@@ -106,8 +124,15 @@ temp <- read_2017(root = root_dir) %>%
 Detailed description of how to clean the alcohol data are given in `vignette("alcohol_data")`. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.  
 
 ```{r drinkfreq, eval = F}
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+
 # Frequency of drinking in 2017 among drinkers
-read_2017(root = "X:/") %>%
+root_dir <- "/Volumes/Shared/"
+#root_dir <- "X:/"
+
+read_2017(root = root_dir) %>%
   clean_age %>%
   clean_demographic %>%
   alc_drink_now_allages %>%
@@ -125,6 +150,8 @@ read_2017(root = "X:/") %>%
 See `vignette("smoking_data")`.
 
 ```{r readalldata, eval = F}
+library(magrittr)
+
 # Wrap the individual cleaning functions in another function for applying to each year
 
 cleandata <- function(data) {
@@ -209,7 +236,7 @@ data <- clean_surveyweights(data)
 ```
 
 ### Summarise data
-The `survey` package is used by the function `prop_summary()` in `hseclean` to estimate the uncertainty around proportions calculated from a binary variable - `prop_summary()` was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.   
+The function `survey::svyby()` in the `survey` R package is used by the function `prop_summary()` in `hseclean` to estimate the uncertainty around proportions calculated from a binary variable - `prop_summary()` was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.   
 
 ```{r ex2, eval = F}
 prop_smokers <- prop_summary(
@@ -219,12 +246,11 @@ prop_smokers <- prop_summary(
   levels_0 = c("former", "never"),
   strat_vars = c("year", "sex", "imd_quintile")
 )
-
 ```
 
 ### Missing data imputation
 
-`hseclean` uses the R package `mice`, implemented in a basic way by the `impute_data_mice()` function. See `vignette("missing_data")`.      
+`hseclean` uses the function `mice::mice()` in the `mice` R package, implemented in a basic way by the `impute_data_mice()` function. See `vignette("missing_data")`.      
 
 ```{r miexample, eval = F}
 # Run the imputation (takes a long time)
