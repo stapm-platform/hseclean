@@ -92,15 +92,15 @@ work-around is
 
 1.  Download the package “tarball” by copying this into your internet
     browser (making sure the numbers at the end indicate the latest
-    version) `https://github.com/dosgillespie/hseclean/tarball/0.3.3`.
+    version) `https://github.com/dosgillespie/hseclean/tarball/0.3.4`.
     When the window pops up, choose where to save the file. The file I
-    downloaded was dosgillespie-hseclean-0.3.3-0-ga16f575.tar.gz and I
+    downloaded was `dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz` and I
     saved it to Downloads.
 
 2.  Go to the Terminal window in R Studio (or a console window in
     Windows by searching for “cmd”) and install the package from the
     downloaded file by typing `R CMD INSTALL
-    Downloads/dosgillespie-hseclean-0.3.3-0-g3ba2cbc.tar.gz`.
+    Downloads/dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz`.
 
 -----
 
