@@ -119,13 +119,13 @@ to request access to the datasets. Instructions on how to do this can be
 found
 [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).
 
-At The University of Sheffield, the data is stored in the university
-networked X-drive folder `PR_Consumption_TA`, which is accessible only
-to team members who are using data according to the purposes stated to
-the UK Data Service.
-
-No individual-level Health Survey for England or Scottish Health Survey
-data is included within this package on Github.
+In ScHARR, all data is stored and processed according to the [ScHARR
+Information Governance
+Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). The
+HSE and SHeS data is stored in the university networked X-drive folder
+`PR_Consumption_TA`, which is accessible only to team members who are
+using data according to the purposes stated to the UK Data Service. No
+individual-level data is included within this package on Github.
 
 ## Basic functionality
 
