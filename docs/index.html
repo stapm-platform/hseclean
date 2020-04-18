@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -98,8 +98,13 @@
 <blockquote>
 <p>Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service. <code>hseclean</code> is designed to read the tab delimited files.</p>
 </blockquote>
-<hr>
-<p><code>hseclean</code> is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data. This includes functionality to:</p>
+</div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<p><code>hseclean</code> is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data.</p>
+<p>The <strong>inputs</strong> are the raw survey data files for each year.</p>
+<p>The <strong>processes</strong> applied by the functions in <code>hseclean</code> give options to:</p>
 <ol>
 <li>Read tobacco and alcohol related variables and the information on individual characteristics that we use in our analyses.<br>
 </li>
@@ -113,6 +118,7 @@
 </li>
 <li>Summarise categorical variables using proportions, considering survey design.</li>
 </ol>
+<p>The <strong>output</strong> of these processes is a cleaned dataset that is ready for further analysis. This dataset can be saved so that you don’t need to run the cleaning processes in <code>hseclean</code> each time you want to use the cleaned data.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -121,14 +127,21 @@
 <p>You can install the development version of <code>hseclean</code> from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co">#install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"dosgillespie/hseclean"</span>)</pre></div>
+<hr>
+<p>On Windows, there might be an error with <code>install_github()</code> due to long file paths (Windows has a limit on file path length). One possible work-around is</p>
+<ol>
+<li><p>Download the package “tarball” by copying this into your internet browser (making sure the numbers at the end indicate the latest version) <code>https://github.com/dosgillespie/hseclean/tarball/0.3.2</code>. When the window pops up, choose where to save the file. The file I downloaded was dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz and I saved it to Downloads.</p></li>
+<li><p>Go to the Terminal window in R Studio (or a console window in Windows by searching for “cmd”) and install the package from the downloaded file by typing <code>R CMD INSTALL Downloads/dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz</code>.</p></li>
+</ol>
+<hr>
+<p>Then load the package, and some other packages that are useful. Note that the code within <code>hseclean</code> uses the <code><a href="https://rdrr.io/pkg/data.table/man/data.table.html">data.table::data.table()</a></code> syntax.</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># Load the package</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">hseclean</span>)
 
 <span class="co"># Other useful packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)</pre></div>
-<p>The code within <code>hseclean</code> uses the <code>data.table</code> package.</p>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>) <span class="co"># for data manipulation and summary</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>) <span class="co"># for pipes</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>) <span class="co"># for plotting</span></pre></div>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -155,7 +168,9 @@
 <h3 class="hasAnchor">
 <a href="#processing-socioeconomic-demographic-and-health-variables" class="anchor"></a>Processing socioeconomic, demographic and health variables</h3>
 <p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code><a href="articles/covariate_data.html">vignette("covariate_data")</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
+
+<span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_family</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
@@ -168,8 +183,15 @@
 <h3 class="hasAnchor">
 <a href="#alcohol-data" class="anchor"></a>Alcohol data</h3>
 <p>Detailed description of how to clean the alcohol data are given in <code><a href="articles/alcohol_data.html">vignette("alcohol_data")</a></code>. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Frequency of drinking in 2017 among drinkers</span>
-<span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="st">"X:/"</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+
+<span class="co"># Frequency of drinking in 2017 among drinkers</span>
+<span class="no">root_dir</span> <span class="kw">&lt;-</span> <span class="st">"/Volumes/Shared/"</span>
+<span class="co">#root_dir &lt;- "X:/"</span>
+
+<span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>) <span class="kw">%&gt;%</span>
   <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
   <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
   <span class="no">alc_drink_now_allages</span> <span class="kw">%&gt;%</span>
@@ -185,7 +207,9 @@
 <h3 class="hasAnchor">
 <a href="#clean-all-years-of-smoking-and-alcohol-data" class="anchor"></a>Clean all years of smoking and alcohol data</h3>
 <p>See <code><a href="articles/smoking_data.html">vignette("smoking_data")</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="co"># Wrap the individual cleaning functions in another function for applying to each year</span>
+<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
+
+<span class="co"># Wrap the individual cleaning functions in another function for applying to each year</span>
 
 <span class="no">cleandata</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
 
@@ -270,7 +294,7 @@
 <div id="summarise-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summarise-data" class="anchor"></a>Summarise data</h3>
-<p>The <code>survey</code> package is used by the function <code><a href="reference/prop_summary.html">prop_summary()</a></code> in <code>hseclean</code> to estimate the uncertainty around proportions calculated from a binary variable - <code><a href="reference/prop_summary.html">prop_summary()</a></code> was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.</p>
+<p>The function <code><a href="https://rdrr.io/pkg/survey/man/svyby.html">survey::svyby()</a></code> in the <code>survey</code> R package is used by the function <code><a href="reference/prop_summary.html">prop_summary()</a></code> in <code>hseclean</code> to estimate the uncertainty around proportions calculated from a binary variable - <code><a href="reference/prop_summary.html">prop_summary()</a></code> was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="no">prop_smokers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/prop_summary.html">prop_summary</a></span>(
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">hse_data</span>,
   <span class="kw">var_name</span> <span class="kw">=</span> <span class="st">"smk.state"</span>,
@@ -282,7 +306,7 @@
 <div id="missing-data-imputation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#missing-data-imputation" class="anchor"></a>Missing data imputation</h3>
-<p><code>hseclean</code> uses the R package <code>mice</code>, implemented in a basic way by the <code><a href="reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code><a href="articles/missing_data.html">vignette("missing_data")</a></code>.</p>
+<p><code>hseclean</code> uses the function <code><a href="http://stefvanbuuren.github.io/mice/reference/mice.html">mice::mice()</a></code> in the <code>mice</code> R package, implemented in a basic way by the <code><a href="reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code><a href="articles/missing_data.html">vignette("missing_data")</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="co"># Run the imputation (takes a long time)</span>
 <span class="no">imp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/impute_data_mice.html">impute_data_mice</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">hse_data</span>,
                         <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"smk.state"</span>, <span class="st">"agegroup"</span>, <span class="st">"sex"</span>,
