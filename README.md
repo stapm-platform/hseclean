@@ -68,7 +68,14 @@ cleaned data.
 
 ## Installation
 
-Please see file LICENCE.
+We would like to ask that since the code and documentation is still
+under development and is complex, we ask that you consult with the
+authors before you use it.
+
+Please cite the latest version of the package using:  
+“Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020).
+hseclean: Health Survey Data Wrangling. R package version 0.3.3.
+<https://dosgillespie.github.io/hseclean/>. DOI: 10.5281/zenodo.3748784”
 
 You can install the development version of `hseclean` from github with:
 
