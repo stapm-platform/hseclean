@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 The package is usable but there are still bugs and further developments that are being worked through i.e. some code and documentation is still incomplete or in need of being refined. The code and documentation are still undergoing internal review by the analyst team.   
 
 ## Motivation
-`hseclean` was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research, The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.   
+`hseclean` was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research (ScHARR), The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.   
 
 The original motivation for `hseclean` was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The suite of functions within `hseclean` reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.   
 
@@ -60,9 +60,9 @@ devtools::install_github("dosgillespie/hseclean")
 
 On Windows, there might be an error with `install_github()` due to long file paths (Windows has a limit on file path length). One possible work-around is 
 
-1. Download the package "tarball" by copying this into your internet browser (making sure the numbers at the end indicate the latest version) `https://github.com/dosgillespie/hseclean/tarball/0.3.2`. When the window pops up, choose where to save the file. The file I downloaded was dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz and I saved it to Downloads.    
+1. Download the package "tarball" by copying this into your internet browser (making sure the numbers at the end indicate the latest version) `https://github.com/dosgillespie/hseclean/tarball/0.3.3`. When the window pops up, choose where to save the file. The file I downloaded was dosgillespie-hseclean-0.3.3-0-ga16f575.tar.gz and I saved it to Downloads.    
 
-2. Go to the Terminal window in R Studio (or a console window in Windows by searching for "cmd") and install the package from the downloaded file by typing `R CMD INSTALL Downloads/dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz`.  
+2. Go to the Terminal window in R Studio (or a console window in Windows by searching for "cmd") and install the package from the downloaded file by typing `R CMD INSTALL Downloads/dosgillespie-hseclean-0.3.3-0-ga16f575.tar.gz`.  
 
 ---
 

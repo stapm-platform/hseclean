@@ -17,10 +17,10 @@ still undergoing internal review by the analyst team.
 
 `hseclean` was created as part of a programme of work on the health
 economics of tobacco and alcohol at the School of Health and Related
-Research, The University of Sheffield. This programme is based around
-the construction of the Sheffield Tobacco and Alcohol Policy Model
-(STAPM), which aims to use comparable methodologies to evaluate the
-impacts of tobacco and alcohol policies, and investigate the
+Research (ScHARR), The University of Sheffield. This programme is based
+around the construction of the Sheffield Tobacco and Alcohol Policy
+Model (STAPM), which aims to use comparable methodologies to evaluate
+the impacts of tobacco and alcohol policies, and investigate the
 consequences of clustering and interactions between tobacco and alcohol
 consumption behaviours.
 
@@ -85,15 +85,15 @@ work-around is
 
 1.  Download the package “tarball” by copying this into your internet
     browser (making sure the numbers at the end indicate the latest
-    version) `https://github.com/dosgillespie/hseclean/tarball/0.3.2`.
+    version) `https://github.com/dosgillespie/hseclean/tarball/0.3.3`.
     When the window pops up, choose where to save the file. The file I
-    downloaded was dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz and I
+    downloaded was dosgillespie-hseclean-0.3.3-0-ga16f575.tar.gz and I
     saved it to Downloads.
 
 2.  Go to the Terminal window in R Studio (or a console window in
     Windows by searching for “cmd”) and install the package from the
     downloaded file by typing `R CMD INSTALL
-    Downloads/dosgillespie-hseclean-0.3.2-0-ga16f575.tar.gz`.
+    Downloads/dosgillespie-hseclean-0.3.3-0-ga16f575.tar.gz`.
 
 -----
 
