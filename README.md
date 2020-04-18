@@ -93,7 +93,7 @@ work-around is
 2.  Go to the Terminal window in R Studio (or a console window in
     Windows by searching for “cmd”) and install the package from the
     downloaded file by typing `R CMD INSTALL
-    Downloads/dosgillespie-hseclean-0.3.3-0-ga16f575.tar.gz`.
+    Downloads/dosgillespie-hseclean-0.3.3-0-g3ba2cbc.tar.gz`.
 
 -----
 
