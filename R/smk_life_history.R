@@ -23,7 +23,7 @@
 #' Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item smk_start_age

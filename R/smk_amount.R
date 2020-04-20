@@ -18,7 +18,7 @@
 #'  \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/}{the heaviness of smoking index}.
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item cigs_per_day - numeric (0+)

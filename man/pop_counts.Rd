@@ -4,7 +4,9 @@
 \name{pop_counts}
 \alias{pop_counts}
 \title{Population sizes from 2001 to 2016}
-\format{A data table (age, sex, year, imd_quintile, N).}
+\format{
+A data table (age, sex, year, imd_quintile, N).
+}
 \source{
 Office for National Statistics
 }

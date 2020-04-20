@@ -77,6 +77,22 @@ Please cite the latest version of the package using:
 hseclean: Health Survey Data Wrangling. R package version 0.3.4.
 <https://dosgillespie.github.io/hseclean/>. DOI: 10.5281/zenodo.3748784”
 
+Since you will be downloading and installing a source package, you might
+need to set your system up for building R packages:
+
+It is a good idea to update R and all of your packages.
+
+Mac OS: A convenient way to get the tools needed for compilation is to
+install Xcode Command Line Tools. Note that this is much smaller than
+full Xcode. In a shell, enter xcode-select –install. For installing
+almost anything else, consider using [Homebrew](https://brew.sh/).
+
+Windows: Install Rtools. This is not an R package\! It is “a collection
+of resources for building packages for R under Microsoft Windows, or for
+building R itself”. Go to
+<https://cran.r-project.org/bin/windows/Rtools/> and install as
+instructed.
+
 You can install the development version of `hseclean` from github with:
 
 ``` r
@@ -86,9 +102,8 @@ devtools::install_github("dosgillespie/hseclean")
 
 -----
 
-On Windows, there might be an error with `install_github()` due to long
-file paths (Windows has a limit on file path length). One possible
-work-around is
+If there is an error with `install_github()`, one possible work-around
+is
 
 1.  Download the package “tarball” by copying this into your internet
     browser (making sure the numbers at the end indicate the latest

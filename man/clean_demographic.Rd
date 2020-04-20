@@ -30,7 +30,7 @@ In an attempt to harmonise different years of data to the receomended definition
 \item Black / African / Caribbean / Black British (includes Caribbean, African)  
 }
 Following inspection of the data, the white/non-white classification does look appropriate, 
-especially given the likely limited sample sizes - so the 2 level variable has also been created.
+especially given the likely limited sample sizes - so the 2 level variable has also been created.  
 
 For 2008-2013 of the Scottish Health Survey, we can create the same 4-category variable as for the HSE, howvere for 2014 onwards, 
 the Scottish Health Survey 2018 only identifies 5 groups of ethnicity: 

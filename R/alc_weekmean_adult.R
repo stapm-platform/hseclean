@@ -24,7 +24,7 @@
 #' @param data Data table - the Health Survey for England dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item beer_units - average weekly units of beer

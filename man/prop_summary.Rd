@@ -29,7 +29,7 @@ error and survey design.
 \dontrun{
 
 prop_smokers <- prop_summary(
-  data = hse_data,
+  data = data,
   var_name = "cig_smoker_status",
   levels_1 = "current",
   levels_0 = c("former", "never"),

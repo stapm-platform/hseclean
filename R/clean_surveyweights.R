@@ -3,7 +3,8 @@
 #' Process the survey weights
 #'
 #' @param data Data table - the Health Survey for England dataset
-#'
+#' @param pop_data Data table - population counts
+#' @importFrom data.table :=
 #' @return Returns data with survey weights updated
 #' @export
 #'

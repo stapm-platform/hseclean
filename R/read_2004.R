@@ -117,7 +117,7 @@
 #' @param root Character - the root directory.
 #' @param file_generalpop Character - the file path and name of the general population data file.
 #' @param file_ethnicboost Character - the file path and name of the ethnic boost data file.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -133,27 +133,31 @@
 #'
 #' data_2004 <- read_2004(
 #'   root = "X:/",
-#'   file_generalpop = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
-#'   file_ethnicboost = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+#'   file_generalpop = 
+#'     "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+#'   file_ethnicboost = 
+#'     "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
 #' )
 #'
 #' }
 #'
 read_2004 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file_generalpop = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
-  file_ethnicboost = "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+  file_generalpop = 
+    "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+  file_ethnicboost = 
+    "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
 ) {
 
   ##################################################################################
   # General population
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file_generalpop),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
 
   alc_vars <- colnames(data[ , 1507:1574])
   smk_vars <- colnames(data[ , 1436:1506])
@@ -181,7 +185,7 @@ read_2004 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
   setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
            c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
@@ -198,16 +202,16 @@ read_2004 <- function(
   ##################################################################################
   # Ethnic boost sample
 
-  data_ethnicboost <- fread(
+  data_ethnicboost <- data.table::fread(
     paste0(root[1], file_ethnicboost),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data_ethnicboost, names(data_ethnicboost), tolower(names(data_ethnicboost)))
+  data.table::setnames(data_ethnicboost, names(data_ethnicboost), tolower(names(data_ethnicboost)))
 
-  data_ethnicboost <- data_ethnicboost[ , ..names]
+  data_ethnicboost <- data_ethnicboost[ , names, with = F]
 
-  setnames(data_ethnicboost, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
+  data.table::setnames(data_ethnicboost, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
            c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
 
   data_ethnicboost[ , psu := paste0("2004_", psu)]

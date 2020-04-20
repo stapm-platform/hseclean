@@ -8,10 +8,12 @@
 
 <title>Former smokers: time since quit and time as smoker — smk_former • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,10 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Former smokers: time since quit and time as smoker — smk_former" />
-
 <meta property="og:description" content="Cleans the data on the time since quitting and time spent as a regular smoker among former smokers." />
-
 
 
 
@@ -111,7 +112,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -133,13 +133,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Cleans the data on the time since quitting and time spent as a regular smoker among former smokers.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>smk_former</span>(<span class='no'>data</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -148,7 +146,7 @@
       <td><p>Data table - the Health Survey for England data.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns an updated data table with:</p><ul>
@@ -156,7 +154,6 @@
 <li><p>years_reg_smoker</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The main issue to be overcome is that in the Health Surveys for England 2015+, time since quit and time
@@ -164,7 +161,6 @@ spent as a smoker is provided in categories rather than single years. We simulat
 by just picking a value at random within the time interval.</p>
 <p>We also fill missing data: for children 8-15 years, we assume that missing values for former smokers = 1 year.
 For adults, we fill missing values with the average value for each age, sex and IMD quintile subgroup.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

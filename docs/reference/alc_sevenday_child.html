@@ -8,10 +8,12 @@
 
 <title>Alcohol consumption in last seven-days (children) — alc_sevenday_child • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,12 +38,11 @@
 
 
 
-<meta property="og:title" content="Alcohol consumption in last seven-days (children) — alc_sevenday_child" />
 
+<meta property="og:title" content="Alcohol consumption in last seven-days (children) — alc_sevenday_child" />
 <meta property="og:description" content="Processes the information from the questions on drinking in the last seven days -
 whether different types of beverages have been drunk in last 7 days,
 and if so, how much of each was drunk." />
-
 
 
 
@@ -113,7 +114,6 @@ and if so, how much of each was drunk." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -135,16 +135,17 @@ and if so, how much of each was drunk." />
     </div>
 
     <div class="ref-description">
-    
     <p>Processes the information from the questions on drinking in the last seven days -
 whether different types of beverages have been drunk in last 7 days,
 and if so, how much of each was drunk.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>alc_sevenday_child</span>(<span class='no'>data</span>, <span class='kw'>abv_data</span> <span class='kw'>=</span> <span class='kw pkg'>hseclean</span><span class='kw ns'>::</span><span class='no'><a href='abv_data.html'>abv_data</a></span>,
-  <span class='kw'>alc_volume_data</span> <span class='kw'>=</span> <span class='kw pkg'>hseclean</span><span class='kw ns'>::</span><span class='no'><a href='alc_volume_data.html'>alc_volume_data</a></span>)</pre>
-    
+    <pre class="usage"><span class='fu'>alc_sevenday_child</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>abv_data</span> <span class='kw'>=</span> <span class='kw pkg'>hseclean</span><span class='kw ns'>::</span><span class='no'><a href='abv_data.html'>abv_data</a></span>,
+  <span class='kw'>alc_volume_data</span> <span class='kw'>=</span> <span class='kw pkg'>hseclean</span><span class='kw ns'>::</span><span class='no'><a href='alc_volume_data.html'>alc_volume_data</a></span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -161,7 +162,7 @@ and if so, how much of each was drunk.</p>
       <td><p>Data table - our assumptions on the volume of different drinks (ml).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     
@@ -169,16 +170,15 @@ and if so, how much of each was drunk.</p>
 <li><p>total_units7_ch - total units drunk in last 7 days</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>We estimate the number of
 UK standard units of alcohol drunk in the last 7 days by using the data on how many of what size measures of
 different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content.</p>
+
 <p>MISSING DATA</p>
 <p>Normally, if one of the constituent variables was missing, the whole variable would be marked as missing.
 However, due to high missingness, we just assume any missing = 0, and so are likely to make underestimates.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

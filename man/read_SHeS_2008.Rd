@@ -4,8 +4,11 @@
 \alias{read_SHeS_2008}
 \title{Read Scottish Health Survey 2008}
 \usage{
-read_SHeS_2008(root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab")
+read_SHeS_2008(
+  root = c("X:/", "/Volumes/Shared/"),
+ 
+    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -59,7 +62,8 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2008 <- read_SHeS_2008("X:/", "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab")
+data_2008 <- read_SHeS_2008("X:/", 
+"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab")
 
 }
 

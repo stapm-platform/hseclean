@@ -4,7 +4,9 @@
 \name{abv_data}
 \alias{abv_data}
 \title{Alcohol content assumptions}
-\format{A data table}
+\format{
+A data table
+}
 \source{
 Natcen assumptions supplemented with market research data and figures from academic publications.
 }

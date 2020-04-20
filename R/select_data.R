@@ -10,7 +10,7 @@
 #' @param years Integer vector - the years in single years to retain (defaults to 2001 to 2016).
 #' @param keep_vars Character vector - the names of the variables to keep.
 #' @param complete_vars Character vector - the names of the variables on which the selection of complete cases will be based.
-#'
+#' @importFrom data.table :=
 #' @return Returns a reduced version of data
 #' @export
 #'
@@ -32,7 +32,7 @@ select_data <- function(
 
   keep_vars <- intersect(names(data), keep_vars)
   
-  data <- data[ , ..keep_vars]
+  data <- data[ , keep_vars, with = F]
 
   for(cv in complete_vars) {
 

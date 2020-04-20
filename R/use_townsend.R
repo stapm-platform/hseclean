@@ -8,21 +8,26 @@
 #' @param data Data table - the Health Survey for England dataset
 #' @param imdq_to_townsend_map Data table - laid out as a matrix that gives the probability that someone from each IMD quintile
 #' will be in each Townsend quintile.
-#'
+#' @importFrom data.table :=
 #' @return Returns a re-sampled version of the Health Survey for England data,
 #' in which each data point is duplicated 5 times (once for each Townsend quintile) and the survey weights adjusted accordingly.
 #' @export
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' kn <- 1e3
 #'
-#' test_data <- data.table(
-#'   imd_quintile = sample(c("5_most_deprived", "4", "3", "2", "1_least_deprived"), kn, replace = T),
+#' test_data <- data.table::data.table(
+#'   imd_quintile = 
+#'     sample(c("5_most_deprived", "4", "3", "2", "1_least_deprived"), 
+#'     kn, 
+#'     replace = TRUE),
 #'   wt_int = runif(kn)
 #' )
 #'
 #' data_with_townsend <- use_townsend(test_data)
+#' }
 #'
 use_townsend <- function(
   data,
@@ -49,14 +54,14 @@ use_townsend <- function(
 
   keepvars <- colnames(data)[!(colnames(data) %in% c(paste0("townsend", 1:5)))]
 
-  data <- melt(data, id.vars = keepvars, value.name = "wt_int1", variable.name = "townsend_quintile")
+  data <- data.table::melt(data, id.vars = keepvars, value.name = "wt_int1", variable.name = "townsend_quintile")
 
   wt2 <- sum(data$wt_int1)
 
   if(wt1 != wt2) warning("Expansion by Townsend has changed the sum of the survey weights")
 
   data[ , wt_int := NULL]
-  setnames(data, "wt_int1", "wt_int")
+  data.table::setnames(data, "wt_int1", "wt_int")
 
 return(data)
 }

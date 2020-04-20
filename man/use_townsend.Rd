@@ -23,13 +23,18 @@ the Townsend Index from the 2001 census.
 }
 \examples{
 
+\dontrun{
 kn <- 1e3
 
-test_data <- data.table(
-  imd_quintile = sample(c("5_most_deprived", "4", "3", "2", "1_least_deprived"), kn, replace = T),
+test_data <- data.table::data.table(
+  imd_quintile = 
+    sample(c("5_most_deprived", "4", "3", "2", "1_least_deprived"), 
+    kn, 
+    replace = TRUE),
   wt_int = runif(kn)
 )
 
 data_with_townsend <- use_townsend(test_data)
+}
 
 }

@@ -19,7 +19,7 @@
 #' qualification or not. Here a degree is defined as an "NVQ4/NVQ5/Degree or equiv".
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return Returns an updated version of data with the new education variables:
 #' \itemize{
 #' \item eduend4cat - 4 categories of when finished education,

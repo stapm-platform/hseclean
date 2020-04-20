@@ -45,7 +45,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -71,12 +71,12 @@ read_2006 <- function(
   ##################################################################################
   # General population
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
 
   alc_vars <- colnames(data[ , 730:801])
   smk_vars <- colnames(data[ , 1689:1762])
@@ -103,9 +103,9 @@ read_2006 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
-  setnames(data, c("imd2004", "d7unit", "marstatc", "ethinda"),
+  data.table::setnames(data, c("imd2004", "d7unit", "marstatc", "ethinda"),
            c("qimd", "d7unitwg", "marstat", "ethnicity_raw"))
 
   data[ , psu := paste0("2006_", psu)]

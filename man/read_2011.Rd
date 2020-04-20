@@ -4,8 +4,10 @@
 \alias{read_2011}
 \title{Read HSE 2011}
 \usage{
-read_2011(root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab")
+read_2011(
+  root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -74,7 +76,8 @@ home who could not participate in the nurse schedule.
 
 \dontrun{
 
-data_2011 <- read_2011("X:/", "ScHARR/PR_Consumption_TA/HSE/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab")
+data_2011 <- read_2011("X:/", 
+"ScHARR/PR_Consumption_TA/HSE/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab")
 
 }
 

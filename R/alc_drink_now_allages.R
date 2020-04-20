@@ -10,7 +10,7 @@
 #' supplemented by responses to if currently drinks or if always non-drinker.
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item drinks_now (drinker, non_drinker).

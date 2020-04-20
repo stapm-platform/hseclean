@@ -11,7 +11,7 @@
 #'  This variable is created for adults aged >= 16 years, and children aged 8-15 years.
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return Returns two smoking variables:
 #' \itemize{
 #' \item cig_smoker_status - current, former, never

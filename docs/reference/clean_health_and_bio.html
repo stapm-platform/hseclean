@@ -8,10 +8,12 @@
 
 <title>Health and biometric variables — clean_health_and_bio • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,10 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Health and biometric variables — clean_health_and_bio" />
-
 <meta property="og:description" content="Cleans data on presence/absence of certain categories of health condition, and on height and weight." />
-
 
 
 
@@ -111,7 +112,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -133,13 +133,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Cleans data on presence/absence of certain categories of health condition, and on height and weight.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>clean_health_and_bio</span>(<span class='no'>data</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -148,13 +146,12 @@
       <td><p>The Health Survey for England dataset.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns an updated version of data with a separate variable indicating the presence/absence of each
 health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
 hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cleaned height and weight:</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>HEATH CONDITIONS</p>
@@ -179,7 +176,6 @@ hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cl
 <p>HEIGHT AND WEIGHT</p>
 <p>Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
  replaced by the mean height and weight for each age, sex and IMD quintile.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

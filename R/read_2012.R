@@ -37,7 +37,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -51,7 +51,8 @@
 #'
 #' \dontrun{
 #'
-#' data_2012 <- read_2012("X:/", "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab")
+#' data_2012 <- read_2012("X:/", 
+#' "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab")
 #'
 #' }
 #'
@@ -63,12 +64,12 @@ read_2012 <- function(
   ##################################################################################
   # General population
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
 
   alc_vars <- colnames(data[ , 502:652])
   smk_vars <- colnames(data[ , 2117:2254])
@@ -96,9 +97,9 @@ read_2012 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
-  setnames(data, c("marstatc", "origin", paste0("complst", 1:14)), c("marstat", "ethnicity_raw", paste0("compm", 1:14)))
+  data.table::setnames(data, c("marstatc", "origin", paste0("complst", 1:14)), c("marstat", "ethnicity_raw", paste0("compm", 1:14)))
 
   data[ , psu := paste0("2012_", psu)]
   data[ , cluster := paste0("2012_", cluster)]

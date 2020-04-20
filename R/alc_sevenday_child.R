@@ -18,8 +18,8 @@
 #'
 #' @param data Data table - the Health Survey for England dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
-#' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#'
+#' @param alc_volume_data Data table - our assumptions on the volume of different drinks (ml).
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item total_units7_ch - total units drunk in last 7 days

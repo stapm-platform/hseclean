@@ -13,7 +13,7 @@
 #'  for our modelling.
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return Returns an updated version of data with the new age variables: age in single years, age in the categories above,
 #' and birth cohort.
 #'

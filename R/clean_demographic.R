@@ -27,7 +27,7 @@
 #' On the basis of this, only the 2 level variable (white/non-white) has been created for all years for Scotland.
 #'
 #' @param data Data table - the Health Survey for England/Scotland Health Survey dataset.
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item ethnicity_4cat: 4 level variable (see above).

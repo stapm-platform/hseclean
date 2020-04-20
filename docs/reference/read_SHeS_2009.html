@@ -8,10 +8,12 @@
 
 <title>Read Scottish Health Survey 2009 — read_SHeS_2009 • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,10 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Read Scottish Health Survey 2009 — read_SHeS_2009" />
-
 <meta property="og:description" content="Reads and does basic cleaning on the Scottish Health Survey 2009." />
-
 
 
 
@@ -111,7 +112,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -133,14 +133,15 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Reads and does basic cleaning on the Scottish Health Survey 2009.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>read_SHeS_2009</span>(<span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab"</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>read_SHeS_2009</span>(
+  <span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
+
+    <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab"</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -153,7 +154,7 @@
       <td><p>Character - the file path and name.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a data table. Note that:</p>
@@ -166,7 +167,6 @@
 <li><p>The probabilistic sampling unit have the year appended to them.</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The Scottish Health Survey is designed to yield a representative sample of the general population
@@ -176,6 +176,7 @@ comprising of</p><ul>
 <li><p>4,312 addresses formed an additional child booster sample,</p></li>
 <li><p>768 addresses formed the Health Board boost.</p></li>
 </ul>
+
 
 <p>MISSING VALUES</p>
 <ul>
@@ -190,7 +191,6 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 <li><p>-9 No answer/ Refused</p></li>
 </ul>
 
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

@@ -14,8 +14,8 @@
 #'
 #' @param data Data table - the health survey dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
-#' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#'
+#' @param alc_volume_data Data table - our assumptions on the volume of different drinks (ml).
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item n_days_drink - number of days drank in last 7.

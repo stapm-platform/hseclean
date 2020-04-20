@@ -4,8 +4,11 @@
 \alias{read_SHeS_2015}
 \title{Read Scottish Health Survey 2015}
 \usage{
-read_SHeS_2015(root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2015/UKDA-8100-tab/tab/shes15i_archive_v1.tab")
+read_SHeS_2015(
+  root = c("X:/", "/Volumes/Shared/"),
+ 
+    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2015/UKDA-8100-tab/tab/shes15i_archive_v1.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -29,7 +32,8 @@ Reads and does basic cleaning on the Scottish Health Survey 2015.
 }
 \details{
 The Scottish Health Survey is designed to yield a representative sample of the general population
-living in private households in Scotland every year.
+living in private households in Scotland every year. 
+
 
 MISSING VALUES
 
@@ -49,7 +53,8 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2015 <- read_SHeS_2015("X:/", "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2015/UKDA-8100-tab/tab/shes15i_archive_v1.tab")
+data_2015 <- read_SHeS_2015("X:/", 
+"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2015/UKDA-8100-tab/tab/shes15i_archive_v1.tab")
 
 }
 

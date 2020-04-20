@@ -39,9 +39,9 @@ There are a set of 14 categories of conditions that are ascertained consistently
  \item Blood and related organs condition
  }
 
-HEIGHT AND WEIGHT
+ HEIGHT AND WEIGHT
 
-Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
+ Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
  replaced by the mean height and weight for each age, sex and IMD quintile.
 }
 \examples{

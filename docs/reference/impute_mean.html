@@ -8,10 +8,12 @@
 
 <title>Fills missing values with subgroup mean value — impute_mean • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,11 +38,10 @@
 
 
 
-<meta property="og:title" content="Fills missing values with subgroup mean value — impute_mean" />
 
+<meta property="og:title" content="Fills missing values with subgroup mean value — impute_mean" />
 <meta property="og:description" content="Replaces any values &amp;lt; 0 with NA, calculates the subgroup mean,
 then replaces missing values with the subgroup mean." />
-
 
 
 
@@ -112,7 +113,6 @@ then replaces missing values with the subgroup mean." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -134,15 +134,17 @@ then replaces missing values with the subgroup mean." />
     </div>
 
     <div class="ref-description">
-    
     <p>Replaces any values &lt; 0 with NA, calculates the subgroup mean,
 then replaces missing values with the subgroup mean.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>impute_mean</span>(<span class='no'>data</span>, <span class='no'>var_names</span>, <span class='kw'>remove_zeros</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>strat_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"age_cat"</span>))</pre>
-    
+    <pre class="usage"><span class='fu'>impute_mean</span>(
+  <span class='no'>data</span>,
+  <span class='no'>var_names</span>,
+  <span class='kw'>remove_zeros</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>strat_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"age_cat"</span>)
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -163,17 +165,15 @@ then replaces missing values with the subgroup mean.</p>
       <td><p>Character vector - the variables by which to stratify the subgroup means</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns an updated version of data in which the variables specified have had
 their missing values imputed with the subgroup means.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If not all NAs can be imputed with the fine scale starting amount of stratification,
 imputation is attempted again, removing the stratification variable specified last.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

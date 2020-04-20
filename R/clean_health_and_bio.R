@@ -32,7 +32,7 @@
 #'
 #'
 #' @param data The Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return Returns an updated version of data with a separate variable indicating the presence/absence of each
 #' health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
 #' hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cleaned height and weight: 

@@ -8,6 +8,8 @@ clean_surveyweights(data, pop_data = hseclean::pop_counts)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset}
+
+\item{pop_data}{Data table - population counts}
 }
 \value{
 Returns data with survey weights updated

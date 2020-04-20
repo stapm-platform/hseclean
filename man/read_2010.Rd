@@ -4,8 +4,10 @@
 \alias{read_2010}
 \title{Read HSE 2010}
 \usage{
-read_2010(root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2010/UKDA-6986-tab/tab/hse10ai.tab")
+read_2010(
+  root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2010/UKDA-6986-tab/tab/hse10ai.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}

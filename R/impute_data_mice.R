@@ -10,7 +10,7 @@
 #' @param var_methods Character vector - the names of the statistical methods to be used to predict each of
 #' the above variables - see the mice documentation.
 #' @param n_imputations Integer - the number of different versions of the imputed data to produce.
-#'
+#' @importFrom data.table :=
 #' @return Returns a list containing
 #' \itemize{
 #' \item{data} All versions of the multiply imputed data in a single data table.
@@ -84,7 +84,7 @@ impute_data_mice <- function(
 
     } else {
 
-      imputed_data <- rbindlist(list(imputed_data, copy(imp)), use.names = T)
+      imputed_data <- data.table::rbindlist(list(imputed_data, copy(imp)), use.names = T)
 
     }
 

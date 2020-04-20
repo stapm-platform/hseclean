@@ -68,7 +68,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -92,7 +92,7 @@ read_2002 <- function(
   file = "ScHARR/PR_Consumption_TA/HSE/HSE 2002/UKDA-4912-tab/tab/hse02ai.tab"
 ) {
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
@@ -125,9 +125,9 @@ read_2002 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
-  setnames(data,
+  data.table::setnames(data,
 
            c("area", "nimd", "d7unit", "child_wt", "marstatb", "ethnici",
              "nberf", "sberf", "spirf", "sherf", "winef", "popsf",

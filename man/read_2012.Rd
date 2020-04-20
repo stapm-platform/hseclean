@@ -4,8 +4,10 @@
 \alias{read_2012}
 \title{Read HSE 2012}
 \usage{
-read_2012(root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab")
+read_2012(
+  root = c("X:/", "/Volumes/Shared/"),
+  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -60,7 +62,8 @@ usually because of internal routing. For example, men in women only questions.
 
 \dontrun{
 
-data_2012 <- read_2012("X:/", "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab")
+data_2012 <- read_2012("X:/", 
+"ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab")
 
 }
 

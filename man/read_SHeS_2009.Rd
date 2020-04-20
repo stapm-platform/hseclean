@@ -4,8 +4,11 @@
 \alias{read_SHeS_2009}
 \title{Read Scottish Health Survey 2009}
 \usage{
-read_SHeS_2009(root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab")
+read_SHeS_2009(
+  root = c("X:/", "/Volumes/Shared/"),
+ 
+    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab"
+)
 }
 \arguments{
 \item{root}{Character - the root directory.}
@@ -37,6 +40,7 @@ comprising of
 \item 768 addresses formed the Health Board boost.
 }
 
+
 MISSING VALUES
 
 \itemize{
@@ -55,7 +59,8 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2009 <- read_SHeS_2009("X:/", "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab")
+data_2009 <- read_SHeS_2009("X:/", 
+"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab")
 
 }
 

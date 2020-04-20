@@ -21,7 +21,7 @@
 #' }
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item employ2cat: "employed", "unemployed"

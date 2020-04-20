@@ -21,7 +21,7 @@ combine_years <- function(
   data_list
 ) {
 
-  data <- rbindlist(data_list, use.names = T, fill = T)
+  data <- data.table::rbindlist(data_list, use.names = T, fill = T)
 
 return(data)
 }

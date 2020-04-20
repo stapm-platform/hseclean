@@ -9,7 +9,8 @@
 #' @param levels_1 Character vector - the levels that should be assigned 1 in the binary variable
 #' @param levels_0 Character vector - the levels that should be assigned 0 in the binary variable
 #' @param strat_vars Character vector - the variables by which to stratify the estimates
-#'
+#' @importFrom data.table :=
+#' @importFrom survey svymean
 #' @return Returns the estimate and standard error.
 #
 #' @export
@@ -19,7 +20,7 @@
 #' \dontrun{
 #'
 #' prop_smokers <- prop_summary(
-#'   data = hse_data,
+#'   data = data,
 #'   var_name = "cig_smoker_status",
 #'   levels_1 = "current",
 #'   levels_0 = c("former", "never"),
@@ -65,9 +66,9 @@ prop_summary <- function(
 
   rownames(prop_data) <- NULL
 
-  setDT(prop_data)
+  data.table::setDT(prop_data)
 
-  setnames(prop_data, "bin_var", var_name)
+  data.table::setnames(prop_data, "bin_var", var_name)
 
 return(prop_data)
 }

@@ -18,7 +18,7 @@
 #' deal with the changing definitions of benefits over time.
 #'
 #' @param data Data table - the Health Survey for England dataset.
-#'
+#' @importFrom data.table :=
 #' @return
 #' \itemize{
 #' \item income5cat: quintiles of equivalised household income.

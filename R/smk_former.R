@@ -11,7 +11,7 @@
 #' For adults, we fill missing values with the average value for each age, sex and IMD quintile subgroup.
 #'
 #' @param data Data table - the Health Survey for England data.
-#'
+#' @importFrom data.table :=
 #' @return Returns an updated data table with:
 #' \itemize{
 #' \item years_since_quit

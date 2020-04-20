@@ -42,7 +42,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -56,7 +56,8 @@
 #'
 #' \dontrun{
 #'
-#' data_2015 <- read_2015("X:/", "ScHARR/PR_Consumption_TA/HSE/HSE 2015/UKDA-8280-tab/tab/hse2015ai.tab")
+#' data_2015 <- read_2015("X:/", 
+#' "ScHARR/PR_Consumption_TA/HSE/HSE 2015/UKDA-8280-tab/tab/hse2015ai.tab")
 #'
 #' }
 #'
@@ -68,12 +69,12 @@ read_2015 <- function(
   ##################################################################################
   # General population
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
 
   alc_vars <- colnames(data[ , 1542:1708])
   smk_vars <- colnames(data[ , 1302:1540])
@@ -100,9 +101,9 @@ read_2015 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
-  setnames(data,
+  data.table::setnames(data,
            c("qrtint", "cluster_adults", "marstatd", "origin2", "activb2", paste0("complst", 1:14)),
            c("quarter", "cluster", "marstat", "ethnicity_raw", "activb", paste0("compm", 1:14)))
 

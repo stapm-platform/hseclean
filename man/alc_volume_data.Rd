@@ -4,7 +4,9 @@
 \name{alc_volume_data}
 \alias{alc_volume_data}
 \title{Beverage volume assumptions}
-\format{A data table}
+\format{
+A data table
+}
 \source{
 Natcen assumptions supplemented with market research data and figures from academic publications.
 }

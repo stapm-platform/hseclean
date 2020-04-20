@@ -23,7 +23,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #'
 #' \itemize{
@@ -40,21 +40,23 @@
 #'
 #' \dontrun{
 #'
-#' data_2016 <- read_SHeS_2016("X:/", "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab")
+#' data_2016 <- read_SHeS_2016("X:/", 
+#' "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab")
 #'
 #' }
 #'
 read_SHeS_2016 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab"
+  file = 
+    "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab"
 ) {
   
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
   )
   
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
   
   alc_vars <- Hmisc::Cs(
     # alc_drink_now_allages
@@ -137,9 +139,9 @@ read_SHeS_2016 <- function(
   
   names <- tolower(names)
   
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
   
-  setnames(data,
+  data.table::setnames(data,
            
            c("simd16_rpa", "strata", "ethnic05",
              "cigregs",

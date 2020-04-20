@@ -13,7 +13,7 @@
 #' @param var_names Character vector - the variable names to be imputed
 #' @param remove_zeros Logical - should zeros be treated as missing data
 #' @param strat_vars Character vector - the variables by which to stratify the subgroup means
-#'
+#' @importFrom data.table :=
 #' @return Returns an updated version of data in which the variables specified have had
 #' their missing values imputed with the subgroup means.
 #' @export

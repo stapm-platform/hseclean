@@ -34,7 +34,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -48,7 +48,8 @@
 #'
 #' \dontrun{
 #'
-#' data_2014 <- read_2014("X:/", "ScHARR/PR_Consumption_TA/HSE/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab")
+#' data_2014 <- read_2014("X:/", 
+#' "ScHARR/PR_Consumption_TA/HSE/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab")
 #'
 #' }
 #'
@@ -60,12 +61,12 @@ read_2014 <- function(
   ##################################################################################
   # General population
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
 
   alc_vars <- colnames(data[ , 672:831])
   smk_vars <- colnames(data[ , 1714:1957])
@@ -93,9 +94,9 @@ read_2014 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
-  setnames(data, c("longend2", "marstatd", "age90", "origin3", paste0("complst", 1:14)), c("longend", "marstat", "age", "ethnicity_raw", paste0("compm", 1:14)))
+  data.table::setnames(data, c("longend2", "marstatd", "age90", "origin3", paste0("complst", 1:14)), c("longend", "marstat", "age", "ethnicity_raw", paste0("compm", 1:14)))
 
   data[ , psu := paste0("2014_", psu)]
   data[ , cluster := paste0("2014_", cluster)]

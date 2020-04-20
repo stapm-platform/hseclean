@@ -52,7 +52,7 @@
 #'
 #' @param root Character - the root directory.
 #' @param file Character - the file path and name.
-#'
+#' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
 #' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
@@ -78,12 +78,12 @@ read_2009 <- function(
   ##################################################################################
   # General population
 
-  data <- fread(
+  data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
   )
 
-  setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))
 
   alc_vars <- colnames(data[ , 396:471])
   smk_vars <- colnames(data[ , c(686:695, 921:1048)])
@@ -110,9 +110,9 @@ read_2009 <- function(
 
   names <- tolower(names)
 
-  data <- data[ , ..names]
+  data <- data[ , names, with = F]
 
-  setnames(data, c("imd2007", "marstatc", "origin"), c("qimd", "marstat", "ethnicity_raw"))
+  data.table::setnames(data, c("imd2007", "marstatc", "origin"), c("qimd", "marstat", "ethnicity_raw"))
 
   data[ , psu := paste0("2009_", psu)]
   data[ , cluster := paste0("2009_", cluster)]

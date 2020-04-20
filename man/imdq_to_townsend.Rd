@@ -4,7 +4,9 @@
 \name{imdq_to_townsend}
 \alias{imdq_to_townsend}
 \title{Probabilistic mapping of Index of Multiple Deprivation to Townsend quintiles}
-\format{A data table}
+\format{
+A data table
+}
 \source{
 See code in the data-raw folder of the hseclean package.
 }

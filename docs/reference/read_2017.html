@@ -8,10 +8,12 @@
 
 <title>Read HSE 2017 — read_2017 • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,10 +38,9 @@
 
 
 
+
 <meta property="og:title" content="Read HSE 2017 — read_2017" />
-
 <meta property="og:description" content="Reads and does basic cleaning on the Health Survey for England 2017." />
-
 
 
 
@@ -111,7 +112,6 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -133,14 +133,14 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Reads and does basic cleaning on the Health Survey for England 2017.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>read_2017</span>(<span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>read_2017</span>(
+  <span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
+  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -153,7 +153,7 @@
       <td><p>Character - the file path and name.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a data table. Note that:</p><ul>
@@ -163,7 +163,6 @@ except -8 ("don't know") as this is data.</p></li>
 <li><p>The cluster and probabilistic sampling unit have the year appended to them.</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The HSE 2017 sample comprised of a core general population sample. There was no boost sample in 2017.</p>
@@ -171,7 +170,6 @@ except -8 ("don't know") as this is data.</p></li>
 <p>Adults and children were interviewed at households identified at the selected addresses. Up to four children in each household were selected to take part at random; up to two aged 2 to 12 and up to two aged 13 to 15.</p>
 <p>A total of 7,997 adults aged 16 and over and 1,985 children aged 0-15 were interviewed, including 5,196 adults and 1,195 children who had a nurse visit.#'</p>
 <p>From 2015 HSE data contains the 2015 English index of multiple deprivation, divided into quintiles.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

@@ -8,10 +8,12 @@
 
 <title>Select variables and apply filters — select_data • hseclean</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,11 +38,10 @@
 
 
 
-<meta property="og:title" content="Select variables and apply filters — select_data" />
 
+<meta property="og:title" content="Select variables and apply filters — select_data" />
 <meta property="og:description" content="Selects the variables required for analysis and selects only the rows without missing data
 for specified variables." />
-
 
 
 
@@ -112,7 +113,6 @@ for specified variables." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
@@ -134,16 +134,18 @@ for specified variables." />
     </div>
 
     <div class="ref-description">
-    
     <p>Selects the variables required for analysis and selects only the rows without missing data
 for specified variables.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>select_data</span>(<span class='no'>data</span>, <span class='kw'>ages</span> <span class='kw'>=</span> <span class='fl'>8</span>:<span class='fl'>89</span>, <span class='kw'>years</span> <span class='kw'>=</span> <span class='fl'>2001</span>:<span class='fl'>2017</span>,
-  <span class='kw'>keep_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"age"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>), <span class='kw'>complete_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"age"</span>,
-  <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>))</pre>
-    
+    <pre class="usage"><span class='fu'>select_data</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>ages</span> <span class='kw'>=</span> <span class='fl'>8</span>:<span class='fl'>89</span>,
+  <span class='kw'>years</span> <span class='kw'>=</span> <span class='fl'>2001</span>:<span class='fl'>2017</span>,
+  <span class='kw'>keep_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"age"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>),
+  <span class='kw'>complete_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"age"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>)
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -168,11 +170,10 @@ for specified variables.</p>
       <td><p>Character vector - the names of the variables on which the selection of complete cases will be based.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a reduced version of data</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
