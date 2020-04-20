@@ -77,6 +77,8 @@ Please cite the latest version of the package using:
 hseclean: Health Survey Data Wrangling. R package version 0.3.4.
 <https://dosgillespie.github.io/hseclean/>. DOI: 10.5281/zenodo.3748784”
 
+-----
+
 Since you will be downloading and installing a source package, you might
 need to set your system up for building R packages:
 
@@ -92,6 +94,8 @@ of resources for building packages for R under Microsoft Windows, or for
 building R itself”. Go to
 <https://cran.r-project.org/bin/windows/Rtools/> and install as
 instructed.
+
+-----
 
 You can install the development version of `hseclean` from github with:
 
