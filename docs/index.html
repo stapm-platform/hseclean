@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
       </span>
     </div>
 
@@ -126,11 +126,15 @@
 <p>We would like to ask that since the code and documentation is still under development and is complex, that you consult with the authors before you use it.</p>
 <p>Please cite the latest version of the package using:<br>
 “Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020). hseclean: Health Survey Data Wrangling. R package version 0.3.4. <a href="https://dosgillespie.github.io/hseclean/" class="uri">https://dosgillespie.github.io/hseclean/</a>. DOI: 10.5281/zenodo.3748784”</p>
+<p>Since you will be downloading and installing a source package, you might need to set your system up for building R packages:</p>
+<p>It is a good idea to update R and all of your packages.</p>
+<p>Mac OS: A convenient way to get the tools needed for compilation is to install Xcode Command Line Tools. Note that this is much smaller than full Xcode. In a shell, enter xcode-select –install. For installing almost anything else, consider using <a href="https://brew.sh/">Homebrew</a>.</p>
+<p>Windows: Install Rtools. This is not an R package! It is “a collection of resources for building packages for R under Microsoft Windows, or for building R itself”. Go to <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a> and install as instructed.</p>
 <p>You can install the development version of <code>hseclean</code> from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co">#install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"dosgillespie/hseclean"</span>)</pre></div>
 <hr>
-<p>On Windows, there might be an error with <code>install_github()</code> due to long file paths (Windows has a limit on file path length). One possible work-around is</p>
+<p>If there is an error with <code>install_github()</code>, one possible work-around is</p>
 <ol>
 <li><p>Download the package “tarball” by copying this into your internet browser (making sure the numbers at the end indicate the latest version) <code>https://github.com/dosgillespie/hseclean/tarball/0.3.4</code>. When the window pops up, choose where to save the file. The file I downloaded was <code>dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz</code> and I saved it to Downloads.</p></li>
 <li><p>Go to the Terminal window in R Studio (or a console window in Windows by searching for “cmd”) and install the package from the downloaded file by typing <code>R CMD INSTALL Downloads/dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz</code>.</p></li>
