@@ -70,7 +70,7 @@ read_2014 <- function(
 
   alc_vars <- colnames(data[ , 672:831])
   smk_vars <- colnames(data[ , 1714:1957])
-  health_vars <- paste0("complst", 1:14)
+  health_vars <- paste0("complst", 1:15)
 
   other_vars <- Hmisc::Cs(
     mintb, addnum,
@@ -96,7 +96,7 @@ read_2014 <- function(
 
   data <- data[ , names, with = F]
 
-  data.table::setnames(data, c("longend2", "marstatd", "age90", "origin3", paste0("complst", 1:14)), c("longend", "marstat", "age", "ethnicity_raw", paste0("compm", 1:14)))
+  data.table::setnames(data, c("longend2", "marstatd", "age90", "origin3", paste0("complst", 1:15)), c("longend", "marstat", "age", "ethnicity_raw", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2014_", psu)]
   data[ , cluster := paste0("2014_", cluster)]

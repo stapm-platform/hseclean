@@ -78,7 +78,7 @@ read_2015 <- function(
 
   alc_vars <- colnames(data[ , 1542:1708])
   smk_vars <- colnames(data[ , 1302:1540])
-  health_vars <- paste0("complst", 1:14)
+  health_vars <- paste0("complst", 1:15)
 
   other_vars <- Hmisc::Cs(
     qrtint, addnum,
@@ -104,8 +104,8 @@ read_2015 <- function(
   data <- data[ , names, with = F]
 
   data.table::setnames(data,
-           c("qrtint", "cluster_adults", "marstatd", "origin2", "activb2", paste0("complst", 1:14)),
-           c("quarter", "cluster", "marstat", "ethnicity_raw", "activb", paste0("compm", 1:14)))
+           c("qrtint", "cluster_adults", "marstatd", "origin2", "activb2", paste0("complst", 1:15)),
+           c("quarter", "cluster", "marstat", "ethnicity_raw", "activb", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2015_", psu)]
   data[ , cluster := paste0("2015_", cluster)]

@@ -6,7 +6,7 @@
 #'
 #' HEATH CONDITIONS
 #'
-#' There are a set of 14 categories of conditions that are ascertained consistently across all years of the Heath Survey for England.
+#' There are a set of 15 categories of conditions that are ascertained consistently across all years of the Heath Survey for England.
 #'  These are:
 #'  \itemize{
 #'  \item Cancer
@@ -23,6 +23,7 @@
 #'  \item Musculo-skeletal condition
 #'  \item Infectious disease
 #'  \item Blood and related organs condition
+#'  \item Other
 #'  }
 #'
 #'  HEIGHT AND WEIGHT
@@ -38,7 +39,7 @@
 #' \itemize{
 #' \item Returns a variable indicating the presence/absence of each
 #' health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
-#' hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood).
+#' hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood, hse_other).
 #' \item height and weight.
 #' \item BMI (numeric)
 #' }
@@ -120,10 +121,12 @@ clean_health_and_bio <- function(
   data[compm14 == 0, hse_blood := "no_blood"]
   data[compm14 == 1, hse_blood := "blood"]
 
+  data[compm15 == 0, hse_other := "no_other"]
+  data[compm15 == 1, hse_other := "other"]
 
   # Remove variables no longer needed
   data[ , `:=`(compm1 = NULL, compm3 = NULL, compm4 = NULL, compm5 = NULL, compm6 = NULL)]
-  data[ , `:=`(paste0("compm", 8:14), NULL)]
+  data[ , `:=`(paste0("compm", 8:15), NULL)]
 
 
   ################################################################
@@ -140,7 +143,7 @@ clean_health_and_bio <- function(
   data[ , bmi := weight / ((.01 * height)^2)]
   
   
-return(data)
+return(data[])
 }
 
 

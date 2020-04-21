@@ -51,7 +51,7 @@ read_2017 <- function(
 
   alc_vars <- colnames(data[ , c(50, 61, 749:801, 925:969, 1180:1203, 1535:1578)])
   smk_vars <- colnames(data[ , c(19, 20, 44, 55, 62, 727:748, 905:924, 1019:1043, 1204:1332, 1579:1592)])
-  health_vars <- paste0("complst", 1:14)
+  health_vars <- paste0("complst", 1:15)
 
   other_vars <- Hmisc::Cs(
     qrtint, addnum,
@@ -77,8 +77,8 @@ read_2017 <- function(
   data <- data[ , names, with = F]
 
   data.table::setnames(data,
-           c("qrtint", "marstatd", "origin2", "activb2", "stwork", paste0("complst", 1:14)),
-           c("quarter", "marstat", "ethnicity_raw", "activb", "paidwk", paste0("compm", 1:14)))
+           c("qrtint", "marstatd", "origin2", "activb2", "stwork", paste0("complst", 1:15)),
+           c("quarter", "marstat", "ethnicity_raw", "activb", "paidwk", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2017_", psu)]
   data[ , cluster := paste0("2017_", cluster)]

@@ -66,7 +66,7 @@ read_2001 <- function(
 
   alc_vars <- colnames(data[ , 1656:1783])
   smk_vars <- colnames(data[ , 927:984])
-  health_vars <- paste0("compm", 1:14)
+  health_vars <- paste0("compm", 1:15)
 
   other_vars <- Hmisc::Cs(
 
