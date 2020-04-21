@@ -15,7 +15,7 @@ keep_vars <- c("wt_int", "psu", "cluster", "year", "quarter",
               "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
               "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
               
-              "weight", "height",
+              "weight", "height", "bmi", "bmi_4cat",
               
               "cig_smoker_status", "smk_start_age", "years_since_quit",
               "cigs_per_day", "smoker_cat",
@@ -57,7 +57,7 @@ data <- alc_weekmean_adult(data)
 data <- alc_sevenday_adult(data)
 data <- alc_sevenday_child(data)
   
-data <- select_data(data, ages = 12:89, years = year, keep_vars = keep_vars, complete_vars = complete_vars)
+data <- select_data(data, ages = 11:89, years = year, keep_vars = keep_vars, complete_vars = complete_vars)
 
 data <- clean_surveyweights(data)
 

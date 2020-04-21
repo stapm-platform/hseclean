@@ -28,15 +28,20 @@
 #'  HEIGHT AND WEIGHT
 #'
 #'  Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
-#'  replaced by the mean height and weight for each age, sex and IMD quintile.
+#'  replaced by the mean height and weight for each age, sex and IMD quintile. 
+#'  BMI is calculated according to kg / m^2. 
 #'
 #'
 #' @param data The Health Survey for England dataset.
 #' @importFrom data.table :=
-#' @return Returns an updated version of data with a separate variable indicating the presence/absence of each
+#' @return
+#' \itemize{
+#' \item Returns a variable indicating the presence/absence of each
 #' health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
-#' hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cleaned height and weight: 
-#' 
+#' hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood).
+#' \item height and weight.
+#' \item BMI (numeric)
+#' }
 #' @export
 #'
 #' @examples
@@ -126,11 +131,15 @@ clean_health_and_bio <- function(
 
   # Replace missing values for weight and height with the subgroup mean value
 
-  data <- impute_mean(data, c("wtval", "htval"), remove_zeros = T)
+  data <- hseclean::impute_mean(data, c("wtval", "htval"), remove_zeros = TRUE,
+                      strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
 
   setnames(data, c("wtval", "htval"), c("weight", "height"))
 
-
+  # Calculate BMI
+  data[ , bmi := weight / ((.01 * height)^2)]
+  
+  
 return(data)
 }
 

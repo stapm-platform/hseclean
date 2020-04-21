@@ -149,9 +149,15 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns an updated version of data with a separate variable indicating the presence/absence of each
+    
+<ul>
+<li><p>Returns a variable indicating the presence/absence of each
 health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
-hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cleaned height and weight:</p>
+hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood).</p></li>
+<li><p>height and weight.</p></li>
+<li><p>BMI (numeric and 4 categories)</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>HEATH CONDITIONS</p>
@@ -175,7 +181,9 @@ hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cl
 
 <p>HEIGHT AND WEIGHT</p>
 <p>Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
- replaced by the mean height and weight for each age, sex and IMD quintile.</p>
+ replaced by the mean height and weight for each age, sex and IMD quintile. 
+ BMI is calculated according to kg / m^2. 
+ BMI categories are calculated separately for adults &gt;= 20 years and children/teens.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

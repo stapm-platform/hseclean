@@ -10,9 +10,13 @@ clean_health_and_bio(data)
 \item{data}{The Health Survey for England dataset.}
 }
 \value{
-Returns an updated version of data with a separate variable indicating the presence/absence of each
+\itemize{
+\item Returns a variable indicating the presence/absence of each
 health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
-hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood), and cleaned height and weight:
+hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood).
+\item height and weight.
+\item BMI (numeric and 4 categories)
+}
 }
 \description{
 Cleans data on presence/absence of certain categories of health condition, and on height and weight.
@@ -42,7 +46,9 @@ There are a set of 14 categories of conditions that are ascertained consistently
  HEIGHT AND WEIGHT
 
  Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
- replaced by the mean height and weight for each age, sex and IMD quintile.
+ replaced by the mean height and weight for each age, sex and IMD quintile. 
+ BMI is calculated according to kg / m^2. 
+ BMI categories are calculated separately for adults >= 20 years and children/teens.
 }
 \examples{
 
