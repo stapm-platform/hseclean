@@ -14,7 +14,7 @@ smk_amount(data)
 \item cigs_per_day - numeric (0+)
 \item smoker_cat (non_smoker, 10_or_less, 11_to_20, 21_to_30, 31_or_more)
 \item banded_consumption (non_smoker, light, moderate, heavy)
-\item cig_type (non_smoker, tipped, plain_untipped, rollups)
+\item cig_type (non_smoker, hand rolled, machine rolled)
 \item time_to_first_cig (non_smoker, less_than_5_minutes, five_to_thirty_minutes,
 thirty_minutes_but_less_than_1_hour, one_hour_or_more)
 }
