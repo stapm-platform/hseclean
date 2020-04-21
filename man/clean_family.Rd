@@ -21,7 +21,7 @@ Process the data on the number of children in the household and the relationship
 status of each respondent.
 }
 \details{
-NUMBER OF CHILDREN IN THE HOUSEHOLD
+NUMBER OF CHILDREN AGE 0-15 YEARS IN THE HOUSEHOLD
 
 Categorised into: 0, 1, 2, 3+. The problem with the Health Survey for England is that from 2015 onwards,
 the number of children in the household is
