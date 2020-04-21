@@ -15,10 +15,10 @@ keep_vars <- c("wt_int", "psu", "cluster", "year", "quarter",
               "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
               "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
               
-              "weight", "height", "bmi", "bmi_4cat",
+              "weight", "height", "bmi",
               
               "cig_smoker_status", "smk_start_age", "years_since_quit",
-              "cigs_per_day", "smoker_cat",
+              "cigs_per_day", "smoker_cat", "giveup_smk",
               
               "drinks_now", 
               "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",

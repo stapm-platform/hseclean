@@ -58,13 +58,13 @@ Since you will be downloading and installing a source package, you might need to
 
 It is a good idea to update R and all of your packages.  
 
-Mac OS: A convenient way to get the tools needed for compilation is to install Xcode Command Line Tools. Note that this is much smaller than full Xcode. In a shell, enter xcode-select --install. For installing almost anything else, consider using [Homebrew](https://brew.sh/).      
+**Mac OS**: A convenient way to get the tools needed for compilation is to install Xcode Command Line Tools. Note that this is much smaller than full Xcode. In a shell, enter xcode-select --install. For installing almost anything else, consider using [Homebrew](https://brew.sh/).      
 
-Windows: Install Rtools. This is not an R package! It is “a collection of resources for building packages for R under Microsoft Windows, or for building R itself”. Go to https://cran.r-project.org/bin/windows/Rtools/ and install as instructed.     
+**Windows**: Install Rtools. This is not an R package! It is “a collection of resources for building packages for R under Microsoft Windows, or for building R itself”. Go to https://cran.r-project.org/bin/windows/Rtools/ and install as instructed.     
 
 ---
 
-You can install the development version of `hseclean` from github with:   
+You can **install the development version of `hseclean`** from github with:   
 
 ```{r gh_installation, message=FALSE, eval = FALSE}
 #install.packages("devtools")
@@ -200,11 +200,11 @@ cleandata <- function(data) {
                     "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
                     "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
                     
-                    "weight", "height",
+                    "weight", "height", "bmi",
                     
                     "cig_smoker_status", "years_since_quit", "years_reg_smoker", "cig_ever",
                     "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig",
-                    "smk_start_age", "smk_stop_age", "censor_age",
+                    "smk_start_age", "smk_stop_age", "censor_age", "giveup_smk",
                     
                     "drinks_now", 
                     "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",

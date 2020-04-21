@@ -129,10 +129,10 @@
 <hr>
 <p>Since you will be downloading and installing a source package, you might need to set your system up for building R packages:</p>
 <p>It is a good idea to update R and all of your packages.</p>
-<p>Mac OS: A convenient way to get the tools needed for compilation is to install Xcode Command Line Tools. Note that this is much smaller than full Xcode. In a shell, enter xcode-select –install. For installing almost anything else, consider using <a href="https://brew.sh/">Homebrew</a>.</p>
-<p>Windows: Install Rtools. This is not an R package! It is “a collection of resources for building packages for R under Microsoft Windows, or for building R itself”. Go to <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a> and install as instructed.</p>
+<p><strong>Mac OS</strong>: A convenient way to get the tools needed for compilation is to install Xcode Command Line Tools. Note that this is much smaller than full Xcode. In a shell, enter xcode-select –install. For installing almost anything else, consider using <a href="https://brew.sh/">Homebrew</a>.</p>
+<p><strong>Windows</strong>: Install Rtools. This is not an R package! It is “a collection of resources for building packages for R under Microsoft Windows, or for building R itself”. Go to <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a> and install as instructed.</p>
 <hr>
-<p>You can install the development version of <code>hseclean</code> from github with:</p>
+<p>You can <strong>install the development version of <code>hseclean</code></strong> from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co">#install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"dosgillespie/hseclean"</span>)</pre></div>
 <hr>
@@ -251,11 +251,11 @@
                     <span class="st">"hse_cancer"</span>, <span class="st">"hse_endocrine"</span>, <span class="st">"hse_heart"</span>, <span class="st">"hse_mental"</span>, <span class="st">"hse_nervous"</span>, <span class="st">"hse_eye"</span>, <span class="st">"hse_ear"</span>, <span class="st">"hse_respir"</span>,
                     <span class="st">"hse_disgest"</span>, <span class="st">"hse_urinary"</span>, <span class="st">"hse_skin"</span>, <span class="st">"hse_muscskel"</span>, <span class="st">"hse_infect"</span>, <span class="st">"hse_blood"</span>,
 
-                    <span class="st">"weight"</span>, <span class="st">"height"</span>,
+                    <span class="st">"weight"</span>, <span class="st">"height"</span>, <span class="st">"bmi"</span>,
 
                     <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span>, <span class="st">"years_reg_smoker"</span>, <span class="st">"cig_ever"</span>,
                     <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span>,
-                    <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"censor_age"</span>,
+                    <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"censor_age"</span>, <span class="st">"giveup_smk"</span>,
 
                     <span class="st">"drinks_now"</span>,
                     <span class="st">"drink_freq_7d"</span>, <span class="st">"n_days_drink"</span>, <span class="st">"peakday"</span>, <span class="st">"binge_cat"</span>,

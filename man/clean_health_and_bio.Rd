@@ -15,7 +15,7 @@ clean_health_and_bio(data)
 health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
 hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood).
 \item height and weight.
-\item BMI (numeric and 4 categories)
+\item BMI (numeric)
 }
 }
 \description{
@@ -47,8 +47,7 @@ There are a set of 14 categories of conditions that are ascertained consistently
 
  Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
  replaced by the mean height and weight for each age, sex and IMD quintile. 
- BMI is calculated according to kg / m^2. 
- BMI categories are calculated separately for adults >= 20 years and children/teens.
+ BMI is calculated according to kg / m^2.
 }
 \examples{
 

@@ -114,6 +114,11 @@
 <a href="#cigarette-smoking-status" class="anchor"></a>Cigarette smoking status</h2>
 <p>The function <code><a href="../reference/smk_status.html">smk_status()</a></code> categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers; people who have only tried a cigarette once or twice are classified as never smokers. We create a smoking status variable for children aged 8-15 years and adults aged &gt;= 16 years. Ever-smokers are people who are either current or former smokers.</p>
 </div>
+<div id="quitting" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quitting" class="anchor"></a>Quitting</h2>
+<p>The function <code><a href="../reference/smk_quit.html">smk_quit()</a></code> is in development, and will process the data on the motivation to quit smoking, the reasons for quitting smoking, and the support used to stop smoking. It currently produces only one variable - whether someone wants to quit smoking (y/n).</p>
+</div>
 <div id="former-smoking" class="section level2">
 <h2 class="hasAnchor">
 <a href="#former-smoking" class="anchor"></a>Former smoking</h2>
@@ -161,7 +166,7 @@
     <span class="co"># The variables to retain</span>
     <span class="kw">keep_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>,
                   <span class="st">"age"</span>, <span class="st">"age_cat"</span>, <span class="st">"censor_age"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>,
-                  <span class="st">"cig_smoker_status"</span>, <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"years_since_quit"</span>,
+                  <span class="st">"cig_smoker_status"</span>, <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"years_since_quit"</span>, <span class="st">"giveup_smk"</span>,
                   <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span>),
 
     <span class="co"># The variables that must have complete cases</span>

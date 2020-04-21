@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Health and biometric variables — clean_health_and_bio • hseclean</title>
+<title>Quitting smoking — smk_quit • hseclean</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Health and biometric variables — clean_health_and_bio" />
-<meta property="og:description" content="Cleans data on presence/absence of certain categories of health condition, and on height and weight." />
+<meta property="og:title" content="Quitting smoking — smk_quit" />
+<meta property="og:description" content="Cleans the data on the motivation to quit smoking and the use of support." />
 
 
 
@@ -127,70 +127,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Health and biometric variables</h1>
+    <h1>Quitting smoking</h1>
     
-    <div class="hidden name"><code>clean_health_and_bio.Rd</code></div>
+    <div class="hidden name"><code>smk_quit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Cleans data on presence/absence of certain categories of health condition, and on height and weight.</p>
+    <p>Cleans the data on the motivation to quit smoking and the use of support.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clean_health_and_bio</span>(<span class='no'>data</span>)</pre>
+    <pre class="usage"><span class='fu'>smk_quit</span>(<span class='no'>data</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>The Health Survey for England dataset.</p></td>
+      <td><p>Data table - the Health Survey for England data.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p>Returns a variable indicating the presence/absence of each
-health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
-hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood).</p></li>
-<li><p>height and weight.</p></li>
-<li><p>BMI (numeric)</p></li>
+    <p>Returns an updated data table with:</p><ul>
+<li><p>giveup_smk - whether a current smoker wants to quit smoking (yes, no).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>HEATH CONDITIONS</p>
-<p>There are a set of 14 categories of conditions that are ascertained consistently across all years of the Heath Survey for England.
- These are:</p><ul>
-<li><p>Cancer</p></li>
-<li><p>Endocrine or metabolic condition</p></li>
-<li><p>Mental health condition</p></li>
-<li><p>Nervous system condition</p></li>
-<li><p>Eye condition</p></li>
-<li><p>Ear condition</p></li>
-<li><p>Heart or circulatory system condition</p></li>
-<li><p>Respiratory condition</p></li>
-<li><p>Digestive condition</p></li>
-<li><p>Genito-urinary condition</p></li>
-<li><p>Skin condition</p></li>
-<li><p>Musculo-skeletal condition</p></li>
-<li><p>Infectious disease</p></li>
-<li><p>Blood and related organs condition</p></li>
-</ul>
-
-<p>HEIGHT AND WEIGHT</p>
-<p>Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
- replaced by the mean height and weight for each age, sex and IMD quintile. 
- BMI is calculated according to kg / m^2.</p>
+    <p>Only tested on England data
+Use of support not currently incorporated</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='no'>data_2001</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_2001.html'>read_2001</a></span>()
-
-<span class='no'>data_2001</span> <span class='kw'>&lt;-</span> <span class='fu'>clean_health_and_bio</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data_2001</span>)
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_2001.html'>read_2001</a></span>()
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>smk_quit</span>(<span class='no'>data</span>)
 
 }</div></pre>
   </div>

@@ -43,6 +43,9 @@ Questions about cigarette smoking have been asked of adults aged 16 and over as 
 ## Cigarette smoking status
 The function `smk_status()` categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers; people who have only tried a cigarette once or twice are classified as never smokers. We create a smoking status variable for children aged 8-15 years and adults aged >= 16 years. Ever-smokers are people who are either current or former smokers.    
 
+## Quitting
+The function `smk_quit()` is in development, and will process the data on the motivation to quit smoking, the reasons for quitting smoking, and the support used to stop smoking. It currently produces only one variable - whether someone wants to quit smoking (y/n).   
+
 ## Former smoking
 The function `smk_former()` cleans the data for former smokers on the time since quitting and time spent as a regular smoker. The main issue to overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using `num_sim()`. We then fill missing data for these variables as follows:   
 
@@ -86,7 +89,7 @@ cleandata <- function(data) {
     # The variables to retain
     keep_vars = c("wt_int", "psu", "cluster", "year", 
                   "age", "age_cat", "censor_age", "sex", "imd_quintile",
-                  "cig_smoker_status", "smk_start_age", "smk_stop_age", "years_since_quit",
+                  "cig_smoker_status", "smk_start_age", "smk_stop_age", "years_since_quit", "giveup_smk",
                   "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig"),
     
     # The variables that must have complete cases
