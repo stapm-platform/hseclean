@@ -113,7 +113,9 @@ A further education variable is also produced - which indicates whether an indiv
 The function `clean_family()` processes the data on the number of children in the household and the relationship status of each respondent.   
 
 ### Number of children in the household
-Categorised into: 0, 1, 2, 3+. The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see vignette(missing_data)).   
+This is the number of children aged 0-15 years. The variable is created by combining the HSE data on children and infants in the household. It is categorised into: 0, 1, 2, 3+.   
+
+The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see vignette(missing_data)).   
 
 ### Relationship status
 In previous versions of modelling for the Sheffield Alcohol Policy Model, relationship status has been described as married/not-married. Here, we include more detail by using:    
@@ -135,7 +137,7 @@ It would also be possible from the Health Survey for England to classify people 
 The function `clean_health_and_bio()` cleans data on presence/absence of certain categories of health condition, and on height and weight.  
 
 ## Health conditions
-There are a set of 14 categories of conditions that are ascertained consistently across all years of the HSE.  These are:   
+There are a set of 15 categories of long-lasting illnesses (occurring for or expected to last at least 12 months) that are ascertained consistently across all years of the HSE.  These are:   
 - Cancer  
 - Endocrine or metabolic condition  
 - Mental health condition  
@@ -149,7 +151,8 @@ There are a set of 14 categories of conditions that are ascertained consistently
 - Skin condition  
 - Musculo-skeletal condition  
 - Infectious disease  
-- Blood and related organs condition  
+- Blood and related organs condition    
+- Other complaints  
 
 ## Height and weight
 Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are replaced by the mean height and weight for each age, sex and IMD quintile.  BMI is calculated according to kg / m^2.  
