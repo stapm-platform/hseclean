@@ -47,6 +47,9 @@ smk_quit <- function(
     
   }
   
+  if(!("cig_smoker_status" %in% colnames(data))) message("oops, run smk_status() first")
+  
+  data[cig_smoker_status %in% c("never", "former"), giveup_smk := "non_smoker"]
   
   
 return(data[])
