@@ -24,7 +24,7 @@
 #' \item cigs_per_day - numeric (0+)
 #' \item smoker_cat (non_smoker, 10_or_less, 11_to_20, 21_to_30, 31_or_more)
 #' \item banded_consumption (non_smoker, light, moderate, heavy)
-#' \item cig_type (non_smoker, tipped, plain_untipped, rollups)
+#' \item cig_type (non_smoker, hand rolled, machine rolled)
 #' \item time_to_first_cig (non_smoker, less_than_5_minutes, five_to_thirty_minutes,
 #' thirty_minutes_but_less_than_1_hour, one_hour_or_more)
 #' }
@@ -125,9 +125,9 @@ smk_amount <- function(
   # This variable is the only question on cigarette type that is asked consistently across years
   if(country == "England"){
   data[cig_smoker_status %in% c("never", "former"), cig_type := "non_smoker"]
-  data[cig_smoker_status == "current" & cigtyp == 1, cig_type := "tipped"]
-  data[cig_smoker_status == "current" & cigtyp == 2, cig_type := "plain_untipped"]
-  data[cig_smoker_status == "current" & cigtyp == 3, cig_type := "rollups"]
+  data[cig_smoker_status == "current" & cigtyp == 1, cig_type := "machine_rolled"] # tipped
+  data[cig_smoker_status == "current" & cigtyp == 2, cig_type := "machine_rolled"] # untipped
+  data[cig_smoker_status == "current" & cigtyp == 3, cig_type := "hand_rolled"]
 
   ####################################################
   # Time from waking until smoking
