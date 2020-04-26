@@ -179,7 +179,9 @@ each year, e.g. `read_SHeS_2008()`.
 
 There are separate functions that focus on processing a different theme
 of socioeconomic, demographic and health variables. See
-`vignette("covariate_data")`.
+`vignette("covariate_data")`. Note that the order in which the cleaning
+functions are applied can matter - as some functions use variables that
+are cleaned by others.
 
 ``` r
 library(magrittr)
@@ -235,10 +237,10 @@ cleandata <- function(data) {
   
   data %<>%
     clean_age %>%
-    clean_family %>%
     clean_demographic %>% 
     clean_education %>%
     clean_economic_status %>%
+    clean_family %>%
     clean_income %>%
     clean_health_and_bio %>%
     smk_status %>%

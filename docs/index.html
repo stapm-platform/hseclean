@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
       </span>
     </div>
 
@@ -174,7 +174,7 @@
 <div id="processing-socioeconomic-demographic-and-health-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing-socioeconomic-demographic-and-health-variables" class="anchor"></a>Processing socioeconomic, demographic and health variables</h3>
-<p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code><a href="articles/covariate_data.html">vignette("covariate_data")</a></code>.</p>
+<p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code><a href="articles/covariate_data.html">vignette("covariate_data")</a></code>. Note that the order in which the cleaning functions are applied can matter - as some functions use variables that are cleaned by others.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
 
 <span class="no">temp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/read_2017.html">read_2017</a></span>(<span class="kw">root</span> <span class="kw">=</span> <span class="no">root_dir</span>) <span class="kw">%&gt;%</span>
@@ -222,10 +222,10 @@
 
   <span class="no">data</span> <span class="kw">%&lt;&gt;%</span>
     <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
-    <span class="no">clean_family</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_education</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_economic_status</span> <span class="kw">%&gt;%</span>
+    <span class="no">clean_family</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_income</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_health_and_bio</span> <span class="kw">%&gt;%</span>
     <span class="no">smk_status</span> <span class="kw">%&gt;%</span>

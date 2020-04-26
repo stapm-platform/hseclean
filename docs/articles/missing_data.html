@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
       </span>
     </div>
 
@@ -109,6 +109,7 @@
 </li>
 <li>Information on education, employment and socioeconomic status is triangulated across several variables.</li>
 </ul>
+<p>The number of children in the household is missing for years 2015+. This is imputed in the function <code><a href="../reference/clean_family.html">clean_family()</a></code> based on the fit of a multinomial model to years 2012-2014 (see <code><a href="../articles/covariate_data.html">vignette("covariate_data")</a></code>).</p>
 <p>The function <code><a href="../reference/select_data.html">select_data()</a></code> has the option to filter the data to retain only complete cases for certain variables. To prepare the data, the example code below filters out any incomplete data on key survey variables (age, sex, year, quarter, psu, cluster, imd_quintile). It also filters out any incomplete information on the key smoking and drinking variables, “cig_smoker_status” and “drinks_now”.</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Prepare the data by applying all cleaning functions </span>
 <span class="co"># and retaining all derived variables</span>
@@ -119,10 +120,10 @@
 
   <span class="no">data</span> <span class="kw">%&lt;&gt;%</span>
     <span class="no">clean_age</span> <span class="kw">%&gt;%</span>
-    <span class="no">clean_family</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_demographic</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_education</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_economic_status</span> <span class="kw">%&gt;%</span>
+    <span class="no">clean_family</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_income</span> <span class="kw">%&gt;%</span>
     <span class="no">clean_health_and_bio</span> <span class="kw">%&gt;%</span>
     <span class="no">smk_status</span> <span class="kw">%&gt;%</span>
@@ -198,7 +199,7 @@
 <div id="multiple-imputation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#multiple-imputation" class="anchor"></a>Multiple imputation</h1>
-<p>The variables with the most missingness in the data are income5cat (19% missing) and kids (14% missing). The missingness for children is mainly due to this variable not being reported in the non-secure version of the HSE from the year 2015. In this example, the other variables to be imputed are: ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.</p>
+<p>The variable with the most missingness in the data is income5cat (19% missing). In this example, the other variables to be imputed are: kids, ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.</p>
 <p>To conduct the multiple imputation, we use the R package <code>mice</code> <span class="citation">(Stef van Buuren and Karin Groothuis-Oudshoorn <a href="#ref-Rmice">2011</a>)</span>. The process of running the multiple imputation can take a long time and consume a lot of RAM. There is a range of <code>mice</code> documentation and tutorials online.</p>
 <p>In <code>hseclean</code>, multiple imputation is implemented in a basic way by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function.</p>
 <p><code>mice</code> fits a chained series of regression equations that predict the missing values of variables based on their relationships with other selected variables in the data. The <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function currently only imputes categorical variables, which could be one of three types: “logreg” - binary Logistic regression; “polr” - ordered Proportional odds model; “polyreg” - unordered Polytomous logistic regression.</p>

@@ -113,9 +113,11 @@ A further education variable is also produced - which indicates whether an indiv
 The function `clean_family()` processes the data on the number of children in the household and the relationship status of each respondent.   
 
 ### Number of children in the household
-This is the number of children aged 0-15 years. The variable is created by combining the HSE data on children and infants in the household. It is categorised into: 0, 1, 2, 3+.   
+`kids` is the number of children aged 0-15 years who live in the household. If a 3 year old lives in a household with 2 siblings, aged 6 and 8 years, then we might expect them to be recorded as living in a household with 3 children under age 15 years. The variable is created by combining the HSE data on children and infants in the household. It is categorised into: 0, 1, 2, 3+ children under age 15 years.   
 
-The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see vignette(missing_data)).   
+The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed.   
+
+We impute the number of children for years 2015+ automatically in the function `clean_family()`, based on the correlation between the number of children and a range of demographic and socioeconomic variables in 2012-2014, the last three years for which data on kids is available. This imputation is based on the fit of a multinomial model in `package(nnet)`. The model object is saved in the `hseclean` package as the object `hseclean::impute_kids_model`, and is drawn upon by the `clean_family()` function to impute the data as needed. This imputation won't work unless the required demographic and socio-economic variables have already been cleaned prior to running `clean_family()`. There will still be missing values in `kids` if there are missing values in the predictor variables required by the model. These missing values can be taken care of in a multiple imputation procedure (see vignette(missing_data)).     
 
 ### Relationship status
 In previous versions of modelling for the Sheffield Alcohol Policy Model, relationship status has been described as married/not-married. Here, we include more detail by using:    

@@ -91,10 +91,10 @@ There are separate functions to process each socioeconomic variables - detailed 
 
 temp <- read_2017(root = root_dir) %>%
   clean_age %>%
-  clean_family %>%
   clean_demographic %>% 
   clean_education %>%
   clean_economic_status %>%
+  clean_family %>%
   clean_income %>%
   clean_health_and_bio
 

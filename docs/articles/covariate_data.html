@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8</span>
       </span>
     </div>
 
@@ -198,8 +198,9 @@
 <div id="number-of-children-in-the-household" class="section level3">
 <h3 class="hasAnchor">
 <a href="#number-of-children-in-the-household" class="anchor"></a>Number of children in the household</h3>
-<p>This is the number of children aged 0-15 years. The variable is created by combining the HSE data on children and infants in the household. It is categorised into: 0, 1, 2, 3+.</p>
-<p>The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed (see vignette(missing_data)).</p>
+<p><code>kids</code> is the number of children aged 0-15 years who live in the household. If a 3 year old lives in a household with 2 siblings, aged 6 and 8 years, then we might expect them to be recorded as living in a household with 3 children under age 15 years. The variable is created by combining the HSE data on children and infants in the household. It is categorised into: 0, 1, 2, 3+ children under age 15 years.</p>
+<p>The problem with the Health Survey for England is that from 2015 onwards, the number of children in the household is not provided as this information could be identifiable (you can get it if you apply and pay for a secure dataset). Therefore, for years 2015+, the number of children in the household is completely missing and needs to be imputed.</p>
+<p>We impute the number of children for years 2015+ automatically in the function <code><a href="../reference/clean_family.html">clean_family()</a></code>, based on the correlation between the number of children and a range of demographic and socioeconomic variables in 2012-2014, the last three years for which data on kids is available. This imputation is based on the fit of a multinomial model in <code>package(nnet)</code>. The model object is saved in the <code>hseclean</code> package as the object <code><a href="../reference/impute_kids_model.html">hseclean::impute_kids_model</a></code>, and is drawn upon by the <code><a href="../reference/clean_family.html">clean_family()</a></code> function to impute the data as needed. This imputation won’t work unless the required demographic and socio-economic variables have already been cleaned prior to running <code><a href="../reference/clean_family.html">clean_family()</a></code>. There will still be missing values in <code>kids</code> if there are missing values in the predictor variables required by the model. These missing values can be taken care of in a multiple imputation procedure (see vignette(missing_data)).</p>
 </div>
 <div id="relationship-status" class="section level3">
 <h3 class="hasAnchor">

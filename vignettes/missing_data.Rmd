@@ -38,6 +38,8 @@ To prepare for the process that imputes missing data, run the full set of functi
 - If someone of any age is classified as a current smoker but has a missing value for the amount smoked, then we fill that missing value with the average amount smoked within a year, age, sex and IMD quintile subgroup.  
 - Information on education, employment and socioeconomic status is triangulated across several variables.  
 
+The number of children in the household is missing for years 2015+. This is imputed in the function `clean_family()` based on the fit of a multinomial model to years 2012-2014 (see `vignette("covariate_data")`).  
+
 The function `select_data()` has the option to filter the data to retain only complete cases for certain variables. To prepare the data, the example code below filters out any incomplete data on key survey variables (age, sex, year, quarter, psu, cluster, imd_quintile). It also filters out any incomplete information on the key smoking and drinking variables, "cig_smoker_status" and "drinks_now".    
 
 ```{r cleanhse, eval = F}
@@ -50,10 +52,10 @@ cleandata <- function(data) {
   
   data %<>%
     clean_age %>%
-    clean_family %>%
     clean_demographic %>% 
     clean_education %>%
     clean_economic_status %>%
+    clean_family %>%
     clean_income %>%
     clean_health_and_bio %>%
     smk_status %>%
@@ -128,7 +130,7 @@ data <- clean_surveyweights(data)
 ```
 
 # Multiple imputation
-The variables with the most missingness in the data are income5cat (19% missing) and kids (14% missing). The missingness for children is mainly due to this variable not being reported in the non-secure version of the HSE from the year 2015. In this example, the other variables to be imputed are: ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.   
+The variable with the most missingness in the data is income5cat (19% missing). In this example, the other variables to be imputed are: kids, ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.   
 
 To conduct the multiple imputation, we use the R package `mice` [@Rmice]. The process of running the multiple imputation can take a long time and consume a lot of RAM. There is a range of `mice` documentation and tutorials online.    
 

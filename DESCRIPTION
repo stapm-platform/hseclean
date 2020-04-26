@@ -1,6 +1,6 @@
 Package: hseclean
 Title: Health Survey Data Wrangling
-Version: 0.3.7
+Version: 0.3.8
 Authors@R: 
     c(
     person(given = "Duncan",
@@ -30,10 +30,13 @@ Imports:
     stringr,
     magrittr,
     data.table,
-    survey
+    survey,
+    nnet
 RoxygenNote: 7.1.0
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 2.1.0)
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
