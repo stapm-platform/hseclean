@@ -50,7 +50,7 @@ The **output** of these processes is a cleaned dataset that is ready for further
 We would like to ask that since the code and documentation is still under development and is complex, that you consult with the authors before you use it.    
 
 Please cite the latest version of the package using:  
-"Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020). hseclean: Health Survey Data Wrangling. R package version 0.3.4. https://dosgillespie.github.io/hseclean/. DOI: 10.5281/zenodo.3748784"   
+"Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020). hseclean: Health Survey Data Wrangling. R package version [x.x.x]. https://STAPM.github.io/hseclean/. DOI: 10.5281/zenodo.3748784"   
 
 ---
 
@@ -68,16 +68,16 @@ You can **install the development version of `hseclean`** from github with:
 
 ```{r gh_installation, message=FALSE, eval = FALSE}
 #install.packages("devtools")
-devtools::install_github("dosgillespie/hseclean")
+devtools::install_github("STAPM/hseclean")
 ```
 
 ---
 
 If there is an error with `install_github()`, one possible work-around is 
 
-1. Download the package "tarball" by copying this into your internet browser (making sure the numbers at the end indicate the latest version) `https://github.com/dosgillespie/hseclean/tarball/0.3.4`. When the window pops up, choose where to save the file. The file I downloaded was `dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz` and I saved it to Downloads.    
+1. Download the package "tarball" by copying this into your internet browser (making sure the numbers at the end indicate the latest version) e.g. `https://github.com/STAPM/hseclean/tarball/0.3.4`. When the window pops up, choose where to save the .tar.gz file.  
 
-2. Go to the Terminal window in R Studio (or a console window in Windows by searching for "cmd") and install the package from the downloaded file by typing `R CMD INSTALL Downloads/dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz`.  
+2. Go to the Terminal window in R Studio (or a console window in Windows by searching for "cmd") and install the package from the downloaded file by typing `R CMD INSTALL [file path]`.  
 
 ---
 

@@ -74,8 +74,8 @@ before you use it.
 
 Please cite the latest version of the package using:  
 “Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020).
-hseclean: Health Survey Data Wrangling. R package version 0.3.4.
-<https://dosgillespie.github.io/hseclean/>. DOI: 10.5281/zenodo.3748784”
+hseclean: Health Survey Data Wrangling. R package version \[x.x.x\].
+<https://STAPM.github.io/hseclean/>. DOI: 10.5281/zenodo.3748784”
 
 -----
 
@@ -102,7 +102,7 @@ with:
 
 ``` r
 #install.packages("devtools")
-devtools::install_github("dosgillespie/hseclean")
+devtools::install_github("STAPM/hseclean")
 ```
 
 -----
@@ -112,15 +112,12 @@ is
 
 1.  Download the package “tarball” by copying this into your internet
     browser (making sure the numbers at the end indicate the latest
-    version) `https://github.com/dosgillespie/hseclean/tarball/0.3.4`.
-    When the window pops up, choose where to save the file. The file I
-    downloaded was `dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz` and I
-    saved it to Downloads.
+    version) e.g. `https://github.com/STAPM/hseclean/tarball/0.3.4`.
+    When the window pops up, choose where to save the .tar.gz file.
 
 2.  Go to the Terminal window in R Studio (or a console window in
     Windows by searching for “cmd”) and install the package from the
-    downloaded file by typing `R CMD INSTALL
-    Downloads/dosgillespie-hseclean-0.3.4-0-g9864603.tar.gz`.
+    downloaded file by typing `R CMD INSTALL [file path]`.
 
 -----
 

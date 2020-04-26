@@ -7,8 +7,8 @@ articles:
   missing_data: missing_data.html
   scottish_data: scottish_data.html
   smoking_data: smoking_data.html
-last_built: 2020-04-26T18:07Z
+last_built: 2020-04-26T19:44Z
 urls:
-  reference: https://github.com/dosgillespie/hseclean/reference
-  article: https://github.com/dosgillespie/hseclean/articles
+  reference: https://github.com/STAPM/hseclean/reference
+  article: https://github.com/STAPM/hseclean/articles
 
