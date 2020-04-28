@@ -57,7 +57,7 @@ read_SHeS_2018 <- function(
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
   )
   
-  data.table::setnames(data, names(data), tolower(names(data)))
+  data.table::setnames(data, names(data), tolower(names(data)))#
 
   alc_vars <- Hmisc::Cs(    
     # alc_drink_now_allages
