@@ -50,7 +50,7 @@ The **output** of these processes is a cleaned dataset that is ready for further
 We would like to ask that since the code and documentation is still under development and is complex, that you consult with the authors before you use it.    
 
 Please cite the latest version of the package using:  
-"Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020). hseclean: Health Survey Data Wrangling. R package version [x.x.x]. https://STAPM.github.io/hseclean/. DOI: 10.5281/zenodo.3748784"   
+"Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020). hseclean: Health Survey Data Wrangling. R package version x.x.x. https://STAPM.github.io/hseclean/. DOI: 10.5281/zenodo.3748784"   
 
 ---
 
