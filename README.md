@@ -8,10 +8,11 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3748784.svg)](https://doi.org/10.5281/zenodo.3748784)
 
-The package is usable but there are still bugs and further developments
-that are being worked through i.e. some code and documentation is still
-incomplete or in need of being refined. The code and documentation are
-still undergoing internal review by the analyst team.
+**DRAFT WORKING VERSION** - The package is usable but there are still
+bugs and further developments that are being worked through i.e. some
+code and documentation is still incomplete or in need of being refined.
+The code and documentation are still undergoing internal review by the
+analyst team.
 
 ## Motivation
 
@@ -26,11 +27,14 @@ consumption behaviours.
 
 The original motivation for `hseclean` was to standardised the way that
 the Health Survey for England (HSE) data were cleaned and prepared for
-our analyses and inputs to our decision-analytic models. The suite of
-functions within `hseclean` reads the data for each year since 2001,
-renames, organises and processes the variables that we use for our
-analyses. The package also includes functions to multiply impute missing
-data, and to summarise data considering survey design.
+our analyses and inputs to our decision-analytic models. The
+[HSE](https://digital.nhs.uk/data-and-information/publications/statistical/health-survey-for-england)
+is a series of annual surveys covering health and health-related
+behaviours. The suite of functions within `hseclean` reads the data for
+each year since 2001, renames, organises and processes the variables
+that we use for our analyses. The package also includes functions to
+multiply impute missing data, and to summarise data considering survey
+design.
 
 We have subsequently added functions to process the Scottish Health
 Survey (SHeS) into a form that matches our processing of the Health
@@ -74,7 +78,7 @@ before you use it.
 
 Please cite the latest version of the package using:  
 “Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020).
-hseclean: Health Survey Data Wrangling. R package version \[x.x.x\].
+hseclean: Health Survey Data Wrangling. R package version x.x.x.
 <https://STAPM.github.io/hseclean/>. DOI: 10.5281/zenodo.3748784”
 
 -----
