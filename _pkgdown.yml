@@ -2,6 +2,8 @@ destination: docs
 home:
   title: Health Survey Data Wrangling
   links:
+  - text: STAPM webpage
+    href: https://stapm.github.io/
   - text: Browse source code
     href: https://github.com/STAPM/hseclean
   - text: Access data
