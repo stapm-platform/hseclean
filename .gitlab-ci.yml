@@ -1,7 +1,5 @@
 pages:
     stage: deploy
-    dependencies:
-        - testing
     script:
         - ls
     artifacts:
