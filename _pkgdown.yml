@@ -1,4 +1,4 @@
-destination: docs
+destination: public
 home:
   title: Health Survey Data Wrangling
   links:
