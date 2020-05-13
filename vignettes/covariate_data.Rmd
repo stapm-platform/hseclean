@@ -131,7 +131,7 @@ The function `clean_income()` processes the data on income.
 
 There are a few different options for classifying income - the need to have a measure that is consistent across years of the Health Survey for England has led us to use equivalised income quintiles only. (Past SAPM modelling has used years of the HSE for which a continous variable for equivalised income was provided - and calculated our own income groups - but in later years, this continuous income variable is not available.)       
 
-In the past SAPM modelling, a measure of in "poverty" vs. "not in poverty" has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty,  but being in poverty will coincide approximately with the lowest 2 income quintiles.    
+In the past SAPM modelling, a measure of in "poverty" vs. "not in poverty" has been used, where the poverty threshold is defined as 60\% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty,  but being in poverty will coincide approximately with the lowest 2 income quintiles.    
 
 It would also be possible from the Health Survey for England to classify people as being in receipt of benefits or not, but this is not currently implemented in `hseclean`, and would have to have some thought on how to deal with the changing definitions of benefits over time.   
 
