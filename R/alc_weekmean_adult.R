@@ -24,7 +24,9 @@
 #' @param data Data table - the Health Survey for England dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#' @importFrom data.table :=
+#' 
+#' @importFrom data.table := setnames
+#' 
 #' @return
 #' \itemize{
 #' \item beer_units - average weekly units of beer
@@ -63,7 +65,11 @@ alc_weekmean_adult <- function(
   abv_data = hseclean::abv_data,
   volume_data = hseclean::alc_volume_data
 ) {
+  
+  # Check that drinks_now variable is in the data
+  if(sum(colnames(data) == "drinks_now") == 0) message("missing drinks_now variable - run alc_drink_now_allages() first.")
 
+  
   year <- as.integer(unique(data[ , year][1]))
   country <- unique(data[ , country][1])
   
@@ -404,7 +410,7 @@ alc_weekmean_adult <- function(
 
     data[ , weekmean := spirit_units + wine_units + rtd_units + beer_units]
 
-    data[weekmean == 0, drinks_now := "non_drinker"]
+    #data[weekmean == 0, drinks_now := "non_drinker"]
     data[weekmean > 0, drinks_now := "drinker"]
 
     # generate preference vector
@@ -426,35 +432,35 @@ alc_weekmean_adult <- function(
     # Categorise total units per week
 
     data[ , drinker_cat := NA_character_]
-    data[weekmean == 0, drinker_cat := "abstainer"]
-    data[weekmean > 0 & weekmean < 14, drinker_cat := "lower_risk"]
-    data[weekmean > 0 & weekmean >= 14 & weekmean < 35 & sex == "Female", drinker_cat := "increasing_risk"]
-    data[weekmean > 0 & weekmean >= 14 & weekmean < 50 & sex == "Male", drinker_cat := "increasing_risk"]
-    data[weekmean > 0 & weekmean >= 35 & sex == "Female", drinker_cat := "higher_risk"]
-    data[weekmean > 0 & weekmean >= 50 & sex == "Male", drinker_cat := "higher_risk"]
+    data[drinks_now == "non_drinker", drinker_cat := "abstainer"]
+    data[drinks_now == "drinker" & weekmean < 14, drinker_cat := "lower_risk"]
+    data[drinks_now == "drinker" & weekmean >= 14 & weekmean < 35 & sex == "Female", drinker_cat := "increasing_risk"]
+    data[drinks_now == "drinker" & weekmean >= 14 & weekmean < 50 & sex == "Male", drinker_cat := "increasing_risk"]
+    data[drinks_now == "drinker" & weekmean >= 35 & sex == "Female", drinker_cat := "higher_risk"]
+    data[drinks_now == "drinker" & weekmean >= 50 & sex == "Male", drinker_cat := "higher_risk"]
 
 
     #################################################################
     # Categorise beverage preferences
 
     data[perc_spirit_units == 0, spirits_pref_cat := "does_not_drink_spirits"]
-    data[perc_spirit_units > 0 & perc_spirit_units <= .5, spirits_pref_cat := "drinks_some_spirits"]
-    data[perc_spirit_units > .5, spirits_pref_cat := "mostly_drinks_spirits"]
+    data[perc_spirit_units > 0 & perc_spirit_units <= 0.5, spirits_pref_cat := "drinks_some_spirits"]
+    data[perc_spirit_units > 0.5, spirits_pref_cat := "mostly_drinks_spirits"]
 
     data[perc_wine_units == 0, wine_pref_cat := "does_not_drink_wine"]
-    data[perc_wine_units > 0 & perc_wine_units <= .5, wine_pref_cat := "drinks_some_wine"]
-    data[perc_wine_units > .5, wine_pref_cat := "mostly_drinks_wine"]
+    data[perc_wine_units > 0 & perc_wine_units <= 0.5, wine_pref_cat := "drinks_some_wine"]
+    data[perc_wine_units > 0.5, wine_pref_cat := "mostly_drinks_wine"]
 
     data[perc_rtd_units == 0, rtd_pref_cat := "does_not_drink_rtds"]
-    data[perc_rtd_units > 0 & perc_rtd_units <= .5, rtd_pref_cat := "drinks_some_rtds"]
-    data[perc_rtd_units > .5, rtd_pref_cat := "mostly_drinks_rtds"]
+    data[perc_rtd_units > 0 & perc_rtd_units <= 0.5, rtd_pref_cat := "drinks_some_rtds"]
+    data[perc_rtd_units > 0.5, rtd_pref_cat := "mostly_drinks_rtds"]
 
     data[perc_beer_units == 0, beer_pref_cat := "does_not_drink_beer"]
-    data[perc_beer_units > 0 & perc_beer_units <= .5, beer_pref_cat := "drinks_some_beer"]
-    data[perc_beer_units > .5, beer_pref_cat := "mostly_drinks_beer"]
+    data[perc_beer_units > 0 & perc_beer_units <= 0.5, beer_pref_cat := "drinks_some_beer"]
+    data[perc_beer_units > 0.5, beer_pref_cat := "mostly_drinks_beer"]
 
   }
 
-return(data)
+return(data[])
 }
 
