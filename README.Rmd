@@ -51,11 +51,13 @@ Once that is sorted, you can **install the development version of `hseclean`** f
 
 ```{r gh_installation, message=FALSE, eval = FALSE}
 #install.packages("devtools")
+#install.packages("getPass")
 
 devtools::install_git(
   "https://gitlab.com/stapm/hseclean.git", 
   credentials = git2r::cred_user_pass("uname", getPass::getPass()),
-  ref = "x.x.x"
+  ref = "x.x.x",
+  build_vignettes = TRUE
 )
 
 # Where uname is your Gitlab user name.

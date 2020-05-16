@@ -126,11 +126,13 @@
 <p><code>hseclean</code> is currently available only to members of the project team (but please contact Duncan Gillespie <a href="mailto:duncan.gillespie@sheffield.ac.uk" class="email">duncan.gillespie@sheffield.ac.uk</a> to discuss). To access you need to <a href="https://gitlab.com/"><strong>sign-up for a GitLab account</strong></a>. You will then need to be added to the STAPM project team to gain access.</p>
 <p>Once that is sorted, you can <strong>install the development version of <code>hseclean</code></strong> from GitLab with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co">#install.packages("devtools")</span>
+<span class="co">#install.packages("getPass")</span>
 
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_git</a></span>(
   <span class="st">"https://gitlab.com/stapm/hseclean.git"</span>,
   <span class="kw">credentials</span> <span class="kw">=</span> <span class="kw pkg">git2r</span><span class="kw ns">::</span><span class="fu"><a href="https://docs.ropensci.org/git2r/reference/cred_user_pass.html">cred_user_pass</a></span>(<span class="st">"uname"</span>, <span class="kw pkg">getPass</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/getPass/man/getPass.html">getPass</a></span>()),
-  <span class="kw">ref</span> <span class="kw">=</span> <span class="st">"x.x.x"</span>
+  <span class="kw">ref</span> <span class="kw">=</span> <span class="st">"x.x.x"</span>,
+  <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>
 )
 
 <span class="co"># Where uname is your Gitlab user name.</span>
