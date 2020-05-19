@@ -20,6 +20,7 @@ Authors@R:
            role = c("aut"),
            email = "a.brennan@sheffield.ac.uk")
     )
+Maintainer: Duncan Gillespie <duncan.gillespie@sheffield.ac.uk>
 Description: Functions to read the data, rename, organise and process the variables required, impute missing data, and summarise data.
 License: GPL-3
 Encoding: UTF-8
