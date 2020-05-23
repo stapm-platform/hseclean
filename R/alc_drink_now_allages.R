@@ -63,44 +63,44 @@ alc_drink_now_allages <- function(
   if("adrinkof" %in% colnames(data)){
     
   # How often alcoholic drink
-  data[is.na(drinks_now) & adrinkof %in% 1:6, drinks_now := "drinker"]
-  data[is.na(drinks_now) & adrinkof == 7, drinks_now := "non_drinker"]
+  data[adrinkof %in% 1:6, drinks_now := "drinker"]
+  data[adrinkof == 7, drinks_now := "non_drinker"]
 
   # Assign drink frequency
-  data[is.na(drink_freq_7d) & adrinkof == 1, drink_freq_7d := 7]
-  data[is.na(drink_freq_7d) & adrinkof == 2, drink_freq_7d := 2]
-  data[is.na(drink_freq_7d) & adrinkof == 3, drink_freq_7d := 1]
-  data[is.na(drink_freq_7d) & adrinkof == 4, drink_freq_7d := .5]
-  data[is.na(drink_freq_7d) & adrinkof == 5, drink_freq_7d := .25]
-  data[is.na(drink_freq_7d) & adrinkof == 6, drink_freq_7d := 3 / 52]
+  data[adrinkof == 1, drink_freq_7d := 7]
+  data[adrinkof == 2, drink_freq_7d := 2]
+  data[adrinkof == 3, drink_freq_7d := 1]
+  data[adrinkof == 4, drink_freq_7d := .5]
+  data[adrinkof == 5, drink_freq_7d := .25]
+  data[adrinkof == 6, drink_freq_7d := 3 / 52]
 
   # If missing, supplement with When last had alcoholic drink
-  data[is.na(drinks_now) & adrlast %in% 1:6, drinks_now := "drinker"]
+  data[!(adrinkof %in% 1:7) & adrlast %in% 1:6, drinks_now := "drinker"]
 
   # Class 6 months ago or more as non-drinker
-  data[is.na(drinks_now) & adrlast == 7, drinks_now := "non_drinker"]
+  data[!(adrinkof %in% 1:7) & adrlast == 7, drinks_now := "non_drinker"]
   }
 
   # If separate section for 8-12 years (just 2001)
   if("cdrinkof" %in% colnames(data)) {
 
     # How often alcoholic drink
-    data[is.na(drinks_now) & cdrinkof %in% 1:6, drinks_now := "drinker"]
-    data[is.na(drinks_now) & cdrinkof == 7, drinks_now := "non_drinker"]
+    data[cdrinkof %in% 1:6, drinks_now := "drinker"]
+    data[cdrinkof == 7, drinks_now := "non_drinker"]
 
-    data[is.na(drink_freq_7d) & cdrinkof == 1, drink_freq_7d := 7]
-    data[is.na(drink_freq_7d) & cdrinkof == 2, drink_freq_7d := 2]
-    data[is.na(drink_freq_7d) & cdrinkof == 3, drink_freq_7d := 1]
-    data[is.na(drink_freq_7d) & cdrinkof == 4, drink_freq_7d := .5]
-    data[is.na(drink_freq_7d) & cdrinkof == 5, drink_freq_7d := .25]
-    data[is.na(drink_freq_7d) & cdrinkof == 6, drink_freq_7d := 3 / 52]
-    data[is.na(drink_freq_7d) & cdrinkof == -8, drink_freq_7d := NA]
+    data[cdrinkof == 1, drink_freq_7d := 7]
+    data[cdrinkof == 2, drink_freq_7d := 2]
+    data[cdrinkof == 3, drink_freq_7d := 1]
+    data[cdrinkof == 4, drink_freq_7d := .5]
+    data[cdrinkof == 5, drink_freq_7d := .25]
+    data[cdrinkof == 6, drink_freq_7d := 3 / 52]
+    data[cdrinkof == -8, drink_freq_7d := NA]
 
     # If missing, supplement with When last had alcoholic drink
-    data[is.na(drinks_now) & cdrlast %in% 1:6, drinks_now := "drinker"]
+    data[!(cdrinkof %in% 1:7) & cdrlast %in% 1:6, drinks_now := "drinker"]
 
     # Class 6 months ago or more as non-drinker
-    data[is.na(drinks_now) & cdrlast == 7, drinks_now := "non_drinker"]
+    data[!(cdrinkof %in% 1:7) & cdrlast == 7, drinks_now := "non_drinker"]
 
     data[ , `:=`(cdrinkof = NULL, cdrlast = NULL)]
 
