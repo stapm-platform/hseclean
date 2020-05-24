@@ -10,19 +10,25 @@ alc_drink_now_allages(data)
 \item{data}{Data table - the Health Survey for England dataset.}
 }
 \value{
-\itemize{
-\item drinks_now (drinker, non_drinker).
-\item drink_freq_7d (numerical variable calculated from categorical responses to how frequently someone drinks)
+\describe{
+\item{drinks_now}{Drank at all in the last 12 months (drinker, non_drinker).}      
+\item{drink_freq_7d}{Frequency of drinking in the last 7 days (numerical variable calculated from categorical responses to how frequently someone drinks).}       
+\item{adrinkweek}{Youth drinks at least once a week (yes, no).}
+\item{adrinkmonth}{Youth drinks at least once a month (yes, no).}   
+\item{adrinklastweek}{Youth drank in the last week (yes, no).}      
 }
 }
 \description{
 Clean the data on whether someone is a current drinker (drank in last 12 months)
-and if they did drink how frequently they did so.
+and if they did drink how frequently they did so. Several definitions are used for youth drinking (< 16 years).
 }
 \details{
-Combines information from adults and children. Someone is classed as a drinker even if they only reported
-drinking once or twice a year. Any missing data is
-supplemented by responses to if currently drinks or if always non-drinker.
+Combines information from adults and children. In general, someone is classed as a drinker even if they only reported
+drinking once or twice a year - which is a less strict definition than used by some other surveys. Any missing data is
+supplemented by responses to if currently drinks or if always non-drinker.   
+
+For youth drinking, variables are also created for: 
+drinks at least once a week, drinks at least once a month, and drank in the last week.
 }
 \examples{
 
