@@ -1,6 +1,6 @@
 Package: hseclean
 Title: Health Survey Data Wrangling
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: 
     c(
     person(given = "Duncan",
