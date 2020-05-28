@@ -10,7 +10,14 @@ alc_drink_freq(x)
 \item{x}{Drinking frequency}
 }
 \value{
-Returns a numeric translation of the categorical drinking frequency variable.
+Returns a numeric translation (days/week) of the categorical drinking frequency variable.
+\item{Almost every day}{7}
+\item{Five or six days a week}{5.5}
+\item{Three or four days a week}{3.5}
+\item{Once or twice a week}{1.5}
+\item{Once or twice a month}{0.375}
+\item{Once every couple of months}{0.188}
+\item{Once or twice a year}{0.029}
 }
 \description{
 Convert the surveyed drink frequency to a measure of days per week on which drinking occurred.
