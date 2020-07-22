@@ -17,3 +17,97 @@ authors:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c
   Alan Brennan:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a
+    
+reference:
+- title: Read Health Survey for England
+  contents:
+  - read_hse
+  - read_2001
+  - read_2002
+  - read_2003
+  - read_2004
+  - read_2005
+  - read_2006
+  - read_2007
+  - read_2008
+  - read_2009
+  - read_2010
+  - read_2011
+  - read_2012
+  - read_2013
+  - read_2014
+  - read_2015
+  - read_2016
+  - read_2017
+  
+- title: Read Scottish Health Survey
+  contents:
+  - read_SHeS_2008
+  - read_SHeS_2009
+  - read_SHeS_2010
+  - read_SHeS_2011
+  - read_SHeS_2012
+  - read_SHeS_2013
+  - read_SHeS_2014
+  - read_SHeS_2015
+  - read_SHeS_2016
+  - read_SHeS_2017
+  - read_SHeS_2018
+  
+- title: Alcohol data
+  contents:
+  - alc_drink_freq
+  - alc_drink_now_allages
+  - alc_sevenday_adult
+  - alc_sevenday_child
+  - alc_weekmean_adult
+  
+- title: Smoking data
+  contents:
+  - smk_amount
+  - smk_life_history
+  - smk_quit
+  - smk_status
+  - smk_former
+  
+- title: Covariate data
+  contents:
+  - clean_age
+  - clean_demographic
+  - clean_economic_status
+  - clean_education
+  - clean_family
+  - clean_health_and_bio
+  - clean_income
+  - use_townsend
+  
+- title: Data wrangling
+  contents:
+  - combine_years
+  - select_data
+  - impute_mean
+  - num_sim
+  - impute_data_mice
+  - prop_summary
+  - clean_surveyweights
+  
+- title: Data
+  contents:
+  - pop_counts
+  - imdq_to_townsend
+  - abv_data
+  - alc_volume_data
+  - impute_kids_model
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

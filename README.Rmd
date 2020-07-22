@@ -83,9 +83,9 @@ Please cite the latest version of the package using:
 
 ## Getting started
 
-To be able to **download data from the UK Data Service**, you will need to **register with the UK Data Service website**, which will enable you to request access to the datasets. Instructions on how to do this can be found [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).    
+To be able to **download data from the UK Data Service**, you will need to **register with the UK Data Service website**, which will enable you to request access to the datasets. Instructions on how to do this can be found [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx). **Note that you might not have to clean the data yourself as we can provide you with datasets for running the models that have already been cleaned.**    
 
-In ScHARR, all data is stored and processed according to the [ScHARR Information Governance Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). The HSE and SHeS data is stored in the university networked X-drive folder `PR_Consumption_TA`, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level data is included within this package on Github.   
+In ScHARR, all data is stored and processed according to the [ScHARR Information Governance Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). The HSE and SHeS data is stored in the university networked X-drive folder `PR_Consumption_TA`, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level data is included within this package.   
 
 ## Basic functionality
 
