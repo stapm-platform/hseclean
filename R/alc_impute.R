@@ -86,6 +86,9 @@ alc_impute <- function(
   
   data[ , median_weekmean := NULL]
   
+  data[drinks_now == "non_drinker", weekmean := 0]
+  
+  
 return(data[])
 }
 
