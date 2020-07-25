@@ -84,6 +84,7 @@ alc_impute <- function(
   # Replace missing with the subgroup median
   data[is.na(weekmean), weekmean := median_weekmean]
   
+  data[ , median_weekmean := NULL]
   
 return(data[])
 }
