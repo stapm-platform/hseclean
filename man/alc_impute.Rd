@@ -18,12 +18,12 @@ Fills the missing values of average weekly consumption so that
 this variable corresponds to the data on whether an individual is a drinker.
 }
 \details{
-For children 13-15 years old, the missing values in the average amount drunk in the last week are filled with the 
+For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
 by scaling the amount drunk in the last week by the frequency of drinking.   
 
-For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the average, 
-stratified by age category, year, sex, IMD quintile and the frequency of drinking.
+For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+stratified by age category, year, sex and the frequency of drinking.
 }
 \examples{
 

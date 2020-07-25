@@ -5,12 +5,12 @@
 #' Fills the missing values of average weekly consumption so that 
 #' this variable corresponds to the data on whether an individual is a drinker.  
 #'
-#' For children 13-15 years old, the missing values in the average amount drunk in the last week are filled with the 
+#' For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 #' average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
 #' by scaling the amount drunk in the last week by the frequency of drinking.   
 #' 
-#' For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the average, 
-#' stratified by age category, year, sex, IMD quintile and the frequency of drinking.   
+#' For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+#' stratified by age category, year, sex and the frequency of drinking.   
 #'
 #' @param data Data table - the Health Survey for England dataset.
 #' @importFrom data.table :=
@@ -57,12 +57,12 @@ alc_impute <- function(
   
   ## Children 13-15 years old
   
-  # Calculate the average amount drunk by children who are drinkers over the last 7 days
+  # Calculate the median amount drunk by children who are drinkers over the last 7 days
   # removing zeros
-  mean_7d_amount_ch <- mean(data[drinks_now == "drinker" & total_units7_ch > 0 & age >= 13 & age < 16, total_units7_ch], na.rm = T)
+  median_7d_amount_ch <- median(data[drinks_now == "drinker" & total_units7_ch > 0 & age >= 13 & age < 16, total_units7_ch], na.rm = T)
   
   # replace zero amounts for drinkers younger than 16 with the average value
-  data[drinks_now == "drinker" & total_units7_ch == 0 & age >= 13 & age < 16, total_units7_ch := mean_7d_amount_ch]
+  data[drinks_now == "drinker" & total_units7_ch == 0 & age >= 13 & age < 16, total_units7_ch := median_7d_amount_ch]
   
   # calculate the amount drunk on an average week in a year using information on quantity and frequency
   data[drinks_now == "drinker" & age >= 13 & age < 16, weekmean := (drink_freq_7d * 52 / 7) * total_units7_ch]
@@ -76,7 +76,13 @@ alc_impute <- function(
   data[age >= 16 & drinks_now == "drinker" & weekmean == 0, weekmean := NA]
   
   # Fill the missing values
-  data <- hseclean::impute_mean(data, var_names = "weekmean", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drink_freq_7d"), remove_zeros = FALSE)
+  #data <- hseclean::impute_mean(data, var_names = "weekmean", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drink_freq_7d"), remove_zeros = FALSE)
+    
+  # Calculate the subroup means
+  data[ , median_weekmean := median(weekmean, na.rm = T), by = c("year", "sex", "age_cat", "drink_freq_7d")]
+      
+  # Replace missing with the subgroup median
+  data[is.na(weekmean), weekmean := median_weekmean]
   
   
 return(data[])
