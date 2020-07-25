@@ -2,6 +2,7 @@
 
 export(alc_drink_freq)
 export(alc_drink_now_allages)
+export(alc_impute)
 export(alc_sevenday_adult)
 export(alc_sevenday_child)
 export(alc_weekmean_adult)

@@ -12,7 +12,7 @@ alc_drink_now_allages(data)
 \value{
 \describe{
 \item{drinks_now}{Drank at all in the last 12 months (drinker, non_drinker).}      
-\item{drink_freq_7d}{Frequency of drinking in the last 7 days (numerical variable calculated from categorical responses to how frequently someone drinks).}       
+\item{drink_freq_7d}{Frequency of drinking, expressed in terms of the expected number of drinking ocassions per week (numerical variable calculated from categorical responses to how frequently someone drinks).}       
 \item{adrinkweek}{Youth drinks at least once a week (yes, no).}
 \item{adrinkmonth}{Youth drinks at least once a month (yes, no).}   
 \item{adrinklastweek}{Youth drank in the last week (yes, no).}      

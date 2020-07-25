@@ -61,6 +61,7 @@ reference:
   - alc_sevenday_adult
   - alc_sevenday_child
   - alc_weekmean_adult
+  - alc_impute
   
 - title: Smoking data
   contents:
