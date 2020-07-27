@@ -75,6 +75,9 @@ read_2001 <- function(
     area, child_wt, #cluster, #, #wt_int,
 
      #HHInc,
+    
+    # Identifiers
+    hserial,pserial,
 
     eqv5,
     #eqvinc,

@@ -106,6 +106,7 @@ read_2002 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     area, child_wt, #tablewt,#cluster, #wt_int,
+    hserial,pserial,
     age, sex,
     ethnici,
     nimd, econact, nssec3, nssec8,

@@ -83,6 +83,7 @@ read_2005 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     area, cluster, wt_int, child_wt, wt_intCH, Wt_intEL,
+    hserial,pserial,
     age, sex,
     ethinda,
     imd2004, econact, nssec3, nssec8,

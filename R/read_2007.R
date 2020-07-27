@@ -126,6 +126,7 @@ read_2007 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     area, cluster, wt_int,
+    hserial,pserial,
     age, sex,
     ethinda,
     imd2007, econact, nssec3, nssec8,
