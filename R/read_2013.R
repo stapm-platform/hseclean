@@ -74,6 +74,7 @@ read_2013 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     PSU, Cluster, wt_int,
+    hserial,pserial,
     Age, Sex,
     Origin,
     qimd, econact, nssec3, nssec8,
@@ -95,7 +96,9 @@ read_2013 <- function(
 
   data <- data[ , names, with = F]
 
-  data.table::setnames(data, c("longend2", "marstatd", "origin", paste0("complst", 1:15)), c("longend", "marstat", "ethnicity_raw", paste0("compm", 1:15)))
+  data.table::setnames(data, 
+                       c("longend2", "marstatd", "origin", "pserial", paste0("complst", 1:15)), 
+                       c("longend", "marstat", "ethnicity_raw", "hse_id", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2013_", psu)]
   data[ , cluster := paste0("2013_", cluster)]

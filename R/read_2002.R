@@ -106,6 +106,7 @@ read_2002 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     area, child_wt, #tablewt,#cluster, #wt_int,
+    hserial,pserial,
     age, sex,
     ethnici,
     nimd, econact, nssec3, nssec8,
@@ -133,13 +134,13 @@ read_2002 <- function(
              "nberf", "sberf", "spirf", "sherf", "winef", "popsf",
              "nberqhp", "nberqsm", "nberqlg", "nberqbt", "nberqpt",
              "sberqhp", "sberqsm", "sberqlg", "sberqbt", "sberqpt",
-             "sherqgs", "spirqme"),
+             "sherqgs", "spirqme", "pserial"),
 
            c("psu", "qimd", "d7unitwg", "wt_int", "marstat", "ethnicity_raw",
              "nbeer", "sbeer", "spirits", "sherry", "wine", "pops",
              "nbeerq1", "nbeerq2", "nbeerq3", "nbeerq4", "nbeerq5",
              "sbeerq1", "sbeerq2", "sbeerq3", "sbeerq4", "sbeerq5",
-             "sherryq", "spiritsq"))
+             "sherryq", "spiritsq", "hse_id"))
 
 
   data[ , psu := paste0("2002_", psu)]

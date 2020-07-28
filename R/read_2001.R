@@ -75,6 +75,9 @@ read_2001 <- function(
     area, child_wt, #cluster, #, #wt_int,
 
      #HHInc,
+    
+    # Identifiers
+    hserial,pserial,
 
     eqv5,
     #eqvinc,
@@ -115,13 +118,13 @@ read_2001 <- function(
              "nberf", "sberf", "spirf", "sherf", "winef", "popsf",
              "nberqhp", "nberqsm", "nberqlg", "nberqbt", "nberqpt",
              "sberqhp", "sberqsm", "sberqlg", "sberqbt", "sberqpt",
-             "sherqgs", "spirqme"),
+             "sherqgs", "spirqme", "pserial"),
 
            c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw",
              "nbeer", "sbeer", "spirits", "sherry", "wine", "pops",
              "nbeerq1", "nbeerq2", "nbeerq3", "nbeerq4", "nbeerq5",
              "sbeerq1", "sbeerq2", "sbeerq3", "sbeerq4", "sbeerq5",
-             "sherryq", "spiritsq"))
+             "sherryq", "spiritsq", "hse_id"))
 
   # Tidy survey weights
   data[ , wt_int := 1]

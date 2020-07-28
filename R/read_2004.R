@@ -166,6 +166,7 @@ read_2004 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     area, cluster, wt_int,
+    hserial,pserial,
     age, sex,
     ethcind,
     imd2004, econact, nssec3, nssec8,
@@ -187,8 +188,8 @@ read_2004 <- function(
 
   data <- data[ , names, with = F]
 
-  setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
-           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
+  setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethcind","pserial"),
+           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw","hse_id"))
 
   data[ , psu := paste0("2004_", psu)]
   data[ , cluster := paste0("2004_", cluster)]
@@ -211,8 +212,9 @@ read_2004 <- function(
 
   data_ethnicboost <- data_ethnicboost[ , names, with = F]
 
-  data.table::setnames(data_ethnicboost, c("area", "imd2004", "d7unit", "marstatb", "ethcind"),
-           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
+  data.table::setnames(data_ethnicboost,
+                       c("area", "imd2004", "d7unit", "marstatb", "ethcind", "pserial"),
+                       c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw", "hse_id"))
 
   data_ethnicboost[ , psu := paste0("2004_", psu)]
   data_ethnicboost[ , cluster := paste0("2004_", cluster)]

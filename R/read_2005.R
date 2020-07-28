@@ -83,6 +83,7 @@ read_2005 <- function(
   other_vars <- Hmisc::Cs(
     mintb, addnum,
     area, cluster, wt_int, child_wt, wt_intCH, Wt_intEL,
+    hserial,pserial,
     age, sex,
     ethinda,
     imd2004, econact, nssec3, nssec8,
@@ -105,8 +106,8 @@ read_2005 <- function(
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
-  data.table::setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethinda"),
-           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
+  data.table::setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethinda", "pserial"),
+           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw", "hse_id"))
 
   data[ , psu := paste0("2005_", psu)]
   data[ , cluster := paste0("2005_", cluster)]
