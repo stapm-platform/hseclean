@@ -97,7 +97,9 @@ read_2014 <- function(
 
   data <- data[ , names, with = F]
 
-  data.table::setnames(data, c("longend2", "marstatd", "age90", "origin3", paste0("complst", 1:15)), c("longend", "marstat", "age", "ethnicity_raw", paste0("compm", 1:15)))
+  data.table::setnames(data, 
+                       c("longend2", "marstatd", "age90", "origin3", "pserial", paste0("complst", 1:15)), 
+                       c("longend", "marstat", "age", "ethnicity_raw", "hse_id", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2014_", psu)]
   data[ , cluster := paste0("2014_", cluster)]

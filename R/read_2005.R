@@ -106,8 +106,8 @@ read_2005 <- function(
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
-  data.table::setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethinda"),
-           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw"))
+  data.table::setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethinda", "pserial"),
+           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw", "hse_id"))
 
   data[ , psu := paste0("2005_", psu)]
   data[ , cluster := paste0("2005_", cluster)]

@@ -103,7 +103,7 @@ read_2016 <- function(
 
   data.table::setnames(data,
            c("qrtint", "marstatd", "origin2", "activb2", "stwork","seriala", paste0("complst", 1:15)),
-           c("quarter", "marstat", "ethnicity_raw", "activb", "paidwk","pserial", paste0("compm", 1:15)))
+           c("quarter", "marstat", "ethnicity_raw", "activb", "paidwk","hse_id", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2016_", psu)]
   data[ , cluster := paste0("2016_", cluster)]
