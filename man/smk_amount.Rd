@@ -15,6 +15,9 @@ smk_amount(data)
 \item smoker_cat (non_smoker, 10_or_less, 11_to_20, 21_to_30, 31_or_more)
 \item banded_consumption (non_smoker, light, moderate, heavy)
 \item cig_type (non_smoker, hand rolled, machine rolled)
+\item hand_rolled_per_day - numeric (0+) (years 2013+)
+\item machine_rolled_per_day - numeric (0+) (years 2013+)
+\item prop_handrolled - numeric (0-1) (years 2013+)
 \item time_to_first_cig (non_smoker, less_than_5_minutes, five_to_thirty_minutes,
 thirty_minutes_but_less_than_1_hour, one_hour_or_more)
 }
@@ -29,9 +32,8 @@ this is based on asking how many cigarettes were smoked in the last week. Missin
 the average amount smoked for an age, sex and IMD quintile subgroup.
 
 We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In
-later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled
-cigarettes are smoked on a weekday vs. a weekend. We currently don't use those questions because they were not asked in
-all years.
+later years of the Health Survey for England, new questions are added from year 2013 that ask how many handrolled vs. machine rolled
+cigarettes are smoked on a weekday vs. a weekend.    
 
 We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette.
 This latter variable has a high level of missingness. Together these categorical variables allow calculation of
@@ -41,7 +43,9 @@ This latter variable has a high level of missingness. Together these categorical
 
 \dontrun{
 
-data <- read_2001()
+library(hseclean)
+
+data <- read_2017(root = "/Volumes/Shared/")
 data <- clean_age(data)
 data <- clean_demographic(data)
 data <- smk_status(data)

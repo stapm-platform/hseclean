@@ -45,8 +45,7 @@
 #' @importFrom data.table :=
 #' @return Returns a data table. Note that:
 #' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
-#' except -8 ("don't know") as this is data.
+#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
 #' \item All variable names are converted to lower case.
 #' \item The cluster and probabilistic sampling unit have the year appended to them.
 #' }
@@ -71,7 +70,7 @@ read_2015 <- function(
 
   data <- data.table::fread(
     paste0(root[1], file),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A")
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
   )
 
   data.table::setnames(data, names(data), tolower(names(data)))
@@ -105,8 +104,8 @@ read_2015 <- function(
   data <- data[ , names, with = F]
 
   data.table::setnames(data,
-           c("qrtint", "cluster_adults", "marstatd", "origin2", "activb2","seriala", paste0("complst", 1:15)),
-           c("quarter", "cluster", "marstat", "ethnicity_raw", "activb","hse_id", paste0("compm", 1:15)))
+           c("qrtint", "cluster_adults", "marstatd", "origin2", "activb2","seriala", "hrollwk", "hrollwe", paste0("complst", 1:15)),
+           c("quarter", "cluster", "marstat", "ethnicity_raw", "activb","hse_id", "rollwk", "rollwe", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2015_", psu)]
   data[ , cluster := paste0("2015_", cluster)]

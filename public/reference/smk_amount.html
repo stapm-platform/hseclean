@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -155,6 +155,9 @@
 <li><p>smoker_cat (non_smoker, 10_or_less, 11_to_20, 21_to_30, 31_or_more)</p></li>
 <li><p>banded_consumption (non_smoker, light, moderate, heavy)</p></li>
 <li><p>cig_type (non_smoker, hand rolled, machine rolled)</p></li>
+<li><p>hand_rolled_per_day - numeric (0+) (years 2013+)</p></li>
+<li><p>machine_rolled_per_day - numeric (0+) (years 2013+)</p></li>
+<li><p>prop_handrolled - numeric (0-1) (years 2013+)</p></li>
 <li><p>time_to_first_cig (non_smoker, less_than_5_minutes, five_to_thirty_minutes,
 thirty_minutes_but_less_than_1_hour, one_hour_or_more)</p></li>
 </ul>
@@ -166,9 +169,8 @@ from questions about how many cigarettes are smoked typically on a weekday vs. a
 this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as
 the average amount smoked for an age, sex and IMD quintile subgroup.</p>
 <p>We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In
-later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled
-cigarettes are smoked on a weekday vs. a weekend. We currently don't use those questions because they were not asked in
-all years.</p>
+later years of the Health Survey for England, new questions are added from year 2013 that ask how many handrolled vs. machine rolled
+cigarettes are smoked on a weekday vs. a weekend.</p>
 <p>We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette.
 This latter variable has a high level of missingness. Together these categorical variables allow calculation of
  <a href='https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/'>the heaviness of smoking index</a>.</p>
@@ -177,7 +179,9 @@ This latter variable has a high level of missingness. Together these categorical
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_2001.html'>read_2001</a></span>()
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>hseclean</span>)
+
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_2017.html'>read_2017</a></span>(<span class='kw'>root</span> <span class='kw'>=</span> <span class='st'>"/Volumes/Shared/"</span>)
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_age.html'>clean_age</a></span>(<span class='no'>data</span>)
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_demographic.html'>clean_demographic</a></span>(<span class='no'>data</span>)
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='smk_status.html'>smk_status</a></span>(<span class='no'>data</span>)

@@ -17,8 +17,7 @@ read_2002(
 \value{
 Returns a data table. Note that:
 \itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-9", "-90", "-90.0", "N/A") is replace with NA,
-except -8 ("don't know") as this is data.
+\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
 \item All variable names are converted to lower case.
 \item A single sampling cluster is assigned.
 \item The probabilistic sampling unit have the year appended to them.
