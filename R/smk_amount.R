@@ -172,6 +172,13 @@ smk_amount <- function(
       data[is.na(cig_type) & prop_handrolled > .5, cig_type := "hand_rolled"]
       data[is.na(cig_type) & prop_handrolled <= .5, cig_type := "machine_rolled"]
       
+      data[prop_handrolled == 1, machine_rolled_per_day := 0]
+      
+      data[prop_handrolled > 1, `:=`(machine_rolled_per_day = 0, prop_handrolled = 1, hand_rolled_per_day = cigs_per_day)]
+    
+      # check  
+      #data[cig_smoker_status == "current" & cigs_per_day != (machine_rolled_per_day + hand_rolled_per_day)]
+    
     }
     
     
