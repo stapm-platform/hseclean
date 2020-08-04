@@ -37,7 +37,7 @@ clean_surveyweights <- function(
   data <- merge(data, pop_data, by = c("year", "age", "sex", "imd_quintile"), all.x = T)
   data[ , sample_n := .N, by = c("year", "age", "sex", "imd_quintile")]
   data[ , wt_int := N / sample_n]
-  data[ , wt_int := wt_int / sum(wt_int, na.rm = T), by = "year"]
+  data[ , wt_int := wt_int / mean(wt_int, na.rm = T), by = "year"]
 
   data[ , `:=`(sample_n = NULL, N = NULL)]
   
