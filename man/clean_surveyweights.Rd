@@ -4,7 +4,7 @@
 \alias{clean_surveyweights}
 \title{Process the survey weights}
 \usage{
-clean_surveyweights(data, pop_data = hseclean::pop_counts)
+clean_surveyweights(data, pop_data)
 }
 \arguments{
 \item{data}{Data table - the Health Survey for England dataset}
@@ -15,13 +15,14 @@ clean_surveyweights(data, pop_data = hseclean::pop_counts)
 Returns data with survey weights updated
 }
 \description{
-Process the survey weights
+Makes new survey weights based on the difference between the HSE sample size and the actual population size 
+by year, age, sex and IMD quintiles.
 }
 \examples{
 
 \dontrun{
 
-data <- clean_surveyweights(data)
+data <- clean_surveyweights(data, pop_data = stapmr::pop_counts)
 
 }
 
