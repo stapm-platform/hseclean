@@ -94,7 +94,6 @@ reference:
   
 - title: Data
   contents:
-  - pop_counts
   - imdq_to_townsend
   - abv_data
   - alc_volume_data
