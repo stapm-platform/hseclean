@@ -32,7 +32,7 @@ Imports:
     magrittr,
     data.table,
     survey,
-    nnet
+    stats
 RoxygenNote: 7.1.0
 Suggests: 
     knitr,
@@ -40,4 +40,5 @@ Suggests:
     testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Depends: 
-    R (>= 2.10)
+    R (>= 2.10),
+    nnet

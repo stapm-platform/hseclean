@@ -25,6 +25,7 @@
 #'
 #' @param data Data table - the Health Survey for England dataset.
 #' @importFrom data.table :=
+#' @importFrom stats predict
 #' @return Returns an updated version of data with the new family variables:
 #' \itemize{
 #' \item 'kids' - number of children age <= 15 years in the household (0, 1, 2, 3+)
@@ -36,9 +37,18 @@
 #'
 #' \dontrun{
 #'
-#' data_2001 <- read_2001()
-#'
-#' data_2001 <- clean_family(data = data_2001)
+#' library(hseclean)
+#' 
+#' #data <- read_2015(root = "/Volumes/Shared/")
+#' 
+#' storage_location <- "/Users/duncangillespie/Documents/HSE/"
+#' data <- readRDS(paste0(storage_location, "HSE_2015.rds"))
+#' 
+#' data <- clean_age(data)
+#' data <- clean_demographic(data)
+#' data <- clean_education(data)
+#' data <- clean_economic_status(data)
+#' data <- clean_family(data)
 #'
 #' }
 #'
