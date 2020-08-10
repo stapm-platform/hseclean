@@ -44,8 +44,16 @@ impute_data_mice <- function(
 ) {
 
   # Convert variables to factors
-  for(v in var_names) data[ , (v) := as.factor(get(v))]
+  for(v in var_names) {
+   
+    if(!is.factor(data[ , get(v)])) {
+     
+    data[ , (v) := as.factor(get(v))]
+      
+    }
 
+  }  
+    
   # Setup the predictor matrix
   n <- ncol(data)
   predMat <- matrix(0, n, n)
