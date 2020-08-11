@@ -3,10 +3,11 @@
 #'
 #' Clean the variables that describe how much, what and to what level of addiction people smoke.
 #'
-#' The main variable is the average number of cigarettes smoked per day. For adults this is calculated
-#' from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children,
+#' The main variable is the average number of cigarettes smoked per day. For adults, this is calculated
+#' from questions about how many cigarettes are smoked typically on a weekday vs. a weekend 
+#' (this is a weighted average to account for more weekdays in a week than weekends). For children,
 #' this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as
-#' the average amount smoked for an age, sex and IMD quintile subgroup.
+#' the average amount smoked for an age, sex and IMD quintile subgroup.   
 #'
 #' We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In
 #' later years of the Health Survey for England, new questions are added from year 2013 that ask how many handrolled vs. machine rolled

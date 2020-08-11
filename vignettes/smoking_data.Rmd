@@ -62,7 +62,7 @@ We also create a variable for the age at which an individual was censored from o
 Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.    
 
 ## Amount and type of cigarette smoked by current smokers
-The function `smk_amount()` cleans the data that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.  
+The function `smk_amount()` cleans the data that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults, this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend (this is a weighted average to account for more weekdays in a week than weekends). For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.    
 
 We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In later years of the HSE, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend.     
 
