@@ -32,11 +32,11 @@ Reads and does basic cleaning on the Health Survey for England 2004.
 }
 \details{
 The Health Survey for England 2004 was designed to provide data at both national and regional level
-about the population living in private households in England. The sample design of the 2004 survey
+about the population living in private households in England. **The sample design of the 2004 survey
 had two parts: a general population sample that followed the same pattern as in previous years and a
 minority ethnic ‘boost’ sample, designed solely to yield interviews with members of seven largest
 minority ethnic groups in England: Black Caribbean, Black African, Indian, Pakistani, Bangladeshi,
-Chinese and Irish.
+Chinese and Irish.**
 
 The general population sample was half the size of the usual sample, and involved selection 6,552
 addresses from the Postcode Address File (PAF) in 312 wards, issued over a twelve-month period
@@ -61,7 +61,7 @@ visit both using computer assisted interviewing. The main focus of the 2004 surv
 minority ethnic backgrounds was cardiovascular disease (CVD) and related risk factors. At the nurse
 visit, questions were asked about prescribed medication, vitamin supplements and nicotine
 replacements. The nurse took the blood pressure of those aged 5 and over, measured lung function of
-those aged 7-15, and made waist and hip measurements for those aged 11and over. Saliva samples
+those aged 7-15, and made waist and hip measurements for those aged 11 and over. Saliva samples
 were collected from 4-15 year olds and blood samples from those aged 11 and over including fasting
 blood from those aged 16 and over. Blood and saliva samples were sent to a laboratory for analysis.
 
@@ -70,7 +70,7 @@ ethnic groups, were given a shortened version of the questionnaire covering core
 For all informants, information was obtained directly from persons aged 13 and over. Information
 about children under 13 was obtained from a parent with the child present.
 
-WEIGHTING
+**WEIGHTING**
 
 General Population Data (HSE04gpa.sav)
 
@@ -83,8 +83,8 @@ Two sets of non-response weights have been generated for the general population 
 weights which adjust for non-contact and refusal of households, and interview weights which also
 adjust for the additional non-response among individuals in participating households.
 
-The household weight (wt_ hhld) is a household level weight that corrects the distribution of
-household members to match population estimates for sex/age groups and GOR. These weights were
+**The household weight (wt_hhld) is a household level weight that corrects the distribution of
+household members to match population estimates for sex/age groups and GOR.** These weights were
 generated using calibration weighting, with the household selection weights as starting values. (The
 household selection weights correct for where the limit of three households are selected at addresses
 with more than three.) Note that the population control totals used for the calibration weighting were
@@ -94,18 +94,18 @@ the ONS projected mid-year population estimates for 2004, but with a small adjus
 For analyses at the individual level, the weighting variable to use is wt_int. These weights are
 generated separately for adults and children:
 \itemize{
-\item for adults (aged 16 or more), the interview weights are a combination of the household weight
+\item for adults (aged 16 or more), **the interview weights are a combination of the household weight
 and a component which adjusts the sample to reduce bias from individual non-response within
-households;
-\item for children (aged 0 to 15), the weights are generated from the household weights and the child
+households**;
+\item for children (aged 0 to 15), **the weights are generated from the household weights and the child
 selection weights – the selection weights correct for only including a maximum of two children in
-a household. The combined household and child selection weight were adjusted to ensure that the
+a household.** The combined household and child selection weight were adjusted to ensure that the
 weighted age/sex distribution matched that of all children in co-operating households.
 }
 For analysis of children aged 0-15 in the General Population Sample, taking into account child
 selection only and not adjusting for non-response, the child_wt variable can be used.
 
-Minority Ethnic Group Data (HSE04etha.sav)
+**Minority Ethnic Group Data (HSE04etha.sav)**
 
 For the HSE 2004, as well as the general population sample, boost samples were selected in areas
 with (relatively) higher proportions of people in minority ethnic groups. All respondents, whether
