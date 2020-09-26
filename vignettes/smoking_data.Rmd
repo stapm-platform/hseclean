@@ -30,7 +30,7 @@ suppressPackageStartupMessages(library(hseclean))
 ```
 
 # Introduction
-For the Sheffield Tobacco Policy Model (STPM) we use HSE data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our `smoke.trans` R package). Our upper age limit is 89 years, but otherwise we make use of all ages.      
+For the Sheffield Tobacco Policy Model (STPM) we use HSE data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our [smktrans](https://stapm.gitlab.io/smktrans/) R package). Our upper age limit is 89 years, but otherwise we make use of all ages.      
 
 The purpose of this vignette is to explain how we use the HSE data to inform the patterns of tobacco smoking, and to explain how `hseclean` supports this.    
 
