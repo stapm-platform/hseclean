@@ -55,7 +55,7 @@ read_2017 <- function(
   other_vars <- Hmisc::Cs(
     qrtint, addnum,
     psu, cluster, wt_int, #wt_sc,
-    SerialA,
+    seriala,
     age16g5, age35g, sex,
     origin2,
     qimd, nssec3, nssec8,

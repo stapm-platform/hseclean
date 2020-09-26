@@ -61,7 +61,7 @@ devtools::install_git(
 )
 
 # Where uname is your Gitlab user name.
-# ref = "x.x.x" is the version to install - remove this to install the latest version
+# ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"
 # this should make a box pop up where you enter your GitLab password
 ```
 

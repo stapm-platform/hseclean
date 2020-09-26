@@ -7,7 +7,7 @@
 #'
 #' @param data Data table - the Health Survey for England dataset.
 #' @param ages Integer vector - the ages in single years to retain (defaults to 8 to 89 years).
-#' @param years Integer vector - the years in single years to retain (defaults to 2001 to 2016).
+#' @param years Integer vector - the years in single years to retain.
 #' @param keep_vars Character vector - the names of the variables to keep.
 #' @param complete_vars Character vector - the names of the variables on which the selection of complete cases will be based.
 #' @importFrom data.table :=
@@ -25,7 +25,7 @@
 select_data <- function(
   data,
   ages = 8:89,
-  years = 2001:2017,
+  years = 2001:2018,
   keep_vars = c("age", "sex", "imd_quintile"),
   complete_vars = c("age", "sex", "imd_quintile")
 ) {

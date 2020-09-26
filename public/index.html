@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -136,7 +136,7 @@
 )
 
 <span class="co"># Where uname is your Gitlab user name.</span>
-<span class="co"># ref = "x.x.x" is the version to install - remove this to install the latest version</span>
+<span class="co"># ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"</span>
 <span class="co"># this should make a box pop up where you enter your GitLab password</span></pre></div>
 <p>Then load the package, and some other packages that are useful. Note that the code within <code>hseclean</code> uses the <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table::data.table()</a></code> syntax.</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># Load the package</span>
@@ -315,7 +315,7 @@
 <div id="missing-data-imputation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#missing-data-imputation" class="anchor"></a>Missing data imputation</h3>
-<p><code>hseclean</code> uses the function <code><a href="http://stefvanbuuren.github.io/mice/reference/mice.html">mice::mice()</a></code> in the <code>mice</code> R package, implemented in a basic way by the <code><a href="reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code><a href="articles/missing_data.html">vignette("missing_data")</a></code>.</p>
+<p><code>hseclean</code> uses the function <code><a href="https://rdrr.io/pkg/mice/man/mice.html">mice::mice()</a></code> in the <code>mice</code> R package, implemented in a basic way by the <code><a href="reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code><a href="articles/missing_data.html">vignette("missing_data")</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="co"># Run the imputation (takes a long time)</span>
 <span class="no">imp</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/impute_data_mice.html">impute_data_mice</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">hse_data</span>,
                         <span class="kw">var_names</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"smk.state"</span>, <span class="st">"agegroup"</span>, <span class="st">"sex"</span>,

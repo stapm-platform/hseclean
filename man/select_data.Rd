@@ -7,7 +7,7 @@
 select_data(
   data,
   ages = 8:89,
-  years = 2001:2017,
+  years = 2001:2018,
   keep_vars = c("age", "sex", "imd_quintile"),
   complete_vars = c("age", "sex", "imd_quintile")
 )
@@ -17,7 +17,7 @@ select_data(
 
 \item{ages}{Integer vector - the ages in single years to retain (defaults to 8 to 89 years).}
 
-\item{years}{Integer vector - the years in single years to retain (defaults to 2001 to 2016).}
+\item{years}{Integer vector - the years in single years to retain.}
 
 \item{keep_vars}{Character vector - the names of the variables to keep.}
 

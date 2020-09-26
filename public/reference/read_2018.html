@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read HSE 2010 — read_2010 • hseclean</title>
+<title>Read HSE 2018 — read_2018 • hseclean</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Read HSE 2010 — read_2010" />
-<meta property="og:description" content="Reads and does basic cleaning on the Health Survey for England 2010." />
+<meta property="og:title" content="Read HSE 2018 — read_2018" />
+<meta property="og:description" content="Reads and does basic cleaning on the Health Survey for England 2018." />
 
 
 
@@ -127,18 +127,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read HSE 2010</h1>
+    <h1>Read HSE 2018</h1>
     
-    <div class="hidden name"><code>read_2010.Rd</code></div>
+    <div class="hidden name"><code>read_2018.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reads and does basic cleaning on the Health Survey for England 2010.</p>
+    <p>Reads and does basic cleaning on the Health Survey for England 2018.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_2010</span>(
+    <pre class="usage"><span class='fu'>read_2018</span>(
   <span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2010/UKDA-6986-tab/tab/hse10ai.tab"</span>
+  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2018/tab/hse_2018_eul_22052020.tab"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -157,35 +157,9 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a data table. Note that:</p><ul>
-<li><p>Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.</p></li>
+<li><p>Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A") is replaced with NA.</p></li>
 <li><p>All variable names are converted to lower case.</p></li>
 <li><p>The cluster and probabilistic sampling unit have the year appended to them.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The HSE 2010 included a general population sample of adults and children, representative of the whole population at both national and regional level, and a boost sample of children aged
-2-15. For the general population sample, 8,736 addresses were randomly selected in 672 postcode sectors, issued over twelve months from January to December 2010. Where an address was found to have multiple dwelling units, one dwelling unit was selected at random
-and where there were multiple households at a dwelling unit, one household was selected at random.</p>
-<p>In each selected household, all individuals were eligible for inclusion in the survey. Where there were three or more children aged 0-15 in a household, two of the children were selected at random. A nurse visit was arranged for all participants who consented.
-In addition to the core general population sample, a boost sample of children aged 2-15 was selected using 17,136 addresses, some in the same postcode sectors as the core sample and some in an additional 168 postcode sectors to supplement the sample obtained in the core sectors. As for the core sample, where there were three or more children in a household, two of the children were selected at random to limit the respondent burden for parents. There was no nurse follow up for this child boost sample.</p>
-<p>A total of 8,420 adults and 5,692 children were interviewed, with 2,074 children from the core sample and 3,618 from the boost. A household response rate of 66<!-- % was achieved for the core sample, and 70% for the boost sample. Among the general population sample, -->
-5,587 adults and 1,327 children had a nurse visit.</p>
-<p>WEIGHTING</p>
-<p>5.2 Individual weight</p>
-<p>For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:</p><ul>
-<li><p>for adults (aged 16 or more), the interview weights are a combination of the householdweight and a component which adjusts the sample to reduce bias from individual non-response within households;</p></li>
-<li><p>for children (aged 0 to 15), the weights are generated from the household weights and the child selection weights – the selection weights correct for only including a maximum of two children in a household. The combined household and child selection weight were adjusted to ensure that the weighted age/sex distribution matched that of all children in co-operating households.</p></li>
-</ul><p>For analysis of children aged 0-15 in both the Core and the Boost sample, taking into account child selection only and not adjusting for non-response, the (wt_child) variable can be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb) variable can</p>
-<p>MISSING VALUES</p>
-<ul>
-<li><p>-1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
-usually because of internal routing. For example, men in women only questions.</p></li>
-<li><p>-2 Schedule not applicable: Used mainly for variables on the self-completions when the
-respondent was not of the given age range, also used for children without legal guardians in the
-home who could not participate in the nurse schedule.</p></li>
-<li><p>-8 Don't know, Can't say.</p></li>
-<li><p>-9 No answer/ Refused</p></li>
 </ul>
 
 
@@ -193,7 +167,8 @@ home who could not participate in the nurse schedule.</p></li>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='no'>data_2010</span> <span class='kw'>&lt;-</span> <span class='fu'>read_2010</span>(<span class='st'>"X:/"</span>, <span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2010/UKDA-6986-tab/tab/hse10ai.tab"</span>)
+<span class='no'>data_2018</span> <span class='kw'>&lt;-</span> <span class='fu'>read_2018</span>(<span class='st'>"X:/"</span>,
+<span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2018/UKDA-8334-tab/tab/hse2016_eul.tab"</span>)
 
 }</div></pre>
   </div>
