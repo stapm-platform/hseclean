@@ -81,7 +81,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="smoking_data_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Process data on tobacco smoking</h1>
@@ -190,7 +190,7 @@
 <div id="summarise-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summarise-data" class="anchor"></a>Summarise data</h2>
-<p>Taking the survey design into account is important when estimating the mean and confidence intervals around summary statistics computed from the data i.e. it is not possible to accurately estimate sampling error without accounting for survey design. The <code>survey</code> R package <span class="citation">(Thomas Lumley <a href="#ref-Rsurvey">2019</a>)</span> has a collection of functions that incorporate survey design into the calculation of summary statistics. The <code>survey</code> package is used by the function <code><a href="../reference/prop_summary.html">prop_summary()</a></code> in <code>hseclean</code> to estimate the uncertainty around proportions calculated from a binary variable - <code><a href="../reference/prop_summary.html">prop_summary()</a></code> was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.</p>
+<p>Taking the survey design into account is important when estimating the mean and confidence intervals around summary statistics computed from the data i.e. it is not possible to accurately estimate sampling error without accounting for survey design. The <code>survey</code> R package <span class="citation">(Thomas Lumley <a href="#ref-Rsurvey" role="doc-biblioref">2019</a>)</span> has a collection of functions that incorporate survey design into the calculation of summary statistics. The <code>survey</code> package is used by the function <code><a href="../reference/prop_summary.html">prop_summary()</a></code> in <code>hseclean</code> to estimate the uncertainty around proportions calculated from a binary variable - <code><a href="../reference/prop_summary.html">prop_summary()</a></code> was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.</p>
 <p>Using <code><a href="../reference/prop_summary.html">prop_summary()</a></code>, calculate the proportion of smokers, stratified by year, sex and quintiles of the Index of Multiple Deprivation.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">prop_smokers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/prop_summary.html">prop_summary</a></span>(
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">hse_data</span>,
@@ -204,7 +204,7 @@
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-Rsurvey">
 <p>Thomas Lumley. 2019. <em>survey: analysis of complex survey samples</em>.</p>
 </div>
@@ -223,7 +223,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
+  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
 </div>
 
 <div class="pkgdown">

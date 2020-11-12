@@ -81,7 +81,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="covariate_data_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Process data on individual socioeconomic, demographic and health characteristics</h1>
@@ -115,7 +115,7 @@
 </li>
 <li>Thereafter, weights made the additional corrections for the various boost samples in each year.</li>
 </ul>
-<p><code>hseclean</code> contains separate functions for reading the survey data for each year, e.g. <code><a href="../reference/read_2001.html">read_2001()</a></code>, and a description of the survey weights has been added to the help files of those functions. Any processing or combining of survey weights is done in the functions that read each year of data. The function <code><a href="../reference/clean_surveyweights.html">clean_surveyweights()</a></code> assigns any missing weights the average weight for each year, and standardises the weights to sum to 1 within each year. The resulting survey weight variable for each year is <code>wt_int</code>.</p>
+<p><code>hseclean</code> contains separate functions for reading the survey data for each year, e.g. <code><a href="../reference/read_2001.html">read_2001()</a></code>, and a description of the survey weights has been added to the help files of those functions. Any processing or combining of survey weights is done in the functions that read each year of data. The function <code><a href="../reference/clean_surveyweights.html">clean_surveyweights()</a></code> assigns any missing weights the average weight for each year, and standardises the weights to sum to 1 within each year. The resulting survey weight variable for each year is <code>wt_int</code>.</p>
 </div>
 <div id="age" class="section level1">
 <h1 class="hasAnchor">
@@ -160,7 +160,7 @@
 <h2 class="hasAnchor">
 <a href="#economic-status" class="anchor"></a>Economic status</h2>
 <p>The function <code><a href="../reference/clean_economic_status.html">clean_economic_status()</a></code> creates a variety of variables to classify economic status.</p>
-<p>The issues around using occupation-based social classifications for social survey research are discussed by Connelly et al. <span class="citation">(<a href="#ref-Connelly2016a">2016</a>)</span>. They advise using a range of alternative measures, and not creating new measures beyond what is already established.</p>
+<p>The issues around using occupation-based social classifications for social survey research are discussed by Connelly et al. <span class="citation">(<a href="#ref-Connelly2016a" role="doc-biblioref">2016</a>)</span>. They advise using a range of alternative measures, and not creating new measures beyond what is already established.</p>
 <p>The classifications considered are:</p>
 <ul>
 <li>Employed / in paid work or not.</li>
@@ -220,7 +220,7 @@
 <a href="#income" class="anchor"></a>Income</h2>
 <p>The function <code><a href="../reference/clean_income.html">clean_income()</a></code> processes the data on income.</p>
 <p>There are a few different options for classifying income - the need to have a measure that is consistent across years of the Health Survey for England has led us to use equivalised income quintiles only. (Past SAPM modelling has used years of the HSE for which a continous variable for equivalised income was provided - and calculated our own income groups - but in later years, this continuous income variable is not available.)</p>
-<p>In the past SAPM modelling, a measure of in “poverty” vs. “not in poverty” has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty, but being in poverty will coincide approximately with the lowest 2 income quintiles.</p>
+<p>In the past SAPM modelling, a measure of in “poverty” vs. “not in poverty” has been used, where the poverty threshold is defined as 60% of the median income for any year. For years in which we only have income quintiles available, it is not possible to make an exact calculation of poverty, but being in poverty will coincide approximately with the lowest 2 income quintiles.</p>
 <p>It would also be possible from the Health Survey for England to classify people as being in receipt of benefits or not, but this is not currently implemented in <code>hseclean</code>, and would have to have some thought on how to deal with the changing definitions of benefits over time.</p>
 </div>
 </div>
@@ -257,7 +257,7 @@
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-Connelly2016a">
 <p>Connelly, Roxanne, Vernon Gayle, and Paul S. Lambert. 2016. “A Review of Occupation-Based Social Classifications for Social Survey Research.” Journal Article. <em>Methodological Innovations</em> 9. <a href="https://doi.org/10.1177/2059799116638003">https://doi.org/10.1177/2059799116638003</a>.</p>
 </div>
@@ -276,7 +276,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
+  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
 </div>
 
 <div class="pkgdown">

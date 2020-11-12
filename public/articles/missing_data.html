@@ -81,7 +81,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="missing_data_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Imputation of missing data</h1>
@@ -200,10 +200,10 @@
 <h1 class="hasAnchor">
 <a href="#multiple-imputation" class="anchor"></a>Multiple imputation</h1>
 <p>The variable with the most missingness in the data is income5cat (19% missing). In this example, the other variables to be imputed are: kids, ethnicity_4cat, eduend4cat, degree, relationship_status, nssec3_lab, activity_lstweek.</p>
-<p>To conduct the multiple imputation, we use the R package <code>mice</code> <span class="citation">(Stef van Buuren and Karin Groothuis-Oudshoorn <a href="#ref-Rmice">2011</a>)</span>. The process of running the multiple imputation can take a long time and consume a lot of RAM. There is a range of <code>mice</code> documentation and tutorials online.</p>
+<p>To conduct the multiple imputation, we use the R package <code>mice</code> <span class="citation">(Stef van Buuren and Karin Groothuis-Oudshoorn <a href="#ref-Rmice" role="doc-biblioref">2011</a>)</span>. The process of running the multiple imputation can take a long time and consume a lot of RAM. There is a range of <code>mice</code> documentation and tutorials online.</p>
 <p>In <code>hseclean</code>, multiple imputation is implemented in a basic way by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function.</p>
 <p><code>mice</code> fits a chained series of regression equations that predict the missing values of variables based on their relationships with other selected variables in the data. The <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function currently only imputes categorical variables, which could be one of three types: “logreg” - binary Logistic regression; “polr” - ordered Proportional odds model; “polyreg” - unordered Polytomous logistic regression.</p>
-<p>In running the multiple imputation, the number of iterations of the imputed data is selected (choosing a small number e.g. &lt; 5 helps keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "“, otherwise to one of”logreg“,”polr" or “polyreg”.</p>
+<p>In running the multiple imputation, the number of iterations of the imputed data is selected (choosing a small number e.g. &lt; 5 helps keep the size of the resulting imputed data manageable), and the variables to either be predicted or to inform the prediction are selected. If a variable is just going to inform the prediction of the other variables but is not going to be predicted itself, then the model type is set to "“, otherwise to one of”logreg“,”polr" or “polyreg”.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># variables with missingness</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">ethnicity_4cat</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 350 missing (0.2%)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="no">data</span>$<span class="no">eduend4cat</span>, <span class="kw">useNA</span> <span class="kw">=</span> <span class="st">"ifany"</span>) <span class="co"># 179 missing</span>
@@ -260,7 +260,7 @@
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
+<div id="refs" class="references hanging-indent">
 <div id="ref-Rmice">
 <p>Stef van Buuren and Karin Groothuis-Oudshoorn. 2011. “mice: Multivariate Imputation by Chained Equations in R.” <em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="%7Bhttps://www.jstatsoft.org/v45/i03/%7D">{https://www.jstatsoft.org/v45/i03/}</a>.</p>
 </div>
@@ -279,7 +279,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
+  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
 </div>
 
 <div class="pkgdown">
