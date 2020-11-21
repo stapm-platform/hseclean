@@ -140,7 +140,7 @@ alc_impute <- function(
   coln <- c("perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units")
   
   data_fit <- as.data.frame(data[drinker_cat != "abstainer" & !is.na(perc_beer_units)])
-  suppressWarnings(data_fit$Y <- DirichletReg::DR_data(data_fit[ , which(colnames(data_fit) == coln)] / 100))
+  suppressWarnings(data_fit$Y <- DirichletReg::DR_data(data_fit[ , which(colnames(data_fit) %in% coln)] / 100))
   
   # Fit regression
   res1 <- DirichletReg::DirichReg(Y ~ ageband + sex + imd_quintile, data_fit)
