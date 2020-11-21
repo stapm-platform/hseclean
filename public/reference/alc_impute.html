@@ -73,7 +73,7 @@ this variable corresponds to the data on whether an individual is a drinker." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -184,7 +184,7 @@ stratified by age category, year, sex and the frequency of drinking.</p>
   <span class='no'>alc_sevenday_adult</span> <span class='kw'>%&gt;%</span>
   <span class='no'>alc_sevenday_child</span>
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>[<span class='no'>age</span> <span class='kw'>&gt;=</span> <span class='fl'>13</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"age"</span>, <span class='st'>"age_cat"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"drinks_now"</span>, <span class='st'>"drink_freq_7d"</span>, <span class='st'>"total_units7_ch"</span>, <span class='st'>"weekmean"</span>)]
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>[<span class='no'>age</span> <span class='kw'>&gt;=</span> <span class='fl'>13</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"age"</span>, <span class='st'>"age_cat"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"drinks_now"</span>, <span class='st'>"drink_freq_7d"</span>, <span class='st'>"total_units7_ch"</span>, <span class='st'>"weekmean"</span>, <span class='st'>"drinker_cat"</span>)]
 
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>alc_impute</span>(<span class='no'>data</span>)
 

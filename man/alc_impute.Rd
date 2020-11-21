@@ -48,7 +48,7 @@ data \%<>\%
   alc_sevenday_adult \%>\%
   alc_sevenday_child
 
-data <- data[age >= 13, c("year", "age", "age_cat", "sex", "imd_quintile", "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean")]
+data <- data[age >= 13, c("year", "age", "age_cat", "sex", "imd_quintile", "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean", "drinker_cat")]
 
 data <- alc_impute(data)
 

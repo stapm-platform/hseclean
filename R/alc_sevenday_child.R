@@ -149,6 +149,6 @@ alc_sevenday_child <- function(
   data[total_units7_ch > 0, drinks_now := "drinker"]
 
 
-return(data)
+return(data[])
 }
 

@@ -90,6 +90,7 @@ reference:
   - combine_years
   - select_data
   - impute_mean
+  - impute_cat
   - num_sim
   - impute_data_mice
   - prop_summary

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read HSE 2017 — read_2017 • hseclean</title>
+<title>Fills missing values of categorical variables with random draw from subgroup — impute_cat • hseclean</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Read HSE 2017 — read_2017" />
-<meta property="og:description" content="Reads and does basic cleaning on the Health Survey for England 2017." />
+<meta property="og:title" content="Fills missing values of categorical variables with random draw from subgroup — impute_cat" />
+<meta property="og:description" content="Replaces missing (NA) values with a random draw from the subgroup - 
+the frequency of non-missing values within the subgroup therefore determines the result." />
 
 
 
@@ -127,55 +128,78 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read HSE 2017</h1>
+    <h1>Fills missing values of categorical variables with random draw from subgroup</h1>
     
-    <div class="hidden name"><code>read_2017.Rd</code></div>
+    <div class="hidden name"><code>impute_cat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reads and does basic cleaning on the Health Survey for England 2017.</p>
+    <p>Replaces missing (NA) values with a random draw from the subgroup - 
+the frequency of non-missing values within the subgroup therefore determines the result.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_2017</span>(
-  <span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"</span>
+    <pre class="usage"><span class='fu'>impute_cat</span>(
+  <span class='no'>data</span>,
+  <span class='no'>var_names</span>,
+  <span class='kw'>strat_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"age_cat"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>root</th>
-      <td><p>Character - the root directory.</p></td>
+      <th>data</th>
+      <td><p>Data table - the Health Survey for England data</p></td>
     </tr>
     <tr>
-      <th>file</th>
-      <td><p>Character - the file path and name.</p></td>
+      <th>var_names</th>
+      <td><p>Character vector - the variable names to be imputed (categorical variables only)</p></td>
+    </tr>
+    <tr>
+      <th>strat_vars</th>
+      <td><p>Character vector - the variables by which to stratify the sample to create subgroups</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a data table. Note that:</p><ul>
-<li><p>Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.</p></li>
-<li><p>All variable names are converted to lower case.</p></li>
-<li><p>The cluster and probabilistic sampling unit have the year appended to them.</p></li>
-</ul>
-
+    <p>Returns an updated version of data in which the variables specified have had
+their missing values imputed with random draws from the subgroups.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The HSE 2017 sample comprised of a core general population sample. There was no boost sample in 2017.</p>
-<p>The sample comprised 9,612 addresses selected at random in 534 postcode sectors, issued over twelve months from January to December 2017. Field work was completed in March 2018.</p>
-<p>Adults and children were interviewed at households identified at the selected addresses. Up to four children in each household were selected to take part at random; up to two aged 2 to 12 and up to two aged 13 to 15.</p>
-<p>A total of 7,997 adults aged 16 and over and 1,985 children aged 0-15 were interviewed, including 5,196 adults and 1,195 children who had a nurse visit.#'</p>
-<p>From 2015 HSE data contains the 2015 English index of multiple deprivation, divided into quintiles.</p>
+    <p>If not all NAs can be imputed with the fine scale starting amount of stratification,
+imputation is attempted again, removing the stratification variable specified last.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 
-<span class='no'>data_2017</span> <span class='kw'>&lt;-</span> <span class='fu'>read_2017</span>(<span class='st'>"X:/"</span>,
-<span class='st'>"ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8334-tab/tab/hse2016_eul.tab"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>hseclean</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>data.table</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
+
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_2017.html'>read_2017</a></span>(<span class='kw'>root</span> <span class='kw'>=</span> <span class='st'>"/Volumes/Shared/"</span>)
+
+<span class='no'>data</span> <span class='kw'>%&lt;&gt;%</span>
+  <span class='no'>clean_age</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>clean_demographic</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>clean_education</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>clean_economic_status</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>clean_family</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>clean_income</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>clean_health_and_bio</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>alc_drink_now_allages</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>alc_weekmean_adult</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>alc_sevenday_adult</span> <span class='kw'>%&gt;%</span>
+  <span class='no'>alc_sevenday_child</span>
+
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>[<span class='no'>age</span> <span class='kw'>&gt;=</span> <span class='fl'>13</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"age"</span>, <span class='st'>"age_cat"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"drinks_now"</span>, <span class='st'>"drink_freq_7d"</span>, <span class='st'>"total_units7_ch"</span>, <span class='st'>"weekmean"</span>, <span class='st'>"drinker_cat"</span>)]
+
+<span class='no'>data</span>[<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>drinks_now</span>)]
+
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>impute_cat</span>(<span class='no'>data</span>, <span class='kw'>var_names</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"drinks_now"</span>))
+
+<span class='no'>data</span>[<span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span>(<span class='no'>drinks_now</span>)]
 
 }</div></pre>
   </div>

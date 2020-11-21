@@ -1,6 +1,4 @@
 
-
-
 #' Fills missing values with subgroup mean value
 #'
 #' Replaces any values < 0 with NA, calculates the subgroup mean,
@@ -10,7 +8,7 @@
 #' imputation is attempted again, removing the stratification variable specified last.
 #'
 #' @param data Data table - the Health Survey for England data
-#' @param var_names Character vector - the variable names to be imputed
+#' @param var_names Character vector - the variable names to be imputed (numeric variables only)
 #' @param remove_zeros Logical - should zeros be treated as missing data
 #' @param strat_vars Character vector - the variables by which to stratify the subgroup means
 #' @importFrom data.table :=
@@ -80,5 +78,5 @@ impute_mean <- function(
   }
 
 
-return(data)
+return(data[])
 }

@@ -14,7 +14,7 @@ impute_mean(
 \arguments{
 \item{data}{Data table - the Health Survey for England data}
 
-\item{var_names}{Character vector - the variable names to be imputed}
+\item{var_names}{Character vector - the variable names to be imputed (numeric variables only)}
 
 \item{remove_zeros}{Logical - should zeros be treated as missing data}
 

@@ -1,5 +1,4 @@
 
-
 #' Impute missing values of average weekly alcohol consumption
 #' 
 #' Fills the missing values of average weekly consumption so that 
@@ -13,9 +12,12 @@
 #' stratified by age category, year, sex and the frequency of drinking.   
 #'
 #' @param data Data table - the Health Survey for England dataset.
+#' 
 #' @importFrom data.table :=
+#' 
 #' @return Returns a data table in which the missing values of average weekly consumption have been filled in so that 
 #' this variable corresponds to the data on whether an individual is a drinker.
+#' 
 #' @export
 #'
 #' @examples
@@ -41,7 +43,7 @@
 #'   alc_sevenday_adult %>%
 #'   alc_sevenday_child
 #' 
-#' data <- data[age >= 13, c("year", "age", "age_cat", "sex", "imd_quintile", "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean")]
+#' data <- data[age >= 13, c("year", "age", "age_cat", "sex", "imd_quintile", "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean", "drinker_cat")]
 #' 
 #' data <- alc_impute(data)
 #' 
@@ -51,8 +53,11 @@ alc_impute <- function(
   data
 ) {
 
+  # Impute drinks_now
+  data <- hseclean::impute_cat(data, "drinks_now", strat_vars = c("age_cat", "sex", "year", "imd_quintile"))
+  
   # Fill any missing values for drinking frequency
-  data <- hseclean::impute_mean(data, "drink_freq_7d", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drinks_now"))
+  data <- hseclean::impute_mean(data, "drink_freq_7d", strat_vars = c("age_cat", "sex", "year", "imd_quintile", "drinks_now"))
   
   
   ## Children 13-15 years old
@@ -73,7 +78,7 @@ alc_impute <- function(
   # Fill in the average amount drunk by adults who are drinkers
   
   # Make zeros NAs
-  data[age >= 16 & drinks_now == "drinker" & weekmean == 0, weekmean := NA]
+  data[age >= 16 & drinks_now == "drinker" & weekmean == 0, `:=`(weekmean = NA, drinker_cat = NA)]
   
   # Fill the missing values
   #data <- hseclean::impute_mean(data, var_names = "weekmean", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drink_freq_7d"), remove_zeros = FALSE)
@@ -87,6 +92,17 @@ alc_impute <- function(
   data[ , median_weekmean := NULL]
   
   data[drinks_now == "non_drinker", weekmean := 0]
+  
+  # Re-categorise total units per week
+  data[ , drinker_cat := NA_character_]
+  data[drinks_now == "non_drinker", drinker_cat := "abstainer"]
+  data[drinks_now == "drinker" & weekmean < 14, drinker_cat := "lower_risk"]
+  data[drinks_now == "drinker" & weekmean >= 14 & weekmean < 35 & sex == "Female", drinker_cat := "increasing_risk"]
+  data[drinks_now == "drinker" & weekmean >= 14 & weekmean < 50 & sex == "Male", drinker_cat := "increasing_risk"]
+  data[drinks_now == "drinker" & weekmean >= 35 & sex == "Female", drinker_cat := "higher_risk"]
+  data[drinks_now == "drinker" & weekmean >= 50 & sex == "Male", drinker_cat := "higher_risk"]
+  
+  data[ , `:=`(drink_freq_7d = NULL, total_units7_ch = NULL)]
   
   
 return(data[])
