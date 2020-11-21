@@ -14,16 +14,28 @@ Returns a data table in which the missing values of average weekly consumption h
 this variable corresponds to the data on whether an individual is a drinker.
 }
 \description{
-Fills the missing values of average weekly consumption so that 
-this variable corresponds to the data on whether an individual is a drinker.
+Fills the missing values of whether an individual is a drinker,
+average weekly consumption, and the percentage beverage preferences.
 }
 \details{
+Missing values of whether an individual drinks or not are imputed by 
+taking a random draw from the age, sex, IMD quintile subgroup. Thus, the 
+frequency of the imputed categorical values approx matches the frequency 
+of drinking in that subgroup.  
+
 For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
-by scaling the amount drunk in the last week by the frequency of drinking.   
+by scaling the amount drunk in the last week by the frequency of drinking. For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+stratified by age category, year, sex and the frequency of drinking.   
 
-For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
-stratified by age category, year, sex and the frequency of drinking.
+Missing values for how drinkers divide their percentage consumption among five beverage types (beer, wine, spirits, RTDs) 
+are imputed by first fitting a Dirichlet distribution to the distribution of preferences 
+within an age, sex, IMD quintile subgroup. The missing values for each individual drinker 
+are then imputed by taking a random draw from the Dirichlet distribution defined by the 
+estimated Dirichlet parameters for that subgroup. Note that the HSE data 
+does not contain any beverage preference info for individuals younger than age 16,
+so we assume that the underlying distribution of beverage preferences for ages 13-15 years is the same 
+as for the age group 16-24 years.
 }
 \examples{
 
@@ -48,7 +60,10 @@ data \%<>\%
   alc_sevenday_adult \%>\%
   alc_sevenday_child
 
-data <- data[age >= 13, c("year", "age", "age_cat", "sex", "imd_quintile", "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean", "drinker_cat")]
+data <- data[age >= 13, c(
+  "year", "age", "age_cat", "sex", "imd_quintile", 
+  "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean", "drinker_cat",
+  "perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units")]
 
 data <- alc_impute(data)
 

@@ -1,6 +1,6 @@
 Package: hseclean
 Title: Health Survey Data Wrangling
-Version: 1.5.0
+Version: 1.6.0
 Authors@R: 
     c(
     person(given = "Duncan",
@@ -36,7 +36,8 @@ Imports:
     magrittr,
     data.table,
     survey,
-    stats
+    stats,
+    DirichletReg
 RoxygenNote: 7.1.0
 Suggests: 
     knitr,

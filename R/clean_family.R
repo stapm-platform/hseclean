@@ -24,8 +24,10 @@
 #' }
 #'
 #' @param data Data table - the Health Survey for England dataset.
+#' 
 #' @importFrom data.table :=
 #' @importFrom stats predict
+#' 
 #' @return Returns an updated version of data with the new family variables:
 #' \itemize{
 #' \item 'kids' - number of children age <= 15 years in the household (0, 1, 2, 3+)

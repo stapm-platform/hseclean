@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Impute missing values of average weekly alcohol consumption — alc_impute" />
-<meta property="og:description" content="Fills the missing values of average weekly consumption so that 
-this variable corresponds to the data on whether an individual is a drinker." />
+<meta property="og:description" content="Fills the missing values of whether an individual is a drinker,
+average weekly consumption, and the percentage beverage preferences." />
 
 
 
@@ -73,7 +73,7 @@ this variable corresponds to the data on whether an individual is a drinker." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
       </span>
     </div>
 
@@ -134,8 +134,8 @@ this variable corresponds to the data on whether an individual is a drinker." />
     </div>
 
     <div class="ref-description">
-    <p>Fills the missing values of average weekly consumption so that 
-this variable corresponds to the data on whether an individual is a drinker.</p>
+    <p>Fills the missing values of whether an individual is a drinker,
+average weekly consumption, and the percentage beverage preferences.</p>
     </div>
 
     <pre class="usage"><span class='fu'>alc_impute</span>(<span class='no'>data</span>)</pre>
@@ -155,11 +155,22 @@ this variable corresponds to the data on whether an individual is a drinker.</p>
 this variable corresponds to the data on whether an individual is a drinker.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
+    <p>Missing values of whether an individual drinks or not are imputed by 
+taking a random draw from the age, sex, IMD quintile subgroup. Thus, the 
+frequency of the imputed categorical values approx matches the frequency 
+of drinking in that subgroup.</p>
+<p>For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
-by scaling the amount drunk in the last week by the frequency of drinking.</p>
-<p>For adults &gt;= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+by scaling the amount drunk in the last week by the frequency of drinking. For adults &gt;= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
 stratified by age category, year, sex and the frequency of drinking.</p>
+<p>Missing values for how drinkers divide their percentage consumption among five beverage types (beer, wine, spirits, RTDs) 
+are imputed by first fitting a Dirichlet distribution to the distribution of preferences 
+within an age, sex, IMD quintile subgroup. The missing values for each individual drinker 
+are then imputed by taking a random draw from the Dirichlet distribution defined by the 
+estimated Dirichlet parameters for that subgroup. Note that the HSE data 
+does not contain any beverage preference info for individuals younger than age 16,
+so we assume that the underlying distribution of beverage preferences for ages 13-15 years is the same 
+as for the age group 16-24 years.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -184,7 +195,10 @@ stratified by age category, year, sex and the frequency of drinking.</p>
   <span class='no'>alc_sevenday_adult</span> <span class='kw'>%&gt;%</span>
   <span class='no'>alc_sevenday_child</span>
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>[<span class='no'>age</span> <span class='kw'>&gt;=</span> <span class='fl'>13</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"year"</span>, <span class='st'>"age"</span>, <span class='st'>"age_cat"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>, <span class='st'>"drinks_now"</span>, <span class='st'>"drink_freq_7d"</span>, <span class='st'>"total_units7_ch"</span>, <span class='st'>"weekmean"</span>, <span class='st'>"drinker_cat"</span>)]
+<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>data</span>[<span class='no'>age</span> <span class='kw'>&gt;=</span> <span class='fl'>13</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+  <span class='st'>"year"</span>, <span class='st'>"age"</span>, <span class='st'>"age_cat"</span>, <span class='st'>"sex"</span>, <span class='st'>"imd_quintile"</span>,
+  <span class='st'>"drinks_now"</span>, <span class='st'>"drink_freq_7d"</span>, <span class='st'>"total_units7_ch"</span>, <span class='st'>"weekmean"</span>, <span class='st'>"drinker_cat"</span>,
+  <span class='st'>"perc_spirit_units"</span>, <span class='st'>"perc_wine_units"</span>, <span class='st'>"perc_rtd_units"</span>, <span class='st'>"perc_beer_units"</span>)]
 
 <span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>alc_impute</span>(<span class='no'>data</span>)
 

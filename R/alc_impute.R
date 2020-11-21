@@ -1,19 +1,32 @@
 
 #' Impute missing values of average weekly alcohol consumption
 #' 
-#' Fills the missing values of average weekly consumption so that 
-#' this variable corresponds to the data on whether an individual is a drinker.  
+#' Fills the missing values of whether an individual is a drinker,
+#' average weekly consumption, and the percentage beverage preferences.
 #'
+#' Missing values of whether an individual drinks or not are imputed by 
+#' taking a random draw from the age, sex, IMD quintile subgroup. Thus, the 
+#' frequency of the imputed categorical values approx matches the frequency 
+#' of drinking in that subgroup.  
+#' 
 #' For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 #' average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
-#' by scaling the amount drunk in the last week by the frequency of drinking.   
-#' 
-#' For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+#' by scaling the amount drunk in the last week by the frequency of drinking. For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
 #' stratified by age category, year, sex and the frequency of drinking.   
+#' 
+#' Missing values for how drinkers divide their percentage consumption among five beverage types (beer, wine, spirits, RTDs) 
+#' are imputed by first fitting a Dirichlet distribution to the distribution of preferences 
+#' within an age, sex, IMD quintile subgroup. The missing values for each individual drinker 
+#' are then imputed by taking a random draw from the Dirichlet distribution defined by the 
+#' estimated Dirichlet parameters for that subgroup. Note that the HSE data 
+#' does not contain any beverage preference info for individuals younger than age 16,
+#' so we assume that the underlying distribution of beverage preferences for ages 13-15 years is the same 
+#' as for the age group 16-24 years.  
 #'
 #' @param data Data table - the Health Survey for England dataset.
 #' 
-#' @importFrom data.table :=
+#' @importFrom data.table := setDT
+#' @importFrom stats predict
 #' 
 #' @return Returns a data table in which the missing values of average weekly consumption have been filled in so that 
 #' this variable corresponds to the data on whether an individual is a drinker.
@@ -43,7 +56,10 @@
 #'   alc_sevenday_adult %>%
 #'   alc_sevenday_child
 #' 
-#' data <- data[age >= 13, c("year", "age", "age_cat", "sex", "imd_quintile", "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean", "drinker_cat")]
+#' data <- data[age >= 13, c(
+#'   "year", "age", "age_cat", "sex", "imd_quintile", 
+#'   "drinks_now", "drink_freq_7d", "total_units7_ch", "weekmean", "drinker_cat",
+#'   "perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units")]
 #' 
 #' data <- alc_impute(data)
 #' 
@@ -103,6 +119,77 @@ alc_impute <- function(
   data[drinks_now == "drinker" & weekmean >= 50 & sex == "Male", drinker_cat := "higher_risk"]
   
   data[ , `:=`(drink_freq_7d = NULL, total_units7_ch = NULL)]
+  
+  
+  ## Impute missing beverage preferences --------
+  
+  # fit multinomial model to beverage preferences
+  # 4 bev types
+  
+  # add NAs to units where required
+  data[(perc_spirit_units + perc_wine_units + perc_rtd_units + perc_beer_units) == 0 & drinker_cat != "abstainer", 
+       `:=`(perc_spirit_units = NA, perc_wine_units = NA, perc_rtd_units = NA, perc_beer_units = NA)]
+  
+  # Make a new ageband variable
+  # assumes under 16s (for whom no bev pref data is available) have same preferences as over 16-24s
+  data[ , ageband := c("<24", "25-34", "35-49", "50-64", "65+")[findInterval(age, c(0, 25, 35, 50, 65))]]
+  
+  # Fit a Dirichlet regression
+  
+  # Prep data
+  coln <- c("perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units")
+  
+  data_fit <- as.data.frame(data[drinker_cat != "abstainer" & !is.na(perc_beer_units)])
+  suppressWarnings(data_fit$Y <- DirichletReg::DR_data(data_fit[ , which(colnames(data_fit) == coln)] / 100))
+  
+  # Fit regression
+  res1 <- DirichletReg::DirichReg(Y ~ ageband + sex + imd_quintile, data_fit)
+  
+  # Grab predicted values
+  newdata <- data.frame(expand.grid(
+    ageband = c("<24", "25-34", "35-49", "50-64", "65+"),
+    sex = c("Male", "Female"),
+    imd_quintile = c("1_least_deprived", "2", "3", "4", "5_most_deprived")
+  ))
+  
+  # Grab the predicted values 
+  # in the form of the Dirichlet distribution’s parameters (alpha values)
+  preds <- data.frame(predict(res1, newdata = newdata, alpha = T, mu = F))
+  colnames(preds) <- paste0(coln, "_alpha")
+  newdata <- data.frame(newdata, preds)
+  setDT(newdata)
+  
+  # Merge the predicted values back into the main data table
+  data <- merge(data, newdata,
+                by = c("ageband", "sex", "imd_quintile"),
+                all.x = T, all.y = F, sort = F)
+  
+  # Sample replacements for the missing values of beverage preferences
+  data[is.na(perc_beer_units), bev_pref_samp :=
+         mapply(
+           function(seed, a, b, c, d) {
+             
+             set.seed(seed)
+             
+             list(DirichletReg::rdirichlet(1, c(a, b, c, d)))
+             
+           },
+           seed = weekmean,
+           a = perc_spirit_units_alpha, 
+           b = perc_wine_units_alpha,
+           c = perc_rtd_units_alpha, 
+           d = perc_beer_units_alpha
+         )]
+  
+  # Fill the missing values 
+  data[is.na(perc_beer_units), perc_spirit_units := sapply(bev_pref_samp, function(x) x[1] * 100)]
+  data[is.na(perc_beer_units), perc_wine_units := sapply(bev_pref_samp, function(x) x[2] * 100)]
+  data[is.na(perc_beer_units), perc_rtd_units := sapply(bev_pref_samp, function(x) x[3] * 100)]
+  data[is.na(perc_beer_units), perc_beer_units := sapply(bev_pref_samp, function(x) x[4] * 100)]
+  
+  # Remove columns not needed
+  data[ , `:=`(ageband = NULL, perc_spirit_units_alpha = NULL, perc_wine_units_alpha = NULL, 
+               perc_rtd_units_alpha = NULL, perc_beer_units_alpha = NULL, bev_pref_samp = NULL)]
   
   
 return(data[])
