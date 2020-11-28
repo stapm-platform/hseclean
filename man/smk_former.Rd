@@ -2,7 +2,7 @@
 % Please edit documentation in R/smk_former.R
 \name{smk_former}
 \alias{smk_former}
-\title{Former smokers: time since quit and time as smoker}
+\title{Former smokers: time since quit and time as smoker \lifecycle{stable}}
 \usage{
 smk_former(data)
 }

@@ -1,5 +1,5 @@
 
-#' Former smokers: time since quit and time as smoker
+#' Former smokers: time since quit and time as smoker \lifecycle{stable}
 #'
 #' Cleans the data on the time since quitting and time spent as a regular smoker among former smokers.
 #'
