@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_SHeS_2012.R
 \name{read_SHeS_2012}
 \alias{read_SHeS_2012}
-\title{Read Scottish Health Survey 2012}
+\title{Read Scottish Health Survey 2012 \lifecycle{maturing}}
 \usage{
 read_SHeS_2012(
   root = c("X:/", "/Volumes/Shared/"),

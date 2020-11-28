@@ -1,5 +1,5 @@
 
-#' Impute missing values of average weekly alcohol consumption
+#' Impute missing values of average weekly alcohol consumption \lifecycle{maturing}
 #' 
 #' Fills the missing values of whether an individual is a drinker,
 #' average weekly consumption, and the percentage beverage preferences.

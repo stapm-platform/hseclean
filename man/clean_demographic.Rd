@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_demographic.R
 \name{clean_demographic}
 \alias{clean_demographic}
-\title{Demographic variables}
+\title{Demographic variables \lifecycle{maturing}}
 \usage{
 clean_demographic(data)
 }

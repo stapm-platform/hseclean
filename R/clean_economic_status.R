@@ -1,6 +1,6 @@
 
 
-#' Economic status
+#' Economic status \lifecycle{maturing}
 #'
 #' Process the data on employment and occupation.
 #'

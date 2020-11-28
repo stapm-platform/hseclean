@@ -2,7 +2,7 @@
 % Please edit documentation in R/smk_quit.R
 \name{smk_quit}
 \alias{smk_quit}
-\title{Quitting smoking}
+\title{Quitting smoking \lifecycle{experimental}}
 \usage{
 smk_quit(data)
 }

@@ -1,6 +1,6 @@
 
 
-#' Simulate single years from age/time category
+#' Simulate single years from age/time category \lifecycle{stable}
 #'
 #' Used to overcome the loss of variables (age, time since quit) in single years in the Health Surveys for England 2015+.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_income.R
 \name{clean_income}
 \alias{clean_income}
-\title{Income}
+\title{Income \lifecycle{maturing}}
 \usage{
 clean_income(data)
 }

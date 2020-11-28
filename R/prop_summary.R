@@ -1,5 +1,5 @@
 
-#' Summarise the percentages of people with certain levels of a variable
+#' Summarise the percentages of people with certain levels of a variable \lifecycle{maturing}
 #'
 #' Uses the 'survey' package to estimate the percentages with uncertainty that accounts for survey sampling
 #' error and survey design.

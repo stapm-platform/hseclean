@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_surveyweights.R
 \name{clean_surveyweights}
 \alias{clean_surveyweights}
-\title{Process the survey weights}
+\title{Process the survey weights \lifecycle{maturing}}
 \usage{
 clean_surveyweights(data, pop_data)
 }

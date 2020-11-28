@@ -1,6 +1,6 @@
 
 
-#' Education variables
+#' Education variables \lifecycle{maturing}
 #'
 #' Process the data on education.
 #'

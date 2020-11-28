@@ -1,6 +1,6 @@
 
 
-#' Age variables
+#' Age variables \lifecycle{stable}
 #'
 #' Processes the data on age.
 #'

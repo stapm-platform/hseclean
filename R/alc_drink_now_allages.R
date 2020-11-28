@@ -1,6 +1,6 @@
 
 
-#' Whether someone drinks and frequency of drinking
+#' Whether someone drinks and frequency of drinking \lifecycle{maturing}
 #'
 #' Clean the data on whether someone is a current drinker (drank in last 12 months)
 #' and if they did drink how frequently they did so. Several definitions are used for youth drinking (< 16 years).  

@@ -85,31 +85,13 @@
   </a>
 </li>
 <li>
+  <a href="../articles/hseclean.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/alcohol_data.html">Process data on alcohol consumption</a>
-    </li>
-    <li>
-      <a href="../articles/covariate_data.html">Process data on individual socioeconomic, demographic and health characteristics</a>
-    </li>
-    <li>
-      <a href="../articles/missing_data.html">Imputation of missing data</a>
-    </li>
-    <li>
-      <a href="../articles/scottish_data.html">Addition of Scottish data</a>
-    </li>
-    <li>
-      <a href="../articles/smoking_data.html">Process data on tobacco smoking</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -136,7 +118,7 @@
     <p>Cleans the data on the time since quitting and time spent as a regular smoker among former smokers.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>smk_former</span>(<span class='no'>data</span>)</pre>
+    <pre class="usage"><span class='fu'>smk_former</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,15 +146,17 @@ For adults, we fill missing values with the average value for each age, sex and 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_2001.html'>read_2001</a></span>()
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_age.html'>clean_age</a></span>(<span class='no'>data</span>)
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_demographic.html'>clean_demographic</a></span>(<span class='no'>data</span>)
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='smk_status.html'>smk_status</a></span>(<span class='no'>data</span>)
-<span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='fu'>smk_former</span>(<span class='no'>data</span>)
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_2001.html'>read_2001</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='clean_age.html'>clean_age</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='clean_demographic.html'>clean_demographic</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='smk_status.html'>smk_status</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>smk_former</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -188,7 +172,7 @@ For adults, we fill missing values with the average value for each age, sex and 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

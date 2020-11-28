@@ -1,6 +1,6 @@
 
 
-#' Read HSE 2012
+#' Read HSE 2012 \lifecycle{stable}
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2012.
 #'

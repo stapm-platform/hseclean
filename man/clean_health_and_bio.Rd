@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_health_and_bio.R
 \name{clean_health_and_bio}
 \alias{clean_health_and_bio}
-\title{Health and biometric variables}
+\title{Health and biometric variables \lifecycle{maturing}}
 \usage{
 clean_health_and_bio(data)
 }

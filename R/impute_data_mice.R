@@ -1,5 +1,5 @@
 
-#' Chained multiple imputation of a set of variables
+#' Chained multiple imputation of a set of variables \lifecycle{maturing}
 #'
 #' This function uses the \href{https://cran.r-project.org/web/packages/mice/mice.pdf}{mice} package to
 #' multiply impute missing values based on the statistical relationships among a set of variables.

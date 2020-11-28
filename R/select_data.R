@@ -1,6 +1,6 @@
 
 
-#' Select variables and apply filters
+#' Select variables and apply filters \lifecycle{maturing}
 #'
 #' Selects the variables required for analysis and selects only the rows without missing data
 #' for specified variables.

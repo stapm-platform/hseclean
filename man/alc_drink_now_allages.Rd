@@ -2,7 +2,7 @@
 % Please edit documentation in R/alc_drink_now_allages.R
 \name{alc_drink_now_allages}
 \alias{alc_drink_now_allages}
-\title{Whether someone drinks and frequency of drinking}
+\title{Whether someone drinks and frequency of drinking \lifecycle{maturing}}
 \usage{
 alc_drink_now_allages(data)
 }

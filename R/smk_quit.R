@@ -1,5 +1,5 @@
 
-#' Quitting smoking
+#' Quitting smoking \lifecycle{experimental}
 #'
 #' Cleans the data on the motivation to quit smoking and the use of support.
 #'

@@ -1,5 +1,5 @@
 
-#' Income
+#' Income \lifecycle{maturing}
 #'
 #' Process the data on income.
 #'

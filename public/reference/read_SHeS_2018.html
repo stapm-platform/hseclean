@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read Scottish Health Survey 2018 — read_SHeS_2018 • hseclean</title>
+<title>Read Scottish Health Survey 2018  — read_SHeS_2018 • hseclean</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Read Scottish Health Survey 2018 — read_SHeS_2018" />
+<meta property="og:title" content="Read Scottish Health Survey 2018  — read_SHeS_2018" />
 <meta property="og:description" content="Reads and does basic cleaning on the Scottish Health Survey 2018." />
 
 
@@ -85,31 +85,13 @@
   </a>
 </li>
 <li>
+  <a href="../articles/hseclean.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/alcohol_data.html">Process data on alcohol consumption</a>
-    </li>
-    <li>
-      <a href="../articles/covariate_data.html">Process data on individual socioeconomic, demographic and health characteristics</a>
-    </li>
-    <li>
-      <a href="../articles/missing_data.html">Imputation of missing data</a>
-    </li>
-    <li>
-      <a href="../articles/scottish_data.html">Addition of Scottish data</a>
-    </li>
-    <li>
-      <a href="../articles/smoking_data.html">Process data on tobacco smoking</a>
-    </li>
-  </ul>
+<li>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -127,7 +109,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read Scottish Health Survey 2018</h1>
+    <h1>Read Scottish Health Survey 2018 <a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></h1>
     
     <div class="hidden name"><code>read_SHeS_2018.Rd</code></div>
     </div>
@@ -136,11 +118,11 @@
     <p>Reads and does basic cleaning on the Scottish Health Survey 2018.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_SHeS_2018</span>(
-  <span class='kw'>root</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span>),
-
-    <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>read_SHeS_2018</span><span class='op'>(</span>
+  root <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span><span class='op'>)</span>,
+ 
+    file <span class='op'>=</span> <span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,12 +171,14 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='no'>data_2018</span> <span class='kw'>&lt;-</span> <span class='fu'>read_SHeS_2018</span>(<span class='st'>"X:/"</span>,
-<span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"</span>)
+<span class='va'>data_2018</span> <span class='op'>&lt;-</span> <span class='fu'>read_SHeS_2018</span><span class='op'>(</span><span class='st'>"X:/"</span>, 
+<span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -210,7 +194,7 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

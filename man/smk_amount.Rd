@@ -2,7 +2,7 @@
 % Please edit documentation in R/smk_amount.R
 \name{smk_amount}
 \alias{smk_amount}
-\title{Characteristics of smoking}
+\title{Characteristics of smoking \lifecycle{maturing}}
 \usage{
 smk_amount(data)
 }

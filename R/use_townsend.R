@@ -1,5 +1,5 @@
 
-#' Use the Townsend Index of Deprivation
+#' Use the Townsend Index of Deprivation \lifecycle{maturing}
 #'
 #' Produce a version of the Health Survey for England data that has the Townsend Index in it,
 #' based on the probabilistic mapping between the 2015 English Index of Multiple Deprivation and

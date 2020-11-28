@@ -1,5 +1,5 @@
 
-#' Characteristics of smoking
+#' Characteristics of smoking \lifecycle{maturing}
 #'
 #' Clean the variables that describe how much, what and to what level of addiction people smoke.
 #'

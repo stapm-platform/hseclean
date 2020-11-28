@@ -2,7 +2,7 @@
 % Please edit documentation in R/alc_sevenday_child.R
 \name{alc_sevenday_child}
 \alias{alc_sevenday_child}
-\title{Alcohol consumption in last seven-days (children)}
+\title{Alcohol consumption in last seven-days (children) \lifecycle{maturing}}
 \usage{
 alc_sevenday_child(
   data,

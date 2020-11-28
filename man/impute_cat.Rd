@@ -2,7 +2,7 @@
 % Please edit documentation in R/impute_cat.R
 \name{impute_cat}
 \alias{impute_cat}
-\title{Fills missing values of categorical variables with random draw from subgroup}
+\title{Fills missing values of categorical variables with random draw from subgroup \lifecycle{maturing}}
 \usage{
 impute_cat(
   data,

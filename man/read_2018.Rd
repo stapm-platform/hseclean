@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_2018.R
 \name{read_2018}
 \alias{read_2018}
-\title{Read HSE 2018}
+\title{Read HSE 2018 \lifecycle{stable}}
 \usage{
 read_2018(
   root = c("X:/", "/Volumes/Shared/"),

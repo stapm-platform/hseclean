@@ -2,7 +2,7 @@
 % Please edit documentation in R/alc_impute.R
 \name{alc_impute}
 \alias{alc_impute}
-\title{Impute missing values of average weekly alcohol consumption}
+\title{Impute missing values of average weekly alcohol consumption \lifecycle{maturing}}
 \usage{
 alc_impute(data)
 }

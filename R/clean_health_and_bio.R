@@ -1,6 +1,6 @@
 
 
-#' Health and biometric variables
+#' Health and biometric variables \lifecycle{maturing}
 #'
 #' Cleans data on presence/absence of certain categories of health condition, and on height and weight.
 #'

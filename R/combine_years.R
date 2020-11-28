@@ -1,6 +1,6 @@
 
 
-#' Combine years of data
+#' Combine years of data \lifecycle{maturing}
 #'
 #' Combines years of data when provided as a list of data tables.
 #'

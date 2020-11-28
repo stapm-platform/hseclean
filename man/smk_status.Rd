@@ -2,7 +2,7 @@
 % Please edit documentation in R/smk_status.R
 \name{smk_status}
 \alias{smk_status}
-\title{Cigarette smoking status}
+\title{Cigarette smoking status \lifecycle{stable}}
 \usage{
 smk_status(data)
 }

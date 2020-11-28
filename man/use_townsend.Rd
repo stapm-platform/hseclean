@@ -2,7 +2,7 @@
 % Please edit documentation in R/use_townsend.R
 \name{use_townsend}
 \alias{use_townsend}
-\title{Use the Townsend Index of Deprivation}
+\title{Use the Townsend Index of Deprivation \lifecycle{maturing}}
 \usage{
 use_townsend(data, imdq_to_townsend_map = hseclean::imdq_to_townsend)
 }

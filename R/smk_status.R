@@ -1,6 +1,6 @@
 
 
-#' Cigarette smoking status
+#' Cigarette smoking status \lifecycle{stable}
 #'
 #' Categorise cigarette smoking into current, former and never regular cigarette smoker.
 #'

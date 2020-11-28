@@ -3,15 +3,14 @@
 
 # hseclean <img src="tools/hseclean_hex.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
 
+<!-- badges: start -->
+
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-
-**DRAFT WORKING VERSION** - The package is usable but there are still
-bugs and further developments that are being worked through i.e. some
-code and documentation is still incomplete or in need of being refined.
-The code and documentation are still undergoing internal review by the
-analyst team.
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+<!-- badges: end -->
 
 ## Motivation
 
@@ -155,7 +154,7 @@ test_2001 <- read_2001(
 -----
 
 `hseclean` contains separate functions for reading the survey data for
-each year, e.g. `read_SHeS_2008()`.
+each year, e.g. `read_SHeS_2008()`.
 
 ### Processing socioeconomic, demographic and health variables
 

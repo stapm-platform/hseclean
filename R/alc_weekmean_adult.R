@@ -1,6 +1,6 @@
 
 
-#' Alcohol average weekly consumption (adults)
+#' Alcohol average weekly consumption (adults) \lifecycle{maturing}
 #'
 #' We estimate the number of
 #' UK standard units of alcohol drunk on average in a week from the questions on drinking in the last 12 months.

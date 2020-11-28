@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_education.R
 \name{clean_education}
 \alias{clean_education}
-\title{Education variables}
+\title{Education variables \lifecycle{maturing}}
 \usage{
 clean_education(data)
 }

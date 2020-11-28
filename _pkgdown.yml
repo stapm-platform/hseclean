@@ -2,11 +2,13 @@ destination: public
 home:
   title: Health Survey Data Wrangling
   links:
+  - text: View source code (team members)
+    href: https://gitlab.com/stapm/r-packages/hseclean
   - text: STAPM webpage
     href: https://stapm.gitlab.io/
   - text: Access data
     href: https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx
-url: https://stapm.gitlab.io/hseclean
+url: https://stapm.gitlab.io/r-packages/hseclean/
 template:
   params:
     bootswatch: flatly
@@ -19,6 +21,24 @@ authors:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c
   Alan Brennan:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a
+    
+articles:
+- title: "Tobacco and alcohol variables"
+  contents:
+  - alcohol_data
+  - smoking_data
+
+- title: "Other variables"
+  contents:
+  - covariate_data
+    
+- title: "Scottish data"
+  contents:
+  - scottish_data
+  
+- title: "Missing data"
+  contents:
+  - missing_data
     
 reference:
 - title: Read Health Survey for England

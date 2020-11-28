@@ -1,6 +1,6 @@
 
 
-#' Alcohol consumption in last seven-days (adults)
+#' Alcohol consumption in last seven-days (adults) \lifecycle{maturing}
 #'
 #' Processes the information from the questions on drinking in the last seven days - how many times drank and characteristics of the heaviest drinking day.
 #'

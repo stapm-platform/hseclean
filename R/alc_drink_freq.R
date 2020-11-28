@@ -1,5 +1,5 @@
 
-#' Drink frequency
+#' Drink frequency \lifecycle{maturing}
 #'
 #' Convert the surveyed drink frequency to a measure of days per week on which drinking occurred.
 #'

@@ -1,5 +1,5 @@
 
-#' Read Scottish Health Survey 2015
+#' Read Scottish Health Survey 2015 \lifecycle{maturing}
 #'
 #' Reads and does basic cleaning on the Scottish Health Survey 2015.
 #'

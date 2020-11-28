@@ -1,6 +1,6 @@
 
 
-#' Alcohol consumption in last seven-days (children)
+#' Alcohol consumption in last seven-days (children) \lifecycle{maturing}
 #'
 #' Processes the information from the questions on drinking in the last seven days -
 #' whether different types of beverages have been drunk in last 7 days,

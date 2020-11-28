@@ -1,5 +1,5 @@
 
-#' Fills missing values with subgroup mean value
+#' Fills missing values with subgroup mean value \lifecycle{maturing}
 #'
 #' Replaces any values < 0 with NA, calculates the subgroup mean,
 #' then replaces missing values with the subgroup mean.

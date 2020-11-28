@@ -1,6 +1,6 @@
 
 
-#' Process the survey weights
+#' Process the survey weights \lifecycle{maturing}
 #' 
 #' Makes new survey weights based on the difference between the HSE sample size and the actual population size 
 #' by year, age, sex and IMD quintiles.   

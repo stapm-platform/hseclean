@@ -1,0 +1,24 @@
+---
+title: "Get started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get started}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+To illustrate the use of the `hseclean` functions for different tasks, we have created example workflows. You can use these examples to help understand how the code works, run them to generate model inputs, or use them as a starting point for the development of a new project.    
+
+At the moment, these workflows are accessible only to the project team. To access them, you will need to be added to the STAPM Gitlab organisation.  
+
+The workflows are listed below:  
+
+
+
+
+
+
+
+
+
+

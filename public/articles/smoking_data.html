@@ -44,31 +44,13 @@
   </a>
 </li>
 <li>
+  <a href="../articles/hseclean.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/alcohol_data.html">Process data on alcohol consumption</a>
-    </li>
-    <li>
-      <a href="../articles/covariate_data.html">Process data on individual socioeconomic, demographic and health characteristics</a>
-    </li>
-    <li>
-      <a href="../articles/missing_data.html">Imputation of missing data</a>
-    </li>
-    <li>
-      <a href="../articles/scottish_data.html">Addition of Scottish data</a>
-    </li>
-    <li>
-      <a href="../articles/smoking_data.html">Process data on tobacco smoking</a>
-    </li>
-  </ul>
+  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -81,7 +63,8 @@
 
       
 
-      </header><script src="smoking_data_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
+      </header><script src="smoking_data_files/header-attrs-2.5/header-attrs.js"></script><script src="smoking_data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="smoking_data_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="smoking_data_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Process data on tobacco smoking</h1>
@@ -152,53 +135,55 @@
 <h2 class="hasAnchor">
 <a href="#load-and-clean-data" class="anchor"></a>Load and clean data</h2>
 <p>The data is stored in <code>X:/ScHARR/PR_Consumption_TA/Data/</code>. The following code will read, clean, filter and combine the data.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Write a bespoke function that does just the cleaning jobs required.</span>
-<span class="no">cleandata</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">data</span>) {
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_age.html">clean_age</a></span>(<span class="no">data</span>)
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_demographic.html">clean_demographic</a></span>(<span class="no">data</span>)
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_status.html">smk_status</a></span>(<span class="no">data</span>)
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_former.html">smk_former</a></span>(<span class="no">data</span>)
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_life_history.html">smk_life_history</a></span>(<span class="no">data</span>)
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/smk_amount.html">smk_amount</a></span>(<span class="no">data</span>)
-  <span class="no">data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/select_data.html">select_data</a></span>(
-    <span class="no">data</span>, <span class="kw">ages</span> <span class="kw">=</span> <span class="fl">12</span>:<span class="fl">89</span>, <span class="kw">years</span> <span class="kw">=</span> <span class="fl">2001</span>:<span class="fl">2017</span>,
-
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Write a bespoke function that does just the cleaning jobs required.</span>
+<span class="va">cleandata</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_age.html">clean_age</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_demographic.html">clean_demographic</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/smk_status.html">smk_status</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/smk_former.html">smk_former</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/smk_life_history.html">smk_life_history</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/smk_amount.html">smk_amount</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+  <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_data.html">select_data</a></span><span class="op">(</span>
+    <span class="va">data</span>, ages <span class="op">=</span> <span class="fl">12</span><span class="op">:</span><span class="fl">89</span>, years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2017</span>,
+    
     <span class="co"># The variables to retain</span>
-    <span class="kw">keep_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>,
+    keep_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, 
                   <span class="st">"age"</span>, <span class="st">"age_cat"</span>, <span class="st">"censor_age"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>,
                   <span class="st">"cig_smoker_status"</span>, <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"years_since_quit"</span>, <span class="st">"giveup_smk"</span>,
-                  <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span>),
-
+                  <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span><span class="op">)</span>,
+    
     <span class="co"># The variables that must have complete cases</span>
-    <span class="kw">complete_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cig_smoker_status"</span>, <span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, <span class="st">"censor_age"</span>)
-  )
-<span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">data</span>)
-}
+    complete_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cig_smoker_status"</span>, <span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, <span class="st">"censor_age"</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
+<span class="op">}</span>
 
 <span class="co"># Choose the required years and combine</span>
-<span class="no">hse_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/combine_years.html">combine_years</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-  <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2014.html">read_2014</a></span>()), <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2015.html">read_2015</a></span>()), <span class="fu">cleandata</span>(<span class="fu"><a href="../reference/read_2016.html">read_2016</a></span>())
-))
+<span class="va">hse_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/combine_years.html">combine_years</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2014.html">read_2014</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2015.html">read_2015</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>, <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2016.html">read_2016</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span><span class="op">)</span>
 
 <span class="co"># clean the survey weights</span>
-<span class="no">hse_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span>(<span class="no">hse_data</span>)
+<span class="va">hse_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span><span class="op">(</span><span class="va">hse_data</span><span class="op">)</span>
 
 <span class="co"># change some variable names</span>
-<span class="fu">setnames</span>(<span class="no">hse_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"smk_start_age"</span>, <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span>),
-         <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"start_age"</span>, <span class="st">"smk.state"</span>, <span class="st">"time_since_quit"</span>))</pre></body></html></div>
+<span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">hse_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"smk_start_age"</span>, <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span><span class="op">)</span>,
+         <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"start_age"</span>, <span class="st">"smk.state"</span>, <span class="st">"time_since_quit"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="summarise-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summarise-data" class="anchor"></a>Summarise data</h2>
 <p>Taking the survey design into account is important when estimating the mean and confidence intervals around summary statistics computed from the data i.e. it is not possible to accurately estimate sampling error without accounting for survey design. The <code>survey</code> R package <span class="citation">(Thomas Lumley <a href="#ref-Rsurvey" role="doc-biblioref">2019</a>)</span> has a collection of functions that incorporate survey design into the calculation of summary statistics. The <code>survey</code> package is used by the function <code><a href="../reference/prop_summary.html">prop_summary()</a></code> in <code>hseclean</code> to estimate the uncertainty around proportions calculated from a binary variable - <code><a href="../reference/prop_summary.html">prop_summary()</a></code> was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.</p>
 <p>Using <code><a href="../reference/prop_summary.html">prop_summary()</a></code>, calculate the proportion of smokers, stratified by year, sex and quintiles of the Index of Multiple Deprivation.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">prop_smokers</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/prop_summary.html">prop_summary</a></span>(
-  <span class="kw">data</span> <span class="kw">=</span> <span class="no">hse_data</span>,
-  <span class="kw">var_name</span> <span class="kw">=</span> <span class="st">"smk.state"</span>,
-  <span class="kw">levels_1</span> <span class="kw">=</span> <span class="st">"current"</span>,
-  <span class="kw">levels_0</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"former"</span>, <span class="st">"never"</span>),
-  <span class="kw">strat_vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"year"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>)
-)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">prop_smokers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prop_summary.html">prop_summary</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">hse_data</span>,
+  var_name <span class="op">=</span> <span class="st">"smk.state"</span>,
+  levels_1 <span class="op">=</span> <span class="st">"current"</span>,
+  levels_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"former"</span>, <span class="st">"never"</span><span class="op">)</span>,
+  strat_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="references" class="section level1 unnumbered">
@@ -227,7 +212,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

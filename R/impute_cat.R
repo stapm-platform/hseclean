@@ -1,5 +1,5 @@
 
-#' Fills missing values of categorical variables with random draw from subgroup
+#' Fills missing values of categorical variables with random draw from subgroup \lifecycle{maturing}
 #'
 #' Replaces missing (NA) values with a random draw from the subgroup - 
 #' the frequency of non-missing values within the subgroup therefore determines the result.

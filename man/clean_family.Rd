@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_family.R
 \name{clean_family}
 \alias{clean_family}
-\title{Family status}
+\title{Family status \lifecycle{maturing}}
 \usage{
 clean_family(data)
 }
