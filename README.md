@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hseclean <img src="logo.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
+# Health Survey Data Wrangling <img src="logo.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
 
 <!-- badges: start -->
 
