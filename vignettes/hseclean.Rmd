@@ -7,12 +7,200 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+## Workflows
+
 To illustrate the use of the `hseclean` functions for different tasks, we have created example workflows. You can use these examples to help understand how the code works, run them to generate model inputs, or use them as a starting point for the development of a new project.    
 
 At the moment, these workflows are accessible only to the project team. To access them, you will need to be added to the STAPM Gitlab organisation.  
 
 The workflows are listed below:  
 
+## Get data
+
+To be able to **download data from the UK Data Service**, you will need to **register with the UK Data Service website**, which will enable you to request access to the datasets. Instructions on how to do this can be found [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx). **Note that you might not have to clean the data yourself as we can provide you with datasets for running the models that have already been cleaned.**    
+
+In ScHARR, all data is stored and processed according to the [ScHARR Information Governance Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). The HSE and SHeS data is stored in the university networked X-drive folder `PR_Consumption_TA`, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level data is included within this package.   
+
+## Basic functionality
+
+### Reading the HSE data files
+There are separate functions in `hseclean` to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socioeconomic and other descriptor variables.   
+
+```{r readhse, eval = F}
+test_2001 <- read_2001(
+  root = "X:/",
+  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2001/UKDA-4628-tab/tab/hse01ai.tab"
+)
+```
+
+---
+
+`hseclean` contains separate functions for reading the survey data for each year, e.g. `read_SHeS_2008()`. 
+
+
+### Processing socioeconomic, demographic and health variables
+
+There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See `vignette("covariate_data")`. Note that the order in which the cleaning functions are applied can matter - as some functions use variables that are cleaned by others.        
+
+```{r cleanses, eval = F}
+library(magrittr)
+
+temp <- read_2017(root = root_dir) %>%
+  clean_age %>%
+  clean_family %>%
+  clean_demographic %>% 
+  clean_education %>%
+  clean_economic_status %>%
+  clean_income %>%
+  clean_health_and_bio
+```
+
+### Alcohol data
+Detailed description of how to clean the alcohol data are given in `vignette("alcohol_data")`. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.  
+
+```{r drinkfreq, eval = F}
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+
+# Frequency of drinking in 2017 among drinkers
+root_dir <- "/Volumes/Shared/"
+#root_dir <- "X:/"
+
+read_2017(root = root_dir) %>%
+  clean_age %>%
+  clean_demographic %>%
+  alc_drink_now_allages %>%
+  filter(age < 90, age >= 8, drinks_now == "drinker") %>%
+  group_by(imd_quintile, age_cat) %>% 
+  summarise(av_freq = mean(drink_freq_7d, na.rm = T)) %>% 
+  ggplot(aes(x = imd_quintile, y = av_freq, fill = age_cat)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  ylab("average number of days drink in a week")
+```
+
+### Clean all years of smoking and alcohol data
+
+See `vignette("smoking_data")`.
+
+```{r readalldata, eval = F}
+library(magrittr)
+
+# Wrap the individual cleaning functions in another function for applying to each year
+
+cleandata <- function(data) {
+  
+  data %<>%
+    clean_age %>%
+    clean_demographic %>% 
+    clean_education %>%
+    clean_economic_status %>%
+    clean_family %>%
+    clean_income %>%
+    clean_health_and_bio %>%
+    smk_status %>%
+    smk_former %>%
+    smk_life_history %>%
+    smk_amount %>%
+    alc_drink_now_allages %>%
+    alc_weekmean_adult %>%
+    alc_sevenday_adult %>%
+    alc_sevenday_child %>%
+    
+    select_data(
+      ages = 12:89,
+      years = 2001:2017,
+      
+      # variables to retain
+      keep_vars = c("wt_int", "psu", "cluster", "year", "quarter",
+                    "age", "age_cat", "sex", "imd_quintile",
+                    "ethnicity_4cat", "ethnicity_2cat",
+                    "degree", "relationship_status", "employ2cat", "social_grade", "kids", "income5cat",
+                    "nssec3_lab", "man_nonman", "activity_lstweek", "eduend4cat",
+                    
+                    "hse_cancer", "hse_endocrine", "hse_heart", "hse_mental", "hse_nervous", "hse_eye", "hse_ear", "hse_respir", 
+                    "hse_disgest", "hse_urinary", "hse_skin", "hse_muscskel", "hse_infect", "hse_blood",
+                    
+                    "weight", "height", "bmi",
+                    
+                    "cig_smoker_status", "years_since_quit", "years_reg_smoker", "cig_ever",
+                    "cigs_per_day", "smoker_cat", "banded_consumption", "cig_type", "time_to_first_cig",
+                    "smk_start_age", "smk_stop_age", "censor_age", "giveup_smk",
+                    
+                    "drinks_now", 
+                    "drink_freq_7d", "n_days_drink", "peakday", "binge_cat",
+                    "beer_units", "wine_units", "spirit_units", "rtd_units", 
+                    "weekmean", 
+                    "perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units", 
+                    "drinker_cat", 
+                    "spirits_pref_cat", "wine_pref_cat", "rtd_pref_cat", "beer_pref_cat", 
+                    "total_units7_ch"
+      ),
+      
+      # The variables that must have complete cases
+      complete_vars = c("age", "sex", "year", "quarter", "psu", "cluster")
+    )
+  
+  return(data)
+}
+
+# Read and clean each year of data and bind them together in one big dataset
+data <- combine_years(list(
+  cleandata(read_2001(root = root_dir)),
+  cleandata(read_2002(root = root_dir)),
+  cleandata(read_2003(root = root_dir)),
+  cleandata(read_2004(root = root_dir)),
+  cleandata(read_2005(root = root_dir)),
+  cleandata(read_2006(root = root_dir)),
+  cleandata(read_2007(root = root_dir)),
+  cleandata(read_2008(root = root_dir)),
+  cleandata(read_2009(root = root_dir)),
+  cleandata(read_2010(root = root_dir)),
+  cleandata(read_2011(root = root_dir)),
+  cleandata(read_2012(root = root_dir)),
+  cleandata(read_2013(root = root_dir)),
+  cleandata(read_2014(root = root_dir)),
+  cleandata(read_2015(root = root_dir)),
+  cleandata(read_2016(root = root_dir)),
+  cleandata(read_2017(root = root_dir))
+))
+
+# clean the survey weights
+data <- clean_surveyweights(data)
+```
+
+### Summarise data
+The function `survey::svyby()` in the `survey` R package is used by the function `prop_summary()` in `hseclean` to estimate the uncertainty around proportions calculated from a binary variable - `prop_summary()` was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.   
+
+```{r ex2, eval = F}
+prop_smokers <- prop_summary(
+  data = hse_data,
+  var_name = "smk.state",
+  levels_1 = "current",
+  levels_0 = c("former", "never"),
+  strat_vars = c("year", "sex", "imd_quintile")
+)
+```
+
+### Missing data imputation
+
+`hseclean` uses the function `mice::mice()` in the `mice` R package, implemented in a basic way by the `impute_data_mice()` function. See `vignette("missing_data")`.      
+
+```{r miexample, eval = F}
+# Run the imputation (takes a long time)
+imp <- impute_data_mice(data = hse_data,
+                        var_names = c("smk.state", "agegroup", "sex", 
+                                      "imd_quintile", "degree", "kids", "income5cat",
+                                      "relationship_status", "employ2cat", "social_grade"),
+                        var_methods = c("", "", "", 
+                                        "polr", "logreg", "polr", "polr",
+                                        "polyreg", "logreg", "logreg"),
+                        n_imputations = 5)
+
+# imp$data is a single data.table containing all 5 imputed versions of the data
+hse_data_imputed <- copy(imp$data)
+```
 
 
 
