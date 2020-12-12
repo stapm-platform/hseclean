@@ -15,11 +15,17 @@ At the moment, these workflows are accessible only to the project team. To acces
 
 The workflows are listed below:  
 
+### Data testing
+These are the working repos used to check the processing of the survey data using the functions in hseclean   
+
 - [English national data on tobacco and alcohol consumption](https://gitlab.com/stapm/model-inputs/eng_nat_tob_alc_data) - data processing and testing.
-- [English national data on tobacco and alcohol consumption](https://gitlab.com/stapm/projects/syntax/syntax_hse) - working files containing inputs for the SYNTAX project.
-- [Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data](https://gitlab.com/stapm/projects/tobacco_alcohol_clustering) - White Rose Collaboration Fund project.  
 - [Scottish national data on tobacco consumption](https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data) - data processing and testing.
 
+### Project work
+Where possible, the code to clean health survey data is in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data    
+
+- [Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data](https://gitlab.com/stapm/projects/tobacco_alcohol_clustering) - White Rose Collaboration Fund project.  
+- [SYNTAX inputs - tobacco and alcohol consumption](https://gitlab.com/stapm/projects/syntax/syntax_hse) - working files containing inputs for the SYNTAX project.
 
 
 ## Get data
