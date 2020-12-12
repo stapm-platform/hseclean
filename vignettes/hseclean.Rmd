@@ -15,6 +15,13 @@ At the moment, these workflows are accessible only to the project team. To acces
 
 The workflows are listed below:  
 
+- [English national data on tobacco and alcohol consumption](https://gitlab.com/stapm/model-inputs/eng_nat_tob_alc_data) - data processing and testing.
+- [English national data on tobacco and alcohol consumption](https://gitlab.com/stapm/projects/syntax/syntax_hse) - working files containing inputs for the SYNTAX project.
+- [Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data](https://gitlab.com/stapm/projects/tobacco_alcohol_clustering) - White Rose Collaboration Fund project.  
+- [Scottish national data on tobacco consumption](https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data) - data processing and testing.
+
+
+
 ## Get data
 
 To be able to **download data from the UK Data Service**, you will need to **register with the UK Data Service website**, which will enable you to request access to the datasets. Instructions on how to do this can be found [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx). **Note that you might not have to clean the data yourself as we can provide you with datasets for running the models that have already been cleaned.**    
