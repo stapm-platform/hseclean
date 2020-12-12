@@ -2,8 +2,6 @@ destination: public
 home:
   title: Health Survey Data Wrangling
   links:
-  - text: View source code (team members)
-    href: https://gitlab.com/stapm/r-packages/hseclean
   - text: STAPM webpage
     href: https://stapm.gitlab.io/
   - text: Access data
@@ -22,6 +20,25 @@ authors:
   Alan Brennan:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a
     
+navbar:
+  structure:
+    left:  [home, intro, reference, articles]
+    right: [gitlab]
+  components:
+    home: ~
+    intro:
+     text: Get started
+     href: articles/hseclean.html
+    reference:
+     text: Functions
+     href: reference/index.html
+    articles:
+     text: Technical documentation
+     href: articles/index.html
+    gitlab:
+      icon: fab fa-gitlab fa-lg
+      href: https://gitlab.com/stapm/r-packages/hseclean
+
 articles:
 - title: "Tobacco and alcohol variables"
   contents:

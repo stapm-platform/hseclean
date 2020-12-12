@@ -8,6 +8,13 @@
 
 <title>Process the survey weights  — clean_surveyweights • hseclean</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Process the survey weights  — clean_surveyweights" />
 <meta property="og:description" content="Makes new survey weights based on the difference between the HSE sample size and the actual population size 
 by year, age, sex and IMD quintiles." />
+<meta property="og:image" content="https://stapm.gitlab.io/r-packages/hseclean/logo.png" />
 
 
 
@@ -80,23 +88,22 @@ by year, age, sex and IMD quintiles." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/hseclean.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Functions</a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../articles/index.html">Technical documentation</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://gitlab.com/stapm/r-packages/hseclean">
+    <span class="fab fa fab fa-gitlab fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -143,7 +150,7 @@ by year, age, sex and IMD quintiles.</p>
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>clean_surveyweights</span><span class='op'>(</span><span class='va'>data</span>, pop_data <span class='op'>=</span> <span class='fu'>stapmr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/stapmr/man/pop_counts.html'>pop_counts</a></span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>clean_surveyweights</span><span class='op'>(</span><span class='va'>data</span>, pop_data <span class='op'>=</span> <span class='fu'>stapmr</span><span class='fu'>::</span><span class='va'><a href='https://stapm.gitlab.io/stapmr/reference/pop_counts.html'>pop_counts</a></span><span class='op'>)</span>
 
 <span class='op'>}</span>
 
