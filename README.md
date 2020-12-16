@@ -14,6 +14,17 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 ## Motivation
 
+The motivation for `hseclean` was to standardised the way that the
+Health Survey for England (HSE) data were cleaned and prepared for our
+analyses and inputs to our decision-analytic models. The
+[HSE](https://digital.nhs.uk/data-and-information/publications/statistical/health-survey-for-england)
+is a series of annual surveys covering health and health-related
+behaviours. The suite of functions within `hseclean` reads the data for
+each year since 2001, renames, organises and processes the variables
+that we use for our analyses. The package also includes functions to
+multiply impute missing data, and to summarise data considering survey
+design.
+
 `hseclean` was created as part of a programme of work on the health
 economics of tobacco and alcohol at the School of Health and Related
 Research (ScHARR), The University of Sheffield. This programme is based
@@ -22,17 +33,6 @@ Model (STAPM), which aims to use comparable methodologies to evaluate
 the impacts of tobacco and alcohol policies, and investigate the
 consequences of clustering and interactions between tobacco and alcohol
 consumption behaviours.
-
-The original motivation for `hseclean` was to standardised the way that
-the Health Survey for England (HSE) data were cleaned and prepared for
-our analyses and inputs to our decision-analytic models. The
-[HSE](https://digital.nhs.uk/data-and-information/publications/statistical/health-survey-for-england)
-is a series of annual surveys covering health and health-related
-behaviours. The suite of functions within `hseclean` reads the data for
-each year since 2001, renames, organises and processes the variables
-that we use for our analyses. The package also includes functions to
-multiply impute missing data, and to summarise data considering survey
-design.
 
 We have subsequently added functions to process the Scottish Health
 Survey (SHeS) into a form that matches our processing of the Health
@@ -72,19 +72,19 @@ cleaned data.
 
 `hseclean` is currently available only to members of the project team
 (but please contact Duncan Gillespie <duncan.gillespie@sheffield.ac.uk>
-to discuss). To access you need to [**sign-up for a GitLab
-account**](https://gitlab.com/). You will then need to be added to the
+to discuss). To access you need to [sign-up for a GitLab
+account](https://gitlab.com/). You will then need to be added to the
 STAPM project team to gain access.
 
-Once that is sorted, you can **install the development version of
-`hseclean`** from GitLab with:
+Once that is sorted, you can install the latest or a specified version
+of `hseclean` from GitLab with:
 
 ``` r
 #install.packages("devtools")
 #install.packages("getPass")
 
 devtools::install_git(
-  "https://gitlab.com/stapm/hseclean.git", 
+  "https://gitlab.com/stapm/r-packages/hseclean.git", 
   credentials = git2r::cred_user_pass("uname", getPass::getPass()),
   ref = "x.x.x",
   build_vignettes = TRUE
@@ -114,4 +114,4 @@ library(ggplot2) # for plotting
 Please cite the latest version of the package using:  
 “Duncan Gillespie, Laura Webster, Colin Angus and Alan Brennan (2020).
 hseclean: Health Survey Data Wrangling. R package version x.x.x.
-<https://stapm.gitlab.io/hseclean>.”
+<https://stapm.gitlab.io/r-packages/hseclean>.”
