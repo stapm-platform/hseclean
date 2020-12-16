@@ -2,8 +2,6 @@ destination: public
 home:
   title: Health Survey Data Wrangling
   links:
-  - text: STAPM webpage
-    href: https://stapm.gitlab.io/
   - text: Access data
     href: https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx
 url: https://stapm.gitlab.io/r-packages/hseclean/
@@ -23,7 +21,7 @@ authors:
 navbar:
   structure:
     left:  [home, intro, reference, articles]
-    right: [gitlab]
+    right: [gitlab, software]
   components:
     home: ~
     intro:
@@ -38,6 +36,9 @@ navbar:
     gitlab:
       icon: fab fa-gitlab fa-lg
       href: https://gitlab.com/stapm/r-packages/hseclean
+    software:
+      icon: fa-code
+      href: https://stapm.gitlab.io/software.html
 
 articles:
 - title: "Tobacco and alcohol variables"
