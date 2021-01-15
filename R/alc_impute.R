@@ -96,9 +96,9 @@ alc_impute <- function(
   
   
   # note: info on drinking frequency or amount drunk by drinkers is 
-  # only considered for years >= 2013
+  # only considered for years >= 2011
   
-  data[year < 2013, drink_freq_7d := NA]
+  data[year < 2011, drink_freq_7d := NA]
   
   #######################
   ## Average amount consumed by drinkers - Children 13-15 years old
@@ -109,7 +109,7 @@ alc_impute <- function(
   # removing zeros
   median_7d_amount_ch <- median(
     
-    data[year >= 2013 & drinks_now == "drinker" & total_units7_ch > 0 & age >= 13 & age < 16, total_units7_ch]
+    data[year >= 2011 & drinks_now == "drinker" & total_units7_ch > 0 & age >= 13 & age < 16, total_units7_ch]
     
     , na.rm = T)
   
@@ -117,10 +117,10 @@ alc_impute <- function(
   data[drinks_now == "drinker" & total_units7_ch == 0 & age >= 13 & age < 16, 
        total_units7_ch := median_7d_amount_ch]
   
-  data[year < 2013, total_units7_ch := NA]
+  data[year < 2011, total_units7_ch := NA]
   
   # calculate the amount drunk on an average week in a year using information on quantity and frequency
-  data[year >= 2013 & drinks_now == "drinker" & age >= 13 & age < 16, 
+  data[year >= 2011 & drinks_now == "drinker" & age >= 13 & age < 16, 
        weekmean := (drink_freq_7d * 52 / 7) * total_units7_ch]
   
   
@@ -130,7 +130,7 @@ alc_impute <- function(
   # Fill in the average amount drunk by adults who are drinkers
   
   # Make zeros NAs
-  data[year >= 2013 & age >= 16 & drinks_now == "drinker" & weekmean == 0, 
+  data[year >= 2011 & age >= 16 & drinks_now == "drinker" & weekmean == 0, 
        `:=`(weekmean = NA, drinker_cat = NA)]
   
   # Fill the missing values
@@ -138,30 +138,30 @@ alc_impute <- function(
   
   # Calculate the subroup means
   # stratifying by year
-  data[year >= 2013, 
+  data[year >= 2011, 
        median_weekmean := median(weekmean, na.rm = T), 
        by = c("year", "sex", "age_cat", "drink_freq_7d")]
   
   # Replace missing with the subgroup median
-  data[year >= 2013 & is.na(weekmean), weekmean := median_weekmean]
+  data[year >= 2011 & is.na(weekmean), weekmean := median_weekmean]
   
   data[ , median_weekmean := NULL]
   
-  data[year >= 2013 & drinks_now == "non_drinker", weekmean := 0]
+  data[year >= 2011 & drinks_now == "non_drinker", weekmean := 0]
   
   # Re-categorise total units per week
   data[ , drinker_cat := NA_character_]
-  data[year >= 2013 & drinks_now == "non_drinker", 
+  data[year >= 2011 & drinks_now == "non_drinker", 
        drinker_cat := "abstainer"]
-  data[year >= 2013 & drinks_now == "drinker" & weekmean < 14, 
+  data[year >= 2011 & drinks_now == "drinker" & weekmean < 14, 
        drinker_cat := "lower_risk"]
-  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 14 & weekmean < 35 & sex == "Female", 
+  data[year >= 2011 & drinks_now == "drinker" & weekmean >= 14 & weekmean < 35 & sex == "Female", 
        drinker_cat := "increasing_risk"]
-  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 14 & weekmean < 50 & sex == "Male", 
+  data[year >= 2011 & drinks_now == "drinker" & weekmean >= 14 & weekmean < 50 & sex == "Male", 
        drinker_cat := "increasing_risk"]
-  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 35 & sex == "Female", 
+  data[year >= 2011 & drinks_now == "drinker" & weekmean >= 35 & sex == "Female", 
        drinker_cat := "higher_risk"]
-  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 50 & sex == "Male", 
+  data[year >= 2011 & drinks_now == "drinker" & weekmean >= 50 & sex == "Male", 
        drinker_cat := "higher_risk"]
   
   data[ , `:=`(drink_freq_7d = NULL, total_units7_ch = NULL)]
@@ -173,7 +173,7 @@ alc_impute <- function(
   # 4 bev types
   
   # add NAs to units where required
-  data[year >= 2013 & 
+  data[year >= 2011 & 
          (perc_spirit_units + perc_wine_units + perc_rtd_units + perc_beer_units) == 0 & 
          drinker_cat != "abstainer", 
        `:=`(perc_spirit_units = NA, perc_wine_units = NA, perc_rtd_units = NA, perc_beer_units = NA)]
@@ -191,7 +191,7 @@ alc_impute <- function(
   coln <- c("perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units")
   
   data_fit <- as.data.frame(
-    data[year >= 2013 & drinker_cat != "abstainer" & !is.na(perc_beer_units)]
+    data[year >= 2011 & drinker_cat != "abstainer" & !is.na(perc_beer_units)]
   )
   
   suppressWarnings(
@@ -222,7 +222,7 @@ alc_impute <- function(
   
   # Merge the predicted values back into the main data table
   
-  # this will add values for years < 2013, but these can be deleted later
+  # this will add values for years < 2011, but these can be deleted later
   
   data <- merge(data, newdata,
                 by = c("ageband", "sex", "imd_quintile"),
@@ -230,7 +230,7 @@ alc_impute <- function(
   
   
   # Sample replacements for the missing values of beverage preferences
-  data[year >= 2013 & is.na(perc_beer_units), bev_pref_samp :=
+  data[year >= 2011 & is.na(perc_beer_units), bev_pref_samp :=
          mapply(
            function(seed, a, b, c, d) {
              
@@ -247,46 +247,46 @@ alc_impute <- function(
          )]
   
   # Fill the missing values 
-  data[year >= 2013 & is.na(perc_beer_units), perc_spirit_units := sapply(bev_pref_samp, function(x) x[1] * 100)]
-  data[year >= 2013 & is.na(perc_beer_units), perc_wine_units := sapply(bev_pref_samp, function(x) x[2] * 100)]
-  data[year >= 2013 & is.na(perc_beer_units), perc_rtd_units := sapply(bev_pref_samp, function(x) x[3] * 100)]
-  data[year >= 2013 & is.na(perc_beer_units), perc_beer_units := sapply(bev_pref_samp, function(x) x[4] * 100)]
+  data[year >= 2011 & is.na(perc_beer_units), perc_spirit_units := sapply(bev_pref_samp, function(x) x[1] * 100)]
+  data[year >= 2011 & is.na(perc_beer_units), perc_wine_units := sapply(bev_pref_samp, function(x) x[2] * 100)]
+  data[year >= 2011 & is.na(perc_beer_units), perc_rtd_units := sapply(bev_pref_samp, function(x) x[3] * 100)]
+  data[year >= 2011 & is.na(perc_beer_units), perc_beer_units := sapply(bev_pref_samp, function(x) x[4] * 100)]
   
   # Remove columns not needed
   data[ , `:=`(ageband = NULL, perc_spirit_units_alpha = NULL, perc_wine_units_alpha = NULL, 
                perc_rtd_units_alpha = NULL, perc_beer_units_alpha = NULL, bev_pref_samp = NULL)]
   
-  # Make sure that no info on alcohol consumption before 2013 is present
+  # Make sure that no info on alcohol consumption before 2011 is present
   
   suppressWarnings(
-    data[year < 2013, (grep("beer", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("beer", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("wine", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("wine", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("spirit", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("spirit", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("rtd", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("rtd", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("n_days_drink", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("n_days_drink", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("weekmean", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("weekmean", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("drinker_cat", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("drinker_cat", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("peakday", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("peakday", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("binge_cat", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("binge_cat", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("totalwu", names(data), value = TRUE)) := NA]
+    data[year < 2011, (grep("totalwu", names(data), value = TRUE)) := NA]
   )
   
   
