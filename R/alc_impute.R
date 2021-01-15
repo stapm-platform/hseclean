@@ -265,7 +265,13 @@ alc_impute <- function(
     data[year < 2013, (grep("wine", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
-    data[year < 2013, (grep("spirits", names(data), value = TRUE)) := NA]
+    data[year < 2013, (grep("spirit", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("rtd", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("n_days_drink", names(data), value = TRUE)) := NA]
   )
   suppressWarnings(
     data[year < 2013, (grep("weekmean", names(data), value = TRUE)) := NA]
