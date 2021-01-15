@@ -83,6 +83,8 @@ alc_impute <- function(
   data <- hseclean::impute_cat(data, "drinks_now", 
                                strat_vars = c("age_cat", "sex", "year", "imd_quintile"))
   
+  testthat::expect_equal(nrow(data[is.na(drinks_now)]), 0, 
+                         info = "imputation error: still some missing values in drinks_now")
   
   #######################
   ## Fill any missing values for drinking frequency
@@ -94,6 +96,8 @@ alc_impute <- function(
   data <- hseclean::impute_mean(data, "drink_freq_7d", 
                                 strat_vars = c("age_cat", "sex", "year", "imd_quintile", "drinks_now"))
   
+  testthat::expect_equal(nrow(data[is.na(drink_freq_7d)]), 0, 
+                         info = "imputation error: still some missing values in drink_freq_7d")
   
   # note: info on drinking frequency or amount drunk by drinkers is 
   # only considered for years >= 2011
@@ -119,10 +123,18 @@ alc_impute <- function(
   
   data[year < 2011, total_units7_ch := NA]
   
+  testthat::expect_equal(nrow(
+    data[drinks_now == "drinker" & age >= 13 & age < 16 & year >= 2011 & is.na(total_units7_ch)]), 0, 
+                         info = "imputation error: still some missing values in total_units7_ch")
+  
+  
   # calculate the amount drunk on an average week in a year using information on quantity and frequency
   data[year >= 2011 & drinks_now == "drinker" & age >= 13 & age < 16, 
        weekmean := (drink_freq_7d * 52 / 7) * total_units7_ch]
   
+  testthat::expect_equal(nrow(
+    data[drinks_now == "drinker" & age >= 13 & age < 16 & year >= 2011 & is.na(weekmean)]), 0, 
+    info = "imputation error: still some missing values in weekmean for under 16s")
   
   #######################
   ## Average amount consumed by drinkers - Adults >= 16 years old
@@ -137,13 +149,17 @@ alc_impute <- function(
   #data <- hseclean::impute_mean(data, var_names = "weekmean", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drink_freq_7d"), remove_zeros = FALSE)
   
   # Calculate the subroup means
-  # note: not stratified by year or imd quintile
+  # note: not stratified by year
   data[year >= 2011, 
        median_weekmean := median(weekmean, na.rm = T), 
-       by = c("sex", "age_cat", "drink_freq_7d")]
+       by = c("sex", "age_cat", "imd_quintile")]
   
   # Replace missing with the subgroup median
   data[year >= 2011 & is.na(weekmean), weekmean := median_weekmean]
+  
+  testthat::expect_equal(nrow(
+    data[drinks_now == "drinker" & age >= 16 & year >= 2011 & is.na(weekmean)]), 0, 
+    info = "imputation error: still some missing values in weekmean for over 16s")
   
   data[ , median_weekmean := NULL]
   
