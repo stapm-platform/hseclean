@@ -137,10 +137,10 @@ alc_impute <- function(
   #data <- hseclean::impute_mean(data, var_names = "weekmean", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drink_freq_7d"), remove_zeros = FALSE)
   
   # Calculate the subroup means
-  # stratifying by year
+  # note: not stratified by year or imd quintile
   data[year >= 2011, 
        median_weekmean := median(weekmean, na.rm = T), 
-       by = c("year", "sex", "age_cat", "drink_freq_7d")]
+       by = c("sex", "age_cat", "drink_freq_7d")]
   
   # Replace missing with the subgroup median
   data[year >= 2011 & is.na(weekmean), weekmean := median_weekmean]
