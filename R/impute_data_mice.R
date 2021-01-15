@@ -63,10 +63,12 @@ impute_data_mice <- function(
 
   # Set the variables that will be used in the prediction of missing values in other variables
   for(var_i in var_names) {
+    
+    # var_i <- var_names[1]
 
     predMat[NamePos(var_i, data), NamePos(var_names[var_names != var_i], data)] <- 1
 
-    var_methods_long[NamePos(var_i, data)] <- var_methods[var_names == var_i]
+    var_methods_long[NamePos(var_i, data)] <- var_methods[which(var_names == var_i)]
 
   }
 
