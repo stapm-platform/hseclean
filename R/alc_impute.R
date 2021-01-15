@@ -11,7 +11,8 @@
 #' 
 #' For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 #' average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
-#' by scaling the amount drunk in the last week by the frequency of drinking. For adults >= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+#' by scaling the amount drunk in the last week by the frequency of drinking. For adults >= 16 years, 
+#' missing values for the average weekly alcohol consumption are filled by the median, 
 #' stratified by age category, year, sex and the frequency of drinking.   
 #' 
 #' Missing values for how drinkers divide their percentage consumption among five beverage types (beer, wine, spirits, RTDs) 
@@ -68,55 +69,100 @@
 alc_impute <- function(
   data
 ) {
-
-  # Impute drinks_now
-  data <- hseclean::impute_cat(data, "drinks_now", strat_vars = c("age_cat", "sex", "year", "imd_quintile"))
   
-  # Fill any missing values for drinking frequency
-  data <- hseclean::impute_mean(data, "drink_freq_7d", strat_vars = c("age_cat", "sex", "year", "imd_quintile", "drinks_now"))
+  #######################
+  ## Impute drinks_now
+  
+  # missing values of drinks_now spread fairly evenly over years
+  # missing values primarily in the under 18s, and mostly under 16s
+  # missing values evenly distributed by imd_quintile
+  
+  # note that these are the age categories
+  # 13-15 16-17 18-24 25-34 35-44 45-54 55-64 65-74 75-89
+  
+  data <- hseclean::impute_cat(data, "drinks_now", 
+                               strat_vars = c("age_cat", "sex", "year", "imd_quintile"))
   
   
-  ## Children 13-15 years old
+  #######################
+  ## Fill any missing values for drinking frequency
+  
+  # missing values of drink_freq_7d spread fairly evenly over years
+  # missing values primarily in the under 18s, and mostly under 16s
+  # missing values evenly distributed by imd_quintile
+  
+  data <- hseclean::impute_mean(data, "drink_freq_7d", 
+                                strat_vars = c("age_cat", "sex", "year", "imd_quintile", "drinks_now"))
+  
+  
+  # note: info on drinking frequency or amount drunk by drinkers is 
+  # only considered for years >= 2013
+  
+  data[year < 2013, drink_freq_7d := NA]
+  
+  #######################
+  ## Average amount consumed by drinkers - Children 13-15 years old
+  
+  # Due to scarcity of data, do not consider variation by year in this variable
   
   # Calculate the median amount drunk by children who are drinkers over the last 7 days
   # removing zeros
-  median_7d_amount_ch <- median(data[drinks_now == "drinker" & total_units7_ch > 0 & age >= 13 & age < 16, total_units7_ch], na.rm = T)
+  median_7d_amount_ch <- median(
+    
+    data[year >= 2013 & drinks_now == "drinker" & total_units7_ch > 0 & age >= 13 & age < 16, total_units7_ch]
+    
+    , na.rm = T)
   
   # replace zero amounts for drinkers younger than 16 with the average value
-  data[drinks_now == "drinker" & total_units7_ch == 0 & age >= 13 & age < 16, total_units7_ch := median_7d_amount_ch]
+  data[drinks_now == "drinker" & total_units7_ch == 0 & age >= 13 & age < 16, 
+       total_units7_ch := median_7d_amount_ch]
+  
+  data[year < 2013, total_units7_ch := NA]
   
   # calculate the amount drunk on an average week in a year using information on quantity and frequency
-  data[drinks_now == "drinker" & age >= 13 & age < 16, weekmean := (drink_freq_7d * 52 / 7) * total_units7_ch]
+  data[year >= 2013 & drinks_now == "drinker" & age >= 13 & age < 16, 
+       weekmean := (drink_freq_7d * 52 / 7) * total_units7_ch]
   
   
-  ## Adults >= 16 years old
+  #######################
+  ## Average amount consumed by drinkers - Adults >= 16 years old
   
   # Fill in the average amount drunk by adults who are drinkers
   
   # Make zeros NAs
-  data[age >= 16 & drinks_now == "drinker" & weekmean == 0, `:=`(weekmean = NA, drinker_cat = NA)]
+  data[year >= 2013 & age >= 16 & drinks_now == "drinker" & weekmean == 0, 
+       `:=`(weekmean = NA, drinker_cat = NA)]
   
   # Fill the missing values
   #data <- hseclean::impute_mean(data, var_names = "weekmean", strat_vars = c("year", "sex", "imd_quintile", "age_cat", "drink_freq_7d"), remove_zeros = FALSE)
-    
+  
   # Calculate the subroup means
-  data[ , median_weekmean := median(weekmean, na.rm = T), by = c("year", "sex", "age_cat", "drink_freq_7d")]
-      
+  # stratifying by year
+  data[year >= 2013, 
+       median_weekmean := median(weekmean, na.rm = T), 
+       by = c("year", "sex", "age_cat", "drink_freq_7d")]
+  
   # Replace missing with the subgroup median
-  data[is.na(weekmean), weekmean := median_weekmean]
+  data[year >= 2013 & is.na(weekmean), weekmean := median_weekmean]
   
   data[ , median_weekmean := NULL]
   
-  data[drinks_now == "non_drinker", weekmean := 0]
+  data[year >= 2013 & drinks_now == "non_drinker", weekmean := 0]
   
   # Re-categorise total units per week
   data[ , drinker_cat := NA_character_]
-  data[drinks_now == "non_drinker", drinker_cat := "abstainer"]
-  data[drinks_now == "drinker" & weekmean < 14, drinker_cat := "lower_risk"]
-  data[drinks_now == "drinker" & weekmean >= 14 & weekmean < 35 & sex == "Female", drinker_cat := "increasing_risk"]
-  data[drinks_now == "drinker" & weekmean >= 14 & weekmean < 50 & sex == "Male", drinker_cat := "increasing_risk"]
-  data[drinks_now == "drinker" & weekmean >= 35 & sex == "Female", drinker_cat := "higher_risk"]
-  data[drinks_now == "drinker" & weekmean >= 50 & sex == "Male", drinker_cat := "higher_risk"]
+  data[year >= 2013 & drinks_now == "non_drinker", 
+       drinker_cat := "abstainer"]
+  data[year >= 2013 & drinks_now == "drinker" & weekmean < 14, 
+       drinker_cat := "lower_risk"]
+  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 14 & weekmean < 35 & sex == "Female", 
+       drinker_cat := "increasing_risk"]
+  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 14 & weekmean < 50 & sex == "Male", 
+       drinker_cat := "increasing_risk"]
+  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 35 & sex == "Female", 
+       drinker_cat := "higher_risk"]
+  data[year >= 2013 & drinks_now == "drinker" & weekmean >= 50 & sex == "Male", 
+       drinker_cat := "higher_risk"]
   
   data[ , `:=`(drink_freq_7d = NULL, total_units7_ch = NULL)]
   
@@ -127,25 +173,39 @@ alc_impute <- function(
   # 4 bev types
   
   # add NAs to units where required
-  data[(perc_spirit_units + perc_wine_units + perc_rtd_units + perc_beer_units) == 0 & drinker_cat != "abstainer", 
+  data[year >= 2013 & 
+         (perc_spirit_units + perc_wine_units + perc_rtd_units + perc_beer_units) == 0 & 
+         drinker_cat != "abstainer", 
        `:=`(perc_spirit_units = NA, perc_wine_units = NA, perc_rtd_units = NA, perc_beer_units = NA)]
   
   # Make a new ageband variable
   # assumes under 16s (for whom no bev pref data is available) have same preferences as over 16-24s
+  # this is potentially a strong assumption, 
+  # so the imputed data for these variables for below age 16 might have to be ignored
   data[ , ageband := c("<24", "25-34", "35-49", "50-64", "65+")[findInterval(age, c(0, 25, 35, 50, 65))]]
   
   # Fit a Dirichlet regression
+  # in order to impute the proportions with each beverage preference with uncertainty
   
   # Prep data
   coln <- c("perc_spirit_units", "perc_wine_units", "perc_rtd_units", "perc_beer_units")
   
-  data_fit <- as.data.frame(data[drinker_cat != "abstainer" & !is.na(perc_beer_units)])
-  suppressWarnings(data_fit$Y <- DirichletReg::DR_data(data_fit[ , which(colnames(data_fit) %in% coln)] / 100))
+  data_fit <- as.data.frame(
+    data[year >= 2013 & drinker_cat != "abstainer" & !is.na(perc_beer_units)]
+  )
+  
+  suppressWarnings(
+    data_fit$Y <- DirichletReg::DR_data(data_fit[ , which(colnames(data_fit) %in% coln)] / 100)
+  )
   
   # Fit regression
+  
+  # note: no year trend is fitted
+  
   res1 <- DirichletReg::DirichReg(Y ~ ageband + sex + imd_quintile, data_fit)
   
-  # Grab predicted values
+  
+  # Grab predicted values - set up new standardised data frame
   newdata <- data.frame(expand.grid(
     ageband = c("<24", "25-34", "35-49", "50-64", "65+"),
     sex = c("Male", "Female"),
@@ -153,19 +213,24 @@ alc_impute <- function(
   ))
   
   # Grab the predicted values 
-  # in the form of the Dirichlet distribution’s parameters (alpha values)
+  # in the form of the Dirichlet distribution's parameters (alpha values)
   preds <- data.frame(predict(res1, newdata = newdata, alpha = T, mu = F))
+  
   colnames(preds) <- paste0(coln, "_alpha")
   newdata <- data.frame(newdata, preds)
   setDT(newdata)
   
   # Merge the predicted values back into the main data table
+  
+  # this will add values for years < 2013, but these can be deleted later
+  
   data <- merge(data, newdata,
                 by = c("ageband", "sex", "imd_quintile"),
                 all.x = T, all.y = F, sort = F)
   
+  
   # Sample replacements for the missing values of beverage preferences
-  data[is.na(perc_beer_units), bev_pref_samp :=
+  data[year >= 2013 & is.na(perc_beer_units), bev_pref_samp :=
          mapply(
            function(seed, a, b, c, d) {
              
@@ -182,16 +247,44 @@ alc_impute <- function(
          )]
   
   # Fill the missing values 
-  data[is.na(perc_beer_units), perc_spirit_units := sapply(bev_pref_samp, function(x) x[1] * 100)]
-  data[is.na(perc_beer_units), perc_wine_units := sapply(bev_pref_samp, function(x) x[2] * 100)]
-  data[is.na(perc_beer_units), perc_rtd_units := sapply(bev_pref_samp, function(x) x[3] * 100)]
-  data[is.na(perc_beer_units), perc_beer_units := sapply(bev_pref_samp, function(x) x[4] * 100)]
+  data[year >= 2013 & is.na(perc_beer_units), perc_spirit_units := sapply(bev_pref_samp, function(x) x[1] * 100)]
+  data[year >= 2013 & is.na(perc_beer_units), perc_wine_units := sapply(bev_pref_samp, function(x) x[2] * 100)]
+  data[year >= 2013 & is.na(perc_beer_units), perc_rtd_units := sapply(bev_pref_samp, function(x) x[3] * 100)]
+  data[year >= 2013 & is.na(perc_beer_units), perc_beer_units := sapply(bev_pref_samp, function(x) x[4] * 100)]
   
   # Remove columns not needed
   data[ , `:=`(ageband = NULL, perc_spirit_units_alpha = NULL, perc_wine_units_alpha = NULL, 
                perc_rtd_units_alpha = NULL, perc_beer_units_alpha = NULL, bev_pref_samp = NULL)]
   
+  # Make sure that no info on alcohol consumption before 2013 is present
   
-return(data[])
+  suppressWarnings(
+    data[year < 2013, (grep("beer", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("wine", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("spirits", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("weekmean", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("drinker_cat", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("peakday", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("binge_cat", names(data), value = TRUE)) := NA]
+  )
+  suppressWarnings(
+    data[year < 2013, (grep("totalwu", names(data), value = TRUE)) := NA]
+  )
+  
+  
+  
+  return(data[])
 }
 
