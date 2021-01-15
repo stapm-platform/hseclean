@@ -91,7 +91,7 @@ average weekly consumption, and the percentage beverage preferences." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.2</span>
       </span>
     </div>
 
@@ -166,7 +166,8 @@ frequency of the imputed categorical values approx matches the frequency
 of drinking in that subgroup.</p>
 <p>For children 13-15 years old, the missing values in the median amount drunk in the last week are filled with the 
 average value for each year (this average is not stratified). The average weekly alcohol consumption is then calculated 
-by scaling the amount drunk in the last week by the frequency of drinking. For adults &gt;= 16 years, missing values for the average weekly alcohol consumption are filled by the median, 
+by scaling the amount drunk in the last week by the frequency of drinking. For adults &gt;= 16 years, 
+missing values for the average weekly alcohol consumption are filled by the median, 
 stratified by age category, year, sex and the frequency of drinking.</p>
 <p>Missing values for how drinkers divide their percentage consumption among five beverage types (beer, wine, spirits, RTDs) 
 are imputed by first fitting a Dirichlet distribution to the distribution of preferences 
@@ -182,7 +183,7 @@ as for the age group 16-24 years.</p>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://stapm.gitlab.io/r-packages/hseclean/'>hseclean</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://r-datatable.com'>data.table</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://Rdatatable.gitlab.io/data.table'>data.table</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://magrittr.tidyverse.org'>magrittr</a></span><span class='op'>)</span>
 
 <span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_2017.html'>read_2017</a></span><span class='op'>(</span>root <span class='op'>=</span> <span class='st'>"/Volumes/Shared/"</span><span class='op'>)</span>
