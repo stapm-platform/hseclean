@@ -25,8 +25,8 @@
 #' \item smoker_cat (non_smoker, 10_or_less, 11_to_20, 21_to_30, 31_or_more)
 #' \item banded_consumption (non_smoker, light, moderate, heavy)
 #' \item cig_type (non_smoker, hand rolled, machine rolled)
-#' \item hand_rolled_per_day - numeric (0+) (years 2013+)
-#' \item machine_rolled_per_day - numeric (0+) (years 2013+)
+#' \item RYO_tob - numeric (0+) (years 2013+)
+#' \item FM_cigs - numeric (0+) (years 2013+)
 #' \item prop_handrolled - numeric (0-1) (years 2013+)
 #' \item time_to_first_cig (non_smoker, less_than_5_minutes, five_to_thirty_minutes,
 #' thirty_minutes_but_less_than_1_hour, one_hour_or_more)
@@ -136,49 +136,49 @@ smk_amount <- function(
       data[cig_smoker_status != "current", `:=`(rollwk = 0, rollwe = 0)]
       data[cig_smoker_status != "current" & is.na(cigs_per_day), `:=`(rollwk = NA, rollwe = NA)]
       
-      data[cig_smoker_status == "current", hand_rolled_per_day := ((5 * rollwk) + (2 * rollwe)) / 7]
-      data[cig_smoker_status != "current", hand_rolled_per_day := 0]
+      data[cig_smoker_status == "current", RYO_tob := ((5 * rollwk) + (2 * rollwe)) / 7]
+      data[cig_smoker_status != "current", RYO_tob := 0]
       
-      data[ , machine_rolled_per_day := cigs_per_day - hand_rolled_per_day]
+      data[ , FM_cigs := cigs_per_day - RYO_tob]
       
       # There are some inconsistencies in the data
       # it looks like this is often due to a typo - 
       # and all cigs are handrolled but the numbers have not been entered the same 
       # in cigwday and rollwk or cigwend and rollwe
       
-      # Fix this by assuming that whenever machine_rolled_per_day < 0 then all cigarettes are handrolled
-      data[machine_rolled_per_day < 0 & cig_type == "hand_rolled", machine_rolled_per_day := 0]
+      # Fix this by assuming that whenever FM_cigs < 0 then all cigarettes are handrolled
+      data[FM_cigs < 0 & cig_type == "hand_rolled", FM_cigs := 0]
       
-      data[cigs_per_day == 0 & hand_rolled_per_day > 0, cigs_per_day := hand_rolled_per_day]
+      data[cigs_per_day == 0 & RYO_tob > 0, cigs_per_day := RYO_tob]
       
       data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE, strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
       data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE, strat_vars = c("year", "imd_quintile"))
       
-      data[cigs_per_day > 0 & cig_type == "machine_rolled" & machine_rolled_per_day == 0, machine_rolled_per_day := cigs_per_day]
-      data[cigs_per_day > 0 & cig_type == "hand_rolled" & hand_rolled_per_day == 0, hand_rolled_per_day := cigs_per_day]
+      data[cigs_per_day > 0 & cig_type == "machine_rolled" & FM_cigs == 0, FM_cigs := cigs_per_day]
+      data[cigs_per_day > 0 & cig_type == "hand_rolled" & RYO_tob == 0, RYO_tob := cigs_per_day]
       
       # Calculate proportion of handrolled cigarettes
-      data[ , prop_handrolled := hand_rolled_per_day / cigs_per_day]
+      data[ , prop_handrolled := RYO_tob / cigs_per_day]
       
       data <- hseclean::impute_mean(data, "prop_handrolled", remove_zeros = FALSE, strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
       data <- hseclean::impute_mean(data, "prop_handrolled", remove_zeros = FALSE, strat_vars = c("year", "imd_quintile"))
       
-      data[!is.na(cigs_per_day) & (is.na(hand_rolled_per_day) | (hand_rolled_per_day == 0 & machine_rolled_per_day == 0)), hand_rolled_per_day := cigs_per_day * prop_handrolled]
-      data[!is.na(cigs_per_day) & (is.na(hand_rolled_per_day) | (hand_rolled_per_day == 0 & machine_rolled_per_day == 0)), machine_rolled_per_day := cigs_per_day * (1 - prop_handrolled)]
+      data[!is.na(cigs_per_day) & (is.na(RYO_tob) | (RYO_tob == 0 & FM_cigs == 0)), RYO_tob := cigs_per_day * prop_handrolled]
+      data[!is.na(cigs_per_day) & (is.na(RYO_tob) | (RYO_tob == 0 & FM_cigs == 0)), FM_cigs := cigs_per_day * (1 - prop_handrolled)]
       
-      data[cigs_per_day > 0 & hand_rolled_per_day == 0 & machine_rolled_per_day == 0, `:=`(hand_rolled_per_day = NA, machine_rolled_per_day = NA, prop_handrolled = NA)]
+      data[cigs_per_day > 0 & RYO_tob == 0 & FM_cigs == 0, `:=`(RYO_tob = NA, FM_cigs = NA, prop_handrolled = NA)]
       
-      data[cig_smoker_status != "current", `:=`(cigs_per_day = NA, cig_type = NA, hand_rolled_per_day = NA, machine_rolled_per_day = NA, prop_handrolled = NA)]
+      data[cig_smoker_status != "current", `:=`(cigs_per_day = NA, cig_type = NA, RYO_tob = NA, FM_cigs = NA, prop_handrolled = NA)]
       
       data[is.na(cig_type) & prop_handrolled > .5, cig_type := "hand_rolled"]
       data[is.na(cig_type) & prop_handrolled <= .5, cig_type := "machine_rolled"]
       
-      data[prop_handrolled == 1, machine_rolled_per_day := 0]
+      data[prop_handrolled == 1, FM_cigs := 0]
       
-      data[prop_handrolled > 1, `:=`(machine_rolled_per_day = 0, prop_handrolled = 1, hand_rolled_per_day = cigs_per_day)]
+      data[prop_handrolled > 1, `:=`(FM_cigs = 0, prop_handrolled = 1, RYO_tob = cigs_per_day)]
     
       # check  
-      #data[cig_smoker_status == "current" & cigs_per_day != (machine_rolled_per_day + hand_rolled_per_day)]
+      #data[cig_smoker_status == "current" & cigs_per_day != (FM_cigs + RYO_tob)]
     
     }
     
