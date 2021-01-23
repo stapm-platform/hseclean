@@ -29,21 +29,29 @@ select_data <- function(
   keep_vars = c("age", "sex", "imd_quintile"),
   complete_vars = c("age", "sex", "imd_quintile")
 ) {
-
-  keep_vars <- intersect(names(data), keep_vars)
+  
+  keep_vars <- intersect(colnames(data), keep_vars)
   
   data <- data[ , keep_vars, with = F]
-
+  
   for(cv in complete_vars) {
-
-    data <- data[!is.na(get(cv))]
-
+    
+    if(cv %in% colnames(data)) {
+      
+      data <- data[!is.na(get(cv))]
+      
+    } else {
+      
+      warning(cv, " not a column in the data")
+      
+    }
+    
   }
-
+  
   data <- data[age %in% ages & year %in% years]
-
-
-return(data[])
+  
+  
+  return(data[])
 }
 
 
