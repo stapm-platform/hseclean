@@ -1,5 +1,5 @@
 
-#' Impute missing values of average weekly alcohol consumption \lifecycle{maturing}
+#' Impute missing values of average weekly alcohol consumption \lifecycle{deprecated}
 #' 
 #' Fills the missing values of whether an individual is a drinker,
 #' average weekly consumption, and the percentage beverage preferences.
@@ -70,6 +70,7 @@ alc_impute <- function(
   data
 ) {
   
+  
   #######################
   ## Impute drinks_now
   
@@ -80,11 +81,15 @@ alc_impute <- function(
   # note that these are the age categories
   # 13-15 16-17 18-24 25-34 35-44 45-54 55-64 65-74 75-89
   
-  data <- hseclean::impute_cat(data, "drinks_now", 
-                               strat_vars = c("age_cat", "sex", "year", "imd_quintile"))
+  data <- hseclean::impute_cat(
+    data = data, 
+    var_names = "drinks_now", 
+    strat_vars = c("age_cat", "sex", "year", "imd_quintile")
+  )
   
   testthat::expect_equal(nrow(data[is.na(drinks_now)]), 0, 
                          info = "imputation error: still some missing values in drinks_now")
+  
   
   #######################
   ## Fill any missing values for drinking frequency
@@ -93,11 +98,14 @@ alc_impute <- function(
   # missing values primarily in the under 18s, and mostly under 16s
   # missing values evenly distributed by imd_quintile
   
+  
+  
   data <- hseclean::impute_mean(data, "drink_freq_7d", 
-                                strat_vars = c("age_cat", "sex", "year", "imd_quintile", "drinks_now"))
+                                  strat_vars = c("age_cat", "year", "sex", "imd_quintile", "drinks_now"))
   
   testthat::expect_equal(nrow(data[is.na(drink_freq_7d)]), 0, 
                          info = "imputation error: still some missing values in drink_freq_7d")
+  
   
   # note: info on drinking frequency or amount drunk by drinkers is 
   # only considered for years >= 2011
@@ -125,7 +133,7 @@ alc_impute <- function(
   
   testthat::expect_equal(nrow(
     data[drinks_now == "drinker" & age >= 13 & age < 16 & year >= 2011 & is.na(total_units7_ch)]), 0, 
-                         info = "imputation error: still some missing values in total_units7_ch")
+    info = "imputation error: still some missing values in total_units7_ch")
   
   
   # calculate the amount drunk on an average week in a year using information on quantity and frequency
@@ -304,6 +312,7 @@ alc_impute <- function(
   suppressWarnings(
     data[year < 2011, (grep("totalwu", names(data), value = TRUE)) := NA]
   )
+  
   
   
   
