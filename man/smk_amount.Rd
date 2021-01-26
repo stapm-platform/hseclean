@@ -15,7 +15,7 @@ smk_amount(data)
 \item smoker_cat (non_smoker, 10_or_less, 11_to_20, 21_to_30, 31_or_more)
 \item banded_consumption (non_smoker, light, moderate, heavy)
 \item cig_type (non_smoker, hand rolled, machine rolled)
-\item units_ROY_tob - numeric (0+) (years 2013+)
+\item units_RYO_tob - numeric (0+) (years 2013+)
 \item units_FM_cigs - numeric (0+) (years 2013+)
 \item prop_handrolled - numeric (0-1) (years 2013+)
 \item time_to_first_cig (non_smoker, less_than_5_minutes, five_to_thirty_minutes,
