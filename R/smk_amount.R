@@ -194,10 +194,10 @@ smk_amount <- function(
     
   }
   
-  data[, cigs_per_day := as.double(ceiling(cigs_per_day))]
-  data[, units_RYO_tob := as.double(ceiling(units_RYO_tob))]
-  data[, units_FM_cigs := as.double(ceiling(units_FM_cigs))]
-  data[units_RYO_tob > 0 | units_FM_cigs > 0, cigs_per_day := units_RYO_tob + units_FM_cigs]
+  data[, units_RYO_tob := as.double(round(units_RYO_tob, 3))]
+  data[, units_FM_cigs := as.double(round(units_FM_cigs, 3))]
+  
+  data[ , cigs_per_day := units_RYO_tob + units_FM_cigs]
   
   
   ####################################################
