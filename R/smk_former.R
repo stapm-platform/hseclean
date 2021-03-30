@@ -23,8 +23,10 @@
 #' @examples
 #'
 #' \dontrun{
+#' 
+#' library(hseclean)
 #'
-#' data <- read_2001()
+#' data <- read_2017(root = "/Volumes/Shared/")
 #' data <- clean_age(data)
 #' data <- clean_demographic(data)
 #' data <- smk_status(data)
@@ -109,11 +111,11 @@ smk_former <- function(
   #############################################################
   # Missing data
 
-  # For children 8-15, assume any missing time since quit is 1 year
-  data[is.na(years_since_quit) & cig_smoker_status == "former" & age < 16, years_since_quit := 1]
+  # For children 8-15, assume any missing time since quit is 1 year - [edit: expanded to years less than 18]
+  data[is.na(years_since_quit) & cig_smoker_status == "former" & age < 18, years_since_quit := 1]
 
   # For children 8-15, assume any missing time as smoker is 1 year
-  data[is.na(years_reg_smoker) & cig_smoker_status == "former" & age < 16, years_reg_smoker := 1]
+  data[is.na(years_reg_smoker) & cig_smoker_status == "former" & age < 18, years_reg_smoker := 1]
 
   # Years since quitting
   data[years_since_quit < 1, years_since_quit := NA]
@@ -125,7 +127,10 @@ smk_former <- function(
   data[is.na(cig_smoker_status) & years_reg_smoker >= 1, cig_smoker_status := "former"]
   
   # Mean-impute missing values for years since quitting and years regular smoker
-  data <- hseclean::impute_mean(data, c("years_since_quit", "years_reg_smoker"))
+  # data <- hseclean::impute_mean(data[cig_smoker_status == "former"], 
+  #                               var_names = c("years_since_quit", "years_reg_smoker"),
+  #                               strat_vars = c("year", "age_cat")
+  #                               )
 
   data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), `:=`(years_since_quit = NA, years_reg_smoker = NA)]
 

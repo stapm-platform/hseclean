@@ -31,7 +31,9 @@ For adults, we fill missing values with the average value for each age, sex and 
 
 \dontrun{
 
-data <- read_2001()
+library(hseclean)
+
+data <- read_2017(root = "/Volumes/Shared/")
 data <- clean_age(data)
 data <- clean_demographic(data)
 data <- smk_status(data)

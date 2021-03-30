@@ -47,7 +47,7 @@ impute_mean <- function(
 
     }
 
-    # Calculate the subroup means
+    # Calculate the subgroup means
     var_name_av <- paste0(var_name, "_av")
 
     check <- 1e8
