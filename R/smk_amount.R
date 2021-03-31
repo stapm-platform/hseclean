@@ -155,7 +155,7 @@ smk_amount <- function(
       # Fill any missing values of cigs per day
       data[ , ageband := c("<13", "13-17", "18-24", "25-34", "35-54", "55+")[findInterval(age, c(-1, 13, 18, 25, 35, 55, 1000))]]
       data[, cigs_per_day_av := mean(cigs_per_day, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
-      data[is.na(cigs_per_day) & cig_smoker_status == "current", cigs_per_day := cigs_per_day_av]
+      data[(is.na(cigs_per_day) | cigs_per_day == 0) & cig_smoker_status == "current", cigs_per_day := cigs_per_day_av]
       data[, cigs_per_day_av := NULL]
       data[, ageband := NULL]
       
@@ -208,7 +208,7 @@ smk_amount <- function(
       # Fill any missing values of cigs per day
       data[ , ageband := c("<13", "13-17", "18-24", "25-34", "35-54", "55+")[findInterval(age, c(-1, 13, 18, 25, 35, 55, 1000))]]
       data[, cigs_per_day_av := mean(cigs_per_day, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
-      data[is.na(cigs_per_day) & cig_smoker_status == "current", cigs_per_day := cigs_per_day_av]
+      data[(is.na(cigs_per_day) | cigs_per_day == 0) & cig_smoker_status == "current", cigs_per_day := cigs_per_day_av]
       data[, cigs_per_day_av := NULL]
       data[, ageband := NULL]
       
