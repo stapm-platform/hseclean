@@ -151,17 +151,37 @@ smk_amount <- function(
       
       data[cigs_per_day == 0 & units_RYO_tob > 0, cigs_per_day := units_RYO_tob]
       
-      data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE, strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
-      data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE, strat_vars = c("year", "imd_quintile"))
+      
+      # Fill any missing values of cigs per day
+      data[ , ageband := c("<13", "13-17", "18-24", "25-34", "35-54", "55+")[findInterval(age, c(-1, 13, 18, 25, 35, 55, 1000))]]
+      data[, cigs_per_day_av := mean(cigs_per_day, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
+      data[is.na(cigs_per_day) & cig_smoker_status == "current", cigs_per_day := cigs_per_day_av]
+      data[, cigs_per_day_av := NULL]
+      data[, ageband := NULL]
+      
+      #data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE, strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
+      #data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE, strat_vars = c("year", "imd_quintile"))
+      
+      
       
       data[cigs_per_day > 0 & cig_type == "machine_rolled" & units_FM_cigs == 0, units_FM_cigs := cigs_per_day]
       data[cigs_per_day > 0 & cig_type == "hand_rolled" & units_RYO_tob == 0, units_RYO_tob := cigs_per_day]
       
+      
       # Calculate proportion of handrolled cigarettes
       data[ , prop_handrolled := units_RYO_tob / cigs_per_day]
       
-      data <- hseclean::impute_mean(data, "prop_handrolled", remove_zeros = FALSE, strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
-      data <- hseclean::impute_mean(data, "prop_handrolled", remove_zeros = FALSE, strat_vars = c("year", "imd_quintile"))
+      # Fill any missing values of prop handrolled
+      # assume <18s share the same product preferences as 18-24
+      data[ , ageband := c("<25", "25-34", "35-54", "55+")[findInterval(age, c(-1, 25, 35, 55, 1000))]]
+      data[, prop_handrolled_av := mean(prop_handrolled, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
+      data[is.na(prop_handrolled) & cig_smoker_status == "current", prop_handrolled := prop_handrolled_av]
+      data[, prop_handrolled_av := NULL]
+      data[, ageband := NULL]
+      
+      #data <- hseclean::impute_mean(data, "prop_handrolled", remove_zeros = FALSE, strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
+      #data <- hseclean::impute_mean(data, "prop_handrolled", remove_zeros = FALSE, strat_vars = c("year", "imd_quintile"))
+      
       
       data[!is.na(cigs_per_day) & (is.na(units_RYO_tob) | (units_RYO_tob == 0 & units_FM_cigs == 0)), units_RYO_tob := cigs_per_day * prop_handrolled]
       data[!is.na(cigs_per_day) & (is.na(units_RYO_tob) | (units_RYO_tob == 0 & units_FM_cigs == 0)), units_FM_cigs := cigs_per_day * (1 - prop_handrolled)]
@@ -185,7 +205,14 @@ smk_amount <- function(
     
     if(year < 2013) {
       
-      data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE)
+      # Fill any missing values of cigs per day
+      data[ , ageband := c("<13", "13-17", "18-24", "25-34", "35-54", "55+")[findInterval(age, c(-1, 13, 18, 25, 35, 55, 1000))]]
+      data[, cigs_per_day_av := mean(cigs_per_day, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
+      data[is.na(cigs_per_day) & cig_smoker_status == "current", cigs_per_day := cigs_per_day_av]
+      data[, cigs_per_day_av := NULL]
+      data[, ageband := NULL]
+      
+      #data <- hseclean::impute_mean(data, "cigs_per_day", remove_zeros = TRUE)
       
       data[cig_smoker_status != "current", `:=`(cigs_per_day = NA, cig_type = NA)]
       

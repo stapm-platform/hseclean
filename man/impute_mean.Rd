@@ -2,7 +2,7 @@
 % Please edit documentation in R/impute_mean.R
 \name{impute_mean}
 \alias{impute_mean}
-\title{Fills missing values with subgroup mean value \lifecycle{maturing}}
+\title{Fills missing values with subgroup mean value \lifecycle{deprecated}}
 \usage{
 impute_mean(
   data,

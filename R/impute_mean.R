@@ -1,5 +1,5 @@
 
-#' Fills missing values with subgroup mean value \lifecycle{maturing}
+#' Fills missing values with subgroup mean value \lifecycle{deprecated}
 #'
 #' Replaces any values < 0 with NA, calculates the subgroup mean,
 #' then replaces missing values with the subgroup mean.
