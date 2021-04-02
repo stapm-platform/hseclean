@@ -37,11 +37,13 @@
 #'
 #' \dontrun{
 #'
-#' data <- read_2001()
+#' library(hseclean)
+#'
+#' data <- read_2017(root = "/Volumes/Shared/")
 #' data <- clean_age(data)
 #' data <- clean_demographic(data)
-#' data <- alc_drink_now(data)
-#' data <- alc_sevenday(data)
+#' data <- alc_drink_now_allages(data)
+#' data <- alc_sevenday_adult(data)
 #'
 #' }
 #'
@@ -52,7 +54,9 @@ alc_sevenday_adult <- function(
 ) {
 
   # Check that drinks_now variable is in the data
-  if(sum(colnames(data) == "drinks_now") == 0) message("missing drinks_now variable - run alc_drink_now_allages() first.")
+  if(sum(colnames(data) == "drinks_now") == 0) {
+    message("missing drinks_now variable - run alc_drink_now_allages() first.")
+  }
   
 
   #################################################################
@@ -66,8 +70,12 @@ alc_sevenday_adult <- function(
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values (there is quite a lot of missingness in this variable)
   data[drinks_now == "non_drinker", d7many := 0]
-  data <- hseclean::impute_mean(data, "d7many", remove_zeros = T)
-
+  
+  
+  #data <- hseclean::impute_mean(data, "d7many", remove_zeros = T)
+  #data[is.na(drinks_now), d7many := NA]
+  
+  
   data[age >= 16 & d7day == 1, n_days_drink := d7many]
 
   data[ , `:=`(d7day = NULL, d7many = NULL)]
@@ -88,7 +96,10 @@ alc_sevenday_adult <- function(
   data[drinks_now == "non_drinker" & is.na(nberqlg7), `:=`(nberqlg7 = 0)]
   data[drinks_now == "non_drinker" & is.na(nberqbt7), `:=`(nberqbt7 = 0)]
   data[drinks_now == "non_drinker" & is.na(nberqpt7), `:=`(nberqpt7 = 0)]
-  data <- hseclean::impute_mean(data, c("nberqhp7", "nberqsm7", "nberqlg7", "nberqbt7", "nberqpt7"))
+  
+  
+  #data <- hseclean::impute_mean(data, c("nberqhp7", "nberqsm7", "nberqlg7", "nberqbt7", "nberqpt7"))
+  
   
   data[ , d7vol_nbeer := 0]
   data[d7typ1 == 1, d7vol_nbeer := nberqhp7 * alc_volume_data[beverage == "nbeerhalfvol", volume]]
@@ -113,7 +124,7 @@ alc_sevenday_adult <- function(
   data[drinks_now == "non_drinker" & is.na(sberqlg7), `:=`(sberqlg7 = 0)]
   data[drinks_now == "non_drinker" & is.na(sberqbt7), `:=`(sberqbt7 = 0)]
   data[drinks_now == "non_drinker" & is.na(sberqpt7), `:=`(sberqpt7 = 0)]
-  data <- hseclean::impute_mean(data, c("sberqhp7", "sberqsm7", "sberqlg7", "sberqbt7", "sberqpt7"))
+  #data <- hseclean::impute_mean(data, c("sberqhp7", "sberqsm7", "sberqlg7", "sberqbt7", "sberqpt7"))
 
   data[ , d7vol_sbeer := 0]
   data[d7typ2 == 1, d7vol_sbeer := sberqhp7 * alc_volume_data[beverage == "sbeerhalfvol", volume]]
@@ -159,7 +170,7 @@ alc_sevenday_adult <- function(
   data[drinks_now == "non_drinker" & is.na(wgls175ml), `:=`(wgls175ml = 0)]
   data[drinks_now == "non_drinker" & is.na(wgls125ml), `:=`(wgls125ml = 0)]
   data[drinks_now == "non_drinker" & is.na(wbtlgz), `:=`(wbtlgz = 0)]
-  data <- hseclean::impute_mean(data, c("wineqgs7", "wgls250ml", "wgls175ml", "wgls125ml", "wbtlgz"))
+  #data <- hseclean::impute_mean(data, c("wineqgs7", "wgls250ml", "wgls175ml", "wgls125ml", "wbtlgz"))
 
   data[ , d7vol_wine := 0]
 
@@ -186,7 +197,7 @@ alc_sevenday_adult <- function(
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(sherqgs7), `:=`(sherqgs7 = 0)]
-  data <- hseclean::impute_mean(data, "sherqgs7")
+  #data <- hseclean::impute_mean(data, "sherqgs7")
 
   data[ , d7vol_sherry := 0]
   data[d7typ4 == 1, d7vol_sherry := sherqgs7 * alc_volume_data[beverage == "sherryvol", volume]]
@@ -199,7 +210,7 @@ alc_sevenday_adult <- function(
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(spirqme7), `:=`(spirqme7 = 0)]
-  data <- hseclean::impute_mean(data, "spirqme7")
+  #data <- hseclean::impute_mean(data, "spirqme7")
 
   data[ , d7vol_spirits := 0]
   data[d7typ3 == 1, d7vol_spirits := spirqme7 * alc_volume_data[beverage == "spiritsvol", volume]]
@@ -230,7 +241,7 @@ alc_sevenday_adult <- function(
   data[drinks_now == "non_drinker" & is.na(popsqsm7), `:=`(popsqsm7 = 0)]
   data[drinks_now == "non_drinker" & is.na(popsqlg7), `:=`(popsqlg7 = 0)]
   data[drinks_now == "non_drinker" & is.na(popsqsmc7), `:=`(popsqsmc7 = 0)]
-  data <- hseclean::impute_mean(data, c("popsqsm7", "popsqlg7", "popsqsmc7"))
+  #data <- hseclean::impute_mean(data, c("popsqsm7", "popsqlg7", "popsqsmc7"))
 
   data[ , d7vol_pops := 0]
 

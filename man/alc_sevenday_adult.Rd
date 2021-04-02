@@ -45,11 +45,13 @@ Therefore the post HSE 2007 unit calculations are not directly comparable to pre
 
 \dontrun{
 
-data <- read_2001()
+library(hseclean)
+
+data <- read_2017(root = "/Volumes/Shared/")
 data <- clean_age(data)
 data <- clean_demographic(data)
-data <- alc_drink_now(data)
-data <- alc_sevenday(data)
+data <- alc_drink_now_allages(data)
+data <- alc_sevenday_adult(data)
 
 }
 

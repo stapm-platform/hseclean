@@ -103,7 +103,6 @@ reference:
   - alc_sevenday_adult
   - alc_sevenday_child
   - alc_weekmean_adult
-  - alc_impute
   
 - title: Smoking data
   contents:
@@ -128,8 +127,6 @@ reference:
   contents:
   - combine_years
   - select_data
-  - impute_mean
-  - impute_cat
   - num_sim
   - impute_data_mice
   - prop_summary
