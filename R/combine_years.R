@@ -6,7 +6,11 @@
 #'
 #' @param data_list List of data tables to combine.
 #'
+#' @importFrom data.table rbindlist
+#'
 #' @return Returns data table of combined data.
+#' 
+#' 
 #' @export
 #'
 #' @examples
@@ -21,7 +25,7 @@ combine_years <- function(
   data_list
 ) {
 
-  data <- data.table::rbindlist(data_list, use.names = T, fill = T)
+  data <- rbindlist(data_list, use.names = T, fill = T)
 
 return(data)
 }
