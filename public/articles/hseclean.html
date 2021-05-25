@@ -83,7 +83,7 @@
 
       
 
-      </header><script src="hseclean_files/header-attrs-2.6/header-attrs.js"></script><script src="hseclean_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="hseclean_files/header-attrs-2.7/header-attrs.js"></script><script src="hseclean_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started</h1>
@@ -150,7 +150,7 @@
 <div id="processing-socioeconomic-demographic-and-health-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing-socioeconomic-demographic-and-health-variables" class="anchor"></a>Processing socioeconomic, demographic and health variables</h3>
-<p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code><a href="../articles/covariate_data.html">vignette("covariate_data")</a></code>. Note that the order in which the cleaning functions are applied can matter - as some functions use variables that are cleaned by others.</p>
+<p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code>vignette("covariate_data")</code>. Note that the order in which the cleaning functions are applied can matter - as some functions use variables that are cleaned by others.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
@@ -166,7 +166,7 @@
 <div id="alcohol-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#alcohol-data" class="anchor"></a>Alcohol data</h3>
-<p>Detailed description of how to clean the alcohol data are given in <code><a href="../articles/alcohol_data.html">vignette("alcohol_data")</a></code>. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.</p>
+<p>Detailed description of how to clean the alcohol data are given in <code>vignette("alcohol_data")</code>. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
@@ -191,7 +191,7 @@
 <div id="clean-all-years-of-smoking-and-alcohol-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#clean-all-years-of-smoking-and-alcohol-data" class="anchor"></a>Clean all years of smoking and alcohol data</h3>
-<p>See <code><a href="../articles/smoking_data.html">vignette("smoking_data")</a></code>.</p>
+<p>See <code>vignette("smoking_data")</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
@@ -293,7 +293,7 @@
 <div id="missing-data-imputation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#missing-data-imputation" class="anchor"></a>Missing data imputation</h3>
-<p><code>hseclean</code> uses the function <code><a href="https://amices.org/mice/reference/mice.html">mice::mice()</a></code> in the <code>mice</code> R package, implemented in a basic way by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code><a href="../articles/missing_data.html">vignette("missing_data")</a></code>.</p>
+<p><code>hseclean</code> uses the function <code><a href="https://amices.org/mice/reference/mice.html">mice::mice()</a></code> in the <code>mice</code> R package, implemented in a basic way by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code>vignette("missing_data")</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Run the imputation (takes a long time)</span>
 <span class="va">imp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/impute_data_mice.html">impute_data_mice</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">hse_data</span>,
@@ -306,7 +306,7 @@
                         n_imputations <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
 
 <span class="co"># imp$data is a single data.table containing all 5 imputed versions of the data</span>
-<span class="va">hse_data_imputed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">imp</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></code></pre></div>
+<span class="va">hse_data_imputed</span> <span class="op">&lt;-</span> <span class="fu">copy</span><span class="op">(</span><span class="va">imp</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>

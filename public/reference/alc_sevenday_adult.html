@@ -132,7 +132,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Alcohol consumption in last seven-days (adults) <a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a></h1>
+    <h1>Alcohol consumption in last seven-days (adults) <a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></h1>
     
     <div class="hidden name"><code>alc_sevenday_adult.Rd</code></div>
     </div>
@@ -191,11 +191,13 @@ Therefore the post HSE 2007 unit calculations are not directly comparable to pre
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_2001.html'>read_2001</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://stapm.gitlab.io/r-packages/hseclean/'>hseclean</a></span><span class='op'>)</span>
+
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_2017.html'>read_2017</a></span><span class='op'>(</span>root <span class='op'>=</span> <span class='st'>"/Volumes/Shared/"</span><span class='op'>)</span>
 <span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='clean_age.html'>clean_age</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
 <span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='clean_demographic.html'>clean_demographic</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>alc_drink_now</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>alc_sevenday</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='alc_drink_now_allages.html'>alc_drink_now_allages</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>alc_sevenday_adult</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>
 
 <span class='op'>}</span>
 

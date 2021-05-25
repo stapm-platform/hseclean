@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Addition of Scottish data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: consumption-refs.bib
+bibliography: inst/consumption-refs.bib
 link-citations: yes
 citation_package: natbib
 biblio-style: vancouver

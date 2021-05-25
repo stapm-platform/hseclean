@@ -2,13 +2,10 @@ pandoc: 2.9.2.1
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  alcohol_data: alcohol_data.html
-  covariate_data: covariate_data.html
+  english_hse_data_processing_methods: english_hse_data_processing_methods.pdf
   hseclean: hseclean.html
-  missing_data: missing_data.html
   scottish_data: scottish_data.html
-  smoking_data: smoking_data.html
-last_built: 2021-02-18T13:08Z
+last_built: 2021-05-25T09:25Z
 urls:
   reference: https://stapm.gitlab.io/r-packages/hseclean//reference
   article: https://stapm.gitlab.io/r-packages/hseclean//articles
