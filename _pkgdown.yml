@@ -42,23 +42,11 @@ navbar:
       href: https://stapm.gitlab.io/software.html
 
 articles:
-- title: "Tobacco and alcohol variables"
+- title: "Data processing"
   contents:
-  - alcohol_data
-  - smoking_data
-
-- title: "Other variables"
-  contents:
-  - covariate_data
-    
-- title: "Scottish data"
-  contents:
+  - english_hse_data_processing_methods
   - scottish_data
-  
-- title: "Missing data"
-  contents:
-  - missing_data
-    
+
 reference:
 - title: Read Health Survey for England
   contents:
