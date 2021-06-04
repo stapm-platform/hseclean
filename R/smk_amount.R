@@ -231,13 +231,13 @@ smk_amount <- function(
     
   }
   
-  if(year > 2013) {
+  if(year >= 2013) {
     data[, units_RYO_tob := as.double(round(units_RYO_tob, 3))]
     data[, units_FM_cigs := as.double(round(units_FM_cigs, 3))]
+    
+    
+    data[ , cigs_per_day := units_RYO_tob + units_FM_cigs]
   }
-  
-  data[ , cigs_per_day := units_RYO_tob + units_FM_cigs]
-  
   
   ####################################################
   # Categorise daily smoking
