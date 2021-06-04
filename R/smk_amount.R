@@ -201,10 +201,10 @@ smk_amount <- function(
       data[prop_handrolled == 1, units_FM_cigs := 0]
       
       data[prop_handrolled > 1, `:=`(units_FM_cigs = 0, prop_handrolled = 1, units_RYO_tob = cigs_per_day)]
-    
+      
       # check  
       #data[cig_smoker_status == "current" & cigs_per_day != (units_FM_cigs + units_RYO_tob)]
-    
+      
     }
     
     
@@ -231,8 +231,10 @@ smk_amount <- function(
     
   }
   
-  data[, units_RYO_tob := as.double(round(units_RYO_tob, 3))]
-  data[, units_FM_cigs := as.double(round(units_FM_cigs, 3))]
+  if(year > 2013) {
+    data[, units_RYO_tob := as.double(round(units_RYO_tob, 3))]
+    data[, units_FM_cigs := as.double(round(units_FM_cigs, 3))]
+  }
   
   data[ , cigs_per_day := units_RYO_tob + units_FM_cigs]
   
