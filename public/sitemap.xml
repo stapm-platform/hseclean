@@ -124,6 +124,9 @@
     <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2018.html</loc>
   </url>
   <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_hse.html</loc>
+  </url>
+  <url>
     <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2008.html</loc>
   </url>
   <url>
@@ -157,9 +160,6 @@
     <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2018.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_hse.html</loc>
-  </url>
-  <url>
     <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/select_data.html</loc>
   </url>
   <url>
@@ -181,7 +181,7 @@
     <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/use_townsend.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//articles/english_hse_data_processing_methods.pdf</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean//articles/english_hse_data_processing_methods.html</loc>
   </url>
   <url>
     <loc>https://stapm.gitlab.io/r-packages/hseclean//articles/hseclean.html</loc>

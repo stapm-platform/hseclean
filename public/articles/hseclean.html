@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
 </li>
 <li>
   <a href="https://stapm.gitlab.io/software.html">
-    <span class="fas fa-code"></span>
+    <span class="fa fa-code"></span>
      
   </a>
 </li>
@@ -83,7 +83,7 @@
 
       
 
-      </header><script src="hseclean_files/header-attrs-2.7/header-attrs.js"></script><script src="hseclean_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="hseclean_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started</h1>
@@ -116,13 +116,15 @@
 <div id="project-work" class="section level3">
 <h3 class="hasAnchor">
 <a href="#project-work" class="anchor"></a>Project work</h3>
-<p>Where possible, the code to clean health survey data is in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data</p>
+<p>Where possible, put the code to clean health survey data in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data</p>
 <ul>
 <li>
 <a href="https://gitlab.com/stapm/projects/tobacco_alcohol_clustering">Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data</a> - White Rose Collaboration Fund project.<br>
 </li>
 <li>
 <a href="https://gitlab.com/stapm/projects/syntax/syntax_hse">SYNTAX inputs - tobacco and alcohol consumption</a> - working files containing inputs for the SYNTAX project.</li>
+<li>
+<a href="https://gitlab.com/stapm/example-workflows/tax_policy_modelling/-/tree/master/05_build_inputs/tobacco_and_alcohol_survey_data">Tobacco and alcohol tax policy modelling example workflow</a> - in a subfolder that builds the inputs to the simulation model.</li>
 </ul>
 </div>
 </div>
@@ -138,7 +140,7 @@
 <div id="reading-the-hse-data-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#reading-the-hse-data-files" class="anchor"></a>Reading the HSE data files</h3>
-<p>There are separate functions in <code>hseclean</code> to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socioeconomic and other descriptor variables.</p>
+<p>There are separate functions in <code>hseclean</code> to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socio-economic and other descriptor variables.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test_2001</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_2001.html">read_2001</a></span><span class="op">(</span>
   root <span class="op">=</span> <span class="st">"X:/"</span>,

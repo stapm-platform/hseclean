@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Addition of Scottish data • hseclean</title>
+<title>Notes on the processing of Scottish Health Survey data to be consistent with the processing of the Health Survey for England • hseclean</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Addition of Scottish data">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Notes on the processing of Scottish Health Survey data to be consistent with the processing of the Health Survey for England">
 <meta property="og:description" content="hseclean">
 <meta property="og:image" content="https://stapm.gitlab.io/r-packages/hseclean/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
 </li>
 <li>
   <a href="https://stapm.gitlab.io/software.html">
-    <span class="fas fa-code"></span>
+    <span class="fa fa-code"></span>
      
   </a>
 </li>
@@ -83,11 +83,14 @@
 
       
 
-      </header><script src="scottish_data_files/header-attrs-2.7/header-attrs.js"></script><script src="scottish_data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="scottish_data_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Addition of Scottish data</h1>
+      <h1 data-toc-skip>Notes on the processing of Scottish Health Survey data to be consistent with the processing of the Health Survey for England</h1>
+            <h3 class="subtitle">Vignette version number 0.2.0</h3>
+                        <h4 class="author">Duncan Gillespie, Colin Angus, Laura Webster &amp; Alan Brennan</h4>
             
+            <h4 class="date">Last reviewed 01/10/21</h4>
       
       
       <div class="hidden name"><code>scottish_data.Rmd</code></div>
@@ -96,12 +99,14 @@
 
     
     
-<blockquote>
-<p>in development</p>
-</blockquote>
-<div id="introduction" class="section level1">
+<div id="summary" class="section level1 unnumbered">
 <h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
+<a href="#summary" class="anchor"></a>Summary</h1>
+<p>This is an early-stage set of working notes that help keep track of how we process the Scottish Health Survey data to produce tobacco and alcohol consumption variables that are consistent with our processing of the Health Survey for England data.</p>
+</div>
+<div id="background" class="section level1">
+<h1 class="hasAnchor">
+<a href="#background" class="anchor"></a>Background</h1>
 <p>The Scottish Health Survey (SHeS) is a series of annual surveys covering health and health-related behaviours. Prior to 2008, the survey had been carried out on three separate occasions (1995, 1998, 2003). We use data from years 2008-2018 to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our <code>smoke.trans</code> R package). Our upper age limit is 89 years, but otherwise we make use of all ages and all booster samples are automatically incorporated in the data we use.</p>
 <p>The aim is to combine the Health Survey for England and the Scottish Health Survey into one dataset. The majority of variables are the same, however some are missing and some are coded differently.</p>
 <p>To support the processing of the HSE data, there is the <code>hseclean</code> R package, which contains a collection of functions to read, process and summarise the HSE data. To support the processing of the SHeS data, we have included additional code in the <code>hseclean</code> functions to clean the SHeS data. The purpose of this vignette is to explain how we use the SHeS data to inform the patterns of cigarette consumption, and to explain how the <code>hseclean</code> package supports this.</p>
@@ -116,7 +121,7 @@
 <div id="read-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#read-data" class="anchor"></a>Read data</h1>
-<p><code>hseclean</code> contains separate functions for reading the survey data for each year, e.g. <code><a href="../reference/read_SHeS_2008.html">read_SHeS_2008()</a></code>.</p>
+<p><code>hseclean</code> contains separate functions for reading the survey data for each year, e.g. <code><a href="../reference/read_SHeS_2008.html">hseclean::read_SHeS_2008()</a></code>.</p>
 </div>
 <div id="survey-design-variables" class="section level1">
 <h1 class="hasAnchor">
@@ -137,7 +142,7 @@
 <div id="imd-quintiles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#imd-quintiles" class="anchor"></a>IMD quintiles</h2>
-<p>SHeS uses the Scottish Index of Multiple Deprivation. We keep this as a separate variable to the English IMD variable as each country calculated its own slightly different version of IMD. However, there has been a study harmonising IMD measures across the four UK nations <span class="citation">(Abel, Barclay, and Payne <a href="#ref-Abel2016" role="doc-biblioref">2016</a>)</span> that we could look at in the future if we want to compare across countries.</p>
+<p>SHeS uses the Scottish Index of Multiple Deprivation. We keep this as a separate variable to the English IMD variable as each country calculated its own slightly different version of IMD. However, there has been a study harmonising IMD measures across the four UK nations <span class="citation">(<a href="#ref-Abel2016" role="doc-biblioref">Abel, Barclay, and Payne 2016</a>)</span> that we could look at in the future if we want to compare across countries.</p>
 <p>5_most_deprived, 4, 3, 2, 1_least_deprived.</p>
 </div>
 <div id="ethnicity" class="section level2">
@@ -230,7 +235,7 @@
 <h2 class="hasAnchor">
 <a href="#economic-status" class="anchor"></a>Economic status</h2>
 <p>The function <code><a href="../reference/clean_economic_status.html">clean_economic_status()</a></code> creates a variety of variables to classify economic status.</p>
-<p>The issues around using occupation-based social classifications for social survey research are discussed by Connelly et al. <span class="citation">(<a href="#ref-Connelly2016a" role="doc-biblioref">2016</a>)</span>. They advise using a range of alternative measures, but not creating new measures beyond what is already established.</p>
+<p>The issues around using occupation-based social classifications for social survey research are discussed by Connelly et al. <span class="citation">(<a href="#ref-Connelly2016a" role="doc-biblioref">2016</a>)</span>. They advise using a range of alternative measures, but not creating new measures beyond what is already established.</p>
 <p>The classifications considered from the Health Survey for England are:</p>
 <ul>
 <li>Employed / in paid work or not.</li>
@@ -242,7 +247,7 @@
 </li>
 <li>Economic status - retired / employed / unemployed.<br>
 </li>
-<li>Activity status for last week that adds more detail such as ‘in education’ and ‘looking after home or family’.</li>
+<li>Activity status for last week that adds more detail such as ‘in education’ and ‘looking after home or family.’</li>
 </ul>
 <p>In ShES, there is no variable for ‘Paidwk’ (Paid work in last 7 days). Need to find a variable that indicates employment or not.<br>
 The variables the data does have include:<br>
@@ -274,7 +279,7 @@ The variables the data does have include:<br>
 - left at 16-18,<br>
 - left at 19 years or over.</p>
 <p>If someone was still in full time education at the time of the survey, then if they were younger than 18 years, we assumed they would leave at 16-18, and if they were older than 18 years, we assumed they would leave at 19 years or over.</p>
-<p>A further education variable is also produced - which indicates whether an individual reached a degree as their top qualification or not. Here a degree is defined as an “NVQ4/NVQ5/Degree or equiv”.</p>
+<p>A further education variable is also produced - which indicates whether an individual reached a degree as their top qualification or not. Here a degree is defined as an “NVQ4/NVQ5/Degree or equiv.”</p>
 </div>
 <div id="family" class="section level2">
 <h2 class="hasAnchor">
@@ -351,11 +356,6 @@ The variables the data does have include:<br>
 - Blood and related organs condition</p>
 </div>
 </div>
-<div id="quality-of-life" class="section level1">
-<h1 class="hasAnchor">
-<a href="#quality-of-life" class="anchor"></a>Quality of life</h1>
-<p>tbc</p>
-</div>
 <div id="cigarette-smoking-variables" class="section level1">
 <h1 class="hasAnchor">
 <a href="#cigarette-smoking-variables" class="anchor"></a>Cigarette smoking variables</h1>
@@ -390,7 +390,7 @@ The variables the data does have include:<br>
 <h2 class="hasAnchor">
 <a href="#amount-and-type-of-cigarette-smoked-by-current-smokers" class="anchor"></a>Amount and type of cigarette smoked by current smokers</h2>
 <p>The function <code><a href="../reference/smk_amount.html">smk_amount()</a></code> cleans the variables that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend. For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.</p>
-<p>For the HSE, we categorise cigarette preferences based on the answer to ‘what is the main type of cigarette smoked’. In later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend. We currently don’t use those questions because they were not asked in all years.</p>
+<p>For the HSE, we categorise cigarette preferences based on the answer to ‘what is the main type of cigarette smoked.’ In later years of the Health Survey for England, new questions are added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend. We currently don’t use those questions because they were not asked in all years.</p>
 <p>We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette. This latter variable has a high level of missingness. Together these categorical variables allow calculation of <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/">the heaviness of smoking index</a>.</p>
 </div>
 </div>
@@ -403,23 +403,22 @@ The variables the data does have include:<br>
 - For adults considering the last week, when they drank the most<br>
 - For children considering the last week, what they drank</p>
 <p>We analyse beverage-specific alcohol consumption in terms of beer (combining normal beer, strong beer), wine (combining wine and sherry), spirits, and alcopops.</p>
-</div>
-<div id="assumptions-about-serving-size-and-alcohol-content" class="section level1">
-<h1 class="hasAnchor">
-<a href="#assumptions-about-serving-size-and-alcohol-content" class="anchor"></a>Assumptions about serving size and alcohol content</h1>
+<div id="assumptions-about-serving-size-and-alcohol-content" class="section level2">
+<h2 class="hasAnchor">
+<a href="#assumptions-about-serving-size-and-alcohol-content" class="anchor"></a>Assumptions about serving size and alcohol content</h2>
 <p>We make the same assumptions as we do in the HSE. This is described more fully in the vignette <code>alcohol_data</code>.</p>
 </div>
-<div id="whether-someone-drinks-and-frequency-of-drinking" class="section level1">
-<h1 class="hasAnchor">
-<a href="#whether-someone-drinks-and-frequency-of-drinking" class="anchor"></a>Whether someone drinks and frequency of drinking</h1>
+<div id="whether-someone-drinks-and-frequency-of-drinking" class="section level2">
+<h2 class="hasAnchor">
+<a href="#whether-someone-drinks-and-frequency-of-drinking" class="anchor"></a>Whether someone drinks and frequency of drinking</h2>
 <p>We class someone as a current drinker if they reported drinking at all in the last 12 months e.g. even if reporting only having 1-2 drinks a year. There is no alcohol data collected for children, therefore we retain under 16s in our data, but assign them NAs for all alcohol questions. Any missing data is supplemented by responses to if currently drinks or if always non-drinker. This processing is done by the function <code><a href="../reference/alc_drink_now_allages.html">alc_drink_now_allages()</a></code>.</p>
 <p>In 2010, some of the variables are names differently to the other years:<br>
 - nberqbt7 and sberqbt are not variables - we set these variables to zero is missing.<br>
 - sberqbt is not a variable, it is called sbeer4.</p>
 </div>
-<div id="adult-average-consumption-in-the-last-12-months" class="section level1">
-<h1 class="hasAnchor">
-<a href="#adult-average-consumption-in-the-last-12-months" class="anchor"></a>Adult average consumption in the last 12 months</h1>
+<div id="adult-average-consumption-in-the-last-12-months" class="section level2">
+<h2 class="hasAnchor">
+<a href="#adult-average-consumption-in-the-last-12-months" class="anchor"></a>Adult average consumption in the last 12 months</h2>
 <p>We estimate the average amount drunk in terms of UK standard units of alcohol (1 unit = 10ml or 8g pure ethanol). The processing is done by the function <code><a href="../reference/alc_weekmean_adult.html">alc_weekmean_adult()</a></code>. The calculation has the following steps:<br>
 - Convert the categorical variables to numeric variables for the frequency with which each beverage is typically consumed (normal beer, strong beer, spirits, sherry, wine, alcopops).<br>
 - Convert the reported volumes usually consumed (e.g. small glass, large glass) into volumes in ml, using the beverage size assumptions above.<br>
@@ -427,26 +426,27 @@ The variables the data does have include:<br>
 - Convert the expected volumes of each beverage consumed each week to UK standard units of alcohol consumed, using the alcohol content assumptions above.<br>
 - Collapse normal and strong beer into a single “beer” variable by summing their units. Collapse wine and sherry into a single “wine” variable by summing their units.<br>
 - Calculate total weekly units but summing across beverage categories.<br>
-- Calculate the beverage “preference vector”, the percentage of total consumption contributed by the consumption of each of four beverage types (beer, wine, spirits, alcopops).<br>
+- Calculate the beverage “preference vector,” the percentage of total consumption contributed by the consumption of each of four beverage types (beer, wine, spirits, alcopops).<br>
 - Cap the total units consumed in a week at 300 units, assuming that above this already very high level of consumption estimates of variation in consumption are less reliable.<br>
-- Categorise average weekly consumption into “abstainer”, “lower risk” (less than 14 units<span class="math inline">\(/\)</span>week), “increasing risk” (greater than or equal to 14 units<span class="math inline">\(/\)</span>week and less than 35 units<span class="math inline">\(/\)</span>week for women, and less than 50 units<span class="math inline">\(/\)</span>week for men), “higher risk”.<br>
-- Categorise beverage preferences - for each of the four beverages, “does not drink”, “drinks some” (less than or equal to 50% of consumption), “mostly drinks”.</p>
+- Categorise average weekly consumption into “abstainer,” “lower risk” (less than 14 units<span class="math inline">\(/\)</span>week), “increasing risk” (greater than or equal to 14 units<span class="math inline">\(/\)</span>week and less than 35 units<span class="math inline">\(/\)</span>week for women, and less than 50 units<span class="math inline">\(/\)</span>week for men), “higher risk.”<br>
+- Categorise beverage preferences - for each of the four beverages, “does not drink,” “drinks some” (less than or equal to 50% of consumption), “mostly drinks.”</p>
 </div>
-<div id="adult-consumption-on-the-heaviest-drinking-day-in-the-last-week" class="section level1">
-<h1 class="hasAnchor">
-<a href="#adult-consumption-on-the-heaviest-drinking-day-in-the-last-week" class="anchor"></a>Adult consumption on the heaviest drinking day in the last week</h1>
+<div id="adult-consumption-on-the-heaviest-drinking-day-in-the-last-week" class="section level2">
+<h2 class="hasAnchor">
+<a href="#adult-consumption-on-the-heaviest-drinking-day-in-the-last-week" class="anchor"></a>Adult consumption on the heaviest drinking day in the last week</h2>
 <p><code><a href="../reference/alc_sevenday_adult.html">alc_sevenday_adult()</a></code> processes the information from the questions on drinking in the last seven days - how many times drank and characteristics of the heaviest drinking day. We estimate the number of UK standard units of alcohol drunk on the heaviest drinking day by using the data on how many of what size measures of different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content. We estimate their total units on heaviest drinking day (peakday) and categorise their binge drinking status (did_not_drink, binge, no_binge).</p>
 <p>Normally, if one of the constituent variables was missing, the whole variable would be marked as missing. However, due to high missingness, we just assume any missing = 0, and so are likely to make underestimates.</p>
+</div>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references hanging-indent">
-<div id="ref-Abel2016">
-<p>Abel, Gary A, Matthew E Barclay, and Rupert A Payne. 2016. “Adjusted Indices of Multiple Deprivation to Enable Comparisons Within and Between Constituent Countries of the Uk Including an Illustration Using Mortality Rates.” <em>BMJ Open</em> 6 (11): e012750.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Abel2016" class="csl-entry">
+Abel, Gary A, Matthew E Barclay, and Rupert A Payne. 2016. <span>“Adjusted Indices of Multiple Deprivation to Enable Comparisons Within and Between Constituent Countries of the UK Including an Illustration Using Mortality Rates.”</span> <em>BMJ Open</em> 6 (11): e012750.
 </div>
-<div id="ref-Connelly2016a">
-<p>Connelly, Roxanne, Vernon Gayle, and Paul S. Lambert. 2016. “A Review of Occupation-Based Social Classifications for Social Survey Research.” Journal Article. <em>Methodological Innovations</em> 9. <a href="https://doi.org/10.1177/2059799116638003">https://doi.org/10.1177/2059799116638003</a>.</p>
+<div id="ref-Connelly2016a" class="csl-entry">
+Connelly, Roxanne, Vernon Gayle, and Paul S. Lambert. 2016. <span>“A Review of Occupation-Based Social Classifications for Social Survey Research.”</span> Journal Article. <em>Methodological Innovations</em> 9. <a href="https://doi.org/10.1177/2059799116638003">https://doi.org/10.1177/2059799116638003</a>.
 </div>
 </div>
 </div>
