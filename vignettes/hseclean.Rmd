@@ -22,11 +22,11 @@ These are the working repos used to check the processing of the survey data usin
 - [Scottish national data on tobacco consumption](https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data) - data processing and testing.
 
 ### Project work
-Where possible, the code to clean health survey data is in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data    
+Where possible, put the code to clean health survey data in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data    
 
 - [Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data](https://gitlab.com/stapm/projects/tobacco_alcohol_clustering) - White Rose Collaboration Fund project.  
 - [SYNTAX inputs - tobacco and alcohol consumption](https://gitlab.com/stapm/projects/syntax/syntax_hse) - working files containing inputs for the SYNTAX project.
-
+- [Tobacco and alcohol tax policy modelling example workflow](https://gitlab.com/stapm/example-workflows/tax_policy_modelling/-/tree/master/05_build_inputs/tobacco_and_alcohol_survey_data) - in a subfolder that builds the inputs to the simulation model.  
 
 ## Get data
 
@@ -37,7 +37,7 @@ In ScHARR, all data is stored and processed according to the [ScHARR Information
 ## Basic functionality
 
 ### Reading the HSE data files
-There are separate functions in `hseclean` to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socioeconomic and other descriptor variables.   
+There are separate functions in `hseclean` to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socio-economic and other descriptor variables.   
 
 ```{r readhse, eval = F}
 test_2001 <- read_2001(

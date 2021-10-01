@@ -1,0 +1,107 @@
+% Encoding: UTF-8
+
+@Manual{Rsurvey,
+  title  = {{survey: analysis of complex survey samples}},
+  author = {{Thomas Lumley}},
+  year   = {2019},
+  note   = {{R package version 3.35-1}},
+}
+﻿
+
+@Article{Connelly2016,
+  author  = {Connelly, Roxanne and Gayle, Vernon and Lambert, Paul S.},
+  journal = {Methodological Innovations},
+  title   = {Ethnicity and ethnic group measures in social survey research},
+  year    = {2016},
+  issn    = {2059-7991
+2059-7991},
+  volume  = {9},
+  doi     = {10.1177/2059799116642885},
+  groups  = {cm1dog:6},
+  type    = {Journal Article},
+}
+
+@Article{Connelly2016a,
+  author  = {Connelly, Roxanne and Gayle, Vernon and Lambert, Paul S.},
+  journal = {Methodological Innovations},
+  title   = {A Review of occupation-based social classifications for social survey research},
+  year    = {2016},
+  issn    = {2059-7991
+2059-7991},
+  volume  = {9},
+  doi     = {10.1177/2059799116638003},
+  groups  = {cm1dog:6},
+  type    = {Journal Article},
+}
+
+@Article{Hiscock2012,
+  author  = {Hiscock, R. and Bauld, L. and Amos, A. and Platt, S.},
+  journal = {Journal of Public Health},
+  title   = {Smoking and socioeconomic status in England: the rise of the never smoker and the disadvantaged smoker},
+  year    = {2012},
+  number  = {3},
+  pages   = {390-396},
+  volume  = {34},
+  doi     = {10.1093/pubmed/fds012},
+  groups  = {cm1dog:6},
+  type    = {Journal Article},
+  url     = {https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3425348/pdf/fds012.pdf},
+}
+
+@Article{Rmice,
+  author  = {{Stef {van Buuren} and Karin Groothuis-Oudshoorn}},
+  title   = {{{mice}: Multivariate Imputation by Chained Equations in R}},
+  journal = {{Journal of Statistical Software}},
+  year    = {2011},
+  volume  = {45},
+  number  = {3},
+  pages   = {1-67},
+  url     = {{https://www.jstatsoft.org/v45/i03/}},
+}
+
+@Article{Abel2016,
+  title = {Adjusted indices of multiple deprivation to enable comparisons within and between constituent countries of the UK including an illustration using mortality rates},
+  author = {Abel, Gary A and Barclay, Matthew E and Payne, Rupert A},
+  journal = {BMJ open},
+  volume = {6},
+  number = {11},
+  pages = {e012750},
+  year = {2016},
+  publisher = {British Medical Journal Publishing Group}
+}
+
+@article{Holmes2014,
+	Author = {Holmes, John and Meng, Yang and Meier, Petra S. and Brennan, Alan and Angus, Colin and Campbell-Burton, Alexia and Guo, Yelan and Hill-McManus, Daniel and Purshouse, Robin C.},
+	Doi = {10.1016/s0140-6736(13)62417-4},
+	Issn = {0140-6736},
+	Journal = {Lancet},
+	Number = {9929},
+	Pages = {1655-1664},
+	Title = {Effects of minimum unit pricing for alcohol on different income and socioeconomic groups: a modelling study},
+	Type = {Journal Article},
+	Url = {<Go to ISI>://WOS:000335670800028},
+	Volume = {383},
+	Year = {2014},
+	Bdsk-File-1 = {YnBsaXN0MDDSAQIDBFxyZWxhdGl2ZVBhdGhZYWxpYXNEYXRhXxBFLi4vLi4vLi4vLi4vLi4vLi4vVXNlcnMvZHVuY2FuZ2lsbGVzcGllL0Rvd25sb2Fkcy9tb2RlbCB0ZWNoIHJlZnMudHh0TxEBcAAAAAABcAACAAAMTWFjaW50b3NoIEhEAAAAAAAAAAAAAAAAAAAAAAAAAEJEAAH/////E21vZGVsIHRlY2ggcmVmcy50eHQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAAAAAAAAAAAAD/////AAAKIGN1AAAAAAAAAAAAAAAAAAlEb3dubG9hZHMAAAIANS86VXNlcnM6ZHVuY2FuZ2lsbGVzcGllOkRvd25sb2Fkczptb2RlbCB0ZWNoIHJlZnMudHh0AAAOACgAEwBtAG8AZABlAGwAIAB0AGUAYwBoACAAcgBlAGYAcwAuAHQAeAB0AA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAM1VzZXJzL2R1bmNhbmdpbGxlc3BpZS9Eb3dubG9hZHMvbW9kZWwgdGVjaCByZWZzLnR4dAAAEwABLwAAFQACABb//wAAAAgADQAaACQAbAAAAAAAAAIBAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAHg},
+	Bdsk-Url-1 = {%3CGo%20to%20ISI%3E://WOS:000335670800028},
+	Bdsk-Url-2 = {https://doi.org/10.1016/s0140-6736(13)62417-4}}
+
+@article{purshouse2013modelling,
+	author = {Purshouse, Robin C and Brennan, Alan and Rafia, Rachid and Latimer, Nicholas R and Archer, Rachel J and Angus, Colin R and Preston, Louise R and Meier, Petra S},
+	date-added = {2020-11-27 08:11:05 +0000},
+	date-modified = {2020-11-27 08:11:05 +0000},
+	journal = {Alcohol and alcoholism},
+	number = {2},
+	pages = {180--188},
+	publisher = {Oxford University Press},
+	title = {Modelling the cost-effectiveness of alcohol screening and brief interventions in primary care in England},
+	volume = {48},
+	year = {2013}}
+
+@Comment{jabref-meta: databaseType:bibtex;}
+
+@Comment{jabref-meta: grouping:
+0 AllEntriesGroup:;
+1 StaticGroup:Markings\;2\;1\;\;\;\;;
+2 StaticGroup:cm1dog:6\;2\;1\;\;\;\;;
+}

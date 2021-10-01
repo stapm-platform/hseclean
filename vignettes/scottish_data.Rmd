@@ -1,37 +1,40 @@
 ---
-title: "Addition of Scottish data"
-output: rmarkdown::html_vignette
+title: "Notes on the processing of Scottish Health Survey data to be consistent with the processing of the Health Survey for England"
+subtitle: "Vignette version number 0.2.0"
+date: "Last reviewed 01/10/21"
+author: "Duncan Gillespie, Colin Angus, Laura Webster & Alan Brennan"
+biblio-style: apalike
+output: 
+  rmarkdown::html_vignette:
+    number_sections: true
+    toc: true
+link-citations: yes
+bibliography:
+- inst/consumption-refs.bib
+always_allow_html: yes
+urlcolor: blue
 vignette: >
   %\VignetteIndexEntry{Addition of Scottish data}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: inst/consumption-refs.bib
-link-citations: yes
-citation_package: natbib
-biblio-style: vancouver
-urlcolor: blue
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE, results = 'hide', warning = FALSE}
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.pos = 'H'
 )
+
 ```
 
-```{r setup, include = FALSE, results = 'hide', warning = FALSE, eval = F}
-suppressPackageStartupMessages(library(dplyr))
-suppressPackageStartupMessages(library(magrittr))
-suppressPackageStartupMessages(library(data.table))
-suppressPackageStartupMessages(library(testthat))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(library(hseclean))
-```
+# Summary {-}
+This is an early-stage set of working notes that help keep track of how we process the Scottish Health Survey data to produce tobacco and alcohol consumption variables that are consistent with our processing of the Health Survey for England data.   
 
- > in development
-
-# Introduction
+# Background
 The Scottish Health Survey (SHeS) is a series of annual surveys covering health and health-related behaviours. Prior to 2008, the survey had been carried out on three separate occasions (1995, 1998, 2003). We use data from years 2008-2018 to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our `smoke.trans` R package). Our upper age limit is 89 years, but otherwise we make use of all ages and all booster samples are automatically incorporated in the data we use.  
 
 The aim is to combine the Health Survey for England and the Scottish Health Survey into one dataset. The majority of variables are the same, however some are missing and some are coded differently.   
@@ -47,7 +50,7 @@ Things still to think about:
 - what to do with missing nssec8 for children?   
 
 # Read data
-`hseclean` contains separate functions for reading the survey data for each year, e.g. `read_SHeS_2008()`.   
+`hseclean` contains separate functions for reading the survey data for each year, e.g. `hseclean::read_SHeS_2008()`.   
 
 # Survey design variables
 The first thing to consider is the influence of survey sampling design, which is variable among years. The variables that describe the sampling structure are `strata` and `PSU` (probabilistic sampling unit).    
@@ -260,10 +263,6 @@ In line with what we do in the Health Survey for England, we include the 14 cate
 - Blood and related organs condition  
 
 
-# Quality of life
-
-tbc  
-
 
 # Cigarette smoking variables
 Questions about cigarette smoking have been asked of adults aged 16 and over.   
@@ -311,18 +310,18 @@ Alcohol consumption data in SHeS is recorded in the same ways as the Health Surv
 
 We analyse beverage-specific alcohol consumption in terms of beer (combining normal beer, strong beer), wine (combining wine and sherry), spirits, and alcopops.    
 
-# Assumptions about serving size and alcohol content
+## Assumptions about serving size and alcohol content
 We make the same assumptions as we do in the HSE. This is described more fully in the vignette `alcohol_data`.  
 
 
-# Whether someone drinks and frequency of drinking
+## Whether someone drinks and frequency of drinking
 We class someone as a current drinker if they reported drinking at all in the last 12 months e.g. even if reporting only having 1-2 drinks a year. There is no alcohol data collected for children, therefore we retain under 16s in our data, but assign them NAs for all alcohol questions. Any missing data is supplemented by responses to if currently drinks or if always non-drinker. This processing is done by the function `alc_drink_now_allages()`.   
 
 In 2010, some of the variables are names differently to the other years:  
 - nberqbt7 and sberqbt are not variables - we set these variables to zero is missing.   
 - sberqbt is not a variable, it is called sbeer4.   
 
-# Adult average consumption in the last 12 months
+## Adult average consumption in the last 12 months
 We estimate the average amount drunk in terms of UK standard units of alcohol (1 unit = 10ml or 8g pure ethanol). The processing is done by the function `alc_weekmean_adult()`. The calculation has the following steps:  
 - Convert the categorical variables to numeric variables for the frequency with which each beverage is typically consumed (normal beer, strong beer, spirits, sherry, wine, alcopops).  
 - Convert the reported volumes usually consumed (e.g. small glass, large glass) into volumes in ml, using the beverage size assumptions above.  
@@ -336,7 +335,7 @@ We estimate the average amount drunk in terms of UK standard units of alcohol (1
 - Categorise beverage preferences - for each of the four beverages, "does not drink", "drinks some" (less than or equal to 50\% of consumption), "mostly drinks".  
 
 
-# Adult consumption on the heaviest drinking day in the last week
+## Adult consumption on the heaviest drinking day in the last week
 `alc_sevenday_adult()` processes the information from the questions on drinking in the last seven days - how many times drank and characteristics of the heaviest drinking day. We estimate the number of UK standard units of alcohol drunk on the heaviest drinking day by using the data on how many of what size measures of different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content. We estimate their total units on heaviest drinking day (peakday) and categorise their binge drinking status (did_not_drink, binge, no_binge).  
 
 Normally, if one of the constituent variables was missing, the whole variable would be marked as missing. However, due to high missingness, we just assume any missing = 0, and so are likely to make underestimates.  

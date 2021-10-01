@@ -18,7 +18,7 @@ authors:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c
   Alan Brennan:
     href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a
-    
+
 navbar:
   structure:
     left:  [home, intro, reference, articles]
@@ -44,6 +44,7 @@ navbar:
 articles:
 - title: "Data processing"
   contents:
+  - hseclean
   - english_hse_data_processing_methods
   - scottish_data
 
@@ -69,7 +70,7 @@ reference:
   - read_2016
   - read_2017
   - read_2018
-  
+
 - title: Read Scottish Health Survey
   contents:
   - read_SHeS_2008
@@ -83,7 +84,7 @@ reference:
   - read_SHeS_2016
   - read_SHeS_2017
   - read_SHeS_2018
-  
+
 - title: Alcohol data
   contents:
   - alc_drink_freq
@@ -91,7 +92,7 @@ reference:
   - alc_sevenday_adult
   - alc_sevenday_child
   - alc_weekmean_adult
-  
+
 - title: Smoking data
   contents:
   - smk_amount
@@ -99,7 +100,7 @@ reference:
   - smk_quit
   - smk_status
   - smk_former
-  
+
 - title: Covariate data
   contents:
   - clean_age
@@ -110,7 +111,7 @@ reference:
   - clean_health_and_bio
   - clean_income
   - use_townsend
-  
+
 - title: Data wrangling
   contents:
   - combine_years
@@ -119,23 +120,22 @@ reference:
   - impute_data_mice
   - prop_summary
   - clean_surveyweights
-  
+
 - title: Data
   contents:
   - imdq_to_townsend
   - abv_data
   - alc_volume_data
   - impute_kids_model
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+

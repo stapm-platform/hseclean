@@ -1,36 +1,13 @@
 ---
 title: "Methods to process the Health Survey for England data for the modelling of policy effects on tobacco and alcohol consumption"
-subtitle: Version 1.1.0
+subtitle: "Vignette version number 1.1.0"
+date: "Last reviewed 01/10/21"
+author: "Duncan Gillespie, Colin Angus, Laura Webster & Alan Brennan"
 biblio-style: apalike
-date: "`r format(Sys.Date(), format = '%B %Y')`"
 output: 
-  bookdown::pdf_document2:
-    highlight: haddock
+  rmarkdown::html_vignette:
     number_sections: true
-    toc: false
-header-includes:
-  - \usepackage{booktabs}
-  - \usepackage{longtable}
-  - \usepackage{array}
-  - \usepackage{multirow}
-  - \usepackage{wrapfig}
-  - \usepackage{float}
-  - \usepackage{colortbl}
-  - \usepackage{pdflscape}
-  - \usepackage{tabu}
-  - \usepackage{threeparttable}
-  - \usepackage{threeparttablex}
-  - \usepackage[normalem]{ulem}
-  - \usepackage[normalem]{ulem}
-  - \usepackage[utf8]{inputenc}
-  - \usepackage{makecell}
-  - \usepackage{amsmath}
-  - \usepackage{graphicx}
-  - \usepackage{titling}
-  - \pretitle{\begin{center}
-    \includegraphics[width=3in,height=2in]{inst/TUOS_PRIMARY_LOGO_FULL COLOUR.jpg}\LARGE\\\vskip 3em}
-  - \posttitle{\end{center}\vskip 3em}
-  - \usepackage{tcolorbox}
+    toc: true
 link-citations: yes
 bibliography:
 - inst/consumption-refs.bib
@@ -42,95 +19,17 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
-pkgdown:
-  as_is: true
-  extension: pdf
 ---
 
-Duncan Gillespie, Colin Angus, Laura Webster & Alan Brennan
-
-\vskip 1em
-
-School of Health and Related Research (ScHARR), The University of Sheffield
-
-\vskip 1em
-
-**Address for correspondence**:\
-Dr Duncan Gillespie\
-Section of Health Economics and Decision Science,\
-School for Health and Related Research,\
-The University of Sheffield,\
-Regent Court, Regent Street, Sheffield, S1 4DA, UK\
-Email: [duncan.gillespie\@sheffield.ac.uk](mailto:duncan.gillespie@sheffield.ac.uk){.email}
-
-\vskip 1em
-
-```{=tex}
-\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=WARNING]
-This is a working version that is subject to review and future updated and extended versions are likely.
-\end{tcolorbox}
-```
-\vskip 1em
-
-This report is licensed to The University of Sheffield under a [CC by 4.0](https://creativecommons.org/licenses/by/4.0/) license.  
-
-\newpage
-
-```{r setup, include = FALSE, results = 'hide', warning = FALSE}
-
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.pos = 'H'
-)
-
-options(tinytex.verbose = F)
-
-suppressPackageStartupMessages(library(magrittr))
-suppressPackageStartupMessages(library(knitr))
-suppressPackageStartupMessages(library(kableExtra))
-suppressPackageStartupMessages(library(data.table))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(library(readxl))
-suppressPackageStartupMessages(library(tobalcepi))
-suppressPackageStartupMessages(library(stapmr))
-suppressPackageStartupMessages(library(smktrans))
-suppressPackageStartupMessages(library(ggthemes))
-suppressPackageStartupMessages(library(RColorBrewer))
-suppressPackageStartupMessages(library(cowplot))
-suppressPackageStartupMessages(library(plyr))
-suppressPackageStartupMessages(library(DiagrammeR))
-
-```
-
-```{r include=FALSE, eval=F}
-# automatically create a bib database for R packages
-# do not re-run!
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
 
 # Summary {-}
-This methodology report sets out a description of how the data related to tobacco and alcohol consumption in the Health Survey for England are processed for use in the Sheffield Tobacco and Alcohol Policy Modelling (STPM). The report covers: (1) the processing of alcohol consumption data; the processing of tobacco consumption data; the processing of socio-demographic covariates relevant to our tobacco and alcohol modelling; the imputation of missing data.   
-
-
-\newpage
+This vignette sets out a description of how the data related to tobacco and alcohol consumption in the Health Survey for England are processed for use in the Sheffield Tobacco and Alcohol Policy Modelling (STAPM). The vignette covers: (1) the processing of alcohol consumption data; the processing of tobacco consumption data; the processing of socio-demographic covariates relevant to our tobacco and alcohol modelling; the imputation of missing data. This is a working set of notes to help keep track of the methods used to process the data.     
 
 # Background
-The Sheffield Alcohol Policy Model (SAPM) has been used to examine the effects of pricing policies, advertising restrictions and advice on why and how to reduce drinking [@Holmes2014;@purshouse2013modelling] (see the range of publications and projects on the [Sheffield Alcohol Research Group website](https://www.sheffield.ac.uk/scharr/research/themes/alpol)). Patterns of alcohol consumption are informed primarily by the Health Survey for England data. 
+The Sheffield Alcohol Policy Model (SAPM) has been used to examine the effects of pricing policies, advertising restrictions and advice on why and how to reduce drinking [@Holmes2014;@purshouse2013modelling] (see the range of publications and projects on the [Sheffield Alcohol Research Group website](https://www.sheffield.ac.uk/scharr/research/themes/alpol)). Patterns of alcohol consumption in the SAPM modelling are informed primarily by the Health Survey for England data, with additional information e.g. on the division of alcohol consumption between the on- and off-trade provided by the Living Costs and Food Survey.  
 
 # Approach to coding
-
-
-
-
-
-## Data storage and management
-
-The data is stored in `X:/ScHARR/PR_Consumption_TA/Data/`. The following code will read, clean, filter and combine the data. 
-
-
+The [hseclean](https://gitlab.com/stapm/r-packages/hseclean) R package was written to help standardise the processing of the Health Survey for England data to produce inputs for the STAPM simulation modelling. This helps data storage and processing to be consistent across the STAPM projects. The data is stored in `X:/ScHARR/PR_Consumption_TA/Data/`. The following code will read, clean, filter and combine the data. 
 
 # Alcohol consumption
 Alcohol consumption data in the Health Survey for England (HSE) is recorded in four main forms:   
@@ -154,11 +53,11 @@ We analyse beverage-specific alcohol consumption in terms of beer (combining nor
 
 
 ## Whether someone drinks and frequency of drinking
-Calculated for adults (aged 16 years or older) and children (aged 8 to 15 years) by the function `alc_drink_now_allages()`. We combine the information on drinking frequency from adults and children into a single variable.   
+Calculated for adults (aged 16 years or older) and children (aged 8 to 15 years) by the function `hseclean::alc_drink_now_allages()`. We combine the information on drinking frequency from adults and children into a single variable.   
 
 We calculate the variable `drinks_now`, which classes someone as either a drinker or a non-drinker. Adults are classed as drinkers if they reported drinking at all in the last 12 months, even if reporting only having 1-2 drinks a year (according to the variable `dnoft`). Note that this definition of a non-drinker can vary among surveys, e.g. some surveys class only having 1-2 drinks a year as a non-drinker, and this could lead to variation in estimates of the number of non-drinkers.     
 
-We calculate the variable `drink_freq_7d`, which is a numerical variable that described drinking frequency. Adult drinking frequency is also inferred from the variable `dnoft`: the function `alc_drink_freq()` converts the categorical responses into the expected number of days in a week that someone drinks.
+We calculate the variable `drink_freq_7d`, which is a numerical variable that described drinking frequency. Adult drinking frequency is also inferred from the variable `dnoft`: the function `hseclean::alc_drink_freq()` converts the categorical responses into the expected number of days in a week that someone drinks.
 
 - "Almost every day" = 7 days a week  
 - "Five or six days a week" = 5.5 days a week  
@@ -208,7 +107,7 @@ Separate variables are produced describing the average weekly units in four beve
 - describe the percentage of the total consumption in a week that is contributed by each beverage type (`per_spirit_units`, `perc_wine_units`, `perc_beer_units`, `perc_rtd_units`).    
 - describe whether or not someone shows a clear beverage preference e.g. `does_not_drink_spirits`, `drinks_some_spirits`, `mostly_drinks_spirits`, where "mostly drinks" is defined by a single beverage comprising more that 50\% of an individuals average weekly consumption.   
 
-The processing is done by the function `alc_weekmean_adult()`. The calculation has the following steps:    
+The processing is done by the function `hseclean::alc_weekmean_adult()`. The calculation has the following steps:    
 
 - Convert the categorical variables to numeric variables for the frequency with which each beverage is typically consumed (normal beer, strong beer, spirits, sherry, wine, alcopops).  
 - Convert the reported volumes usually consumed (e.g. small glass, large glass) into volumes in ml, using the beverage size assumptions above. In doing so, variations in recording among years and between the interview and self-complete questionnaire are accounted for.  
@@ -220,7 +119,7 @@ The processing is done by the function `alc_weekmean_adult()`. The calculation h
 
 
 ### Adult consumption on the heaviest drinking day in the last week
-The function `alc_sevenday_adult()` processes the information from the questions on adult (16 or more years old) drinking in the last seven days:  
+The function `hseclean::alc_sevenday_adult()` processes the information from the questions on adult (16 or more years old) drinking in the last seven days:  
 
 - Number of days drank on in the last seven, `n_days_drink`.    
 - the characteristics of drinking on the heaviest drinking day  
@@ -235,7 +134,7 @@ Missing data is imputed using the means of people who did drink in the last seve
 
 
 ### Children's consumption in the last week
-The function `alc_sevenday_child()` processes the information on drinking by children (ages 13-15) in the last seven days. The data on children's drinking comes in the form of survey questions on whether or not they have drunk each beverage type in the last week, and if so, how much of each was drunk. The main output is the variable `total_units7_ch` - the total units drunk in the last seven days.   
+The function `hseclean::alc_sevenday_child()` processes the information on drinking by children (ages 13-15) in the last seven days. The data on children's drinking comes in the form of survey questions on whether or not they have drunk each beverage type in the last week, and if so, how much of each was drunk. The main output is the variable `total_units7_ch` - the total units drunk in the last seven days.   
 
 We estimate the number of UK standard units of alcohol drunk in the last 7 days by using the data on how many of what size measures of different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content.    
 
@@ -246,26 +145,26 @@ Due to high missingness in this variable, we assume that anyone who has missing 
 
 
 # Tobacco consumption
-For the Sheffield Tobacco Policy Model (STPM) we use HSE data from years 2001 to the latest available. We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our [smktrans](https://stapm.gitlab.io/smktrans/) R package). Our upper age limit is 89 years, but otherwise we make use of all ages.      
+For the Sheffield Tobacco Policy Model (STPM), we use HSE data from years 2001 to the latest available (although survey weights started to be used from 2003, which is likely to make the data from 2003 slightly more reliable). We use these data to inform the trends in smoking prevalence, the socio-demographic variation in smoking prevalence, and as inputs to a procedure that we use to infer the age-specific probabilities of smoking initiation and quitting (see our [smktrans](https://gitlab.com/stapm/r-packages/smktrans) R package). Our upper age limit is 89 years, but otherwise we make use of all ages.      
 
 The purpose of this vignette is to explain how we use the HSE data to inform the patterns of tobacco smoking, and to explain how `hseclean` supports this.    
 
 Questions about cigarette smoking have been asked of adults aged 16 and over as part of the HSE series since 1991 - we use data from 2001 to the latest year available. We use data on children (12-15 years) and adults (16+ years). There is often a special section in the annual HSE report devoted to describing trends in cigarette smoking e.g.[HSE 2015](https://files.digital.nhs.uk/publicationimport/pub22xxx/pub22610/hse2015-adult-smo.pdf).     
 
 ## Cigarette smoking status
-The function `smk_status()` categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or ocassionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers; people who have only tried a cigarette once or twice are classified as never smokers. We create a smoking status variable for children aged 8-15 years and adults aged >= 16 years. Ever-smokers are people who are either current or former smokers.    
+The function `hseclean::smk_status()` categorises cigarette smoking into current, former and never regular cigarette smokers. If some smokes either regularly or occasionally, then they are classified as a current regular cigarette smoker. People who used to smoke regularly or occasionally are classified as former smokers; people who have only tried a cigarette once or twice are classified as never smokers. We create a smoking status variable for children aged 8-15 years and adults aged >= 16 years. Ever-smokers are people who are either current or former smokers.    
 
 ## Quitting
-The function `smk_quit()` is in development, and will process the data on the motivation to quit smoking, the reasons for quitting smoking, and the support used to stop smoking. It currently produces only one variable - whether someone wants to quit smoking (y/n).   
+The function `hseclean::smk_quit()` is in development, and will process the data on the motivation to quit smoking, the reasons for quitting smoking, and the support used to stop smoking. It currently produces only one variable - whether someone wants to quit smoking (y/n).   
 
 ## Former smoking
-The function `smk_former()` cleans the data for former smokers on the time since quitting and time spent as a regular smoker. The main issue to overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using `num_sim()`. We then fill missing data for these variables as follows:   
+The function `hseclean::smk_former()` cleans the data for former smokers on the time since quitting and time spent as a regular smoker. The main issue to overcome is that in the HSE 2015+, time since quit and time spent as a smoker is provided in categories rather than single years. We simulate the single years by just picking a value at random within the time interval, using `hseclean::num_sim()`. We then fill missing data for these variables as follows:   
 
 - For children 8-15 years, we assume that missing values for former smokers' time since quitting and time spent as a former smoker = 1 year.   
 - For adults, we fill missing values for former smokers' time since quitting and time spent as a former smoker with the average value for each age, sex and IMD quintile subgroup.   
 
 ## Smoking life-histories
-The function `smk_life_history()` cleans the data on the ages when smokers started and stopped being regular cigarette smokers. For each individual smoker, the data recorded in the HSE implies a single age at which a smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and stopping multiple times.    
+The function `hseclean::smk_life_history()` cleans the data on the ages when smokers started and stopped being regular cigarette smokers. For each individual smoker, the data recorded in the HSE implies a single age at which a smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and stopping multiple times.    
 
 Both the start age and stop age will have error in them e.g. due to uncertainty in respondent recall, and, for years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute introducing random error. Start age is likely to be biased towards earlier ages, because for adult smokers and former smokers with missing values we use the age first tried a cigarette, and for children the reported start age does not necessarily mean the start of regular smoking, it is just the age at which they started to smoke.    
 
@@ -274,30 +173,18 @@ We also create a variable for the age at which an individual was censored from o
 Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.    
 
 ## Amount and type of cigarette smoked by current smokers
-The function `smk_amount()` cleans the data that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults, this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend (this is a weighted average to account for more weekdays in a week than weekends). For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.    
+The function `hseclean::smk_amount()` cleans the data that describe how much, what and to what level of addiction people smoke. The main variable is the average number of cigarettes smoked per day. For adults, this is calculated from questions about how many cigarettes are smoked typically on a weekday vs. a weekend (this is a weighted average to account for more weekdays in a week than weekends). For children, this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as the average amount smoked for an age, sex and IMD quintile subgroup.    
 
 We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. For years 2013 and later of the HSE, questions were added that ask how many handrolled vs. machine rolled cigarettes are smoked on a weekday vs. a weekend.     
 
 We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette (this latter variable has a high level of missingness). Together these two variables allow calculation of [the heaviness of smoking index](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/).    
 
-
-
-
-## Summarise data
+# Summarise data
 Taking the survey design into account is important when estimating the mean and confidence intervals around summary statistics computed from the data i.e. it is not possible to accurately estimate sampling error without accounting for survey design. The `survey` R package [@Rsurvey] has a collection of functions that incorporate survey design into the calculation of summary statistics. The `survey` package is used by the function `prop_summary()` in `hseclean` to estimate the uncertainty around proportions calculated from a binary variable - `prop_summary()` was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.   
 
-
-Using `prop_summary()`, calculate the proportion of smokers, stratified by year, sex and quintiles of the Index of Multiple Deprivation.  
-
-
-
 # Covariate data
-The Health Survey for England (HSE) is a series of annual surveys covering health and health-related behaviours. For the Sheffield Tobacco Policy Model (STPM) we use data from years 2001 to the latest available. Our upper age limit is 89 years, but otherwise we make use of all ages.      
+The suppliers of the HSE data introduced tighter information governance rules in 2015, which meant that they stopped providing variables that could be used to identify the age in single years of an individual, and also stopped providing information on number of children in the household. These variables can still be obtained, but only after applying for the secure-access version of the data, which we do not do. Therefore, in our processing of the standard-access version of the data, we use imputation methods to overcome the added restrictions.     
 
-One important thing to note is that the suppliers of the HSE data introduced tighter information governance rules in 2015, which meant that they stopped providing variables that could be used to identify the age in single years of an individual, and also stopped providing information on number of children in the household. These variables can still be obtained, but only after applying for the secure-access version of the data, which we do not do. Therefore, in our processing of the standard-access version of the data, we use imputation methods to overcome the added restrictions.     
-
-`hseclean` is a collection of functions to read and process the HSE data into a suitable form for use in our modelling. Here we describe how we use it to clean and calculate the covariates used in our analyses.    
-  
 ## Survey design variables
 The first thing to consider is the influence of survey sampling design, which is variable among years. The variables that describe the sampling structure are `cluster` and `PSU` (probabilistic sampling unit).  
 
@@ -420,8 +307,6 @@ There are a set of 15 categories of long-lasting illnesses (occurring for or exp
 
 ### Height and weight
 Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are replaced by the mean height and weight for each age, sex and IMD quintile.  BMI is calculated according to kg / m^2.  
-
-
 
 
 # Missing data
