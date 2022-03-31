@@ -29,8 +29,8 @@
 #'  HEIGHT AND WEIGHT
 #'
 #'  Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
-#'  replaced by the mean height and weight for each age, sex and IMD quintile. 
-#'  BMI is calculated according to kg / m^2. 
+#'  replaced by the mean height and weight for each age, sex and IMD quintile.
+#'  BMI is calculated according to kg / m^2.
 #'
 #'
 #' @param data The Health Survey for England dataset.
@@ -38,7 +38,7 @@
 #' @return
 #' \itemize{
 #' \item Returns a variable indicating the presence/absence of each
-#' health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
+#' health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir,
 #' hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood, hse_other).
 #' \item height and weight.
 #' \item BMI (numeric)
@@ -67,25 +67,25 @@ clean_health_and_bio <- function(
   data[compm1 == 1, hse_cancer := "cancer"]
 
   if("compm2" %in% colnames(data)){
-  data[compm2 == 0, hse_endocrine := "no_endocrine"]
-  data[compm2 == 1, hse_endocrine := "endocrine"]
-  
-  data[compm7 == 0, hse_heart := "no_heart"]
-  data[compm7 == 1, hse_heart := "heart"]
-  
-  data[ , `:=`(compm2 = NULL, compm7 = NULL)]
-  
+    data[compm2 == 0, hse_endocrine := "no_endocrine"]
+    data[compm2 == 1, hse_endocrine := "endocrine"]
+
+    data[compm7 == 0, hse_heart := "no_heart"]
+    data[compm7 == 1, hse_heart := "heart"]
+
+    data[ , `:=`(compm2 = NULL, compm7 = NULL)]
+
   }
-  
+
   if("compm2a" %in% colnames(data)){
-  data[compm2a == 0 | compm2b == 0, hse_endocrine := "no_endocrine"]
-  data[compm2a == 1 | compm2b == 1, hse_endocrine := "endocrine"]
-  
-  data[compm7a == 0 | compm7b == 0 | compm7c == 0 | compm7d == 0 | compm7e == 0, hse_heart := "no_heart"]
-  data[compm7a == 1 | compm7b == 1 | compm7c == 1 | compm7d == 1 | compm7e == 1, hse_heart := "heart"]
-  
-  data[ , `:=`(compm2a = NULL, compm2b = NULL, compm7a = NULL, compm7b = NULL, compm7c = NULL, compm7d = NULL, compm7e = NULL)]
-  
+    data[compm2a == 0 | compm2b == 0, hse_endocrine := "no_endocrine"]
+    data[compm2a == 1 | compm2b == 1, hse_endocrine := "endocrine"]
+
+    data[compm7a == 0 | compm7b == 0 | compm7c == 0 | compm7d == 0 | compm7e == 0, hse_heart := "no_heart"]
+    data[compm7a == 1 | compm7b == 1 | compm7c == 1 | compm7d == 1 | compm7e == 1, hse_heart := "heart"]
+
+    data[ , `:=`(compm2a = NULL, compm2b = NULL, compm7a = NULL, compm7b = NULL, compm7c = NULL, compm7d = NULL, compm7e = NULL)]
+
   }
 
   data[compm3 == 0, hse_mental := "no_mental"]
@@ -121,13 +121,22 @@ clean_health_and_bio <- function(
   data[compm14 == 0, hse_blood := "no_blood"]
   data[compm14 == 1, hse_blood := "blood"]
 
-  data[compm15 == 0, hse_other := "no_other"]
-  data[compm15 == 1, hse_other := "other"]
+  if("compm15" %in% colnames(data)) {
 
-  # Remove variables no longer needed
-  data[ , `:=`(compm1 = NULL, compm3 = NULL, compm4 = NULL, compm5 = NULL, compm6 = NULL)]
-  data[ , `:=`(paste0("compm", 8:15), NULL)]
+    data[compm15 == 0, hse_other := "no_other"]
+    data[compm15 == 1, hse_other := "other"]
 
+    # Remove variables no longer needed
+    data[ , `:=`(compm1 = NULL, compm3 = NULL, compm4 = NULL, compm5 = NULL, compm6 = NULL)]
+    data[ , `:=`(paste0("compm", 8:15), NULL)]
+
+  } else {
+
+    # Remove variables no longer needed
+    data[ , `:=`(compm1 = NULL, compm3 = NULL, compm4 = NULL, compm5 = NULL, compm6 = NULL)]
+    data[ , `:=`(paste0("compm", 8:14), NULL)]
+
+  }
 
   ################################################################
   # Height and weight
@@ -141,9 +150,9 @@ clean_health_and_bio <- function(
 
   # Calculate BMI
   data[ , bmi := weight / ((.01 * height)^2)]
-  
-  
-return(data[])
+
+
+  return(data[])
 }
 
 

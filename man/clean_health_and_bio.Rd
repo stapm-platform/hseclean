@@ -12,7 +12,7 @@ clean_health_and_bio(data)
 \value{
 \itemize{
 \item Returns a variable indicating the presence/absence of each
-health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir, 
+health condition (hse_cancer, hse_endocrine, hse_heart, hse_mental, hse_nervous, hse_eye, hse_ear, hse_respir,
 hse_disgest, hse_urinary, hse_skin, hse_muscskel, hse_infect, hse_blood, hse_other).
 \item height and weight.
 \item BMI (numeric)
@@ -47,7 +47,7 @@ There are a set of 15 categories of conditions that are ascertained consistently
  HEIGHT AND WEIGHT
 
  Height (cm) and weight (kg). Weight is estimated above 130kg. Missing values of height and weight are
- replaced by the mean height and weight for each age, sex and IMD quintile. 
+ replaced by the mean height and weight for each age, sex and IMD quintile.
  BMI is calculated according to kg / m^2.
 }
 \examples{
