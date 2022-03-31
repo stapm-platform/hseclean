@@ -124,13 +124,13 @@ clean_family <- function(
   data[ , `:=`(infants = NULL, children = NULL)]
 
   # For years >= 2015, impute the number of kids
-  required_vars <- c("age_cat", "sex", "relationship_status", "ethnicity_4cat", "imd_quintile", "eduend4cat", "degree", "nssec3_lab", "employ2cat", "activity_lstweek")
+  required_vars <- c("age_cat", "sex", "relationship_status", "ethnicity_2cat", "imd_quintile", "eduend4cat", "degree", "nssec3_lab", "employ2cat", "activity_lstweek")
 
   testthat::expect_equal(
     length(required_vars),
     length(intersect(required_vars, colnames(data))),
     info = "one of these variables is missing from data:
-  age_cat, sex, relationship_status, ethnicity_4cat, imd_quintile, eduend4cat, degree, nssec3_lab, employ2cat, activity_lstweek"
+  age_cat, sex, relationship_status, ethnicity_2cat, imd_quintile, eduend4cat, degree, nssec3_lab, employ2cat, activity_lstweek"
   )
 
   # impute kids

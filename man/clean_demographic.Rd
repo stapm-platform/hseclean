@@ -22,18 +22,18 @@ Processes demographic variables.
 }
 \details{
 ETHNICITY
-In an attempt to harmonise different years of data to the receomended definitions, we have pooled the asian and other categories.  
+In an attempt to harmonise different years of data to the recommended definitions, we have pooled the Asian and other categories.
 \itemize{
 \item White (English, Irish, Scottish, Welsh, other European)
 \item Mixed / multiple ethnic groups
 \item Asian / Asian British (includes African-Indian, Indian, Pakistani, Bangladeshi), plus Other ethnic group (includes Chinese, Japanese, Philippino, Vietnamese, Arab)
-\item Black / African / Caribbean / Black British (includes Caribbean, African)  
+\item Black / African / Caribbean / Black British (includes Caribbean, African)
 }
-Following inspection of the data, the white/non-white classification does look appropriate, 
-especially given the likely limited sample sizes - so the 2 level variable has also been created.  
+Following inspection of the data, the white/non-white classification does look appropriate,
+especially given the likely limited sample sizes - so the 2 level variable has also been created.
 
-For 2008-2013 of the Scottish Health Survey, we can create the same 4-category variable as for the HSE, howvere for 2014 onwards, 
-the Scottish Health Survey 2018 only identifies 5 groups of ethnicity: 
+For 2008-2013 of the Scottish Health Survey, we can create the same 4-category variable as for the HSE, however for 2014 onwards,
+the Scottish Health Survey 2018 only identifies 5 groups of ethnicity:
 \itemize{
 \item White (Scottish)
 \item White (Other British)
