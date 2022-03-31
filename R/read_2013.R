@@ -47,14 +47,14 @@
 #'
 #' \dontrun{
 #'
-#' data_2013 <- read_2013("X:/", 
+#' data_2013 <- read_2013("X:/",
 #' "ScHARR/PR_Consumption_TA/HSE/HSE 2013/UKDA-7649-tab/tab/hse2013ai.tab")
 #'
 #' }
 #'
 read_2013 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2013/UKDA-7649-tab/tab/hse2013ai.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2013/UKDA-7649-tab/tab/hse2013ai.tab"
 ) {
 
   ##################################################################################
@@ -96,8 +96,8 @@ read_2013 <- function(
 
   data <- data[ , names, with = F]
 
-  data.table::setnames(data, 
-                       c("longend2", "marstatd", "origin", "pserial", "hrollwk", "hrollwe", paste0("complst", 1:15)), 
+  data.table::setnames(data,
+                       c("longend2", "marstatd", "origin", "pserial", "hrollwk", "hrollwe", paste0("complst", 1:15)),
                        c("longend", "marstat", "ethnicity_raw", "hse_id", "rollwk", "rollwe", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2013_", psu)]
@@ -105,7 +105,7 @@ read_2013 <- function(
 
   data[ , year := 2013]
   data[ , country := "England"]
-  
+
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 

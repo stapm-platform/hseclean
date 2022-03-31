@@ -6,7 +6,8 @@
 \usage{
 read_2017(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"
+ 
+    file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"
 )
 }
 \arguments{
@@ -40,7 +41,7 @@ From 2015 HSE data contains the 2015 English index of multiple deprivation, divi
 
 \dontrun{
 
-data_2017 <- read_2017("X:/", 
+data_2017 <- read_2017("X:/",
 "ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8334-tab/tab/hse2016_eul.tab")
 
 }

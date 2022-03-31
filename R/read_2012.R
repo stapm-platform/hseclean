@@ -50,14 +50,14 @@
 #'
 #' \dontrun{
 #'
-#' data_2012 <- read_2012("X:/", 
+#' data_2012 <- read_2012("X:/",
 #' "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab")
 #'
 #' }
 #'
 read_2012 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab"
 ) {
 
   ##################################################################################
@@ -99,8 +99,8 @@ read_2012 <- function(
 
   data <- data[ , names, with = F]
 
-  data.table::setnames(data, 
-                       c("marstatc", "origin", "pserial", paste0("complst", 1:15)), 
+  data.table::setnames(data,
+                       c("marstatc", "origin", "pserial", paste0("complst", 1:15)),
                        c("marstat", "ethnicity_raw", "hse_id", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2012_", psu)]
@@ -108,7 +108,7 @@ read_2012 <- function(
 
   data[ , year := 2012]
   data[ , country := "England"]
-  
+
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 

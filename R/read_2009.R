@@ -71,7 +71,7 @@
 #'
 read_2009 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2009/UKDA-6732-tab/tab/hse09ai.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2009/UKDA-6732-tab/tab/hse09ai.tab"
 ) {
 
   ##################################################################################
@@ -119,7 +119,7 @@ read_2009 <- function(
 
   data[ , year := 2009]
   data[ , country := "England"]
-  
+
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 

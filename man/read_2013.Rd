@@ -6,7 +6,8 @@
 \usage{
 read_2013(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2013/UKDA-7649-tab/tab/hse2013ai.tab"
+ 
+    file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2013/UKDA-7649-tab/tab/hse2013ai.tab"
 )
 }
 \arguments{
@@ -59,7 +60,7 @@ usually because of internal routing. For example, men in women only questions.
 
 \dontrun{
 
-data_2013 <- read_2013("X:/", 
+data_2013 <- read_2013("X:/",
 "ScHARR/PR_Consumption_TA/HSE/HSE 2013/UKDA-7649-tab/tab/hse2013ai.tab")
 
 }

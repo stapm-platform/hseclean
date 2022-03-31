@@ -64,14 +64,14 @@
 #'
 #' \dontrun{
 #'
-#' data_2011 <- read_2011("X:/", 
+#' data_2011 <- read_2011("X:/",
 #' "ScHARR/PR_Consumption_TA/HSE/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab")
 #'
 #' }
 #'
 read_2011 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2011/UKDA-7260-tab/tab/hse2011ai.tab"
 ) {
 
   ##################################################################################

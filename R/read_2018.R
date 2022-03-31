@@ -19,14 +19,14 @@
 #'
 #' \dontrun{
 #'
-#' data_2018 <- read_2018("X:/", 
+#' data_2018 <- read_2018("X:/",
 #' "ScHARR/PR_Consumption_TA/HSE/HSE 2018/UKDA-8334-tab/tab/hse2016_eul.tab")
 #'
 #' }
 #'
 read_2018 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2018/tab/hse_2018_eul_22052020.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2018/tab/hse_2018_eul_22052020.tab"
 ) {
 
   ##################################################################################
@@ -76,7 +76,7 @@ read_2018 <- function(
 
   data[ , year := 2018]
   data[ , country := "England"]
-  
+
 return(data[])
 }
 

@@ -47,14 +47,14 @@
 #'
 #' \dontrun{
 #'
-#' data_2014 <- read_2014("X:/", 
+#' data_2014 <- read_2014("X:/",
 #' "ScHARR/PR_Consumption_TA/HSE/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab")
 #'
 #' }
 #'
 read_2014 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab"
 ) {
 
   ##################################################################################
@@ -96,8 +96,8 @@ read_2014 <- function(
 
   data <- data[ , names, with = F]
 
-  data.table::setnames(data, 
-                       c("longend2", "marstatd", "age90", "origin3", "pserial", "hrollwk", "hrollwe", paste0("complst", 1:15)), 
+  data.table::setnames(data,
+                       c("longend2", "marstatd", "age90", "origin3", "pserial", "hrollwk", "hrollwe", paste0("complst", 1:15)),
                        c("longend", "marstat", "age", "ethnicity_raw", "hse_id", "rollwk", "rollwe", paste0("compm", 1:15)))
 
   data[ , psu := paste0("2014_", psu)]

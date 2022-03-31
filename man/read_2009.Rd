@@ -6,7 +6,8 @@
 \usage{
 read_2009(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2009/UKDA-6732-tab/tab/hse09ai.tab"
+ 
+    file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2009/UKDA-6732-tab/tab/hse09ai.tab"
 )
 }
 \arguments{

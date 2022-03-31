@@ -4,7 +4,7 @@
 #' Reads and does basic cleaning on the Health Survey for England 2017.
 #'
 #' The HSE 2017 sample comprised of a core general population sample. There was no boost sample in 2017.
-#' 
+#'
 #' The sample comprised 9,612 addresses selected at random in 534 postcode sectors, issued over twelve months from January to December 2017. Field work was completed in March 2018.
 #'
 #' Adults and children were interviewed at households identified at the selected addresses. Up to four children in each household were selected to take part at random; up to two aged 2 to 12 and up to two aged 13 to 15.
@@ -28,14 +28,14 @@
 #'
 #' \dontrun{
 #'
-#' data_2017 <- read_2017("X:/", 
+#' data_2017 <- read_2017("X:/",
 #' "ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8334-tab/tab/hse2016_eul.tab")
 #'
 #' }
 #'
 read_2017 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"
 ) {
 
   ##################################################################################
@@ -85,7 +85,7 @@ read_2017 <- function(
 
   data[ , year := 2017]
   data[ , country := "England"]
-  
+
 return(data[])
 }
 

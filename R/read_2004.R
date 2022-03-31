@@ -132,9 +132,9 @@
 #'
 #' data_2004 <- read_2004(
 #'   root = "X:/",
-#'   file_generalpop = 
+#'   file_generalpop =
 #'     "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
-#'   file_ethnicboost = 
+#'   file_ethnicboost =
 #'     "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
 #' )
 #'
@@ -142,10 +142,10 @@
 #'
 read_2004 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file_generalpop = 
-    "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
-  file_ethnicboost = 
-    "ScHARR/PR_Consumption_TA/HSE/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+  file_generalpop =
+    "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+  file_ethnicboost =
+    "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
 ) {
 
   ##################################################################################
@@ -195,14 +195,14 @@ read_2004 <- function(
 
   data[ , year := 2004]
   data[ , country := "England"]
-  
+
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
   # For combining data with the ethnic boost sample,
   # Make the interview weights for the general population sample sum to 1
   data[ , wt_int := wt_int / sum(wt_int, na.rm = T)]
-  
+
   ##################################################################################
   # Ethnic boost sample
 
@@ -224,14 +224,14 @@ read_2004 <- function(
 
   data_ethnicboost[ , year := 2004]
   data_ethnicboost[ , country := "England"]
-  
+
   data_ethnicboost[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data_ethnicboost[ , mintb := NULL]
-  
+
   # For combining data with the ethnic boost sample,
   # Make the interview weights for the ethnic boost sample sum to 1
   data_ethnicboost[ , wt_int := wt_int / sum(wt_int, na.rm = T)]
-  
+
 # Due to uncertainty about how to combine the ethnic boost and general population sample
 # and smoking prevlence in the combined sample looking too low for this year
 # use only the general population sample

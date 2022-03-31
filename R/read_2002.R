@@ -88,7 +88,7 @@
 #'
 read_2002 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/HSE 2002/UKDA-4912-tab/tab/hse02ai.tab"
+  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2002/UKDA-4912-tab/tab/hse02ai.tab"
 ) {
 
   data <- data.table::fread(
@@ -147,7 +147,7 @@ read_2002 <- function(
 
   data[ , year := 2002]
   data[ , country := "England"]
-  
+
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
