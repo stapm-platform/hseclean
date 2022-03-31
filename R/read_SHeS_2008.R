@@ -1,21 +1,21 @@
 
-#' Read Scottish Health Survey 2008 \lifecycle{maturing}
+#' Read Scottish Health Survey 2008 \lifecycle{stable}
 #'
 #' Reads and does basic cleaning on the Scottish Health Survey 2008.
 #'
 #' The Scottish Health Survey is designed to yield a representative sample of the general population
 #' living in private households in Scotland every year. An initial sample of 9,906 addresses were selected, comprising of
-#' three sample types: 
+#' three sample types:
 #' \itemize{
 #' \item 6,945 formed the main sample, at which adults and children were eligible;
 #' \item 2,301 addresses formed an additional child boost sample at which only households containing children ages 0-15 were eligible;
 #' \item 660 addresses formed the Health Board boost sample, at which only only adults were eligible to interview.
 #' }
-#' 
+#'
 #' Note: Optional NHS Health Board boost - NHS Health Boards were given the option to boost their samples beyond the levels which is funded centrally.
-#' In 2008, Fife Borders and Grampian Health Boards chose to boost the number of adults interviewed. These cases have been included in the main 2008 file, 
-#' and their additional selection probability has been adjusted for in the weighting scheme. 
-#'     
+#' In 2008, Fife Borders and Grampian Health Boards chose to boost the number of adults interviewed. These cases have been included in the main 2008 file,
+#' and their additional selection probability has been adjusted for in the weighting scheme.
+#'
 #' MISSING VALUES
 #'
 #' \itemize{
@@ -49,24 +49,23 @@
 #'
 #' \dontrun{
 #'
-#' data_2008 <- read_SHeS_2008("X:/", 
+#' data_2008 <- read_SHeS_2008("X:/",
 #' "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab")
 #'
 #' }
 #'
 read_SHeS_2008 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = 
-    "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab"
+  root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
+  file = "SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab"
 ) {
-  
+
   data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
   )
-  
+
   data.table::setnames(data, names(data), tolower(names(data)))
-  
+
   alc_vars <- Hmisc::Cs(
     # alc_drink_now_allages
     dnoft, dnnow, dnany, dnevr,
@@ -88,99 +87,99 @@ read_SHeS_2008 <- function(
     wqglz1, wqglz2, wqglz3, q250glz, q175glz, q125glz, wqbt, wineq,
     sherryq, spiritsq,
     popsm031, popsm032, popsm033, popsq031, popsq032, popsq033,
-    
+
     # to compare SHeS calcs with our estimates of weekly units
     nberwu, sberwu, spirwu, sherwu, winewu, popswu, drating,
-    
+
     #self-completed amount
-    dwin08q0, dwin08q2, dwin08q3, dwin08q4, dshryq08, dspiritq, 
+    dwin08q0, dwin08q2, dwin08q3, dwin08q4, dshryq08, dspiritq,
     dsbeerq0, dsbeerq2, dsbeerq3, dnbeerq0, dnbeerq2, dnbeerq3,
     dpop08q0, dpop08q2, dpop08q3,
-    
+
     #self-completed frequency
     dpops08, dwine08, dshery08, dspirits, dsbeer, dnbeer
-    
+
     #wineq, wqbt, wqgl, nberf, nberqhp, sberqhp, sberf, spirf, spirqme, sherf, sherqgs, winef,
     #win250g, win175g, win125g, win125b, popsf, popsqlb, popsqsb, popsqsc, nberqsm7, nberqlg7,
     #sberqsm7, sberqlg7
   )
-  
+
   smk_vars <- Hmisc::Cs(startsmk, endsmoke, smokyrs, dcigage, smkevr, cignow, cigwday,
                         cigwend, cigevr, cigregs)
-  
+
   health_vars <- paste0("compm", 1:14)
-  
+
   other_vars <- Hmisc::Cs(
-    
+
     psu,
     strata, # stratification unit
     int08wt, # individual weight after calibration
     cint08wt, # Child weight after calibration
-    
+
     eqv5, eqvinc,
-    
+
     # Education
     educend,
     hedqul08, # Highest educational qualification - revised 2008
-    
+
     # Occupation
-    nssec3, nssec8,    
+    nssec3, nssec8,
     nactiv, econac08,
-    
+
     # Family
     maritalg,
-    
+
     # demographic
     age,
     ethnici,
     simd5_sg, simd5_rp,
     sex,
-    
+
     # how much they weigh
     htval, wtval
-    
+
   )
-  
-  
+
+
   names <- c(other_vars, health_vars, alc_vars, smk_vars)
-  
+
   names <- tolower(names)
-  
+
   data <- data[ , names, with = F]
-  
+
   data.table::setnames(data,
-           
+
            c("simd5_rp", "strata", "ethnici", "eqv5", "eqvinc", "econac08",
              "cigregs",
              "w250gl7", "w175gl7", "w125gl7", "w125bl7",
              "popscl7", "popsbl7", "poplbl7",
              "l7scodeq", "sberqlg", "sberqsm",
              "l7ncodeq", "nberqlg", "nberqsm",
-             
+
              # amount drunk on one day
              "nberqbt", "sberqbt",
              "pops03", "popsm031", "popsm032", "popsm033", "popsq031", "popsq032", "popsq033",
-             
-             #self-completed 
+
+             #self-completed
              "dnbeerq0", "dnbeerq2", "dnbeerq3",
-             "dsbeerq0", "dsbeerq2", "dsbeerq3",              
-             "dwin08q0", "dwin08q2", "dwin08q3", "dwin08q4", "dshryq08", "dspiritq", 
+             "dsbeerq0", "dsbeerq2", "dsbeerq3",
+             "dwin08q0", "dwin08q2", "dwin08q3", "dwin08q4", "dshryq08", "dspiritq",
              "dpop08q0", "dpop08q2", "dpop08q3",
              #self-completed frequency
              "dpops08", "dwine08", "dshery08", "dspirits", "dsbeer", "dnbeer"
              ),
-           
+
            c("simd", "cluster", "ethnicity_raw", "eqv5_15", "eqvinc_15", "econac12",
              "cigreg",
              "wgls250ml", "wgls175ml", "wgls125ml", "wbtlgz",
              "popsqsmc7", "popsqsm7", "popsqlg7",
              "sberqpt7", "sberqlg7", "sberqsm7",
              "nberqpt7", "nberqlg7", "nberqsm7",
-             
+
              # amount drunk on one day
              "nbeerq4", "sbeerq4",
              "pops", "popsly11", "popsly12", "popsly13", "popsq111", "popsq112", "popsq113",
-             
+
              #self-completed
              "scnbeeq1", "scnbeeq3", "scnbeeq2",
              "scsbeeq1", "scsbeeq3", "scsbeeq2",
@@ -189,20 +188,20 @@ read_SHeS_2008 <- function(
              #self-completed frequency
              "scpops", "scwine", "scsherry", "scspirit", "scsbeer", "scnbeer"
              ))
-  
+
   # Tidy survey weights
   data[ , wt_int := int08wt]
   data[age < 16, wt_int := cint08wt]
 
   data[ , `:=` (int08wt = NULL, cint08wt = NULL)]
-  
+
   # Set PSU and cluster
   data[ , psu := paste0("2008_", psu)]
   data[ , cluster := paste0("2008_", cluster)]
-  
+
   data[ , year := 2008]
   data[ , country := "Scotland"]
-  
+
   return(data[])
 }
 

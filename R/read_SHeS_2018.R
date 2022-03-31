@@ -1,5 +1,5 @@
 
-#' Read Scottish Health Survey 2018 \lifecycle{maturing}
+#' Read Scottish Health Survey 2018 \lifecycle{stable}
 #'
 #' Reads and does basic cleaning on the Scottish Health Survey 2018.
 #'
@@ -41,25 +41,24 @@
 #'
 #' \dontrun{
 #'
-#' data_2018 <- read_SHeS_2018("X:/", 
+#' data_2018 <- read_SHeS_2018("X:/",
 #' "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab")
 #'
 #' }
 #'
 read_SHeS_2018 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = 
-    "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"
+  root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
+  file = "SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"
 ) {
-  
+
   data <- data.table::fread(
     paste0(root[1], file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
   )
-  
+
   data.table::setnames(data, names(data), tolower(names(data)))#
 
-  alc_vars <- Hmisc::Cs(    
+  alc_vars <- Hmisc::Cs(
     # alc_drink_now_allages
     dnoft, dnnow, dnany, dnevr,
     # alc_sevenday_adult (heaviest day)
@@ -80,100 +79,100 @@ read_SHeS_2018 <- function(
     wqglz1, wqglz2, wqglz3, q250glz, q175glz, q125glz, wqbt, wineq,
     sherryq, spiritsq,
     popsm031, popsm032, popsm033, popsq031, popsq032, popsq033,
-    
+
     # to compare SHeS calcs with our estimates of weekly units
     nberwu, sberwu, spirwu, sherwu, winewu, popswu, drating,
-    
-    #self-completed 
-    dwin08q0, dwin08q2, dwin08q3, dwin08q4, dshryq08, dspiritq, 
+
+    #self-completed
+    dwin08q0, dwin08q2, dwin08q3, dwin08q4, dshryq08, dspiritq,
     dsbeerq0, dsbeerq2, dsbeerq3, dnbeerq0, dnbeerq2, dnbeerq3,
     dpop08q0, dpop08q2, dpop08q3,
-    
+
     #self-completed frequency
-    dpops08, dwine08, dshery08, dspirits, dsbeer, dnbeer 
-    
+    dpops08, dwine08, dshery08, dspirits, dsbeer, dnbeer
+
     #wineq, wqbt, wqgl, nberf, nberqhp, sberqhp, sberf, spirf, spirqme, sherf, sherqgs, winef,
     #win250g, win175g, win125g, win125b, popsf, popsqlb, popsqsb, popsqsc, nberqsm7, nberqlg7,
     #sberqsm7, sberqlg7
     )
-  
+
   smk_vars <- Hmisc::Cs(startsmk, endsmoke, smokyrs, dcigage, smkevr, cignow, cigwday,
                         cigwend, cigevr, cigregs)
-  
+
   health_vars <- Hmisc::Cs(compm1, compm2a, compm2b, compm3, compm4, compm5, compm6, compm7a,
-                           compm7b, compm7c, compm7d, compm7e, compm8, compm9, compm10, compm11, 
+                           compm7b, compm7c, compm7d, compm7e, compm8, compm9, compm10, compm11,
                            compm12, compm13, compm14)
-  
+
   other_vars <- Hmisc::Cs(
-    
+
     psu,
     strata, # stratification unit
     int18wt, # individual weight after calibration
     cint18wt, # Child weight after calibration
-    
+
     eqv5_15, eqvinc_15,
-    
+
     # Education
     educend,
     hedqul08, # Highest educational qualification - revised 2008
-    
+
     # Occupation
-    nssec3, nssec8,    
+    nssec3, nssec8,
     econac12,
-    
+
     # Family
     maritalg,
-    
+
     # demographic
     age,
     ethnic05,
     simd16_sga, simd16_rpa,
     sex,
-    
+
     # how much they weigh
     htval, wtval
-    
+
   )
-  
-  
+
+
   names <- c(other_vars, health_vars, alc_vars, smk_vars)
-  
+
   names <- tolower(names)
-  
+
   data <- data[ , names, with = F]
-  
+
   data.table::setnames(data,
-           
+
            c("simd16_rpa", "strata", "ethnic05",
              "cigregs",
              "w250gl7", "w175gl7", "w125gl7", "w125bl7",
              "popscl7", "popsbl7", "poplbl7",
              "l7scodeq", "sberqlg", "sberqsm",
              "l7ncodeq", "nberqlg", "nberqsm",
-             
+
              # amount drunk on one day
              "nberqbt", "sberqbt",
              "pops03", "popsm031", "popsm032", "popsm033", "popsq031", "popsq032", "popsq033",
-             
-             #self-completed 
+
+             #self-completed
              "dnbeerq0", "dnbeerq2", "dnbeerq3",
-             "dsbeerq0", "dsbeerq2", "dsbeerq3",              
-             "dwin08q0", "dwin08q2", "dwin08q3", "dwin08q4", "dshryq08", "dspiritq", 
+             "dsbeerq0", "dsbeerq2", "dsbeerq3",
+             "dwin08q0", "dwin08q2", "dwin08q3", "dwin08q4", "dshryq08", "dspiritq",
              "dpop08q0", "dpop08q2", "dpop08q3",
              #self-completed frequency
              "dpops08", "dwine08", "dshery08", "dspirits", "dsbeer", "dnbeer"),
-           
+
            c("simd", "cluster", "ethnicity_raw",
              "cigreg",
              "wgls250ml", "wgls175ml", "wgls125ml", "wbtlgz",
              "popsqsmc7", "popsqsm7", "popsqlg7",
              "sberqpt7", "sberqlg7", "sberqsm7",
              "nberqpt7", "nberqlg7", "nberqsm7",
-             
+
              # amount drunk on one day
              "nbeerq4", "sbeerq4",
              "pops", "popsly11", "popsly12", "popsly13", "popsq111", "popsq112", "popsq113",
-             
+
              #self-completed
              "scnbeeq1", "scnbeeq3", "scnbeeq2",
              "scsbeeq1", "scsbeeq3", "scsbeeq2",
@@ -182,20 +181,20 @@ read_SHeS_2018 <- function(
              #self-completed frequency
              "scpops", "scwine", "scsherry", "scspirit", "scsbeer", "scnbeer"
            ))
-  
+
   # Tidy survey weights
   data[ , wt_int := int18wt]
   data[age < 16, wt_int := cint18wt]
-  
+
   data[ , `:=` (int18wt = NULL, cint18wt = NULL)]
 
   # Set PSU and cluster
   data[ , psu := paste0("2018_", psu)]
   data[ , cluster := paste0("2018_", cluster)]
-  
+
   data[ , year := 2018]
   data[ , country := "Scotland"]
-  
+
   return(data[])
 }
 
