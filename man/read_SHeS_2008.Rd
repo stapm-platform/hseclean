@@ -2,12 +2,11 @@
 % Please edit documentation in R/read_SHeS_2008.R
 \name{read_SHeS_2008}
 \alias{read_SHeS_2008}
-\title{Read Scottish Health Survey 2008 \lifecycle{maturing}}
+\title{Read Scottish Health Survey 2008 \lifecycle{stable}}
 \usage{
 read_SHeS_2008(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab"
+  root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
+  file = "SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab"
 )
 }
 \arguments{
@@ -33,7 +32,7 @@ Reads and does basic cleaning on the Scottish Health Survey 2008.
 \details{
 The Scottish Health Survey is designed to yield a representative sample of the general population
 living in private households in Scotland every year. An initial sample of 9,906 addresses were selected, comprising of
-three sample types: 
+three sample types:
 \itemize{
 \item 6,945 formed the main sample, at which adults and children were eligible;
 \item 2,301 addresses formed an additional child boost sample at which only households containing children ages 0-15 were eligible;
@@ -41,9 +40,9 @@ three sample types:
 }
 
 Note: Optional NHS Health Board boost - NHS Health Boards were given the option to boost their samples beyond the levels which is funded centrally.
-In 2008, Fife Borders and Grampian Health Boards chose to boost the number of adults interviewed. These cases have been included in the main 2008 file, 
-and their additional selection probability has been adjusted for in the weighting scheme. 
-    
+In 2008, Fife Borders and Grampian Health Boards chose to boost the number of adults interviewed. These cases have been included in the main 2008 file,
+and their additional selection probability has been adjusted for in the weighting scheme.
+
 MISSING VALUES
 
 \itemize{
@@ -62,7 +61,7 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2008 <- read_SHeS_2008("X:/", 
+data_2008 <- read_SHeS_2008("X:/",
 "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2008/UKDA-6383-tab/tab/shes08i_v11.tab")
 
 }

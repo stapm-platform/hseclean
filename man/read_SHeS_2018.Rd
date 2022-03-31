@@ -2,12 +2,11 @@
 % Please edit documentation in R/read_SHeS_2018.R
 \name{read_SHeS_2018}
 \alias{read_SHeS_2018}
-\title{Read Scottish Health Survey 2018 \lifecycle{maturing}}
+\title{Read Scottish Health Survey 2018 \lifecycle{stable}}
 \usage{
 read_SHeS_2018(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"
+  root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
+  file = "SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"
 )
 }
 \arguments{
@@ -54,7 +53,7 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2018 <- read_SHeS_2018("X:/", 
+data_2018 <- read_SHeS_2018("X:/",
 "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab")
 
 }

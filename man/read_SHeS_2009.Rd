@@ -2,12 +2,11 @@
 % Please edit documentation in R/read_SHeS_2009.R
 \name{read_SHeS_2009}
 \alias{read_SHeS_2009}
-\title{Read Scottish Health Survey 2009 \lifecycle{maturing}}
+\title{Read Scottish Health Survey 2009 \lifecycle{stable}}
 \usage{
 read_SHeS_2009(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab"
+  root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
+  file = "SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab"
 )
 }
 \arguments{
@@ -33,10 +32,10 @@ Reads and does basic cleaning on the Scottish Health Survey 2009.
 \details{
 The Scottish Health Survey is designed to yield a representative sample of the general population
 living in private households in Scotland every year. An initial sample of 12,668 addresses were selected,
-comprising of 
+comprising of
 \itemize{
-\item 7,588 formed the main sample, 
-\item 4,312 addresses formed an additional child booster sample, 
+\item 7,588 formed the main sample,
+\item 4,312 addresses formed an additional child booster sample,
 \item 768 addresses formed the Health Board boost.
 }
 
@@ -59,7 +58,7 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2009 <- read_SHeS_2009("X:/", 
+data_2009 <- read_SHeS_2009("X:/",
 "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2009/UKDA-6713-tab/tab/shes09i_v5.tab")
 
 }

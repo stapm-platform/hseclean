@@ -2,12 +2,11 @@
 % Please edit documentation in R/read_SHeS_2016.R
 \name{read_SHeS_2016}
 \alias{read_SHeS_2016}
-\title{Read Scottish Health Survey 2016 \lifecycle{maturing}}
+\title{Read Scottish Health Survey 2016 \lifecycle{stable}}
 \usage{
 read_SHeS_2016(
-  root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab"
+  root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
+  file = "SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab"
 )
 }
 \arguments{
@@ -32,7 +31,7 @@ Reads and does basic cleaning on the Scottish Health Survey 2016.
 }
 \details{
 The Scottish Health Survey is designed to yield a representative sample of the general population
-living in private households in Scotland every year. 
+living in private households in Scotland every year.
 
 
 MISSING VALUES
@@ -53,7 +52,7 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
 
 \dontrun{
 
-data_2016 <- read_SHeS_2016("X:/", 
+data_2016 <- read_SHeS_2016("X:/",
 "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2016/UKDA-8290-tab/tab/shes16i_archive_v1.tab")
 
 }
