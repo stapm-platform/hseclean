@@ -1,6 +1,5 @@
 
-
-#' Alcohol average weekly consumption (adults) \lifecycle{maturing}
+#' Alcohol average weekly consumption (adults)
 #'
 #' We estimate the number of
 #' UK standard units of alcohol drunk on average in a week from the questions on drinking in the last 12 months.
@@ -24,9 +23,9 @@
 #' @param data Data table - the Health Survey for England dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
-#' 
+#'
 #' @importFrom data.table := setnames
-#' 
+#'
 #' @return
 #' \itemize{
 #' \item beer_units - average weekly units of beer
@@ -65,14 +64,14 @@ alc_weekmean_adult <- function(
   abv_data = hseclean::abv_data,
   volume_data = hseclean::alc_volume_data
 ) {
-  
+
   # Check that drinks_now variable is in the data
   if(sum(colnames(data) == "drinks_now") == 0) message("missing drinks_now variable - run alc_drink_now_allages() first.")
 
-  
+
   year <- as.integer(unique(data[ , year][1]))
   country <- unique(data[ , country][1])
-  
+
   year_set1 <- 2001:2002
   year_set2 <- 2011:2100
 
@@ -191,18 +190,18 @@ alc_weekmean_adult <- function(
 
 
   if(country == "Scotland") {
-    
+
     data[ , vol_wine := 0]
     data[wqglz1 == 1 & !is.na(q250glz) & q250glz > 0, vol_wine := q250glz * volume_data[beverage == "winelglassvol", volume]]
     data[wqglz2 == 2 & !is.na(q175glz) & q175glz > 0, vol_wine := vol_wine + q175glz * volume_data[beverage == "wineglassvol", volume]]
     data[wqglz3 == 3 & !is.na(q125glz) & q125glz > 0, vol_wine := vol_wine + q125glz * volume_data[beverage == "winesglassvol", volume]]
     # if measure used is both bottles and glasses or just bottle
     data[wineq %in% c(1, 3) & !is.na(wqbt) & wqbt > 0, vol_wine := vol_wine + wqbt * volume_data[beverage == "winesglassvol", volume]]
-    
-    
+
+
     data[ , `:=` (wqglz1 = NULL, wqglz2 = NULL, wqglz3 = NULL, q250glz = NULL, q175glz = NULL, q125glz = NULL)]
   }
-  
+
   # Fortified wine (Sherry)
 
   if(year %in% c(year_set1, year_set2) | country == "Scotland") {
@@ -410,7 +409,7 @@ alc_weekmean_adult <- function(
 
     data[ , weekmean := spirit_units + wine_units + rtd_units + beer_units]
 
-    #data[weekmean == 0, drinks_now := "non_drinker"]
+    data[weekmean == 0, drinks_now := "non_drinker"]
     data[weekmean > 0, drinks_now := "drinker"]
 
     # generate preference vector
@@ -425,7 +424,7 @@ alc_weekmean_adult <- function(
     data[is.na(perc_beer_units), perc_beer_units := 0]
 
     # Cap consumption at 300 units
-    data[weekmean > 300, weekmean := 300]
+    #data[weekmean > 300, weekmean := 300]
 
 
     #################################################################
