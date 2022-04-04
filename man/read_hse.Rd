@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_hse.R
 \name{read_hse}
 \alias{read_hse}
-\title{Read HSE data \lifecycle{maturing}}
+\title{Read HSE data \lifecycle{deprecated}}
 \usage{
 read_hse(year, root = c("X:/", "/Volumes/Shared/"))
 }

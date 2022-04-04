@@ -1,6 +1,6 @@
 
 
-#' Demographic variables \lifecycle{maturing}
+#' Demographic variables
 #'
 #' Processes demographic variables.
 #'

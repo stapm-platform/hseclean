@@ -2,7 +2,7 @@
 % Please edit documentation in R/alc_weekmean_adult.R
 \name{alc_weekmean_adult}
 \alias{alc_weekmean_adult}
-\title{Alcohol average weekly consumption (adults) \lifecycle{maturing}}
+\title{Alcohol average weekly consumption (adults)}
 \usage{
 alc_weekmean_adult(
   data,

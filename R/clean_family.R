@@ -1,5 +1,5 @@
 
-#' Family status \lifecycle{maturing}
+#' Family status
 #'
 #' Process the data on the number of children in the household and the relationship
 #' status of each respondent.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/num_sim.R
 \name{num_sim}
 \alias{num_sim}
-\title{Simulate single years from age/time category \lifecycle{stable}}
+\title{Simulate single years from age/time category}
 \usage{
 num_sim(x)
 }

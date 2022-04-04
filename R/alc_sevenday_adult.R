@@ -1,6 +1,5 @@
 
-
-#' Alcohol consumption in last seven-days (adults) \lifecycle{maturing}
+#' Alcohol consumption in last seven-days (adults)
 #'
 #' Processes the information from the questions on drinking in the last seven days - how many times drank and characteristics of the heaviest drinking day.
 #'
@@ -15,9 +14,9 @@
 #' @param data Data table - the health survey dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param alc_volume_data Data table - our assumptions on the volume of different drinks (ml).
-#' 
+#'
 #' @importFrom data.table :=
-#' 
+#'
 #' @return
 #' \itemize{
 #' \item n_days_drink - number of days drank in last 7.
@@ -57,7 +56,7 @@ alc_sevenday_adult <- function(
   if(sum(colnames(data) == "drinks_now") == 0) {
     message("missing drinks_now variable - run alc_drink_now_allages() first.")
   }
-  
+
 
   #################################################################
   # Adults - Number of days drank in last 7
@@ -66,16 +65,16 @@ alc_sevenday_adult <- function(
   data[age >= 16 & d7day == 2, n_days_drink := 0]
 
   # On how many days out of the last seven did you have an alcoholic drink?
-  
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values (there is quite a lot of missingness in this variable)
   data[drinks_now == "non_drinker", d7many := 0]
-  
-  
+
+
   #data <- hseclean::impute_mean(data, "d7many", remove_zeros = T)
   #data[is.na(drinks_now), d7many := NA]
-  
-  
+
+
   data[age >= 16 & d7day == 1, n_days_drink := d7many]
 
   data[ , `:=`(d7day = NULL, d7many = NULL)]
@@ -86,9 +85,9 @@ alc_sevenday_adult <- function(
   # Normal beer
   # SHeS 2010 does not have nberqbt7
   if(!("nberqbt7" %in% colnames(data))){
-    data[, nberqbt7 := 0] 
-  }  
-  
+    data[, nberqbt7 := 0]
+  }
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(nberqhp7), `:=`(nberqhp7 = 0)]
@@ -96,11 +95,11 @@ alc_sevenday_adult <- function(
   data[drinks_now == "non_drinker" & is.na(nberqlg7), `:=`(nberqlg7 = 0)]
   data[drinks_now == "non_drinker" & is.na(nberqbt7), `:=`(nberqbt7 = 0)]
   data[drinks_now == "non_drinker" & is.na(nberqpt7), `:=`(nberqpt7 = 0)]
-  
-  
+
+
   #data <- hseclean::impute_mean(data, c("nberqhp7", "nberqsm7", "nberqlg7", "nberqbt7", "nberqpt7"))
-  
-  
+
+
   data[ , d7vol_nbeer := 0]
   data[d7typ1 == 1, d7vol_nbeer := nberqhp7 * alc_volume_data[beverage == "nbeerhalfvol", volume]]
   data[d7typ1 == 1, d7vol_nbeer := d7vol_nbeer + nberqsm7 * alc_volume_data[beverage == "nbeerscanvol", volume]]
@@ -114,9 +113,9 @@ alc_sevenday_adult <- function(
   # Strong beer
   # SHeS 2010 does not have sberqbt7
   if(!("sberqbt7" %in% colnames(data))){
-    data[, sberqbt7 := 0] 
-  }  
-  
+    data[, sberqbt7 := 0]
+  }
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(sberqhp7), `:=`(sberqhp7 = 0)]
@@ -206,7 +205,7 @@ alc_sevenday_adult <- function(
 
 
   # Spirits
-  
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(spirqme7), `:=`(spirqme7 = 0)]
@@ -228,14 +227,14 @@ alc_sevenday_adult <- function(
     data[ , popsqlg7 := 0]
 
   }
-  
-  # In SHeS, there are two separate measures for small cans and small bottles 
+
+  # In SHeS, there are two separate measures for small cans and small bottles
   if(!("popsqsmc7" %in% colnames(data))) {
-    
+
     data[ , popsqsmc7 := 0]
-    
+
   }
-  
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(popsqsm7), `:=`(popsqsm7 = 0)]
@@ -250,7 +249,7 @@ alc_sevenday_adult <- function(
 
   # Small cans in SHeS
   data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqsmc7 * alc_volume_data[beverage == "popsscvol", volume]]
-  
+
   # Large bottles
   data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqlg7 * alc_volume_data[beverage == "popslbvol", volume]]
 
@@ -285,7 +284,7 @@ alc_sevenday_adult <- function(
 
   data[drinks_now == "non_drinker" & is.na(peakday), peakday := 0]
   data[drinks_now == "non_drinker" & is.na(n_days_drink), n_days_drink := 0]
-  
+
   # Check to see if anyone is marked as a non-drinker but has peakday > 0
   ncheck <- nrow(data[drinks_now == "non_drinker" & peakday > 0])
   if(ncheck > 0) message(paste0("warning - ", ncheck, " people marked as non-drinkers in drinks_now but have peakday > 0"))
@@ -301,8 +300,8 @@ alc_sevenday_adult <- function(
   data[n_days_drink > 0 & peakday >= 6 & sex == "Female", binge_cat := "binge"]
 
   data[drinks_now == "non_drinker" & is.na(binge_cat), binge_cat := "did_not_drink"]
-  
-  
+
+
   # Remove variables no longer needed
   remove_vars <- c("drnksame", "whichday", colnames(data)[stringr::str_detect(colnames(data), "d7")])
   data[ , (remove_vars) := NULL]

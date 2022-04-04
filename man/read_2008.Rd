@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_2008.R
 \name{read_2008}
 \alias{read_2008}
-\title{Read HSE 2008 \lifecycle{stable}}
+\title{Read HSE 2008}
 \usage{
 read_2008(
   root = c("X:/", "/Volumes/Shared/"),

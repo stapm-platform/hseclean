@@ -1,5 +1,5 @@
 
-#' Read HSE data \lifecycle{maturing}
+#' Read HSE data \lifecycle{deprecated}
 #'
 #' Reads and does basic cleaning of a selected year of the Health Survey for England.
 #'

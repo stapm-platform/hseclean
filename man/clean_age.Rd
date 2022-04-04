@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_age.R
 \name{clean_age}
 \alias{clean_age}
-\title{Age variables \lifecycle{stable}}
+\title{Age variables}
 \usage{
 clean_age(data)
 }

@@ -1,6 +1,6 @@
 
 
-#' Combine years of data \lifecycle{maturing}
+#' Combine years of data
 #'
 #' Combines years of data when provided as a list of data tables.
 #'
@@ -9,8 +9,8 @@
 #' @importFrom data.table rbindlist
 #'
 #' @return Returns data table of combined data.
-#' 
-#' 
+#'
+#'
 #' @export
 #'
 #' @examples

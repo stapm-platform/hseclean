@@ -2,7 +2,7 @@
 % Please edit documentation in R/combine_years.R
 \name{combine_years}
 \alias{combine_years}
-\title{Combine years of data \lifecycle{maturing}}
+\title{Combine years of data}
 \usage{
 combine_years(data_list)
 }

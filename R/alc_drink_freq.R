@@ -1,5 +1,5 @@
 
-#' Drink frequency \lifecycle{maturing}
+#' Drink frequency
 #'
 #' Convert the surveyed drink frequency to a measure of days per week on which drinking occurred.
 #'
@@ -13,7 +13,7 @@
 #' \item{Once or twice a month}{0.375}
 #' \item{Once every couple of months}{0.188}
 #' \item{Once or twice a year}{0.029}
-#' 
+#'
 #' @export
 #'
 #' @examples

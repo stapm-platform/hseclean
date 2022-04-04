@@ -2,7 +2,7 @@
 % Please edit documentation in R/alc_drink_freq.R
 \name{alc_drink_freq}
 \alias{alc_drink_freq}
-\title{Drink frequency \lifecycle{maturing}}
+\title{Drink frequency}
 \usage{
 alc_drink_freq(x)
 }

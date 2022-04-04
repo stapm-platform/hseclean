@@ -2,7 +2,7 @@
 % Please edit documentation in R/prop_summary.R
 \name{prop_summary}
 \alias{prop_summary}
-\title{Summarise the percentages of people with certain levels of a variable \lifecycle{maturing}}
+\title{Summarise the percentages of people with certain levels of a variable}
 \usage{
 prop_summary(data, var_name, levels_1, levels_0, strat_vars = NULL)
 }

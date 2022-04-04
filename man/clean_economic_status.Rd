@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_economic_status.R
 \name{clean_economic_status}
 \alias{clean_economic_status}
-\title{Economic status \lifecycle{maturing}}
+\title{Economic status}
 \usage{
 clean_economic_status(data)
 }

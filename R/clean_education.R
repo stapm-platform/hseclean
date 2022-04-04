@@ -1,6 +1,6 @@
 
 
-#' Education variables \lifecycle{maturing}
+#' Education variables
 #'
 #' Process the data on education.
 #'
@@ -61,14 +61,14 @@ clean_education <- function(
   if("topqual3" %in% colnames(data)){
     data[topqual3 == 1, degree := "degree"]
     data[topqual3 %in% 2:7, degree := "no_degree"]
-    
+
     data[ , topqual3 := NULL]
   }
-  
+
   if("hedqul08" %in% colnames(data)){
     data[hedqul08 %in% 1:2, degree := "degree"]
     data[hedqul08 %in% 3:6, degree := "no_degree"]
-    
+
     data[ , hedqul08 := NULL]
   }
 
@@ -76,7 +76,7 @@ clean_education <- function(
   data[is.na(degree) & age < 18, degree := "no_degree"]
   data[is.na(degree) & eduend4cat %in% c("16-18", "15_or_under", "never_went_to_school"), degree := "no_degree"]
   data[is.na(degree) & eduend4cat == "19_or_over", degree := "degree"]
-  
-  
+
+
 return(data[])
 }
