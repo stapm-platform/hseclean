@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.2</span>
       </span>
     </div>
 
@@ -132,7 +132,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read Scottish Health Survey 2013 <a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></h1>
+    <h1>Read Scottish Health Survey 2013 <a href='https://lifecycle.r-lib.org/articles/stages.html#stable'><img src='figures/lifecycle-stable.svg' alt='[Stable]' /></a></h1>
     
     <div class="hidden name"><code>read_SHeS_2013.Rd</code></div>
     </div>
@@ -142,9 +142,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>read_SHeS_2013</span><span class='op'>(</span>
-  root <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span><span class='op'>)</span>,
- 
-    file <span class='op'>=</span> <span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2013/UKDA-7594-tab/tab/shes13i_archive_v5.tab"</span>
+  root <span class='op'>=</span> <span class='st'>"X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/"</span>,
+  file <span class='op'>=</span> <span class='st'>"SHeS 2013/UKDA-7594-tab/tab/shes13i_archive_v5.tab"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -195,7 +194,7 @@ respondent did not complete or agree to a particular schedule (i.e. nurse schedu
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>data_2013</span> <span class='op'>&lt;-</span> <span class='fu'>read_SHeS_2013</span><span class='op'>(</span><span class='st'>"X:/"</span>, 
+<span class='va'>data_2013</span> <span class='op'>&lt;-</span> <span class='fu'>read_SHeS_2013</span><span class='op'>(</span><span class='st'>"X:/"</span>,
 <span class='st'>"ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2013/UKDA-7594-tab/tab/shes13i_archive_v5.tab"</span><span class='op'>)</span>
 
 <span class='op'>}</span>

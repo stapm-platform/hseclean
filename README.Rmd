@@ -20,19 +20,17 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 ## Motivation
-The motivation for `hseclean` was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The [HSE](https://digital.nhs.uk/data-and-information/publications/statistical/health-survey-for-england) is a series of annual surveys covering health and health-related behaviours. The suite of functions within `hseclean` reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.   
+The motivation for `hseclean` was to standardised the way that health survey data were cleaned and prepared for our analyses and inputs to the STAPM decision-analytic model. The data are annual surveys covering health and health-related behaviours for England and Scotland. The suite of functions within `hseclean` reads the data for each year, renames, organises and processes the variables including multiple imputation and basic data summaries.   
 
-`hseclean` was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research (ScHARR), The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.   
+`hseclean` was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research (ScHARR), The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies.     
 
 We have subsequently added functions to process the Scottish Health Survey (SHeS) into a form that matches our processing of the Health Survey for England.  
 
- > Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service. `hseclean` is designed to read the tab delimited files.    
- 
 ## Usage
 
 `hseclean` is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data. 
 
-The **inputs** are the raw survey data files for each year.   
+The **inputs** are the tab delimited survey data files for each year.   
 
 The **processes** applied by the functions in `hseclean` give options to:
 
@@ -46,9 +44,9 @@ The **processes** applied by the functions in `hseclean` give options to:
 The **output** of these processes is a cleaned dataset that is ready for further analysis. This dataset can be saved so that you don't need to run the cleaning processes in `hseclean` each time you want to use the cleaned data.  
 
 ## Installation
-`hseclean` is currently available only to members of the project team (but please contact Duncan Gillespie duncan.gillespie@sheffield.ac.uk to discuss). To access you need to [sign-up for a GitLab account](https://gitlab.com/). You will then need to be added to the STAPM project team to gain access.   
+`hseclean` is currently available only to members of the project team - there are plans afoot to make the code open access. To access - [sign-up for a GitLab account](https://gitlab.com/) to be given access rights to the STAPM project.     
 
-Once that is sorted, you can install the latest or a specified version of `hseclean` from GitLab with:     
+Install Rtools - using the `installr` package can make this easier. Then install the latest or a specified version of `hseclean` from GitLab with:     
 
 ```{r gh_installation, message=FALSE, eval = FALSE}
 #install.packages("devtools")
@@ -65,6 +63,9 @@ devtools::install_git(
 # ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"
 # this should make a box pop up where you enter your GitLab password
 ```
+
+Or clone the package repo locally and use the 'install and restart' button in the Build tab of RStudio. This option is more convenient when testing development versions.   
+
 
 Then load the package, and some other packages that are useful. Note that the code within `hseclean` uses the `data.table::data.table()` syntax.  
 

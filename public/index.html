@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.2</span>
       </span>
     </div>
 
@@ -94,18 +94,15 @@
 <div id="motivation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
-<p>The motivation for <code>hseclean</code> was to standardised the way that the Health Survey for England (HSE) data were cleaned and prepared for our analyses and inputs to our decision-analytic models. The <a href="https://digital.nhs.uk/data-and-information/publications/statistical/health-survey-for-england">HSE</a> is a series of annual surveys covering health and health-related behaviours. The suite of functions within <code>hseclean</code> reads the data for each year since 2001, renames, organises and processes the variables that we use for our analyses. The package also includes functions to multiply impute missing data, and to summarise data considering survey design.</p>
-<p><code>hseclean</code> was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research (ScHARR), The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies, and investigate the consequences of clustering and interactions between tobacco and alcohol consumption behaviours.</p>
+<p>The motivation for <code>hseclean</code> was to standardised the way that health survey data were cleaned and prepared for our analyses and inputs to the STAPM decision-analytic model. The data are annual surveys covering health and health-related behaviours for England and Scotland. The suite of functions within <code>hseclean</code> reads the data for each year, renames, organises and processes the variables including multiple imputation and basic data summaries.</p>
+<p><code>hseclean</code> was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research (ScHARR), The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies.</p>
 <p>We have subsequently added functions to process the Scottish Health Survey (SHeS) into a form that matches our processing of the Health Survey for England.</p>
-<blockquote>
-<p>Health Survey for England and Scottish Health Survey data are accessed via the UK Data Service. <code>hseclean</code> is designed to read the tab delimited files.</p>
-</blockquote>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p><code>hseclean</code> is a package for reading and cleaning the Health Survey for England and Scottish Health Survey data.</p>
-<p>The <strong>inputs</strong> are the raw survey data files for each year.</p>
+<p>The <strong>inputs</strong> are the tab delimited survey data files for each year.</p>
 <p>The <strong>processes</strong> applied by the functions in <code>hseclean</code> give options to:</p>
 <ol>
 <li>Read tobacco and alcohol related variables and the information on individual characteristics that we use in our analyses.<br>
@@ -125,13 +122,13 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><code>hseclean</code> is currently available only to members of the project team (but please contact Duncan Gillespie <a href="mailto:duncan.gillespie@sheffield.ac.uk" class="email">duncan.gillespie@sheffield.ac.uk</a> to discuss). To access you need to <a href="https://gitlab.com/">sign-up for a GitLab account</a>. You will then need to be added to the STAPM project team to gain access.</p>
-<p>Once that is sorted, you can install the latest or a specified version of <code>hseclean</code> from GitLab with:</p>
+<p><code>hseclean</code> is currently available only to members of the project team - there are plans afoot to make the code open access. To access - <a href="https://gitlab.com/">sign-up for a GitLab account</a> to be given access rights to the STAPM project.</p>
+<p>Install Rtools - using the <code>installr</code> package can make this easier. Then install the latest or a specified version of <code>hseclean</code> from GitLab with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#install.packages("devtools")</span>
 <span class="co">#install.packages("getPass")</span>
 
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_git</a></span><span class="op">(</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_git</a></span><span class="op">(</span>
   <span class="st">"https://gitlab.com/stapm/r-packages/hseclean.git"</span>, 
   credentials <span class="op">=</span> <span class="fu">git2r</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/git2r/reference/cred_user_pass.html">cred_user_pass</a></span><span class="op">(</span><span class="st">"uname"</span>, <span class="fu">getPass</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/getPass/man/getPass.html">getPass</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
   ref <span class="op">=</span> <span class="st">"x.x.x"</span>,
@@ -141,6 +138,7 @@
 <span class="co"># Where uname is your Gitlab user name.</span>
 <span class="co"># ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"</span>
 <span class="co"># this should make a box pop up where you enter your GitLab password</span></code></pre></div>
+<p>Or clone the package repo locally and use the ‘install and restart’ button in the Build tab of RStudio. This option is more convenient when testing development versions.</p>
 <p>Then load the package, and some other packages that are useful. Note that the code within <code>hseclean</code> uses the <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table::data.table()</a></code> syntax.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Load the package</span>
@@ -167,6 +165,12 @@
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+</ul>
+</div>
+<div class="citation">
+<h2>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html">Citing hseclean</a></li>
 </ul>
 </div>
 <div class="developers">
