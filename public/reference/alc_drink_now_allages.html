@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Whether someone drinks and frequency of drinking  — alc_drink_now_allages • hseclean</title>
+<title>Whether someone drinks and frequency of drinking — alc_drink_now_allages • hseclean</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Whether someone drinks and frequency of drinking  — alc_drink_now_allages" />
+<meta property="og:title" content="Whether someone drinks and frequency of drinking — alc_drink_now_allages" />
 <meta property="og:description" content="Clean the data on whether someone is a current drinker (drank in last 12 months)
 and if they did drink how frequently they did so. Several definitions are used for youth drinking (&amp;lt; 16 years)." />
 <meta property="og:image" content="https://stapm.gitlab.io/r-packages/hseclean/logo.png" />
@@ -133,7 +133,7 @@ and if they did drink how frequently they did so. Several definitions are used f
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Whether someone drinks and frequency of drinking <a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></h1>
+    <h1>Whether someone drinks and frequency of drinking</h1>
     
     <div class="hidden name"><code>alc_drink_now_allages.Rd</code></div>
     </div>
@@ -150,7 +150,7 @@ and if they did drink how frequently they did so. Several definitions are used f
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>Data table - the Health Survey for England dataset.</p></td>
+      <td><p>Data table - the survey dataset.</p></td>
     </tr>
     </table>
 
@@ -158,11 +158,11 @@ and if they did drink how frequently they did so. Several definitions are used f
 
     
 <dl>
-<dt>drinks_now</dt><dd><p>Drank at all in the last 12 months (drinker, non_drinker).</p></dd>      
-<dt>drink_freq_7d</dt><dd><p>Frequency of drinking, expressed in terms of the expected number of drinking ocassions per week (numerical variable calculated from categorical responses to how frequently someone drinks).</p></dd>       
+<dt>drinks_now</dt><dd><p>Drank at all in the last 12 months (drinker, non_drinker).</p></dd>
+<dt>drink_freq_7d</dt><dd><p>Frequency of drinking, expressed in terms of the expected number of drinking ocassions per week (numerical variable calculated from categorical responses to how frequently someone drinks).</p></dd>
 <dt>adrinkweek</dt><dd><p>Youth drinks at least once a week (yes, no).</p></dd>
-<dt>adrinkmonth</dt><dd><p>Youth drinks at least once a month (yes, no).</p></dd>   
-<dt>adrinklastweek</dt><dd><p>Youth drank in the last week (yes, no).</p></dd>      
+<dt>adrinkmonth</dt><dd><p>Youth drinks at least once a month (yes, no).</p></dd>
+<dt>adrinklastweek</dt><dd><p>Youth drank in the last week (yes, no).</p></dd>
 
 </dl>
 
@@ -171,8 +171,9 @@ and if they did drink how frequently they did so. Several definitions are used f
     <p>Combines information from adults and children. In general, someone is classed as a drinker even if they only reported
 drinking once or twice a year - which is a less strict definition than used by some other surveys. Any missing data is
 supplemented by responses to if currently drinks or if always non-drinker.</p>
-<p>For youth drinking, variables are also created for: 
+<p>For youth drinking, variables are also created for:
 drinks at least once a week, drinks at least once a month, and drank in the last week.</p>
+<p>Note: The Scottish Health Survey dataset does not have drinking data on children younger than 16 years old.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Economic status — clean_economic_status • hseclean</title>
+<title>Read HSE 2019 — read_2019 • hseclean</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Economic status — clean_economic_status" />
-<meta property="og:description" content="Process the data on employment and occupation." />
+<meta property="og:title" content="Read HSE 2019 — read_2019" />
+<meta property="og:description" content="Reads and does basic cleaning on the Health Survey for England 2019." />
 <meta property="og:image" content="https://stapm.gitlab.io/r-packages/hseclean/logo.png" />
 
 
@@ -132,54 +132,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Economic status</h1>
+    <h1>Read HSE 2019</h1>
     
-    <div class="hidden name"><code>clean_economic_status.Rd</code></div>
+    <div class="hidden name"><code>read_2019.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Process the data on employment and occupation.</p>
+    <p>Reads and does basic cleaning on the Health Survey for England 2019.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clean_economic_status</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>read_2019</span><span class='op'>(</span>
+  root <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"X:/"</span>, <span class='st'>"/Volumes/Shared/"</span><span class='op'>)</span>,
+ 
+    file <span class='op'>=</span> <span class='st'>"ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2019/hse_2019_eul_20211006.tab"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>Data table - the Health Survey for England dataset.</p></td>
+      <th>root</th>
+      <td><p>Character - the root directory.</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>Character - the file path and name.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p>employ2cat: "employed", "unemployed"</p></li>
-<li><p>nssec3_lab: "Managprof", "Intermediate", "Routinemanual", "Other". Social class/occupation based on the NS-SEC system. A four level variable for
-managerial and professional occupations, intermediate occupations and routine and manual occupations. The fourth level is
-'other' that includes anyone (young/old/unemployed) who do not have an occupation.</p></li>
-<li><p>social_grade: "ABC1", "C2DE". 2 level social grade classification.</p></li>
-<li><p>man_nonman: "Manual", "Non-manual", "Other"</p></li>
-<li><p>activity_lstweek: "Managprof" (employed), "Intermediate" (employed), "Routinemanual" (employed), "Unemployed", "In education", "Looking after home or family", "Sickness, injury or disability", "Retired"</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The classifications considered are:</p>
-<ul>
-<li><p>Employed / in paid work or not.</p></li>
-<li><p>The NS-SEC measure, which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
-therefore not that good at classifying people who are not employed for various reasons.</p></li>
-<li><p>The NRS social grade system. This measure is the one used in the
-Tobacco and Alcohol Toolkit studies, but is not reported in the Health Survey for England. We create this variable by recategorising the NS-SEC 8 level variable.
-This is important to facilitate the link of analysis to the Toolkit Study.</p></li>
-<li><p>Manual vs. non-manual occupation. In the 2017 Tobacco control plan for England, there was a specific target to reduce the difference in rates of smoking
-between people classified with a manual or non-manual occupation. We create this variable from the 3 level NS-SEC classification
-by grouping Managerial and professional with intermediate occupations to give the non-manual group.</p></li>
-<li><p>Economic status - retired / employed / unemployed.</p></li>
-<li><p>Activity status for last week that adds more detail such as 'in education' and 'looking after home or family'.</p></li>
+    <p>Returns a data table. Note that:</p><ul>
+<li><p>Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A") is replaced with NA.</p></li>
+<li><p>All variable names are converted to lower case.</p></li>
+<li><p>The cluster and probabilistic sampling unit have the year appended to them.</p></li>
 </ul>
 
 
@@ -187,9 +173,8 @@ by grouping Managerial and professional with intermediate occupations to give th
     <pre class="examples"><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_2016.html'>read_2016</a></span><span class='op'>(</span>root <span class='op'>=</span> <span class='st'>"/Volumes/Shared/"</span><span class='op'>)</span>
-
-<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>clean_economic_status</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>data</span><span class='op'>)</span>
+<span class='va'>data_2019</span> <span class='op'>&lt;-</span> <span class='fu'>read_2019</span><span class='op'>(</span><span class='st'>"X:/"</span>,
+<span class='st'>"ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2019/hse_2019_eul_20211006.tab"</span><span class='op'>)</span>
 
 <span class='op'>}</span>
 
