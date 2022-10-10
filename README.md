@@ -66,13 +66,15 @@ there are plans afoot to make the code open access. To access - [sign-up
 for a GitLab account](https://gitlab.com/) to be given access rights to
 the STAPM project.
 
-Install Rtools - using the `installr` package can make this easier. Then
-install the latest or a specified version of `hseclean` from GitLab
-with:
+If on a University of Sheffield managed computer, install the R, RStudio
+and Rtools bundle from the Software Centre. Install Rtools - using the
+`installr` package can make this easier. Then install the latest or a
+specified version of `hseclean` from GitLab with:
 
 ``` r
 #install.packages("devtools")
 #install.packages("getPass")
+#install.packages("git2r")
 
 devtools::install_git(
   "https://gitlab.com/stapm/r-packages/hseclean.git", 
