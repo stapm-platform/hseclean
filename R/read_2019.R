@@ -39,17 +39,22 @@ read_2019 <- function(
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
+  # Do a scan of the data dictionary to get the column numbers of all drinking variables
   alc_vars <- colnames(data[ , c(53:56, 67:70, 1081:1196, 1365:1438, 1479:1504)]) # done 2019
-  smk_vars <- colnames(data[ , c(24, 25, 49, 64, 75, 76, 655:804, 1057:1096)]) # needs review from here
-  health_vars <- paste0("complst", 1:15)
+
+  # Do a scan of the data dictionary to get the column numbers of all smoking variables
+  smk_vars <- colnames(data[ , c(24, 25, 49, 63, 73:74, 920:1080, 1332:1364, 1439:1478, 1598:1623)]) # needs review from here
+
+  # health variables do not appear to be present in the 2019 survey
+  #health_vars <- paste0("complst", 1:15)
 
   other_vars <- Hmisc::Cs(
     qrtint, #addnum,
-    psu_scr, cluster195, wt_int, #wt_sc,
+    psu_scr, cluster194, wt_int, #wt_sc,
     seriala,
     age16g5, age35g, sex,
     origin2,
-    qimd, nssec3, nssec8,
+    qimd19, nssec3, nssec8,
     stwork,
     activb2,
     #Ag015g4, #Children, Infants,
@@ -61,15 +66,15 @@ read_2019 <- function(
     # how much they weigh
     htval, wtval)
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+  names <- c(other_vars, alc_vars, smk_vars)
 
   names <- tolower(names)
 
   data <- data[ , names, with = F]
 
   data.table::setnames(data,
-           c("cluster195", "psu_scr", "qrtint", "marstatd", "origin2", "activb2", "stwork","seriala", paste0("complst", 1:15)),
-           c("cluster", "psu", "quarter", "marstat", "ethnicity_raw", "activb", "paidwk","hse_id", paste0("compm", 1:15)))
+           c("cluster194", "psu_scr", "qrtint", "marstatd", "origin2", "activb2", "stwork","seriala", "qimd19"),
+           c("cluster", "psu", "quarter", "marstat", "ethnicity_raw", "activb", "paidwk","hse_id", "qimd"))
 
   data[ , psu := paste0("2019_", psu)]
   data[ , cluster := paste0("2019_", cluster)]
