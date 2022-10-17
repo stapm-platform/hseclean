@@ -73,7 +73,7 @@ alc_weekmean_adult <- function(
   country <- unique(data[ , country][1])
 
   year_set1 <- 2001:2002
-  year_set2 <- 2011:2100
+  year_set2 <- 2011:2018
 
 
   #################################################################

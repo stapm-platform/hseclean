@@ -26,7 +26,7 @@
 #'
 read_2019 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2019/hse_2019_eul_20211006.tab"
+  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2019/hse_2019_eul_20211006.tab"
 ) {
 
   ##################################################################################
@@ -72,9 +72,13 @@ read_2019 <- function(
 
   data <- data[ , names, with = F]
 
+  # remove "_19" suffixes
+  data.table::setnames(data, names(data), stringr::str_remove_all(names(data), "_19"))
+
+  # relabel
   data.table::setnames(data,
-           c("cluster194", "psu_scr", "qrtint", "marstatd", "origin2", "activb2", "stwork","seriala", "qimd19"),
-           c("cluster", "psu", "quarter", "marstat", "ethnicity_raw", "activb", "paidwk","hse_id", "qimd"))
+           c("cluster194", "psu_scr", "qrtint", "marstatd", "origin2", "activb2", "stwork","seriala", "qimd19", "startsmk19"),
+           c("cluster", "psu", "quarter", "marstat", "ethnicity_raw", "activb", "paidwk","hse_id", "qimd", "startsmk"))
 
   data[ , psu := paste0("2019_", psu)]
   data[ , cluster := paste0("2019_", cluster)]

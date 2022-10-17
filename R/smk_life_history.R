@@ -53,12 +53,18 @@ smk_life_history <- function(
 
   #############################################
   # Basic tidying
-  
+
     if(!("kcigage" %in% colnames(data))) {
-      
+
       data[ , kcigage := NA_real_]
-      
+
     }
+
+  if(!("dcigage" %in% colnames(data))) {
+
+    data[ , dcigage := NA_real_]
+
+  }
 
   data[ , startsmk := as.double(startsmk)]
   data[ , dcigage := as.double(dcigage)]
@@ -107,7 +113,7 @@ smk_life_history <- function(
   # Missing data
   #data <- hseclean::impute_mean(data, c("smk_start_age", "smk_stop_age"), remove_zeros = T)
 
-  
+
   data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), smk_stop_age := NA_real_]
   data[is.na(cig_smoker_status) | cig_smoker_status == "never", smk_start_age := NA_real_]
 

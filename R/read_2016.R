@@ -59,7 +59,7 @@
 #'
 read_2016 <- function(
   root = c("X:/", "/Volumes/Shared/"),
-  file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2016/UKDA-8334-tab/tab/hse2016_eul.tab"
+  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2016/UKDA-8334-tab/tab/hse2016_eul.tab"
 ) {
 
   ##################################################################################

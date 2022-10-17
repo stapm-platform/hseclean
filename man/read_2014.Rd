@@ -7,7 +7,7 @@
 read_2014(
   root = c("X:/", "/Volumes/Shared/"),
  
-    file = "ScHARR/PR_Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab"
+    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab"
 )
 }
 \arguments{
