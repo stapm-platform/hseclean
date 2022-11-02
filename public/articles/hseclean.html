@@ -32,6 +32,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -44,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.8.5</span>
       </span>
     </div>
 
@@ -62,13 +64,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://gitlab.com/stapm/r-packages/hseclean">
+  <a href="https://gitlab.com/stapm/r-packages/hseclean" class="external-link">
     <span class="fab fa-gitlab fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://stapm.gitlab.io/software.html">
+  <a href="https://stapm.gitlab.io/software.html" class="external-link">
     <span class="fa fa-code"></span>
      
   </a>
@@ -83,7 +85,7 @@
 
       
 
-      </header><script src="hseclean_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started</h1>
@@ -96,219 +98,271 @@
 
     
     
-<div id="workflows" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workflows" class="anchor"></a>Workflows</h2>
-<p>To illustrate the use of the <code>hseclean</code> functions for different tasks, we have created example workflows. You can use these examples to help understand how the code works, run them to generate model inputs, or use them as a starting point for the development of a new project.</p>
-<p>At the moment, these workflows are accessible only to the project team. To access them, you will need to be added to the STAPM Gitlab organisation.</p>
+<div class="section level2">
+<h2 id="workflows">Workflows<a class="anchor" aria-label="anchor" href="#workflows"></a>
+</h2>
+<p>To illustrate the use of the <code>hseclean</code> functions for
+different tasks, we have created example workflows. You can use these
+examples to help understand how the code works, run them to generate
+model inputs, or use them as a starting point for the development of a
+new project.</p>
+<p>At the moment, these workflows are accessible only to the project
+team. To access them, you will need to be added to the STAPM Gitlab
+organisation.</p>
 <p>The workflows are listed below:</p>
-<div id="data-testing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-testing" class="anchor"></a>Data testing</h3>
-<p>These are the working repos used to check the processing of the survey data using the functions in hseclean</p>
+<div class="section level3">
+<h3 id="data-testing">Data testing<a class="anchor" aria-label="anchor" href="#data-testing"></a>
+</h3>
+<p>These are the working repos used to check the processing of the
+survey data using the functions in hseclean</p>
 <ul>
 <li>
-<a href="https://gitlab.com/stapm/model-inputs/eng_nat_tob_alc_data">English national data on tobacco and alcohol consumption</a> - data processing and testing.</li>
+<a href="https://gitlab.com/stapm/model-inputs/eng_nat_tob_alc_data" class="external-link">English
+national data on tobacco and alcohol consumption</a> - data processing
+and testing.</li>
 <li>
-<a href="https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data">Scottish national data on tobacco consumption</a> - data processing and testing.</li>
+<a href="https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data" class="external-link">Scottish
+national data on tobacco consumption</a> - data processing and
+testing.</li>
 </ul>
 </div>
-<div id="project-work" class="section level3">
-<h3 class="hasAnchor">
-<a href="#project-work" class="anchor"></a>Project work</h3>
-<p>Where possible, put the code to clean health survey data in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data</p>
+<div class="section level3">
+<h3 id="project-work">Project work<a class="anchor" aria-label="anchor" href="#project-work"></a>
+</h3>
+<p>Where possible, put the code to clean health survey data in a script
+that is part of the workflow of the project in which that data is used.
+The code would therefore be found in the repo associated with that
+project. Below are links to project repos focused on processing and
+analysing survey data</p>
 <ul>
 <li>
-<a href="https://gitlab.com/stapm/projects/tobacco_alcohol_clustering">Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data</a> - White Rose Collaboration Fund project.<br>
+<a href="https://gitlab.com/stapm/projects/tobacco_alcohol_clustering" class="external-link">Description
+of the clustering of tobacco and alcohol consumption behaviours using
+English national survey data</a> - White Rose Collaboration Fund
+project.<br>
 </li>
 <li>
-<a href="https://gitlab.com/stapm/projects/syntax/syntax_hse">SYNTAX inputs - tobacco and alcohol consumption</a> - working files containing inputs for the SYNTAX project.</li>
+<a href="https://gitlab.com/stapm/projects/syntax/syntax_hse" class="external-link">SYNTAX
+inputs - tobacco and alcohol consumption</a> - working files containing
+inputs for the SYNTAX project.</li>
 <li>
-<a href="https://gitlab.com/stapm/example-workflows/tax_policy_modelling/-/tree/master/05_build_inputs/tobacco_and_alcohol_survey_data">Tobacco and alcohol tax policy modelling example workflow</a> - in a subfolder that builds the inputs to the simulation model.</li>
+<a href="https://gitlab.com/stapm/example-workflows/tax_policy_modelling/-/tree/master/05_build_inputs/tobacco_and_alcohol_survey_data" class="external-link">Tobacco
+and alcohol tax policy modelling example workflow</a> - in a subfolder
+that builds the inputs to the simulation model.</li>
 </ul>
 </div>
 </div>
-<div id="get-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-data" class="anchor"></a>Get data</h2>
-<p>To be able to <strong>download data from the UK Data Service</strong>, you will need to <strong>register with the UK Data Service website</strong>, which will enable you to request access to the datasets. Instructions on how to do this can be found <a href="https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx">here</a>. <strong>Note that you might not have to clean the data yourself as we can provide you with datasets for running the models that have already been cleaned.</strong></p>
-<p>In ScHARR, all data is stored and processed according to the <a href="https://www.sheffield.ac.uk/scharr/research/igov/policy00">ScHARR Information Governance Policy</a>. The HSE and SHeS data is stored in the university networked X-drive folder <code>PR_Consumption_TA</code>, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level data is included within this package.</p>
+<div class="section level2">
+<h2 id="get-data">Get data<a class="anchor" aria-label="anchor" href="#get-data"></a>
+</h2>
+<p>To be able to <strong>download data from the UK Data
+Service</strong>, you will need to <strong>register with the UK Data
+Service website</strong>, which will enable you to request access to the
+datasets. Instructions on how to do this can be found <a href="https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx" class="external-link">here</a>.
+<strong>Note that you might not have to clean the data yourself as we
+can provide you with datasets for running the models that have already
+been cleaned.</strong></p>
+<p>In ScHARR, all data is stored and processed according to the <a href="https://www.sheffield.ac.uk/scharr/research/igov/policy00" class="external-link">ScHARR
+Information Governance Policy</a>. The HSE and SHeS data is stored in
+the university networked X-drive folder <code>PR_Consumption_TA</code>,
+which is accessible only to team members who are using data according to
+the purposes stated to the UK Data Service. No individual-level data is
+included within this package.</p>
 </div>
-<div id="basic-functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-functionality" class="anchor"></a>Basic functionality</h2>
-<div id="reading-the-hse-data-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#reading-the-hse-data-files" class="anchor"></a>Reading the HSE data files</h3>
-<p>There are separate functions in <code>hseclean</code> to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socio-economic and other descriptor variables.</p>
+<div class="section level2">
+<h2 id="basic-functionality">Basic functionality<a class="anchor" aria-label="anchor" href="#basic-functionality"></a>
+</h2>
+<div class="section level3">
+<h3 id="reading-the-hse-data-files">Reading the HSE data files<a class="anchor" aria-label="anchor" href="#reading-the-hse-data-files"></a>
+</h3>
+<p>There are separate functions in <code>hseclean</code> to read each
+year of HSE data. You must specify the link to where the data is stored.
+The functions read in all variables related to tobacco and alcohol and
+selected socio-economic and other descriptor variables.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">test_2001</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_2001.html">read_2001</a></span><span class="op">(</span>
-  root <span class="op">=</span> <span class="st">"X:/"</span>,
-  file <span class="op">=</span> <span class="st">"ScHARR/PR_Consumption_TA/HSE/HSE 2001/UKDA-4628-tab/tab/hse01ai.tab"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">test_2001</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_2001.html">read_2001</a></span><span class="op">(</span></span>
+<span>  root <span class="op">=</span> <span class="st">"X:/"</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">"ScHARR/PR_Consumption_TA/HSE/HSE 2001/UKDA-4628-tab/tab/hse01ai.tab"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <hr>
-<p><code>hseclean</code> contains separate functions for reading the survey data for each year, e.g. <code><a href="../reference/read_SHeS_2008.html">read_SHeS_2008()</a></code>.</p>
+<p><code>hseclean</code> contains separate functions for reading the
+survey data for each year, e.g. <code><a href="../reference/read_SHeS_2008.html">read_SHeS_2008()</a></code>.</p>
 </div>
-<div id="processing-socioeconomic-demographic-and-health-variables" class="section level3">
-<h3 class="hasAnchor">
-<a href="#processing-socioeconomic-demographic-and-health-variables" class="anchor"></a>Processing socioeconomic, demographic and health variables</h3>
-<p>There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See <code>vignette("covariate_data")</code>. Note that the order in which the cleaning functions are applied can matter - as some functions use variables that are cleaned by others.</p>
+<div class="section level3">
+<h3 id="processing-socioeconomic-demographic-and-health-variables">Processing socioeconomic, demographic and health variables<a class="anchor" aria-label="anchor" href="#processing-socioeconomic-demographic-and-health-variables"></a>
+</h3>
+<p>There are separate functions that focus on processing a different
+theme of socioeconomic, demographic and health variables. See
+<code>vignette("covariate_data")</code>. Note that the order in which
+the cleaning functions are applied can matter - as some functions use
+variables that are cleaned by others.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_age</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_family</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_demographic</span> <span class="op">%&gt;%</span> 
-  <span class="va">clean_education</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_economic_status</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_income</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_health_and_bio</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_2017.html">read_2017</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_age</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_family</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_demographic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="va">clean_education</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_economic_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_income</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_health_and_bio</span></span></code></pre></div>
 </div>
-<div id="alcohol-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#alcohol-data" class="anchor"></a>Alcohol data</h3>
-<p>Detailed description of how to clean the alcohol data are given in <code>vignette("alcohol_data")</code>. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.</p>
+<div class="section level3">
+<h3 id="alcohol-data">Alcohol data<a class="anchor" aria-label="anchor" href="#alcohol-data"></a>
+</h3>
+<p>Detailed description of how to clean the alcohol data are given in
+<code>vignette("alcohol_data")</code>. As an example, here is the
+workflow to plot the frquency of drinking among people who drank in
+2017.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-
-<span class="co"># Frequency of drinking in 2017 among drinkers</span>
-<span class="va">root_dir</span> <span class="op">&lt;-</span> <span class="st">"/Volumes/Shared/"</span>
-<span class="co">#root_dir &lt;- "X:/"</span>
-
-<span class="fu"><a href="../reference/read_2017.html">read_2017</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_age</span> <span class="op">%&gt;%</span>
-  <span class="va">clean_demographic</span> <span class="op">%&gt;%</span>
-  <span class="va">alc_drink_now_allages</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">90</span>, <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">8</span>, <span class="va">drinks_now</span> <span class="op">==</span> <span class="st">"drinker"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">imd_quintile</span>, <span class="va">age_cat</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>av_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">drink_freq_7d</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">imd_quintile</span>, y <span class="op">=</span> <span class="va">av_freq</span>, fill <span class="op">=</span> <span class="va">age_cat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"average number of days drink in a week"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Frequency of drinking in 2017 among drinkers</span></span>
+<span><span class="va">root_dir</span> <span class="op">&lt;-</span> <span class="st">"/Volumes/Shared/"</span></span>
+<span><span class="co">#root_dir &lt;- "X:/"</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/read_2017.html">read_2017</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_age</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">clean_demographic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">alc_drink_now_allages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">90</span>, <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">8</span>, <span class="va">drinks_now</span> <span class="op">==</span> <span class="st">"drinker"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">imd_quintile</span>, <span class="va">age_cat</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>av_freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">drink_freq_7d</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">imd_quintile</span>, y <span class="op">=</span> <span class="va">av_freq</span>, fill <span class="op">=</span> <span class="va">age_cat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"average number of days drink in a week"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="clean-all-years-of-smoking-and-alcohol-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#clean-all-years-of-smoking-and-alcohol-data" class="anchor"></a>Clean all years of smoking and alcohol data</h3>
+<div class="section level3">
+<h3 id="clean-all-years-of-smoking-and-alcohol-data">Clean all years of smoking and alcohol data<a class="anchor" aria-label="anchor" href="#clean-all-years-of-smoking-and-alcohol-data"></a>
+</h3>
 <p>See <code>vignette("smoking_data")</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-
-<span class="co"># Wrap the individual cleaning functions in another function for applying to each year</span>
-
-<span class="va">cleandata</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="va">data</span> <span class="op">%&lt;&gt;%</span>
-    <span class="va">clean_age</span> <span class="op">%&gt;%</span>
-    <span class="va">clean_demographic</span> <span class="op">%&gt;%</span> 
-    <span class="va">clean_education</span> <span class="op">%&gt;%</span>
-    <span class="va">clean_economic_status</span> <span class="op">%&gt;%</span>
-    <span class="va">clean_family</span> <span class="op">%&gt;%</span>
-    <span class="va">clean_income</span> <span class="op">%&gt;%</span>
-    <span class="va">clean_health_and_bio</span> <span class="op">%&gt;%</span>
-    <span class="va">smk_status</span> <span class="op">%&gt;%</span>
-    <span class="va">smk_former</span> <span class="op">%&gt;%</span>
-    <span class="va">smk_life_history</span> <span class="op">%&gt;%</span>
-    <span class="va">smk_amount</span> <span class="op">%&gt;%</span>
-    <span class="va">alc_drink_now_allages</span> <span class="op">%&gt;%</span>
-    <span class="va">alc_weekmean_adult</span> <span class="op">%&gt;%</span>
-    <span class="va">alc_sevenday_adult</span> <span class="op">%&gt;%</span>
-    <span class="va">alc_sevenday_child</span> <span class="op">%&gt;%</span>
-    
-    <span class="fu"><a href="../reference/select_data.html">select_data</a></span><span class="op">(</span>
-      ages <span class="op">=</span> <span class="fl">12</span><span class="op">:</span><span class="fl">89</span>,
-      years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2017</span>,
-      
-      <span class="co"># variables to retain</span>
-      keep_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>,
-                    <span class="st">"age"</span>, <span class="st">"age_cat"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>,
-                    <span class="st">"ethnicity_4cat"</span>, <span class="st">"ethnicity_2cat"</span>,
-                    <span class="st">"degree"</span>, <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,
-                    <span class="st">"nssec3_lab"</span>, <span class="st">"man_nonman"</span>, <span class="st">"activity_lstweek"</span>, <span class="st">"eduend4cat"</span>,
-                    
-                    <span class="st">"hse_cancer"</span>, <span class="st">"hse_endocrine"</span>, <span class="st">"hse_heart"</span>, <span class="st">"hse_mental"</span>, <span class="st">"hse_nervous"</span>, <span class="st">"hse_eye"</span>, <span class="st">"hse_ear"</span>, <span class="st">"hse_respir"</span>, 
-                    <span class="st">"hse_disgest"</span>, <span class="st">"hse_urinary"</span>, <span class="st">"hse_skin"</span>, <span class="st">"hse_muscskel"</span>, <span class="st">"hse_infect"</span>, <span class="st">"hse_blood"</span>,
-                    
-                    <span class="st">"weight"</span>, <span class="st">"height"</span>, <span class="st">"bmi"</span>,
-                    
-                    <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span>, <span class="st">"years_reg_smoker"</span>, <span class="st">"cig_ever"</span>,
-                    <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span>,
-                    <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"censor_age"</span>, <span class="st">"giveup_smk"</span>,
-                    
-                    <span class="st">"drinks_now"</span>, 
-                    <span class="st">"drink_freq_7d"</span>, <span class="st">"n_days_drink"</span>, <span class="st">"peakday"</span>, <span class="st">"binge_cat"</span>,
-                    <span class="st">"beer_units"</span>, <span class="st">"wine_units"</span>, <span class="st">"spirit_units"</span>, <span class="st">"rtd_units"</span>, 
-                    <span class="st">"weekmean"</span>, 
-                    <span class="st">"perc_spirit_units"</span>, <span class="st">"perc_wine_units"</span>, <span class="st">"perc_rtd_units"</span>, <span class="st">"perc_beer_units"</span>, 
-                    <span class="st">"drinker_cat"</span>, 
-                    <span class="st">"spirits_pref_cat"</span>, <span class="st">"wine_pref_cat"</span>, <span class="st">"rtd_pref_cat"</span>, <span class="st">"beer_pref_cat"</span>, 
-                    <span class="st">"total_units7_ch"</span>
-      <span class="op">)</span>,
-      
-      <span class="co"># The variables that must have complete cases</span>
-      complete_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span><span class="op">)</span>
-    <span class="op">)</span>
-  
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="co"># Read and clean each year of data and bind them together in one big dataset</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/combine_years.html">combine_years</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2001.html">read_2001</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2002.html">read_2002</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2003.html">read_2003</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2004.html">read_2004</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2005.html">read_2005</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2006.html">read_2006</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2007.html">read_2007</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2008.html">read_2008</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2009.html">read_2009</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2010.html">read_2010</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2011.html">read_2011</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2012.html">read_2012</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2013.html">read_2013</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2014.html">read_2014</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2015.html">read_2015</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2016.html">read_2016</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,
-  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2017.html">read_2017</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span><span class="op">)</span>
-
-<span class="co"># clean the survey weights</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Wrap the individual cleaning functions in another function for applying to each year</span></span>
+<span></span>
+<span><span class="va">cleandata</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span></span>
+<span>    <span class="va">clean_age</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">clean_demographic</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="va">clean_education</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">clean_economic_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">clean_family</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">clean_income</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">clean_health_and_bio</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">smk_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">smk_former</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">smk_life_history</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">smk_amount</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">alc_drink_now_allages</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">alc_weekmean_adult</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">alc_sevenday_adult</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    <span class="va">alc_sevenday_child</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>    </span>
+<span>    <span class="fu"><a href="../reference/select_data.html">select_data</a></span><span class="op">(</span></span>
+<span>      ages <span class="op">=</span> <span class="fl">12</span><span class="op">:</span><span class="fl">89</span>,</span>
+<span>      years <span class="op">=</span> <span class="fl">2001</span><span class="op">:</span><span class="fl">2017</span>,</span>
+<span>      </span>
+<span>      <span class="co"># variables to retain</span></span>
+<span>      keep_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wt_int"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>,</span>
+<span>                    <span class="st">"age"</span>, <span class="st">"age_cat"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span>,</span>
+<span>                    <span class="st">"ethnicity_4cat"</span>, <span class="st">"ethnicity_2cat"</span>,</span>
+<span>                    <span class="st">"degree"</span>, <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,</span>
+<span>                    <span class="st">"nssec3_lab"</span>, <span class="st">"man_nonman"</span>, <span class="st">"activity_lstweek"</span>, <span class="st">"eduend4cat"</span>,</span>
+<span>                    </span>
+<span>                    <span class="st">"hse_cancer"</span>, <span class="st">"hse_endocrine"</span>, <span class="st">"hse_heart"</span>, <span class="st">"hse_mental"</span>, <span class="st">"hse_nervous"</span>, <span class="st">"hse_eye"</span>, <span class="st">"hse_ear"</span>, <span class="st">"hse_respir"</span>, </span>
+<span>                    <span class="st">"hse_disgest"</span>, <span class="st">"hse_urinary"</span>, <span class="st">"hse_skin"</span>, <span class="st">"hse_muscskel"</span>, <span class="st">"hse_infect"</span>, <span class="st">"hse_blood"</span>,</span>
+<span>                    </span>
+<span>                    <span class="st">"weight"</span>, <span class="st">"height"</span>, <span class="st">"bmi"</span>,</span>
+<span>                    </span>
+<span>                    <span class="st">"cig_smoker_status"</span>, <span class="st">"years_since_quit"</span>, <span class="st">"years_reg_smoker"</span>, <span class="st">"cig_ever"</span>,</span>
+<span>                    <span class="st">"cigs_per_day"</span>, <span class="st">"smoker_cat"</span>, <span class="st">"banded_consumption"</span>, <span class="st">"cig_type"</span>, <span class="st">"time_to_first_cig"</span>,</span>
+<span>                    <span class="st">"smk_start_age"</span>, <span class="st">"smk_stop_age"</span>, <span class="st">"censor_age"</span>, <span class="st">"giveup_smk"</span>,</span>
+<span>                    </span>
+<span>                    <span class="st">"drinks_now"</span>, </span>
+<span>                    <span class="st">"drink_freq_7d"</span>, <span class="st">"n_days_drink"</span>, <span class="st">"peakday"</span>, <span class="st">"binge_cat"</span>,</span>
+<span>                    <span class="st">"beer_units"</span>, <span class="st">"wine_units"</span>, <span class="st">"spirit_units"</span>, <span class="st">"rtd_units"</span>, </span>
+<span>                    <span class="st">"weekmean"</span>, </span>
+<span>                    <span class="st">"perc_spirit_units"</span>, <span class="st">"perc_wine_units"</span>, <span class="st">"perc_rtd_units"</span>, <span class="st">"perc_beer_units"</span>, </span>
+<span>                    <span class="st">"drinker_cat"</span>, </span>
+<span>                    <span class="st">"spirits_pref_cat"</span>, <span class="st">"wine_pref_cat"</span>, <span class="st">"rtd_pref_cat"</span>, <span class="st">"beer_pref_cat"</span>, </span>
+<span>                    <span class="st">"total_units7_ch"</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>      </span>
+<span>      <span class="co"># The variables that must have complete cases</span></span>
+<span>      complete_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"year"</span>, <span class="st">"quarter"</span>, <span class="st">"psu"</span>, <span class="st">"cluster"</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Read and clean each year of data and bind them together in one big dataset</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/combine_years.html">combine_years</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2001.html">read_2001</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2002.html">read_2002</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2003.html">read_2003</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2004.html">read_2004</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2005.html">read_2005</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2006.html">read_2006</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2007.html">read_2007</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2008.html">read_2008</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2009.html">read_2009</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2010.html">read_2010</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2011.html">read_2011</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2012.html">read_2012</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2013.html">read_2013</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2014.html">read_2014</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2015.html">read_2015</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2016.html">read_2016</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu">cleandata</span><span class="op">(</span><span class="fu"><a href="../reference/read_2017.html">read_2017</a></span><span class="op">(</span>root <span class="op">=</span> <span class="va">root_dir</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># clean the survey weights</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="summarise-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#summarise-data" class="anchor"></a>Summarise data</h3>
-<p>The function <code><a href="https://rdrr.io/pkg/survey/man/svyby.html">survey::svyby()</a></code> in the <code>survey</code> R package is used by the function <code><a href="../reference/prop_summary.html">prop_summary()</a></code> in <code>hseclean</code> to estimate the uncertainty around proportions calculated from a binary variable - <code><a href="../reference/prop_summary.html">prop_summary()</a></code> was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.</p>
+<div class="section level3">
+<h3 id="summarise-data">Summarise data<a class="anchor" aria-label="anchor" href="#summarise-data"></a>
+</h3>
+<p>The function <code><a href="https://rdrr.io/pkg/survey/man/svyby.html" class="external-link">survey::svyby()</a></code> in the <code>survey</code>
+R package is used by the function <code><a href="../reference/prop_summary.html">prop_summary()</a></code> in
+<code>hseclean</code> to estimate the uncertainty around proportions
+calculated from a binary variable - <code><a href="../reference/prop_summary.html">prop_summary()</a></code> was
+designed to simplify the process of estimating smoking prevalence from
+the HSE data, stratified by a specified set of variables.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">prop_smokers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prop_summary.html">prop_summary</a></span><span class="op">(</span>
-  data <span class="op">=</span> <span class="va">hse_data</span>,
-  var_name <span class="op">=</span> <span class="st">"smk.state"</span>,
-  levels_1 <span class="op">=</span> <span class="st">"current"</span>,
-  levels_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"former"</span>, <span class="st">"never"</span><span class="op">)</span>,
-  strat_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">prop_smokers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prop_summary.html">prop_summary</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">hse_data</span>,</span>
+<span>  var_name <span class="op">=</span> <span class="st">"smk.state"</span>,</span>
+<span>  levels_1 <span class="op">=</span> <span class="st">"current"</span>,</span>
+<span>  levels_0 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"former"</span>, <span class="st">"never"</span><span class="op">)</span>,</span>
+<span>  strat_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="missing-data-imputation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#missing-data-imputation" class="anchor"></a>Missing data imputation</h3>
-<p><code>hseclean</code> uses the function <code><a href="https://amices.org/mice/reference/mice.html">mice::mice()</a></code> in the <code>mice</code> R package, implemented in a basic way by the <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function. See <code>vignette("missing_data")</code>.</p>
+<div class="section level3">
+<h3 id="missing-data-imputation">Missing data imputation<a class="anchor" aria-label="anchor" href="#missing-data-imputation"></a>
+</h3>
+<p><code>hseclean</code> uses the function <code><a href="https://amices.org/mice/reference/mice.html" class="external-link">mice::mice()</a></code> in
+the <code>mice</code> R package, implemented in a basic way by the
+<code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function. See
+<code>vignette("missing_data")</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Run the imputation (takes a long time)</span>
-<span class="va">imp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/impute_data_mice.html">impute_data_mice</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">hse_data</span>,
-                        var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"smk.state"</span>, <span class="st">"agegroup"</span>, <span class="st">"sex"</span>, 
-                                      <span class="st">"imd_quintile"</span>, <span class="st">"degree"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,
-                                      <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span><span class="op">)</span>,
-                        var_methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, 
-                                        <span class="st">"polr"</span>, <span class="st">"logreg"</span>, <span class="st">"polr"</span>, <span class="st">"polr"</span>,
-                                        <span class="st">"polyreg"</span>, <span class="st">"logreg"</span>, <span class="st">"logreg"</span><span class="op">)</span>,
-                        n_imputations <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-
-<span class="co"># imp$data is a single data.table containing all 5 imputed versions of the data</span>
-<span class="va">hse_data_imputed</span> <span class="op">&lt;-</span> <span class="fu">copy</span><span class="op">(</span><span class="va">imp</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Run the imputation (takes a long time)</span></span>
+<span><span class="va">imp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/impute_data_mice.html">impute_data_mice</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">hse_data</span>,</span>
+<span>                        var_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"smk.state"</span>, <span class="st">"agegroup"</span>, <span class="st">"sex"</span>, </span>
+<span>                                      <span class="st">"imd_quintile"</span>, <span class="st">"degree"</span>, <span class="st">"kids"</span>, <span class="st">"income5cat"</span>,</span>
+<span>                                      <span class="st">"relationship_status"</span>, <span class="st">"employ2cat"</span>, <span class="st">"social_grade"</span><span class="op">)</span>,</span>
+<span>                        var_methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, </span>
+<span>                                        <span class="st">"polr"</span>, <span class="st">"logreg"</span>, <span class="st">"polr"</span>, <span class="st">"polr"</span>,</span>
+<span>                                        <span class="st">"polyreg"</span>, <span class="st">"logreg"</span>, <span class="st">"logreg"</span><span class="op">)</span>,</span>
+<span>                        n_imputations <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># imp$data is a single data.table containing all 5 imputed versions of the data</span></span>
+<span><span class="va">hse_data_imputed</span> <span class="op">&lt;-</span> <span class="fu">copy</span><span class="op">(</span><span class="va">imp</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -324,11 +378,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a">Alan Brennan</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d" class="external-link">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a" class="external-link">Alan Brennan</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -336,6 +392,8 @@
 
   
 
+
+  
 
   </body>
 </html>

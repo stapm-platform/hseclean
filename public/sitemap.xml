@@ -1,195 +1,234 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//index.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/404.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/abv_data.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/alcohol_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/alc_drink_freq.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/covariate_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/alc_drink_now_allages.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/english_hse_data_processing_methods.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/alc_sevenday_adult.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/hseclean.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/alc_sevenday_child.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/alc_volume_data.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/missing_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/alc_weekmean_adult.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/scottish_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_age.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/articles/smoking_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_demographic.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/authors.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_economic_status.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/index.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_education.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_family.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/abv_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_health_and_bio.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_drink_freq.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_income.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_drink_now_allages.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/clean_surveyweights.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_impute.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/combine_years.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_sevenday_adult.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/hseclean-package.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_sevenday_child.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/imdq_to_townsend.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_volume_data.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/impute_data_mice.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/alc_weekmean_adult.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/impute_kids_model.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_age.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/num_sim.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_demographic.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/prop_summary.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_economic_status.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2001.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_education.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2002.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_family.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2003.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_health_and_bio.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2004.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_income.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2005.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/clean_surveyweights.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2006.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/combine_years.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2007.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/hseclean-package.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2008.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/imdq_to_townsend.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2009.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/impute_cat.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2010.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/impute_data_mice.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2011.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/impute_kids_model.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2012.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/impute_mean.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2013.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2014.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/num_sim.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2015.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/pop_counts.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2016.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/prop_summary.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2017.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2001.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2018.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2002.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_2019.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2003.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_hse.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2004.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2008.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2005.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2009.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2006.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2010.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2007.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2011.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2008.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2012.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2009.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2013.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2010.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2014.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2011.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2015.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2012.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2016.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2013.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2017.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2014.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/read_SHeS_2018.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2015.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/select_data.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2016.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/smk_amount.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2017.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/smk_former.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2018.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/smk_life_history.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_2019.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/smk_quit.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_hse.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/smk_status.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2008.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//reference/use_townsend.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2009.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//articles/english_hse_data_processing_methods.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2010.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//articles/hseclean.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2011.html</loc>
   </url>
   <url>
-    <loc>https://stapm.gitlab.io/r-packages/hseclean//articles/scottish_data.html</loc>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2012.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2013.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2014.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2015.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2016.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2017.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/read_SHeS_2018.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/select_data.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/smk_amount.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/smk_former.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/smk_life_history.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/smk_quit.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/smk_status.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.gitlab.io/r-packages/hseclean/reference/use_townsend.html</loc>
   </url>
 </urlset>
