@@ -39,12 +39,12 @@ Imports:
     survey,
     stats,
     DirichletReg,
-    lifecycle
+    lifecycle,
+    testthat
 RoxygenNote: 7.2.1
 Suggests: 
     knitr,
-    rmarkdown,
-    testthat (>= 2.1.0)
+    rmarkdown
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10),
