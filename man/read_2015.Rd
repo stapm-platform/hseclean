@@ -6,8 +6,8 @@
 \usage{
 read_2015(
   root = c("X:/", "/Volumes/Shared/"),
- 
-    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2015/UKDA-8280-tab/tab/hse2015ai.tab"
+  file =
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2015/UKDA-8280-tab/tab/hse2015ai.tab"
 )
 }
 \arguments{

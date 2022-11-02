@@ -6,10 +6,10 @@
 \usage{
 read_2004(
   root = c("X:/", "/Volumes/Shared/"),
- 
-    file_generalpop = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
- 
-    file_ethnicboost = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+  file_generalpop =
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+  file_ethnicboost =
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
 )
 }
 \arguments{
