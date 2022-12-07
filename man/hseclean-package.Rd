@@ -11,7 +11,7 @@ Functions to read the data, rename, organise and process the variables required,
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://stapm.gitlab.io/r-packages/hseclean/}
+  \item \url{https://stapm.github.io/hseclean/}
 }
 
 }
