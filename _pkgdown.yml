@@ -22,7 +22,7 @@ authors:
 navbar:
   structure:
     left:  [home, intro, reference, articles]
-    right: [github, software]
+    right: [github, gitlab, software]
   components:
     home: ~
     intro:
@@ -35,11 +35,14 @@ navbar:
      text: Technical documentation
      href: articles/index.html
     github:
-      icon: fab fa-github fa-lg
-      href: https://github.com/STAPM/hseclean
+     icon: fab fa-github fa-lg
+     href: https://github.com/STAPM/hseclean
+    gitlab:
+     icon: fab fa-gitlab fa-lg
+     href: https://gitlab.com/stapm/r-packages/hseclean
     software:
-      icon: fa-code
-      href: https://stapm.gitlab.io/software.html
+     icon: fa-code
+     href: https://stapm.gitlab.io/software.html
 
 articles:
 - title: "Data processing"
