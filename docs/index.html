@@ -99,11 +99,50 @@
 <!-- badges: start -->
 
 <div class="section level2">
-<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+<h2 id="the-sheffield-tobacco-and-alcohol-policy-modelling-platform">The Sheffield Tobacco and Alcohol Policy Modelling Platform<a class="anchor" aria-label="anchor" href="#the-sheffield-tobacco-and-alcohol-policy-modelling-platform"></a>
+</h2>
+<p>This R package was developed as part of the Sheffield Tobacco and Alcohol Policy Modelling <a href="https://stapm.gitlab.io/" class="external-link uri">https://stapm.gitlab.io/</a> by the <a href="https://www.sheffield.ac.uk/scharr" class="external-link">School of Health and Related Research at the University of Sheffield</a>.</p>
+<p>The aim of the research programme is to identify and evaluate approaches to reducing the harm from tobacco and alcohol, with the aim of improving commissioning in a public health policy context, i.e. providing knowledge to support benefits achieved by policymakers.</p>
+<p>The two objectives of the research programme are:</p>
+<ul>
+<li>To evaluate the health and economic effects of past trends, policy changes or interventions that have affected alcohol consumption and/or tobacco smoking</li>
+<li>To appraise the health and economic outcomes of potential future trends, changes to alcohol and/or tobacco policy or new interventions</li>
+</ul>
+<p>The STAPM modelling is not linked to the tobacco or alcohol industry and is conducted without industry funding or influence.</p>
+</div>
+<div class="section level2">
+<h2 id="purpose-of-making-the-code-open-source">Purpose of making the code open source<a class="anchor" aria-label="anchor" href="#purpose-of-making-the-code-open-source"></a>
+</h2>
+<p>The code has been made open source for the following two reasons:</p>
+<ul>
+<li>Transparency. Open science, allowing review and feedback to the project team on the code and methods used.</li>
+<li>Methodology sharing. For people to understand the code and methods used so they might use aspects of it in their own work, e.g., because they are doing something partially related that isn’t exactly the same job and might like to ‘dip into’ elements of this code for inspiration.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="stage-of-testing-and-development">Stage of testing and development<a class="anchor" aria-label="anchor" href="#stage-of-testing-and-development"></a>
+</h2>
+<p>The code is functional and is being used in project work. It is being reviewed and developed all the time. More tests and checks need to be added.</p>
+<p>The repository is not intended to be maintained by an open source community wider than the development team.</p>
+</div>
+<div class="section level2">
+<h2 id="code-repositories">Code repositories<a class="anchor" aria-label="anchor" href="#code-repositories"></a>
+</h2>
+<p>The code on Github is a mirror of the code in a private Gitlab repository where the actual development takes place.</p>
+</div>
+<div class="section level2">
+<h2 id="motivation-for-developing-the-package">Motivation for developing the package<a class="anchor" aria-label="anchor" href="#motivation-for-developing-the-package"></a>
 </h2>
 <p>The motivation for <code>hseclean</code> was to standardised the way that health survey data were cleaned and prepared for our analyses and inputs to the STAPM decision-analytic model. The data are annual surveys covering health and health-related behaviours for England and Scotland. The suite of functions within <code>hseclean</code> reads the data for each year, renames, organises and processes the variables including multiple imputation and basic data summaries.</p>
 <p><code>hseclean</code> was created as part of a programme of work on the health economics of tobacco and alcohol at the School of Health and Related Research (ScHARR), The University of Sheffield. This programme is based around the construction of the Sheffield Tobacco and Alcohol Policy Model (STAPM), which aims to use comparable methodologies to evaluate the impacts of tobacco and alcohol policies.</p>
 <p>We have subsequently added functions to process the Scottish Health Survey (SHeS) into a form that matches our processing of the Health Survey for England.</p>
+</div>
+<div class="section level2">
+<h2 id="functionality">Functionality<a class="anchor" aria-label="anchor" href="#functionality"></a>
+</h2>
+<p>hseclean works with data from annual surveys covering health and health-related behaviours for England and Scotland. It does not function without this data. However no datasets are provisioned. The code is designed to work with the tab delimited versions of the data downloaded from the <a href="https://ukdataservice.ac.uk/" class="external-link">UK Data Service</a>.</p>
+<p>The package is primarily designed for users at the University of Sheffield, working off the university’s networked drives. This is where most of the testing has taken place so there might be unexpected issues out of that environment.</p>
+<p>What the software does in general and how it relates to data is documented in the vignettes under “Technical Documentation”.</p>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -130,7 +169,8 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p><code>hseclean</code> is publicly available via Github.</p>
-<p>If on a University of Sheffield managed computer, install the R, RStudio and Rtools bundle from the Software Centre. Install Rtools - using the <code>installr</code> package can make this easier. Then install the latest or a specified version of <code>hseclean</code> from Github with:</p>
+<p>By default the user should install the latest tagged version of the package. Otherwise, if you want to reproduce project work and know the version of the package used, install that version.</p>
+<p>If on a University of Sheffield managed computer, install the R, RStudio and Rtools bundle from the Software Centre. Install Rtools - using the <a href="https://cran.r-project.org/web/packages/installr/index.html" class="external-link">installr</a> package can make this easier. Then install the latest or a specified version of <code>hseclean</code> from Github with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("devtools")</span></span>
 <span></span>
