@@ -27,7 +27,7 @@ Authors@R:
 Maintainer: Duncan Gillespie <duncan.gillespie@sheffield.ac.uk>
 Description: Functions to read the data, rename, organise and process the variables required, impute missing data, and summarise data.
 License: GPL-3
-URL: https://stapm.gitlab.io/r-packages/hseclean/
+URL: https://stapm.github.io/hseclean/
 Encoding: UTF-8
 LazyData: true
 Imports: 

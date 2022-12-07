@@ -1,28 +1,28 @@
-destination: public
+destination: docs
 home:
   title: Health Survey Data Wrangling
   links:
   - text: Access data
     href: https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx
-url: https://stapm.gitlab.io/r-packages/hseclean/
+url: https://stapm.github.io/hseclean/
 template:
   params:
     bootswatch: flatly
     ganalytics: UA-167990045-1
 authors:
   Duncan Gillespie:
-    href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/gillespie_d
+    href: https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie
   Damon Morris:
     href: https://www.sheffield.ac.uk/scharr/people/staff/damon-morris
   Colin Angus:
-    href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/angus_c
+    href: https://www.sheffield.ac.uk/scharr/people/staff/colin-angus
   Alan Brennan:
-    href: https://www.sheffield.ac.uk/scharr/sections/heds/staff/brennan_a
+    href: https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan
 
 navbar:
   structure:
     left:  [home, intro, reference, articles]
-    right: [gitlab, software]
+    right: [github, software]
   components:
     home: ~
     intro:
@@ -34,9 +34,9 @@ navbar:
     articles:
      text: Technical documentation
      href: articles/index.html
-    gitlab:
-      icon: fab fa-gitlab fa-lg
-      href: https://gitlab.com/stapm/r-packages/hseclean
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/STAPM/hseclean
     software:
       icon: fa-code
       href: https://stapm.gitlab.io/software.html

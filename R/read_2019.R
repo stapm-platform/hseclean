@@ -1,5 +1,5 @@
 
-#' Read HSE 2019
+#' Read HSE 2019 \lifecycle{maturing}
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2019.
 #'

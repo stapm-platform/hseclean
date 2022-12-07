@@ -61,31 +61,22 @@ cleaned data.
 
 ## Installation
 
-`hseclean` is currently available only to members of the project team -
-there are plans afoot to make the code open access. To access - [sign-up
-for a GitLab account](https://gitlab.com/) to be given access rights to
-the STAPM project.
+`hseclean` is publicly available via Github.
 
 If on a University of Sheffield managed computer, install the R, RStudio
 and Rtools bundle from the Software Centre. Install Rtools - using the
 `installr` package can make this easier. Then install the latest or a
-specified version of `hseclean` from GitLab with:
+specified version of `hseclean` from Github with:
 
 ``` r
 #install.packages("devtools")
-#install.packages("getPass")
-#install.packages("git2r")
 
 devtools::install_git(
-  "https://gitlab.com/stapm/r-packages/hseclean.git", 
-  credentials = git2r::cred_user_pass("uname", getPass::getPass()),
+  "https://github.com/stapm/hseclean.git", 
   ref = "x.x.x",
-  build_vignettes = TRUE
-)
+  build_vignettes = FALSE)
 
-# Where uname is your Gitlab user name.
 # ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"
-# this should make a box pop up where you enter your GitLab password
 ```
 
 Or clone the package repo locally and use the ‘install and restart’
