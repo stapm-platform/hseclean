@@ -2,8 +2,10 @@ destination: docs
 home:
   title: Health Survey Data Wrangling
   links:
-  - text: Access data
-    href: https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx
+  - text: Health Survey for England
+    href: https://stapm.gitlab.io/Health_Survey_for_England.html
+  - text: Scottish Health Survey
+    href: https://stapm.gitlab.io/Scottish_Health_Survey.html
 url: https://stapm.github.io/hseclean/
 template:
   params:
