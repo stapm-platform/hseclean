@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_SHeS_2009.R
 \name{read_SHeS_2009}
 \alias{read_SHeS_2009}
-\title{Read Scottish Health Survey 2009 \lifecycle{stable}}
+\title{Read Scottish Health Survey 2009}
 \usage{
 read_SHeS_2009(
   root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",

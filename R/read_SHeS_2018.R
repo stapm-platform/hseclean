@@ -1,5 +1,5 @@
 
-#' Read Scottish Health Survey 2018 \lifecycle{stable}
+#' Read Scottish Health Survey 2018
 #'
 #' Reads and does basic cleaning on the Scottish Health Survey 2018.
 #'
@@ -76,6 +76,7 @@ read_SHeS_2018 <- function(
     nbeerq1, nbeerq2, nbeerq3, nberqbt,
     sbeerm1, sbeerm2, sbeerm3, sbeerm4,
     sbeerq1, sbeerq2, sbeerq3, sberqbt,
+    wqgl,
     wqglz1, wqglz2, wqglz3, q250glz, q175glz, q125glz, wqbt, wineq,
     sherryq, spiritsq,
     popsm031, popsm032, popsm033, popsq031, popsq032, popsq033,
