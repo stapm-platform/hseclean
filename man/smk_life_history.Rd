@@ -2,7 +2,7 @@
 % Please edit documentation in R/smk_life_history.R
 \name{smk_life_history}
 \alias{smk_life_history}
-\title{Ages of smoking initiation, quit and censoring \lifecycle{stable}}
+\title{Ages of smoking initiation, quit and censoring}
 \usage{
 smk_life_history(data)
 }

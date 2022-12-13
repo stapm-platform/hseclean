@@ -2,7 +2,7 @@
 % Please edit documentation in R/impute_data_mice.R
 \name{impute_data_mice}
 \alias{impute_data_mice}
-\title{Chained multiple imputation of a set of variables \lifecycle{maturing}}
+\title{Chained multiple imputation of a set of variables}
 \usage{
 impute_data_mice(data, var_names, var_methods, n_imputations)
 }

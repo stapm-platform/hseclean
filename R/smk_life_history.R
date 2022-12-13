@@ -1,6 +1,6 @@
 
 
-#' Ages of smoking initiation, quit and censoring \lifecycle{stable}
+#' Ages of smoking initiation, quit and censoring
 #'
 #' Clean the ages that define when smokers started and stopped as recorded in the Health Survey for England data.
 #'

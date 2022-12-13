@@ -2,7 +2,7 @@
 % Please edit documentation in R/use_townsend.R
 \name{use_townsend}
 \alias{use_townsend}
-\title{Use the Townsend Index of Deprivation \lifecycle{maturing}}
+\title{Use the Townsend Index of Deprivation}
 \usage{
 use_townsend(data, imdq_to_townsend_map = hseclean::imdq_to_townsend)
 }
@@ -27,9 +27,9 @@ the Townsend Index from the 2001 census.
 kn <- 1e3
 
 test_data <- data.table::data.table(
-  imd_quintile = 
-    sample(c("5_most_deprived", "4", "3", "2", "1_least_deprived"), 
-    kn, 
+  imd_quintile =
+    sample(c("5_most_deprived", "4", "3", "2", "1_least_deprived"),
+    kn,
     replace = TRUE),
   wt_int = runif(kn)
 )

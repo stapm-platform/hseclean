@@ -1,6 +1,6 @@
 
 
-#' Select variables and apply filters \lifecycle{maturing}
+#' Select variables and apply filters
 #'
 #' Selects the variables required for analysis and selects only the rows without missing data
 #' for specified variables.
@@ -29,28 +29,28 @@ select_data <- function(
   keep_vars = c("age", "sex", "imd_quintile"),
   complete_vars = c("age", "sex", "imd_quintile")
 ) {
-  
+
   keep_vars <- intersect(colnames(data), keep_vars)
-  
+
   data <- data[ , keep_vars, with = F]
-  
+
   for(cv in complete_vars) {
-    
+
     if(cv %in% colnames(data)) {
-      
+
       data <- data[!is.na(get(cv))]
-      
+
     } else {
-      
+
       warning(cv, " not a column in the data")
-      
+
     }
-    
+
   }
-  
+
   data <- data[age %in% ages & year %in% years]
-  
-  
+
+
   return(data[])
 }
 

@@ -1,11 +1,11 @@
 
 
-#' Cigarette smoking status \lifecycle{stable}
+#' Cigarette smoking status
 #'
 #' Categorise cigarette smoking into current, former and never regular cigarette smoker.
 #'
-#' Note that if some smokes either regularly or ocassionally, then they are classified as a current regular
-#'  cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers, but
+#' Note that if some smokes either regularly or occasionally, then they are classified as a current regular
+#'  cigarette smoker. People who used to smoke regularly or occasionally are classified as former smokers, but
 #'  people who have only tried a cigarette once or twice are classified as never smokers.
 #'
 #'  This variable is created for adults aged >= 16 years, and children aged 8-15 years.
@@ -35,7 +35,7 @@ smk_status <- function(
 ) {
 
   country <- unique(data[ , country][1])
-  
+
   ######################################################################
   # Regular cigarette smoking status (age >= 16)
 
@@ -88,10 +88,10 @@ smk_status <- function(
 
   # If less than age 8, assume never smoker
   data[age < 8, cig_smoker_status := "never"]
-  
+
   data[ , kcigevr := NULL]
   }
-  
+
   if(country == "Scotland"){
     data[age < 16, cig_smoker_status := NA_real_]
   }

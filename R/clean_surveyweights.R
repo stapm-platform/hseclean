@@ -1,9 +1,9 @@
 
 
-#' Process the survey weights \lifecycle{maturing}
-#' 
-#' Makes new survey weights based on the difference between the HSE sample size and the actual population size 
-#' by year, age, sex and IMD quintiles.   
+#' Process the survey weights
+#'
+#' Makes new survey weights based on the difference between the HSE sample size and the actual population size
+#' by year, age, sex and IMD quintiles.
 #'
 #' @param data Data table - the Health Survey for England dataset
 #' @param pop_data Data table - population counts
@@ -40,7 +40,7 @@ clean_surveyweights <- function(
   data[ , wt_int := wt_int / mean(wt_int, na.rm = T), by = "year"]
 
   data[ , `:=`(sample_n = NULL, N = NULL)]
-  
+
 
 return(data[])
 }

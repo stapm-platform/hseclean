@@ -1,6 +1,6 @@
 
 
-#' Alcohol consumption in last seven-days (children) \lifecycle{maturing}
+#' Alcohol consumption in last seven-days (children)
 #'
 #' Processes the information from the questions on drinking in the last seven days -
 #' whether different types of beverages have been drunk in last 7 days,
@@ -48,7 +48,7 @@ alc_sevenday_child <- function(
 ) {
 
   year <- as.integer(unique(data[ , year][1]))
-  
+
   yearset1 <- c(2001:2006, 2008:2100)
   yearset2 <- 2007
 
@@ -94,8 +94,8 @@ alc_sevenday_child <- function(
 
 
   # test
-  
-  
+
+
   # Spirits
 
   data[ , d7vol_spirits_ch := 0]

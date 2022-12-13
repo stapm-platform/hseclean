@@ -1,5 +1,5 @@
 
-#' Chained multiple imputation of a set of variables \lifecycle{maturing}
+#' Chained multiple imputation of a set of variables
 #'
 #' This function uses the \href{https://cran.r-project.org/web/packages/mice/mice.pdf}{mice} package to
 #' multiply impute missing values based on the statistical relationships among a set of variables.
@@ -45,15 +45,15 @@ impute_data_mice <- function(
 
   # Convert variables to factors
   for(v in var_names) {
-   
+
     if(!is.factor(data[ , get(v)])) {
-     
+
     data[ , (v) := as.factor(get(v))]
-      
+
     }
 
-  }  
-    
+  }
+
   # Setup the predictor matrix
   n <- ncol(data)
   predMat <- matrix(0, n, n)
@@ -63,7 +63,7 @@ impute_data_mice <- function(
 
   # Set the variables that will be used in the prediction of missing values in other variables
   for(var_i in var_names) {
-    
+
     # var_i <- var_names[1]
 
     predMat[NamePos(var_i, data), NamePos(var_names[var_names != var_i], data)] <- 1

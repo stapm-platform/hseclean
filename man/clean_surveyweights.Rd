@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_surveyweights.R
 \name{clean_surveyweights}
 \alias{clean_surveyweights}
-\title{Process the survey weights \lifecycle{maturing}}
+\title{Process the survey weights}
 \usage{
 clean_surveyweights(data, pop_data)
 }
@@ -15,7 +15,7 @@ clean_surveyweights(data, pop_data)
 Returns data with survey weights updated
 }
 \description{
-Makes new survey weights based on the difference between the HSE sample size and the actual population size 
+Makes new survey weights based on the difference between the HSE sample size and the actual population size
 by year, age, sex and IMD quintiles.
 }
 \examples{

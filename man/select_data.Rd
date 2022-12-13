@@ -2,7 +2,7 @@
 % Please edit documentation in R/select_data.R
 \name{select_data}
 \alias{select_data}
-\title{Select variables and apply filters \lifecycle{maturing}}
+\title{Select variables and apply filters}
 \usage{
 select_data(
   data,

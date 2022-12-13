@@ -2,7 +2,7 @@
 % Please edit documentation in R/smk_status.R
 \name{smk_status}
 \alias{smk_status}
-\title{Cigarette smoking status \lifecycle{stable}}
+\title{Cigarette smoking status}
 \usage{
 smk_status(data)
 }
@@ -20,8 +20,8 @@ Returns two smoking variables:
 Categorise cigarette smoking into current, former and never regular cigarette smoker.
 }
 \details{
-Note that if some smokes either regularly or ocassionally, then they are classified as a current regular
- cigarette smoker. People who used to smoke regularly or ocassionally are classified as former smokers, but
+Note that if some smokes either regularly or occasionally, then they are classified as a current regular
+ cigarette smoker. People who used to smoke regularly or occasionally are classified as former smokers, but
  people who have only tried a cigarette once or twice are classified as never smokers.
 
  This variable is created for adults aged >= 16 years, and children aged 8-15 years.
