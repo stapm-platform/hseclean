@@ -43,28 +43,87 @@ alc_drink_now_allages <- function(
   # Adults age >= 16 years
 
   # Frequency drank any alcoholic drink last 12 mths
+
+  # Categorise drinkers as people who responded to the following
+  # dnoft
+    #Value = 1.0	Label = Almost every day
+    #Value = 2.0	Label = Five or six days a week
+    #Value = 3.0	Label = Three or four days a week
+    #Value = 4.0	Label = Once or twice a week
+    #Value = 5.0	Label = Once or twice a month
+    #Value = 6.0	Label = Once every couple of months
+    #Value = 7.0	Label = Once or twice a year
+
   data[dnoft %in% 1:7, drinks_now := "drinker"]
 
   # Assign drink frequency
+
+  # for responses for which the survey collected data,
+  # i.e. values 1 to 8 of dnoft
+
+  # Value = 8.0	Label = Not at all in the last 12 months = 0
+
+    #x1[x == 1] <- 7 # Almost every day
+    #x1[x == 2] <- 5.5 # Five or six days a week
+    #x1[x == 3] <- 3.5 # Three or four days a week
+    #x1[x == 4] <- 1.5 # Once or twice a week
+    #x1[x == 5] <- 0.375 # Once or twice a month
+    #x1[x == 6] <- 0.188 # Once every couple of months
+    #x1[x == 7] <- 0.029 # Once or twice a year
+
   data[dnoft %in% 1:8, drink_freq_7d := hseclean::alc_drink_freq(dnoft)]
 
   # Class not having drink in last 12 months as non-drinker
   data[dnoft == 8, drinks_now := "non_drinker"]
 
   # If missing, supplement with whether drink nowadays
+
+  # Variable = dnnow	Variable label = (D) Whether drink nowadays
+  # Value = 1.0	Label = Yes
+  # Value = 2.0	Label = No
+  # Value = -1.0	Label = Not applicable
+  # Value = -9.0	Label = Refused
+  # Value = -8.0	Label = Don't know
+	# Value = -6.0	Label = Schedule not obtained
+	# Value = -2.0	Label = Schedule not applicable
+
   data[is.na(drinks_now) & dnnow == 1, drinks_now := "drinker"]
   data[is.na(drinks_now) & dnnow == 2, drinks_now := "non_drinker"]
 
   # If missing, supplement with whether drinks very occasionally or never drinks
+
+  # Pos. = 1,432	Variable = dnany	Variable label = (D) Whether drinks occasionally or never drinks
+  # Value = 1.0	Label = Very occasionally
+  # Value = 2.0	Label = Never
+  # Value = -1.0	Label = Not applicable
+  # Value = -9.0	Label = Refused
+  # Value = -8.0	Label = Don't know
+	# Value = -6.0	Label = Schedule not obtained
+	# Value = -2.0	Label = Schedule not applicable
+
   data[is.na(drinks_now) & dnany == 1, drinks_now := "drinker"]
   data[is.na(drinks_now) & dnany == 2, drinks_now := "non_drinker"]
 
   # If missing, supplement with whether always non-drinker
+
+  # Pos. = 1,433	Variable = dnevr	Variable label = (D) Whether always non-drinker
+  # Value = 1.0	Label = Always a non-drinker
+  # Value = 2.0	Label = Used to drink but stopped
+  # Value = -1.0	Label = Not applicable
+  # Value = -9.0	Label = Refused
+  # Value = -8.0	Label = Don't know
+  # Value = -6.0	Label = Schedule not obtained
+  # Value = -2.0	Label = Schedule not applicable
+
   data[is.na(drinks_now) & dnevr %in% 1:2, drinks_now := "non_drinker"]
+
+  # check on degree of missingness and patterns in missingness
+  # nrow(data[is.na(drinks_now) & age >= 16])
 
   ###################################################################
   # Children age 8-15 years
-  # No alcohol data for children in SHeS
+
+  # No alcohol data for children in the Scottish SHeS
 
   if("adrinkof" %in% colnames(data)){
 
@@ -145,6 +204,9 @@ alc_drink_now_allages <- function(
     data[ , `:=`(cdrinkof = NULL, cdrlast = NULL)]
 
   }
+
+  # For everyone assigned the 'non drinker' status
+  # set their frequency of drinking over the last 7 days to zero
 
   data[drinks_now == "non_drinker", drink_freq_7d := 0]
 

@@ -20,7 +20,7 @@
 #' In 2007 new questions were added asking which glass size was used when wine was consumed.
 #' Therefore the post HSE 2007 unit calculations are not directly comparable to previous years’ data.
 #'
-#' @param data Data table - the Health Survey for England dataset
+#' @param data Data table - the health survey dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)
 #' @param volume_data Data table - our assumptions on the volume of different drinks (ml).
 #'
@@ -60,14 +60,15 @@
 #' }
 #'
 alc_weekmean_adult <- function(
-  data,
-  abv_data = hseclean::abv_data,
-  volume_data = hseclean::alc_volume_data
+    data,
+    abv_data = hseclean::abv_data,
+    volume_data = hseclean::alc_volume_data
 ) {
 
   # Check that drinks_now variable is in the data
-  if(sum(colnames(data) == "drinks_now") == 0) message("missing drinks_now variable - run alc_drink_now_allages() first.")
-
+  if(sum(colnames(data) == "drinks_now") == 0) {
+    message("missing drinks_now variable - run alc_drink_now_allages() first.")
+  }
 
   year <- as.integer(unique(data[ , year][1]))
   country <- unique(data[ , country][1])
@@ -79,7 +80,23 @@ alc_weekmean_adult <- function(
   #################################################################
   # Frequency of drinking in days per week
 
+  # interview questions
   if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+
+    #Pos. = 1,341	Variable = NBeer	Variable label = How often drunk normal strength beer in past year (CAPI)
+    #Value = 1.0	Label = Almost every day
+    #Value = 2.0	Label = Five or six days a week
+    #Value = 3.0	Label = Three or four days a week
+    #Value = 4.0	Label = Once or twice a week
+    #Value = 5.0	Label = Once or twice a month
+    #Value = 6.0	Label = Once every couple of months
+    #Value = 7.0	Label = Once or twice a year
+    #Value = 8.0	Label = Not at all in the last 12 months
+    #Value = -2.0	Label = Schedule not applicable
+    #Value = -9.0	Label = Refused
+    #Value = -8.0	Label = Don't know
+    #Value = -6.0	Label = Schedule not obtained
+    #Value = -1.0	Label = Not applicable
 
     data[ , nbeer := hseclean::alc_drink_freq(nbeer)] # normal beer
     data[ , sbeer := hseclean::alc_drink_freq(sbeer)] # strong beer
@@ -90,9 +107,25 @@ alc_weekmean_adult <- function(
 
   }
 
+  # Self completion questions (younger adults)
   if(year %in% year_set2 | country == "Scotland") {
 
     setnames(data, "scspirit", "scspirits")
+
+    #Pos. = 1,992	Variable = DSpirits	Variable label = Frequency drank spirits in last 12 months (SC)
+    #Value = 1.0	Label = Almost every day
+    #Value = 2.0	Label = 5 or 6 days a week
+    #Value = 3.0	Label = 3 or 4 days a week
+    #Value = 4.0	Label = Once/twice a week
+    #Value = 5.0	Label = Once/twice a month
+    #Value = 6.0	Label = Once every couple of months
+    #Value = 7.0	Label = Once/twice in last 12 months
+    #Value = 8.0	Label = Never in last 12 months
+    #Value = -2.0	Label = Schedule not applicable
+    #Value = -9.0	Label = Refused
+    #Value = -8.0	Label = Don't know
+    #Value = -6.0	Label = Schedule not obtained
+    #Value = -1.0	Label = Not applicable
 
     data[ , scnbeer := hseclean::alc_drink_freq(scnbeer)] # normal beer
     data[ , scsbeer := hseclean::alc_drink_freq(scsbeer)] # strong beer
@@ -103,21 +136,52 @@ alc_weekmean_adult <- function(
 
   }
 
+
   #################################################################
   # Amount usually drunk
 
   # Convert volumes to natural volumes
 
+  #################################
   # Normal beer
+
+  # vol_nbeer - volume in ml
+
+  # nbeerm1 - Quantity of normal beer drunk in past year: Half pints (CAPI)
+  # nbeerq1 - Amount of normal beer drunk on one day (half pints) (CAPI)
+
+  # nbeerm2 - Quantity of normal beer drunk in past year: Small cans (CAPI)
+  # nbeerq2 - Amount of normal beer drunk on one day (small cans) (CAPI)
+
+  # nbeerm3 - Quantity of normal beer drunk in past year: Large cans (CAPI)
+  # nbeerq3 - Amount of normal beer drunk on one day (large cans) (CAPI)
+
+  # nbeerm4 - Quantity of normal beer drunk in past year: Bottles (CAPI)
+  # nbeerq4 - Amount of normal beer drunk on one day (bottles) (CAPI)
 
   if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
+    # if nbeerm1 == 1 then normal beer was mentioned as a beverage that was consumed
+
+    # if no data, then assume consumption of that beverage is zero
     data[ , vol_nbeer := 0]
+
+    # if data, then multiply the quantity consumed by the assumed volume in ml associated with serving size mentioned
+
+    # half pints
     data[nbeerm1 == 1 & !is.na(nbeerq1) & nbeerq1 > 0, vol_nbeer := nbeerq1 * volume_data[beverage == "nbeerhalfvol", volume]]
+
+    # small cans
     data[nbeerm2 == 1 & !is.na(nbeerq2) & nbeerq2 > 0, vol_nbeer := vol_nbeer + nbeerq2 * volume_data[beverage == "nbeerscanvol", volume]]
+
+    # large cans
     data[nbeerm3 == 1 & !is.na(nbeerq3) & nbeerq3 > 0, vol_nbeer := vol_nbeer + nbeerq3 * volume_data[beverage == "nbeerlcanvol", volume]]
+
+    # bottles
     data[nbeerm4 == 1 & !is.na(nbeerq4) & nbeerq4 > 0, vol_nbeer := vol_nbeer + nbeerq4 * volume_data[beverage == "nbeerbtlvol", volume]]
 
+    # if the respondent specifically answered "dont't know" to the question on amount drunk,
+    # then class this as missing data that might subsequently be imputed
     data[nbeerm1 == 1 & nbeerq1 == -8, vol_nbeer := NA]
     data[nbeerm2 == 1 & nbeerq2 == -8, vol_nbeer := NA]
     data[nbeerm3 == 1 & nbeerq3 == -8, vol_nbeer := NA]
@@ -127,6 +191,9 @@ alc_weekmean_adult <- function(
 
   }
 
+
+  # for England in some early years, a different quantity measure is used
+
   if(year %in% year_set1 & country == "England") {
 
     data[!is.na(nbeerq5) & nbeerq5 > 0, vol_nbeer := vol_nbeer + nbeerq5 * 2 * volume_data[beverage == "nbeerhalfvol", volume]]
@@ -135,7 +202,10 @@ alc_weekmean_adult <- function(
 
   }
 
+  #################################
   # Strong beer
+
+  # follows same scheme as normal beer
 
   if(year %in% c(year_set1, year_set2) | country == "Scotland") {
 
@@ -153,6 +223,8 @@ alc_weekmean_adult <- function(
     data[ , `:=` (sbeerm1 = NULL, sbeerm2 = NULL, sbeerm3 = NULL, sbeerm4 = NULL, sbeerq1 = NULL, sbeerq2 = NULL, sbeerq3 = NULL, sbeerq4 = NULL)]
 
   }
+
+  # for England in some early years, a different quantity measure is used
 
   if(year %in% year_set1 & country == "England") {
 
@@ -191,10 +263,18 @@ alc_weekmean_adult <- function(
 
   if(country == "Scotland") {
 
+    # wqglz1 - Whether usually drank wine from 250 ml glasses (CAPI)
+    # wqglz2 - Whether usually drank wine from 175 ml glasses (CAPI)
+    # wqglz3 - Whether usually drank wine from 125 ml glasses (CAPI)
+
+    # q250glz - Number of large glasses (250ml) of wine usually drunk (CAPI)
+    # q175glz - Number of standard glasses (175ml) of wine usually drunk (CAPI)
+    # q125glz - Number of small glasses (125ml) of wine usually drunk (CAPI)
+
     data[ , vol_wine := 0]
     data[wqglz1 == 1 & !is.na(q250glz) & q250glz > 0, vol_wine := q250glz * volume_data[beverage == "winelglassvol", volume]]
-    data[wqglz2 == 2 & !is.na(q175glz) & q175glz > 0, vol_wine := vol_wine + q175glz * volume_data[beverage == "wineglassvol", volume]]
-    data[wqglz3 == 3 & !is.na(q125glz) & q125glz > 0, vol_wine := vol_wine + q125glz * volume_data[beverage == "winesglassvol", volume]]
+    data[wqglz2 == 1 & !is.na(q175glz) & q175glz > 0, vol_wine := vol_wine + q175glz * volume_data[beverage == "wineglassvol", volume]]
+    data[wqglz3 == 1 & !is.na(q125glz) & q125glz > 0, vol_wine := vol_wine + q125glz * volume_data[beverage == "winesglassvol", volume]]
     # if measure used is both bottles and glasses or just bottle
     data[wineq %in% c(1, 3) & !is.na(wqbt) & wqbt > 0, vol_wine := vol_wine + wqbt * volume_data[beverage == "winesglassvol", volume]]
 
@@ -409,8 +489,19 @@ alc_weekmean_adult <- function(
 
     data[ , weekmean := spirit_units + wine_units + rtd_units + beer_units]
 
-    data[weekmean == 0, drinks_now := "non_drinker"]
+
+    # update variable on whether someone drinks or not to match the
+    # weekmean variable
+    # this means that the data on participation in alcohol consumption is
+    # adjusted to match the observed data on actual consumption
+
+    # if someone is recorded as drinking more than zero alcohol on average per week
+    # then make sure they are classed as a drinker
     data[weekmean > 0, drinks_now := "drinker"]
+
+    # and alternatively, if someone is still classed as a non-drinker
+    # make sure their weekly mean consumption is zero
+    data[drinks_now == "non_drinker", weekmean := 0]
 
     # generate preference vector
     data[ , perc_spirit_units := 100 * spirit_units / weekmean]
@@ -460,6 +551,6 @@ alc_weekmean_adult <- function(
 
   }
 
-return(data[])
+  return(data[])
 }
 

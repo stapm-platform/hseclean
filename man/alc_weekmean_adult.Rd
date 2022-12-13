@@ -11,7 +11,7 @@ alc_weekmean_adult(
 )
 }
 \arguments{
-\item{data}{Data table - the Health Survey for England dataset}
+\item{data}{Data table - the health survey dataset}
 
 \item{abv_data}{Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)}
 
