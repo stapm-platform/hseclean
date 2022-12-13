@@ -30,8 +30,6 @@ Reads and does basic cleaning on the Health Survey for England 2018.
 
 \dontrun{
 
-data_2018 <- read_2018("X:/",
-"ScHARR/PR_Consumption_TA/HSE/HSE 2018/UKDA-8334-tab/tab/hse2016_eul.tab")
 
 }
 

@@ -19,8 +19,6 @@
 #'
 #' \dontrun{
 #'
-#' data_2018 <- read_2018("X:/",
-#' "ScHARR/PR_Consumption_TA/HSE/HSE 2018/UKDA-8334-tab/tab/hse2016_eul.tab")
 #'
 #' }
 #'

@@ -1,14 +1,13 @@
 
-#' Read Scottish Health Survey 2018
+#' Read Scottish Health Survey 2019
 #'
-#' Reads and does basic cleaning on the Scottish Health Survey 2018.
+#' Reads and does basic cleaning on the Scottish Health Survey 2019.
 #'
 #' The Scottish Health Survey is designed to yield a representative sample of the general population
-#' living in private households in Scotland every year. A sample of 11,801 addresses was drawn from the
-#' Postcode Address File (PAF) in 2018.
+#' living in private households in Scotland every year. A sample of 6,451 addresses was drawn from the
+#' Postcode Address File (PAF) in 2019.
 #'
-#' Note that the SHeS 2018 still uses the 2016 version of the Scottish Index of Multiple Deprivation quintiles,
-#' but the 2019 SHeS switches to using the 2020 version.
+#' Note that the SHeS 2019 uses the 2020 version of the Scottish Index of Multiple Deprivation quintiles.
 #'
 #'
 #' MISSING VALUES
@@ -44,14 +43,12 @@
 #'
 #' \dontrun{
 #'
-#' data_2018 <- read_SHeS_2018("X:/",
-#' "ScHARR/PR_Tobacco_mup/Data/Scottish Health Survey/SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab")
 #'
 #' }
 #'
-read_SHeS_2018 <- function(
+read_SHeS_2019 <- function(
   root = "X:/ScHARR/PR_Consumption_TA/HSE/Scottish Health Survey (SHeS)/",
-  file = "SHeS 2018/UKDA-8569-tab/tab/shes_18i_eul_v1.tab"
+  file = "SHeS 2019/UKDA-8737-tab/tab/shes19i_eul.tab"
 ) {
 
   data <- data.table::fread(
@@ -111,8 +108,8 @@ read_SHeS_2018 <- function(
 
     psu,
     strata, # stratification unit
-    int18wt, # individual weight after calibration
-    cint18wt, # Child weight after calibration
+    int19wt, # individual weight after calibration
+    cint19wt, # Child weight after calibration
 
     eqv5_15, eqvinc_15,
 
@@ -130,7 +127,7 @@ read_SHeS_2018 <- function(
     # demographic
     age,
     ethnic05,
-    simd16_sga, simd16_rpa,
+    simd20_sga, simd20_rpa,
     sex,
 
     # how much they weigh
@@ -147,7 +144,7 @@ read_SHeS_2018 <- function(
 
   data.table::setnames(data,
 
-           c("simd16_rpa", "strata", "ethnic05",
+           c("simd20_rpa", "strata", "ethnic05",
              "cigregs",
              "w250gl7", "w175gl7", "w125gl7", "w125bl7",
              "popscl7", "popsbl7", "poplbl7",
@@ -187,16 +184,16 @@ read_SHeS_2018 <- function(
            ))
 
   # Tidy survey weights
-  data[ , wt_int := int18wt]
-  data[age < 16, wt_int := cint18wt]
+  data[ , wt_int := int19wt]
+  data[age < 16, wt_int := cint19wt]
 
-  data[ , `:=` (int18wt = NULL, cint18wt = NULL)]
+  data[ , `:=` (int19wt = NULL, cint19wt = NULL)]
 
   # Set PSU and cluster
-  data[ , psu := paste0("2018_", psu)]
-  data[ , cluster := paste0("2018_", cluster)]
+  data[ , psu := paste0("2019_", psu)]
+  data[ , cluster := paste0("2019_", cluster)]
 
-  data[ , year := 2018]
+  data[ , year := 2019]
   data[ , country := "Scotland"]
 
   return(data[])
