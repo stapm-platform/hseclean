@@ -64,6 +64,8 @@ processing using the hseclean package.
 
 -   [Alcohol consumption in the Scottish Health
     Survey](https://stapm.gitlab.io/model-inputs/scot_nat_alc_data/shes_alc_data_report.html)
+-   [Tobacco consumption in the Scottish Health
+    Survey](https://stapm.gitlab.io/model-inputs/scotland_nat_tob_data/shes_tob_data_report.html)
 
 ## Code repositories
 
