@@ -7,7 +7,7 @@
 smk_life_history(data)
 }
 \arguments{
-\item{data}{Data table - the Health Survey for England dataset.}
+\item{data}{Data table - the health survey dataset.}
 }
 \value{
 \itemize{
@@ -17,16 +17,16 @@ smk_life_history(data)
 }
 }
 \description{
-Clean the ages that define when smokers started and stopped as recorded in the Health Survey for England data.
+Clean the ages that define when smokers started and stopped as recorded in the health survey data.
 }
 \details{
-For each individual smoker, the data recorded in the Health Survey for England implies a single age at which a
+For each individual smoker, the data recorded in the health survey implies a single age at which a
 smoker started to smoke and, if they stopped, an age at which they did so. This provides a simplified view of
 what might be a complicated life history of smoking, e.g. smoking to different frequencies or levels, or starting and
 stopping multiple times.
 
 Both the start age and stop age will have error in them e.g. due to uncertainty in respondent recall,
-and, for years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute
+and, for England in years 2015+, due to the reporting in categories of time intervals rather than single years, which we then impute
 introducing random error.
 
 Start age is likely to be biased towards earlier ages, because for adults with missing values we use the age first tried
@@ -35,6 +35,10 @@ it is just the age at which they started to smoke.
 
 We also create a variable for the age at which an individual was censored from our data sample -
 this is their age at the survey + 1 year.
+
+# The variables computed using this function are used to reconstruct a simple life history of smoking for each individual who has
+ever smoked regularly. This information is then used by the smktrans R package to estimate the
+age-specific probabilities of smoking initiation or quitting smoking.
 
 Any missing data is assigned the average start or stop age for each age, sex and IMD quintile.
 }

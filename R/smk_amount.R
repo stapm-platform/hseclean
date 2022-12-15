@@ -1,23 +1,34 @@
 
 #' Characteristics of smoking
 #'
-#' Clean the variables that describe how much, what and to what level of addiction people smoke.
+#' Clean the variables that describe how many cigarettes per day people smoke on average, and to what level of addiction people smoke.
 #'
 #' The main variable is the average number of cigarettes smoked per day. For adults, this is calculated
 #' from questions about how many cigarettes are smoked typically on a weekday vs. a weekend
 #' (this is a weighted average to account for more weekdays in a week than weekends). For children,
 #' this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as
-#' the average amount smoked for an age, sex and IMD quintile subgroup.
+#' the average amount smoked for an age, sex and Index of Multiple Deprivation quintile subgroup.
 #'
-#' We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In
+#' For England, cigarette preferences are categorised based on the answer to 'what is the main type of cigarette smoked'. In
 #' later years of the Health Survey for England, new questions are added from year 2013 that ask how many handrolled vs. machine rolled
 #' cigarettes are smoked on a weekday vs. a weekend.
 #'
-#' We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette.
-#' This latter variable has a high level of missingness. Together these categorical variables allow calculation of
+#' For England, information on the time from waking until smoking the first cigarette of the day is used.
+#' The time from waking until first smoking has a high level of missingness. Together with data on the number of cigarettes smoked per day
+#' these data allow calculation of
 #'  \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/}{the heaviness of smoking index}.
 #'
-#' @param data Data table - the Health Survey for England dataset.
+#' For Scotland, people who smoke handrolled cigarettes so cannot give the amount that they typically smoke per day in terms of cigarettes
+#' report the amount smoked in either grams or ounces of tobacco typically smoked per day. In these cases, a conversion rate of
+#' 0.5g tobacco per cigarette it used. The corresponding number of cigarettes smoked per day is calculated and added to any
+#' machine rolled cigarette consumption recorded for that smoker.
+#'
+#' For Scotland, the health survey data do not allow the estimation of the proportional split in tobacco consumption
+#' between machine rolled and handrolled cigarettes.
+#'
+#' The average number of cigarettes per day is capped at a theoretical maximum of 60 per day.
+#'
+#' @param data Data table - the health survey dataset.
 #' @importFrom data.table :=
 #' @return
 #' \itemize{
@@ -49,7 +60,7 @@
 #' }
 #'
 smk_amount <- function(
-  data
+    data
 ) {
 
   country <- unique(data[ , country][1])
@@ -61,6 +72,15 @@ smk_amount <- function(
   # Assign missing values for smokers as zeros
 
   # Adults age >= 16 years
+
+  # cigwend and cigwday are in both the England and Scotland data
+  # the result could be compared against the cigdyal variable -
+  # which is the estimate of the average number of cigarettes per day calculated by the data providers
+
+  # Scotland has a different method of recording the amount of handrolling tobacco smoked compared to England
+
+  # for Scotland, the cigwday and cigwend variables already merge data from the CAPI interviews and self completion questionnaire
+
   data[is.na(cigwday), cigwday := 0]
   data[is.na(cigwend), cigwend := 0]
 
@@ -69,6 +89,26 @@ smk_amount <- function(
 
   # current smokers should have an amount smoked per day that is greater than zero
   #data[cig_smoker_status == "current" & cigs_per_day == 0, cigs_per_day := NA]
+
+  if(country == "Scotland"){
+
+    # Add in handrolled cigarettes smoked by people who primarily smoke handrolled cigarettes
+
+    ounce_to_gram_conversion <- 28.3495
+    grams_per_cigarette <- 0.5
+
+    data[is.na(dlyg), dlyg := 0]
+    data[is.na(wkndg), wkndg := 0]
+
+    data[is.na(dlyoz), dlyoz := 0]
+    data[is.na(wkndoz), wkndoz := 0]
+
+    data[ , dlyg := dlyg + (dlyoz * ounce_to_gram_conversion)]
+    data[ , wkndg := wkndg + (wkndoz * ounce_to_gram_conversion)]
+
+    data[cig_smoker_status == "current", cigs_per_day := cigs_per_day + (((5 * dlyg * (1 / grams_per_cigarette)) + (2 * wkndg * (1 / grams_per_cigarette))) / 7)]
+
+  }
 
   # Children 8-15 years
   if(country == "England"){
@@ -221,8 +261,8 @@ smk_amount <- function(
 
       data[cig_smoker_status != "current", `:=`(cigs_per_day = NA, cig_type = NA, units_RYO_tob = NA, units_FM_cigs = NA, prop_handrolled = NA)]
 
-      data[is.na(cig_type) & prop_handrolled > .5, cig_type := "hand_rolled"]
-      data[is.na(cig_type) & prop_handrolled <= .5, cig_type := "machine_rolled"]
+      data[is.na(cig_type) & prop_handrolled > 0.5, cig_type := "hand_rolled"]
+      data[is.na(cig_type) & prop_handrolled <= 0.5, cig_type := "machine_rolled"]
 
       data[prop_handrolled == 1, units_FM_cigs := 0]
 
@@ -238,13 +278,9 @@ smk_amount <- function(
 
       data[ , cigs_per_day := units_RYO_tob + units_FM_cigs]
 
-
     }
 
-
-
   }
-
 
 
   ####################################################
@@ -252,22 +288,55 @@ smk_amount <- function(
 
   # Version 1
   data[cig_smoker_status %in% c("never", "former"), smoker_cat := "non_smoker"]
-  data[cig_smoker_status == "current" & cigs_per_day <= 10, smoker_cat := "10_or_less"]
+  data[cig_smoker_status == "current" & cigs_per_day > 0 & cigs_per_day <= 10, smoker_cat := "10_or_less"]
   data[cig_smoker_status == "current" & cigs_per_day > 10 & cigs_per_day <= 20, smoker_cat := "11_to_20"]
   data[cig_smoker_status == "current" & cigs_per_day > 20 & cigs_per_day <= 30, smoker_cat := "21_to_30"]
   data[cig_smoker_status == "current" & cigs_per_day > 30, smoker_cat := "31_or_more"]
 
   # Version 2
   data[cig_smoker_status %in% c("never", "former"), banded_consumption := "non_smoker"]
-  data[cig_smoker_status == "current", banded_consumption := "light"]
+  data[smoker_cat == "10_or_less", banded_consumption := "light"]
   data[smoker_cat == "11_to_20", banded_consumption := "moderate"]
   data[smoker_cat %in% c("21_to_30", "31_or_more"), banded_consumption := "heavy"]
 
 
+  ####################################################
+  # Truncate the distribution of amount smoked to
+  # help make the project more reliable by removing extreme / uncertain positive skew
+
+  # Cap cigs per day at 60
+
+  data[cigs_per_day > 60, cigs_per_day := 60]
+
+  if("prop_handrolled" %in% names(data)) {
+
+    data[, units_RYO_tob := cigs_per_day * prop_handrolled]
+    data[, units_FM_cigs := cigs_per_day * (1 - prop_handrolled)]
+
+  }
+
+  ####################################################
+
+  # Check if someone has been recorded as a smoker
+  # but due to the way NAs are treated as zeros in the processing code above
+  # have been assigned as smoking 0 cigarettes per day due to having missing data
+  # for the amount smoked per day
+
+  data[smoker_cat != "non_smoker" & cigs_per_day == 0, cigs_per_day := NA]
+
+  if("prop_handrolled" %in% names(data)) {
+
+    data[is.na(cigs_per_day), units_RYO_tob := NA]
+    data[is.na(cigs_per_day), units_FM_cigs := NA]
+    data[is.na(cigs_per_day), prop_handrolled := NA]
+
+  }
+
+  ####################################################
 
   if(country == "England"){
 
-    ####################################################
+
     # Time from waking until smoking
 
     data[cig_smoker_status %in% c("never", "former"), time_to_first_cig := "non_smoker"]

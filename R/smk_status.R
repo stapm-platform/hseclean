@@ -10,12 +10,15 @@
 #'
 #'  This variable is created for adults aged >= 16 years, and children aged 8-15 years.
 #'
-#' @param data Data table - the Health Survey for England dataset.
+#'  The data is processed from the Health Survey for England and the Scottish Health Survey.
+#'  The Scottish Health Survey only has data on people >= 16 years old.
+#'
+#' @param data Data table - the health survey dataset.
 #' @importFrom data.table :=
 #' @return Returns two smoking variables:
 #' \itemize{
 #' \item cig_smoker_status - current, former, never
-#' \item cig_ever - ever_smoker, never_smoker, based on current and former smokers from the variable above.
+#' \item cig_ever - ever_smoker, never_smoker, based on current and former smokers from the variables above.
 #' }
 #' @export
 #'
@@ -31,7 +34,7 @@
 #'
 #'
 smk_status <- function(
-  data
+    data
 ) {
 
   country <- unique(data[ , country][1])
@@ -51,7 +54,7 @@ smk_status <- function(
   ##
   # Former smokers (age >= 16)
 
-  # If used to smoke regularly or occassionally
+  # If used to smoke regularly or occasionally
   data[cigreg %in% 1:2, cig_smoker_status := "former"]
 
   ##
@@ -67,37 +70,43 @@ smk_status <- function(
   ##
   # Never smokers (age 8-15)
   if(country == "England"){
-  # If never smoked cigarettes
-  data[kcigevr == 2, cig_smoker_status := "never"]
 
-  # If have ever smoked, but only tried once or twice
-  data[kcigreg %in% 1:2, cig_smoker_status := "never"]
+    # If never smoked cigarettes
+    data[kcigevr == 2, cig_smoker_status := "never"]
 
-  ##
-  # Former smokers (age 8-15)
+    # If have ever smoked, but only tried once or twice
+    data[kcigreg %in% 1:2, cig_smoker_status := "never"]
 
-  # If used to smoke regularly or occassionally
-  data[kcigreg == 3, cig_smoker_status := "former"]
+    ##
+    # Former smokers (age 8-15)
 
-  ##
-  # Current smokers (age 8-15)
+    # If used to smoke regularly or occasionally
+    data[kcigreg == 3, cig_smoker_status := "former"]
 
-  # If currently smoke cigarettes
-  data[kcigreg %in% 4:6 | kcigweek == 1 | kcignum > 0, cig_smoker_status := "current"]
+    ##
+    # Current smokers (age 8-15)
+
+    # If currently smoke cigarettes
+    data[kcigreg %in% 4:6 | kcigweek == 1 | kcignum > 0, cig_smoker_status := "current"]
 
 
-  # If less than age 8, assume never smoker
-  data[age < 8, cig_smoker_status := "never"]
+    # If less than age 8, assume never smoker
+    data[age < 8, cig_smoker_status := "never"]
 
-  data[ , kcigevr := NULL]
+    data[ , kcigevr := NULL]
   }
 
+  # no data on under 16s in Scotland
   if(country == "Scotland"){
+
     data[age < 16, cig_smoker_status := NA_real_]
+
   }
 
   ######################################################################
   # Ever regular cigarette smoker
+
+  # derive the ever-smoking variable to be consistent with the above
 
   data[cig_smoker_status %in% c("current", "former"), cig_ever := "ever_smoker"]
   data[cig_smoker_status == "never", cig_ever := "never_smoker"]
@@ -108,5 +117,5 @@ smk_status <- function(
   data[ , (remove_vars) := NULL]
 
 
-return(data[])
+  return(data[])
 }

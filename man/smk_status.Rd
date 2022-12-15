@@ -7,13 +7,13 @@
 smk_status(data)
 }
 \arguments{
-\item{data}{Data table - the Health Survey for England dataset.}
+\item{data}{Data table - the health survey dataset.}
 }
 \value{
 Returns two smoking variables:
 \itemize{
 \item cig_smoker_status - current, former, never
-\item cig_ever - ever_smoker, never_smoker, based on current and former smokers from the variable above.
+\item cig_ever - ever_smoker, never_smoker, based on current and former smokers from the variables above.
 }
 }
 \description{
@@ -25,6 +25,9 @@ Note that if some smokes either regularly or occasionally, then they are classif
  people who have only tried a cigarette once or twice are classified as never smokers.
 
  This variable is created for adults aged >= 16 years, and children aged 8-15 years.
+
+ The data is processed from the Health Survey for England and the Scottish Health Survey.
+ The Scottish Health Survey only has data on people >= 16 years old.
 }
 \examples{
 

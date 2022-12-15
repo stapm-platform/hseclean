@@ -96,8 +96,10 @@ read_SHeS_2017 <- function(
     #sberqsm7, sberqlg
   )
 
-  smk_vars <- Hmisc::Cs(startsmk, endsmoke, smokyrs, dcigage, smkevr, cignow, cigwday,
-                        cigwend, cigevr, cigregs)
+  smk_vars <- tolower(Hmisc::Cs(SmokEver, SmokeNow, DlySmoke, DlyEst, DlyG, DlyOz, WkndSmok, WkndEst,
+                                WkndG, WkndOz, SmokeReg, NumSmok, NumEst, NumG, NumOz, SmokYrs, EndSmoke,
+                                LongEnd, StartSmk, cignow, smkevr, cigevr, cigregs, cigwday, cigwend, cigdyal,
+                                cigst3, DSmokCig, DCigAge, DSmokNow, DSmokReg, DDlySmok, DWkndSmo))
 
   health_vars <- Hmisc::Cs(compm1, compm2a, compm2b, compm3, compm4, compm5, compm6, compm7a,
                            compm7b, compm7c, compm7d, compm7e, compm8, compm9, compm10, compm11,

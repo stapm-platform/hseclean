@@ -7,7 +7,7 @@
 smk_amount(data)
 }
 \arguments{
-\item{data}{Data table - the Health Survey for England dataset.}
+\item{data}{Data table - the health survey dataset.}
 }
 \value{
 \itemize{
@@ -23,22 +23,33 @@ thirty_minutes_but_less_than_1_hour, one_hour_or_more)
 }
 }
 \description{
-Clean the variables that describe how much, what and to what level of addiction people smoke.
+Clean the variables that describe how many cigarettes per day people smoke on average, and to what level of addiction people smoke.
 }
 \details{
 The main variable is the average number of cigarettes smoked per day. For adults, this is calculated
 from questions about how many cigarettes are smoked typically on a weekday vs. a weekend
 (this is a weighted average to account for more weekdays in a week than weekends). For children,
 this is based on asking how many cigarettes were smoked in the last week. Missing values are imputed as
-the average amount smoked for an age, sex and IMD quintile subgroup.
+the average amount smoked for an age, sex and Index of Multiple Deprivation quintile subgroup.
 
-We categorise cigarette preferences based on the answer to 'what is the main type of cigarette smoked'. In
+For England, cigarette preferences are categorised based on the answer to 'what is the main type of cigarette smoked'. In
 later years of the Health Survey for England, new questions are added from year 2013 that ask how many handrolled vs. machine rolled
 cigarettes are smoked on a weekday vs. a weekend.
 
-We also categorise the amount smoked, and use information on the time from waking until smoking the first cigarette.
-This latter variable has a high level of missingness. Together these categorical variables allow calculation of
+For England, information on the time from waking until smoking the first cigarette of the day is used.
+The time from waking until first smoking has a high level of missingness. Together with data on the number of cigarettes smoked per day
+these data allow calculation of
  \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307335/}{the heaviness of smoking index}.
+
+For Scotland, people who smoke handrolled cigarettes so cannot give the amount that they typically smoke per day in terms of cigarettes
+report the amount smoked in either grams or ounces of tobacco typically smoked per day. In these cases, a conversion rate of
+0.5g tobacco per cigarette it used. The corresponding number of cigarettes smoked per day is calculated and added to any
+machine rolled cigarette consumption recorded for that smoker.
+
+For Scotland, the health survey data do not allow the estimation of the proportional split in tobacco consumption
+between machine rolled and handrolled cigarettes.
+
+The average number of cigarettes per day is capped at a theoretical maximum of 60 per day.
 }
 \examples{
 
