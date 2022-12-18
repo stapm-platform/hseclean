@@ -147,8 +147,8 @@ clean_health_and_bio <- function(
 
   # Replace missing values for weight and height with the subgroup mean value
 
-  #data <- hseclean::impute_mean(data, c("wtval", "htval"), remove_zeros = TRUE,
-  #                    strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
+  data <- hseclean::impute_mean(data, c("wtval", "htval"), remove_zeros = TRUE,
+                      strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
 
   setnames(data, c("wtval", "htval"), c("weight", "height"))
 

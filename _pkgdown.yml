@@ -127,6 +127,7 @@ reference:
   - impute_data_mice
   - prop_summary
   - clean_surveyweights
+  - impute_mean
 
 - title: Data
   contents:
