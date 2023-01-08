@@ -40,8 +40,10 @@ Imports:
     stats,
     DirichletReg,
     lifecycle,
-    testthat
-RoxygenNote: 7.2.2
+    testthat,
+    fitdistrplus,
+    Rdpack
+RoxygenNote: 7.2.3
 Suggests: 
     knitr,
     rmarkdown
@@ -49,4 +51,4 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10),
     nnet
-RdMacros: lifecycle
+RdMacros: Rdpack, lifecycle

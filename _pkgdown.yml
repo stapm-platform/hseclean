@@ -99,6 +99,7 @@ reference:
   - alc_sevenday_adult
   - alc_sevenday_child
   - alc_weekmean_adult
+  - alc_upshift
 
 - title: Smoking data
   contents:
@@ -135,6 +136,7 @@ reference:
   - abv_data
   - alc_volume_data
   - impute_kids_model
+  - per_capita_alc_for_upshift
 
 
 

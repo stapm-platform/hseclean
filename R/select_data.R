@@ -32,9 +32,19 @@ select_data <- function(
 
   keep_vars <- intersect(colnames(data), keep_vars)
 
+  if(!("age" %in% keep_vars)) {
+    warning("age not in keep_vars - put it in")
+  }
+
+  if(!("year" %in% keep_vars)) {
+    warning("year not in keep_vars - put it in")
+  }
+
   data <- data[ , keep_vars, with = F]
 
   for(cv in complete_vars) {
+
+    print(cv)
 
     if(cv %in% colnames(data)) {
 
