@@ -20,13 +20,13 @@ the average weekly alcohol consumption of an individual in UK standard units.}
 
 \item{pcc_data}{Data.table - "PCC" - the values of per capita alcohol consumption
 calculated from HMRC data on duty receipts disaggregated by UK nation.
-Stored as package data in [hseclean::per_capita_alc_for_upshift].}
+Stored as package data in hseclean::per_capita_alc_for_upshift.}
 
-\item{proportion}{Numeric - the proportion of this "true" value
-to shift consumption data up to (default is 80% as per WHO assumptions).}
+\item{proportion}{Numeric - the proportion of this 'true' value to shift consumption data up to
+(default is 80 percent as per WHO assumptions).}
 }
 \value{
-Returns the input data with a column "weekmean_adj" added containing
+Returns the input data with a column weekmean_adj added containing
 the upshifted values of weekly mean alcohol consumption.
 }
 \description{
@@ -34,17 +34,17 @@ Upshift the average weekly units of alcohol consumed to adjust for
 the under-reporting of alcohol consumption in survey data.
 }
 \details{
-A function of the form f(PCC, Proportion, Population) where PCC=the "true"
+A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
 Per Capita Consumption being aimed for, Proportion=the proportion of this
-"true" value to shift consumption data up to
-(default is 80% as per World Health Organisation assumptions)
+'true' value to shift consumption data up to
+(default is 80 percent as per World Health Organisation assumptions)
 and Population=the population whose consumption is to be
 upshifted.
 
 The fixed values used to generate the standard deviations of the gamma distributions
 are taken from \insertCite{kehoe2012determining;textual}{hseclean}.
 
-Note that the result could abe an upshift or a downshift depending
+Note that the result could be an upshift or a downshift depending
 on the reference pcc value and the distribution of consumption in the survey data.
 }
 \examples{
