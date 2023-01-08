@@ -40,6 +40,9 @@
     <loc>https://stapm.github.io/hseclean/reference/alc_sevenday_child.html</loc>
   </url>
   <url>
+    <loc>https://stapm.github.io/hseclean/reference/alc_upshift.html</loc>
+  </url>
+  <url>
     <loc>https://stapm.github.io/hseclean/reference/alc_volume_data.html</loc>
   </url>
   <url>
@@ -92,6 +95,9 @@
   </url>
   <url>
     <loc>https://stapm.github.io/hseclean/reference/num_sim.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.github.io/hseclean/reference/per_capita_alc_for_upshift.html</loc>
   </url>
   <url>
     <loc>https://stapm.github.io/hseclean/reference/prop_summary.html</loc>

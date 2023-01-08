@@ -1,11 +1,11 @@
-pandoc: 2.11.4
-pkgdown: 2.0.7
+pandoc: '2.18'
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   english_hse_data_processing_methods: english_hse_data_processing_methods.html
   hseclean: hseclean.html
   scottish_data: scottish_data.html
-last_built: 2023-01-08T14:54Z
+last_built: 2023-01-08T16:02Z
 urls:
   reference: https://stapm.github.io/hseclean/reference
   article: https://stapm.github.io/hseclean/articles
