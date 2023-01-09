@@ -94,24 +94,24 @@ alc_upshift <- function(
   
   mu_weighted <- sum(data$wt_int * data$lt_ethanol_yr) / sum(data$wt_int)
 
-  cat(crayon::blue(paste0("Current mean consumption in population ", round(mu_weighted, 3), " litres ethanol /year\n")))
+  cat(crayon::blue(paste0("Current per capita consumption in population ", round(mu_weighted, 3), " litres ethanol /year\n")))
 
   # Calculate the ratio between the population mean and the target value
   r <- target_pcc / mu_weighted
 
-  cat(crayon::blue(paste0("Ratio between the population mean and the target value ", round(r, 3), "\n")))
+  cat(crayon::blue(paste0("Ratio between the current population value and the target value ", round(r, 3), "\n")))
 
   # Calculate the current mean consumption among men and women in the population to be upshifted
   mu_male <- as.numeric(data[sex == "Male", .(mu = sum(wt_int * lt_ethanol_yr) / sum(wt_int))])
   mu_female <- as.numeric(data[sex == "Female", .(mu = sum(wt_int * lt_ethanol_yr) / sum(wt_int))])
 
-  cat(crayon::blue(paste0("Current mean consumption\n\t Males: ", round(mu_male, 3), " litres ethanol /year\n\t Females: ", round(mu_female, 3), " litres ethanol /year\n")))
+  cat(crayon::blue(paste0("Current per capita consumption\n\t Males: ", round(mu_male, 3), " litres ethanol /year\n\t Females: ", round(mu_female, 3), " litres ethanol /year\n")))
 
   # Calculate the sex-specific target means
   mu_hat_male <- r * mu_male
   mu_hat_female <- r * mu_female
 
-  cat(crayon::blue(paste0("Target mean consumption\n\t Males: ", round(mu_hat_male, 3), " litres ethanol /year\n\t Females: ", round(mu_hat_female, 3), " litres ethanol /year\n")))
+  cat(crayon::blue(paste0("Target per capita consumption\n\t Males: ", round(mu_hat_male, 3), " litres ethanol /year\n\t Females: ", round(mu_hat_female, 3), " litres ethanol /year\n")))
 
   # Generate four gamma distributions
 
