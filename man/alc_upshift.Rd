@@ -13,8 +13,8 @@ alc_upshift(
 }
 \arguments{
 \item{data}{Data.table - "Population" - the individual level data on alcohol consumption to be upshifted.
-The variable to be upshifted should be names "weekmean" and contain
-the average weekly alcohol consumption of an individual in UK standard units.}
+The variable to be upshifted should be named "weekmean" and contain
+the average weekly alcohol consumption of an individual in UK standard units of ethanol.}
 
 \item{country}{Character string - either "England" or "Scotland".}
 
@@ -35,7 +35,8 @@ the under-reporting of alcohol consumption in survey data.
 }
 \details{
 A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
-Per Capita Consumption being aimed for, Proportion=the proportion of this
+Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year, 
+Proportion=the proportion of this
 'true' value to shift consumption data up to
 (default is 80 percent as per World Health Organisation assumptions)
 and Population=the population whose consumption is to be

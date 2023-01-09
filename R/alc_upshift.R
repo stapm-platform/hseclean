@@ -5,7 +5,8 @@
 #' the under-reporting of alcohol consumption in survey data.
 #'
 #' A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
-#' Per Capita Consumption being aimed for, Proportion=the proportion of this
+#' Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year, 
+#' Proportion=the proportion of this
 #' 'true' value to shift consumption data up to
 #' (default is 80 percent as per World Health Organisation assumptions)
 #' and Population=the population whose consumption is to be
@@ -18,8 +19,8 @@
 #' on the reference pcc value and the distribution of consumption in the survey data.
 #'
 #' @param data Data.table - "Population" - the individual level data on alcohol consumption to be upshifted.
-#' The variable to be upshifted should be names "weekmean" and contain
-#' the average weekly alcohol consumption of an individual in UK standard units.
+#' The variable to be upshifted should be named "weekmean" and contain
+#' the average weekly alcohol consumption of an individual in UK standard units of ethanol.
 #' @param country Character string - either "England" or "Scotland".
 #' @param pcc_data Data.table - "PCC" - the values of per capita alcohol consumption
 #' calculated from HMRC data on duty receipts disaggregated by UK nation.
@@ -70,21 +71,30 @@ alc_upshift <- function(
   proportion = 0.8
 ) {
 
+  # country <- "Scotland"
+  
   # Generate the appropriate value for PCC
   pcc <- as.numeric(hseclean::per_capita_alc_for_upshift[Country == country, "PCC"])
 
-  cat(crayon::blue(paste0("Reference per capita consumption ", round(pcc, 3), " units /week\n")))
+  cat(crayon::blue(paste0("Reference per capita consumption ", round(pcc, 3), " litres ethanol /year\n")))
 
   # Calculate the ‘target’ PCC value as PCC x Proportion
   target_pcc <- pcc * proportion
 
-  cat(crayon::blue(paste0("Target per capita consumption at ", 100 * proportion, "% of reference, ", round(target_pcc, 3), " units /week\n")))
+  cat(crayon::blue(paste0("Target per capita consumption at ", 100 * proportion, "% of reference, ", round(target_pcc, 3), " litres ethanol /year\n")))
 
   # Calculate the current mean consumption in the Population to be upshifted
   # (accounting for relevant weights)
-  mu_weighted <- sum(data$wt_int * data$weekmean) / sum(data$wt_int)
+  
+  # convert weekly mean UK standard units to litres ethanol per year
+  
+  # A UK unit is 10 millilitres (8 grams) of pure alcohol
+  
+  data[ , lt_ethanol_yr := ((365/7) * weekmean * 10) / 1000]
+  
+  mu_weighted <- sum(data$wt_int * data$lt_ethanol_yr) / sum(data$wt_int)
 
-  cat(crayon::blue(paste0("Current mean consumption in population ", round(mu_weighted, 3), " units /week\n")))
+  cat(crayon::blue(paste0("Current mean consumption in population ", round(mu_weighted, 3), " litres ethanol /year\n")))
 
   # Calculate the ratio between the population mean and the target value
   r <- target_pcc / mu_weighted
@@ -92,16 +102,16 @@ alc_upshift <- function(
   cat(crayon::blue(paste0("Ratio between the population mean and the target value ", round(r, 3), "\n")))
 
   # Calculate the current mean consumption among men and women in the population to be upshifted
-  mu_male <- as.numeric(data[sex == "Male", .(mu = sum(wt_int * weekmean) / sum(wt_int))])
-  mu_female <- as.numeric(data[sex == "Female", .(mu = sum(wt_int * weekmean) / sum(wt_int))])
+  mu_male <- as.numeric(data[sex == "Male", .(mu = sum(wt_int * lt_ethanol_yr) / sum(wt_int))])
+  mu_female <- as.numeric(data[sex == "Female", .(mu = sum(wt_int * lt_ethanol_yr) / sum(wt_int))])
 
-  cat(crayon::blue(paste0("Current mean consumption\n\t Males: ", round(mu_male, 3), " units /week\n\t Females: ", round(mu_female, 3), " units /week\n")))
+  cat(crayon::blue(paste0("Current mean consumption\n\t Males: ", round(mu_male, 3), " litres ethanol /year\n\t Females: ", round(mu_female, 3), " litres ethanol /year\n")))
 
   # Calculate the sex-specific target means
   mu_hat_male <- r * mu_male
   mu_hat_female <- r * mu_female
 
-  cat(crayon::blue(paste0("Target mean consumption\n\t Males: ", round(mu_hat_male, 3), " units /week\n\t Females: ", round(mu_hat_female, 3), " units /week\n")))
+  cat(crayon::blue(paste0("Target mean consumption\n\t Males: ", round(mu_hat_male, 3), " litres ethanol /year\n\t Females: ", round(mu_hat_female, 3), " litres ethanol /year\n")))
 
   # Generate four gamma distributions
 
@@ -146,35 +156,44 @@ alc_upshift <- function(
   # Assign individuals to their observed age-specific gamma percentiles of weekly mean consumption
   data[ , percentile := {
 
-    fit <- fitdistrplus::fitdist(weekmean, distr = "gamma", method = "mge", gof = "CvM")
+    # create a new vector of consumption values accounting for survey weights
+    vec <- sample(lt_ethanol_yr, 1e5, replace = TRUE, prob = wt_int)
+    
+    # estimate the gamma distribution parameters
+    fit <- fitdistrplus::fitdist(vec, distr = "gamma", method = "mge", gof = "CvM")
 
+    # use the parameters to estimate the centile values
     obs_c <- stats::qgamma(c_vals, shape = fit$estimate[1], rate = fit$estimate[2])
 
-    percentile <- c_vals[findInterval(weekmean, c(0, obs_c))]
+    # assign each individual to a centile
+    percentile <- c_vals[findInterval(lt_ethanol_yr, c(0, obs_c))]
 
   }, by = "sex"]
 
   # Merge in the corresponding reference values
   data <- merge(data, data_adj, by = c("sex", "percentile"), all.x = T, all.y = F)
 
-  # Calculate the adjusted mean consumption
-  data[ , weekmean_adj := weekmean * ratio]
+  # Calculate the adjusted consumption
+  data[ , lt_ethanol_yr_adj := lt_ethanol_yr * ratio]
 
   # Cross-check that the population mean of the upshifted consumption is equal to the target value
   # (and apply a small universal adjustment factor if it is slightly out)
-  mu_weighted_adj <- sum(data$wt_int * data$weekmean_adj) / sum(data$wt_int)
+  mu_weighted_adj <- sum(data$wt_int * data$lt_ethanol_yr_adj) / sum(data$wt_int)
 
-  cat(crayon::blue(paste0("Adjusted per capita consumption ", round(mu_weighted_adj, 3), " units /week\n")))
+  cat(crayon::blue(paste0("Adjusted per capita consumption ", round(mu_weighted_adj, 3), " litres ethanol /year\n")))
 
   # Calculate a universal adjustment factor to make the adjusted value equal to the target value
   univ_adj <- target_pcc / mu_weighted_adj
 
   cat(crayon::blue(paste0("Universal adjustment factor applied ", round(univ_adj, 3), "\n")))
 
-  data[ , weekmean_adj := weekmean_adj * univ_adj]
-
+  data[ , lt_ethanol_yr_adj := lt_ethanol_yr_adj * univ_adj]
+  
+  # convert back to mean UK standard units of ethanol per week
+  data[ , weekmean_adj := lt_ethanol_yr_adj * 1000 * (1/(365/7)) * (1/10)]
+          
   # Delete columns not needed
-  data[ , `:=` (percentile = NULL, ratio = NULL)]
+  data[ , `:=` (percentile = NULL, ratio = NULL, lt_ethanol_yr = NULL, lt_ethanol_yr_adj = NULL)]
 
   return(data[])
 }

@@ -15,6 +15,9 @@ HMRC data on duty receipts disaggregated by UK nation: https://www.gov.uk/govern
 per_capita_alc_for_upshift
 }
 \description{
+In units of litres of pure ethanol per year
+}
+\details{
 Code to generate these data is in the "data-raw" folder of the hseclean package.
 The year of duty take data used is 2018-19. Population counts are for 2018 are used.
 For England and Wales, population counts were obtained from the
