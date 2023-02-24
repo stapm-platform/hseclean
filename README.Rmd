@@ -54,7 +54,11 @@ Data checks are brief reports that show the results of survey data processing us
 - [Tobacco consumption in the Scottish Health Survey](https://stapm.gitlab.io/model-inputs/scotland_nat_tob_data/shes_tob_data_report.html)
 
 ## Code repositories
-The code on Github is a mirror of the code in a private Gitlab repository where the actual development takes place.   
+The code on Github is a mirror of the code in a private Gitlab repository where the actual development takes place. The code in the Github repository is linked to a repository on the Open Science Framework, which provides the doi for the package citation https://osf.io/43n7p/.    
+
+## Citation
+
+Gillespie D, Webster L, Leeming G, Morris D, Angus C, Brennan A ([YEAR]). hseclean: An R Package for Health Survey Data Wrangling. R package version [x.x.x]. University of Sheffield. https://stapm.github.io/hseclean/. doi: https://doi.org/10.17605/OSF.IO/43N7P
 
 ## Motivation for developing the package
 The motivation for `hseclean` was to standardised the way that health survey data were cleaned and prepared for our analyses and inputs to the STAPM decision-analytic model. The data are annual surveys covering health and health-related behaviours for England and Scotland. The suite of functions within `hseclean` reads the data for each year, renames, organises and processes the variables including multiple imputation and basic data summaries.   
