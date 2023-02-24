@@ -21,6 +21,7 @@ Useful links:
 Authors:
 \itemize{
   \item Laura Webster
+  \item Grace Leeming (\href{https://orcid.org/0000-0003-4836-7840}{ORCID})
   \item Damon Morris (\href{https://orcid.org/0000-0001-6757-5333}{ORCID})
   \item Colin Angus \email{c.r.angus@sheffield.ac.uk}
   \item Alan Brennan \email{a.brennan@sheffield.ac.uk}

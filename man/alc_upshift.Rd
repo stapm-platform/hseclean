@@ -38,7 +38,7 @@ the under-reporting of alcohol consumption in survey data.
 }
 \details{
 A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
-Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year, 
+Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year,
 Proportion=the proportion of this
 'true' value to shift consumption data up to
 (default is 80 percent as per World Health Organisation assumptions)
