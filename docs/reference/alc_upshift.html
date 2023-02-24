@@ -88,8 +88,8 @@ the under-reporting of alcohol consumption in survey data.</p>
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>Data.table - "Population" - the individual level data on alcohol consumption to be upshifted.
-The variable to be upshifted should be names "weekmean" and contain
-the average weekly alcohol consumption of an individual in UK standard units.</p></dd>
+The variable to be upshifted should be named "weekmean" and contain
+the average weekly alcohol consumption of an individual in UK standard units of ethanol.</p></dd>
 
 
 <dt>country</dt>
@@ -117,7 +117,8 @@ the upshifted values of weekly mean alcohol consumption.</p>
     <div id="details">
     <h2>Details</h2>
     <p>A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
-Per Capita Consumption being aimed for, Proportion=the proportion of this
+Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year, 
+Proportion=the proportion of this
 'true' value to shift consumption data up to
 (default is 80 percent as per World Health Organisation assumptions)
 and Population=the population whose consumption is to be
@@ -168,11 +169,11 @@ on the reference pcc value and the distribution of consumption in the survey dat
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
+  <p></p><p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, Grace Leeming, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

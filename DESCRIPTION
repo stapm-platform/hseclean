@@ -11,6 +11,10 @@ Authors@R:
     person(given = "Laura",
            family = "Webster",
            role = c("aut")),
+    person(given = "Grace",
+           family = "Leeming",
+           role = c("aut"),
+           comment = c(ORCID = "0000-0003-4836-7840")),
     person(given = "Damon",
            family = "Morris",
            role = c("aut"),
@@ -26,7 +30,7 @@ Authors@R:
     )
 Maintainer: Duncan Gillespie <duncan.gillespie@sheffield.ac.uk>
 Description: Functions to read the data, rename, organise and process the variables required, impute missing data, and summarise data.
-License: GPL (>= 3)
+License: CC BY 4.0
 URL: https://stapm.github.io/hseclean/
 Encoding: UTF-8
 LazyData: true

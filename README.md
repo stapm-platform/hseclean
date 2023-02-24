@@ -10,6 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+<!-- badger::badge_doi("10.17605/OSF.IO/43N7P", "green") -->
+
+[![](https://img.shields.io/badge/doi-10.17605/OSF.IO/43N7P-green.svg)](https://doi.org/10.17605/OSF.IO/43N7P)
 <!-- badges: end -->
 
 ## The Sheffield Tobacco and Alcohol Policy Modelling Platform
@@ -70,7 +74,18 @@ processing using the hseclean package.
 ## Code repositories
 
 The code on Github is a mirror of the code in a private Gitlab
-repository where the actual development takes place.
+repository where the actual development takes place. The code in the
+Github repository is linked to a repository on the Open Science
+Framework, which provides the doi for the package citation
+<https://osf.io/43n7p/>.
+
+## Citation
+
+Gillespie D, Webster L, Leeming G, Morris D, Angus C, Brennan A
+(\[YEAR\]). hseclean: An R Package for Health Survey Data Wrangling. R
+package version \[x.x.x\]. University of Sheffield.
+<https://stapm.github.io/hseclean/>. doi:
+<https://doi.org/10.17605/OSF.IO/43N7P>
 
 ## Motivation for developing the package
 
