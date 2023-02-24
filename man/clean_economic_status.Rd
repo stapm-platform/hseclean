@@ -24,6 +24,8 @@ managerial and professional occupations, intermediate occupations and routine an
 Process the data on employment and occupation.
 }
 \details{
+First apply the function [hseclean::clean_age()] to the data because this function uses the age variable.
+
 The classifications considered are:
 
 \itemize{

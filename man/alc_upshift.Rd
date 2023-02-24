@@ -7,7 +7,8 @@
 alc_upshift(
   data,
   country = c("England", "Scotland")[1],
-  pcc_data = hseclean::per_capita_alc_for_upshift,
+  year_select,
+  pcc_data = c("HMRC", "MESAS")[1],
   proportion = 0.8
 )
 }
@@ -18,8 +19,10 @@ the average weekly alcohol consumption of an individual in UK standard units.}
 
 \item{country}{Character string - either "England" or "Scotland".}
 
+\item{year_select}{Integer - Year for which upshifting will be done}
+
 \item{pcc_data}{Data.table - "PCC" - the values of per capita alcohol consumption
-calculated from HMRC data on duty receipts disaggregated by UK nation.
+calculated from HMRC data on duty receipts disaggregated by UK nation or MESAS monitoring report on alcohol sales 2022 (Scotland only)
 Stored as package data in hseclean::per_capita_alc_for_upshift.}
 
 \item{proportion}{Numeric - the proportion of this 'true' value to shift consumption data up to
@@ -74,5 +77,10 @@ data <- alc_upshift(data, country = "Scotland",
   proportion = 0.8)
 
 }
+
+
+
+
+
 
 }

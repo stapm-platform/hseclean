@@ -4,6 +4,8 @@
 #'
 #' Process the data on employment and occupation.
 #'
+#' First apply the function [hseclean::clean_age()] to the data because this function uses the age variable.
+#'
 #' The classifications considered are:
 #'
 #' \itemize{

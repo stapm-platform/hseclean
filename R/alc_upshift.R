@@ -21,8 +21,9 @@
 #' The variable to be upshifted should be names "weekmean" and contain
 #' the average weekly alcohol consumption of an individual in UK standard units.
 #' @param country Character string - either "England" or "Scotland".
+#' @param year_select Integer - Year for which upshifting will be done
 #' @param pcc_data Data.table - "PCC" - the values of per capita alcohol consumption
-#' calculated from HMRC data on duty receipts disaggregated by UK nation.
+#' calculated from HMRC data on duty receipts disaggregated by UK nation or MESAS monitoring report on alcohol sales 2022 (Scotland only)
 #' Stored as package data in hseclean::per_capita_alc_for_upshift.
 #' @param proportion Numeric - the proportion of this 'true' value to shift consumption data up to
 #' (default is 80 percent as per WHO assumptions).
@@ -63,15 +64,43 @@
 #'
 #' }
 #'
+#'
+#'
+#'
+#'
+#'
 alc_upshift <- function(
   data,
   country = c("England", "Scotland")[1],
-  pcc_data = hseclean::per_capita_alc_for_upshift,
+  year_select,
+  # pcc_data = c(hseclean::per_capita_alc_for_upshift, hseclean::per_capita_alc_for_upshift_scotland) [1],
+  pcc_data = c("HMRC", "MESAS")[1],
   proportion = 0.8
 ) {
 
-  # Generate the appropriate value for PCC
-  pcc <- as.numeric(hseclean::per_capita_alc_for_upshift[Country == country, "PCC"])
+#Generate the appropriate value for PCC
+
+HMRC <- as.numeric(hseclean::per_capita_alc_for_upshift[Country == country & year == year_select, "PCC"])
+MESAS <- as.numeric(hseclean::per_capita_alc_for_upshift_scotland[Country == country & year == year_select, "PCC"])
+
+
+pcc <- if(pcc_data == "HMRC") {
+
+   if(!(year_select %in% hseclean::per_capita_alc_for_upshift$year)) {
+        warning("year selected is not in the pcc reference data")
+    } else {
+      HMRC
+    }
+
+} else if (pcc_data == "MESAS") {
+
+  if(!(country %in% hseclean::per_capita_alc_for_upshift_scotland$Country)) {
+    warning("country selected is not in the pcc reference data")
+  } else {
+    MESAS
+  }
+}
+
 
   cat(crayon::blue(paste0("Reference per capita consumption ", round(pcc, 3), " units /week\n")))
 
@@ -178,4 +207,5 @@ alc_upshift <- function(
 
   return(data[])
 }
+
 
