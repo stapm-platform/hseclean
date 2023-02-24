@@ -24,7 +24,7 @@ the under-reporting of alcohol consumption in survey data."><meta property="og:i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.11.0</span>
       </span>
     </div>
 
@@ -79,7 +79,8 @@ the under-reporting of alcohol consumption in survey data.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">alc_upshift</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"England"</span>, <span class="st">"Scotland"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span>  pcc_data <span class="op">=</span> <span class="fu">hseclean</span><span class="fu">::</span><span class="va"><a href="per_capita_alc_for_upshift.html">per_capita_alc_for_upshift</a></span>,</span>
+<span>  <span class="va">year_select</span>,</span>
+<span>  pcc_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HMRC"</span>, <span class="st">"MESAS"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>  proportion <span class="op">=</span> <span class="fl">0.8</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -96,9 +97,13 @@ the average weekly alcohol consumption of an individual in UK standard units of 
 <dd><p>Character string - either "England" or "Scotland".</p></dd>
 
 
+<dt>year_select</dt>
+<dd><p>Integer - Year for which upshifting will be done</p></dd>
+
+
 <dt>pcc_data</dt>
 <dd><p>Data.table - "PCC" - the values of per capita alcohol consumption
-calculated from HMRC data on duty receipts disaggregated by UK nation.
+calculated from HMRC data on duty receipts disaggregated by UK nation or MESAS monitoring report on alcohol sales 2022 (Scotland only)
 Stored as package data in hseclean::per_capita_alc_for_upshift.</p></dd>
 
 
@@ -117,7 +122,7 @@ the upshifted values of weekly mean alcohol consumption.</p>
     <div id="details">
     <h2>Details</h2>
     <p>A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
-Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year, 
+Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year,
 Proportion=the proportion of this
 'true' value to shift consumption data up to
 (default is 80 percent as per World Health Organisation assumptions)
@@ -158,6 +163,11 @@ on the reference pcc value and the distribution of consumption in the survey dat
 <span class="r-in"><span>  proportion <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
