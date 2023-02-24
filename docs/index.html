@@ -98,6 +98,8 @@
 </h1></div>
 <!-- badges: start -->
 
+<!-- badger::badge_doi("10.17605/OSF.IO/43N7P", "green") -->
+<p><a href="https://doi.org/10.17605/OSF.IO/43N7P" class="external-link"><img src="https://img.shields.io/badge/doi-10.17605/OSF.IO/43N7P-green.svg"></a> <!-- badges: end --></p>
 <div class="section level2">
 <h2 id="the-sheffield-tobacco-and-alcohol-policy-modelling-platform">The Sheffield Tobacco and Alcohol Policy Modelling Platform<a class="anchor" aria-label="anchor" href="#the-sheffield-tobacco-and-alcohol-policy-modelling-platform"></a>
 </h2>
@@ -137,7 +139,12 @@
 <div class="section level2">
 <h2 id="code-repositories">Code repositories<a class="anchor" aria-label="anchor" href="#code-repositories"></a>
 </h2>
-<p>The code on Github is a mirror of the code in a private Gitlab repository where the actual development takes place.</p>
+<p>The code on Github is a mirror of the code in a private Gitlab repository where the actual development takes place. The code in the Github repository is linked to a repository on the Open Science Framework, which provides the doi for the package citation <a href="https://osf.io/43n7p/" class="external-link uri">https://osf.io/43n7p/</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>Gillespie D, Webster L, Leeming G, Morris D, Angus C, Brennan A ([YEAR]). hseclean: An R Package for Health Survey Data Wrangling. R package version [x.x.x]. University of Sheffield. <a href="https://stapm.github.io/hseclean/" class="uri">https://stapm.github.io/hseclean/</a>. doi: <a href="https://doi.org/10.17605/OSF.IO/43N7P" class="external-link uri">https://doi.org/10.17605/OSF.IO/43N7P</a></p>
 </div>
 <div class="section level2">
 <h2 id="motivation-for-developing-the-package">Motivation for developing the package<a class="anchor" aria-label="anchor" href="#motivation-for-developing-the-package"></a>
@@ -183,17 +190,17 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("devtools")</span></span>
 <span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_git.html" class="external-link">install_git</a></span><span class="op">(</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_git</span><span class="op">(</span></span>
 <span>  <span class="st">"https://github.com/stapm/hseclean.git"</span>, </span>
 <span>  ref <span class="op">=</span> <span class="st">"x.x.x"</span>,</span>
 <span>  build_vignettes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"</span></span></code></pre></div>
 <p>Or clone the package repo locally and use the ‘install and restart’ button in the Build tab of RStudio. This option is more convenient when testing development versions.</p>
-<p>Then load the package, and some other packages that are useful. Note that the code within <code>hseclean</code> uses the <code><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link">data.table::data.table()</a></code> syntax.</p>
+<p>Then load the package, and some other packages that are useful. Note that the code within <code>hseclean</code> uses the <code>data.table::data.table()</code> syntax.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stapm.github.io/hseclean/">hseclean</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">hseclean</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Other useful packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span> <span class="co"># for data manipulation and summary</span></span>
@@ -216,7 +223,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small>GPL (&gt;= 3)</small></li>
+<li><small><a href="https://creativecommons.org/licenses/by/4.0" class="external-link">CC BY 4.0</a></small></li>
 </ul>
 </div>
 
@@ -225,21 +232,6 @@
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html#citation">Citing hseclean</a></li>
-</ul>
-</div>
-
-<div class="developers">
-<h2 data-toc-skip>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3450-5747" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Laura Webster <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6757-5333" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>
-<a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a> <br><small class="roles"> Author </small>  </li>
-<li>
-<a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a> <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -257,12 +249,12 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
+<p>Developed by .</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
