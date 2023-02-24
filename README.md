@@ -10,6 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+
+<!-- badger::badge_doi("10.17605/OSF.IO/43N7P", "green") -->
+
+[![](https://img.shields.io/badge/doi-10.17605/OSF.IO/43N7P-green.svg)](https://doi.org/10.17605/OSF.IO/43N7P)
 <!-- badges: end -->
 
 ## The Sheffield Tobacco and Alcohol Policy Modelling Platform

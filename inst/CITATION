@@ -2,12 +2,11 @@ citHeader("To cite hseclean in publications use:")
 
 citEntry(
   entry    = "Manual",
-  title    = "hseclean: Health Survey Data Wrangling",
-  author   = "Duncan Gillespie and Laura Webster and Damon Morris and Colin Angus and Alan Brennan",
+  title    = "hseclean: An R Package for Health Survey Data Wrangling",
+  author   = "Duncan Gillespie and Laura Webster and Grace Leeming and and Damon Morris and Colin Angus and Alan Brennan",
   year     = "2022",
   note   = "R package version x.x.x [replace with version used]",
   url      = "https://stapm.github.io/hseclean/",
-  textVersion = paste(
-
-  )
+  doi = "10.17605/OSF.IO/43N7P",
+  textVersion = "Gillespie D, Webster L, Leeming G, Morris D, Angus C, Brennan A ([YEAR]). hseclean: An R Package for Health Survey Data Wrangling. R package version [x.x.x]. University of Sheffield. https://stapm.github.io/hseclean/. doi: https://doi.org/10.17605/OSF.IO/43N7P"
 )
