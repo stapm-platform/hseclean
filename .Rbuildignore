@@ -1,4 +1,5 @@
 ^data-raw$
+^data-checks$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
@@ -11,3 +12,8 @@
 ^\.gitlab-ci\.yml$
 ^examples$
 README.Rmd
+^hseclean\.Rproj$
+^manuscript$
+^slides$
+^posters$
+^vignettes$
