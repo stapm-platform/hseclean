@@ -66,11 +66,6 @@ community wider than the development team.
 Data checks are brief reports that show the results of survey data
 processing using the hseclean package.
 
--   [Alcohol consumption in the Scottish Health
-    Survey](https://stapm.github.io/hseclean/shes_alc_data_report.html)
--   [Tobacco consumption in the Scottish Health
-    Survey](https://stapm.gitlab.io/model-inputs/scotland_nat_tob_data/shes_tob_data_report.html)
-
 ## Code repositories
 
 The code on Github is a mirror of the code in a private Gitlab
