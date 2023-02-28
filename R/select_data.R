@@ -44,7 +44,7 @@ select_data <- function(
 
   for(cv in complete_vars) {
 
-    print(cv)
+    #print(cv)
 
     if(cv %in% colnames(data)) {
 

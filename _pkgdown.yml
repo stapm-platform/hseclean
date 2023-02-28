@@ -23,13 +23,18 @@ authors:
 
 navbar:
   structure:
-    left:  [home, intro, reference, articles]
+    left:  [home, intro, data-checks, reference, articles]
     right: [github, gitlab, software]
   components:
     home: ~
     intro:
      text: Get started
      href: articles/hseclean.html
+    data-checks:
+     text: "Data checks"
+     menu:
+      - text: Scottish alcohol data
+      - href: shes_alc_data_report.html
     reference:
      text: Functions
      href: reference/index.html
@@ -47,7 +52,7 @@ navbar:
      href: https://stapm.gitlab.io/software.html
 
 articles:
-- title: "Data processing"
+- title: "Data processing notes"
   contents:
   - hseclean
   - english_hse_data_processing_methods

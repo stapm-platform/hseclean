@@ -5,7 +5,11 @@
 # Update R ad R studio
 #installr::updateR()
 
+# change to local library as needed
 project_lib <- "C:/Users/cm1dog/Documents/R"
+
+# Create library directory if needed
+if(!dir.exists(project_lib)) {dir.create(project_lib)}
 
 .libPaths(project_lib)
 
@@ -14,7 +18,7 @@ project_lib <- "C:/Users/cm1dog/Documents/R"
 
 # Package names
 packages <- c(
-  "boot", 
+  "boot",
   "bit64",
   "bookdown",
   "crayon",
@@ -38,7 +42,7 @@ packages <- c(
   "Hmisc",
   "here",
   "ids",
-  "knitr",   
+  "knitr",
   "lifecycle",
   "magrittr",
   "mice",

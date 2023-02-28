@@ -6,3 +6,5 @@ Archive/
 dev/
 .DS_Store
 **/.DS_Store
+*20_outputs
+*25_plots
