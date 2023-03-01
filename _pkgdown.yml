@@ -23,24 +23,23 @@ authors:
 
 navbar:
   structure:
-    left:  [home, intro, data-checks, reference, articles]
+    left:  [home, intro, reference, articles]
     right: [github, gitlab, software]
   components:
     home: ~
     intro:
      text: Get started
      href: articles/hseclean.html
-    data-checks:
-     text: "Data checks"
-     menu:
-      - text: Scottish alcohol data
-      - href: articles/shes_alc_data_report.html
     reference:
      text: Functions
      href: reference/index.html
     articles:
-     text: Technical documentation
-     href: articles/index.html
+     text: Methods and data checks
+     menu:
+      - text: Health Survey for England methods
+        href: articles/english_hse_data_processing_methods.html
+      - text: Scottish alcohol data
+        href: articles/Scotland_alcohol_data_report.html
     github:
      icon: fab fa-github fa-lg
      href: https://github.com/STAPM/hseclean
@@ -50,13 +49,6 @@ navbar:
     software:
      icon: fa-code
      href: https://stapm.gitlab.io/software.html
-
-articles:
-- title: "Data processing notes"
-  contents:
-  - hseclean
-  - english_hse_data_processing_methods
-  - scottish_data
 
 reference:
 - title: Read Health Survey for England

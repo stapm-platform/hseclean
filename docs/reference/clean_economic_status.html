@@ -31,23 +31,22 @@
       <ul class="nav navbar-nav"><li>
   <a href="../articles/hseclean.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Data checks
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Scottish alcohol data</li>
-    <li>
-      <a href="https://stapm.github.io/hseclean/shes_alc_data_report.html"></a>
-    </li>
-  </ul></li>
 <li>
   <a href="../reference/index.html">Functions</a>
 </li>
-<li>
-  <a href="../articles/index.html">Technical documentation</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Methods and data checks
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a>
+    </li>
+    <li>
+      <a href="../articles/Scotland_alcohol_data_report.html">Scottish alcohol data</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/STAPM/hseclean" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -98,8 +97,9 @@
     <h2>Value</h2>
     
 
-<ul><li><p>employ2cat: "employed", "unemployed"</p></li>
-<li><p>nssec3_lab: "Managprof", "Intermediate", "Routinemanual", "Other". Social class/occupation based on the NS-SEC system. A four level variable for
+<ul><li><p>employ2cat: "employed", "unemployed" (in paid work or not)</p></li>
+<li><p>nssec3_lab: "Managprof", "Intermediate", "Routinemanual", "Other".
+Social class/occupation based on the NS-SEC system. A four level variable for
 managerial and professional occupations, intermediate occupations and routine and manual occupations. The fourth level is
 'other' that includes anyone (young/old/unemployed) who do not have an occupation.</p></li>
 <li><p>social_grade: "ABC1", "C2DE". 2 level social grade classification.</p></li>
@@ -109,11 +109,15 @@ managerial and professional occupations, intermediate occupations and routine an
     <div id="details">
     <h2>Details</h2>
     <p>First apply the function [hseclean::clean_age()] to the data because this function uses the age variable.</p>
+<p>The issues around using occupation-based social classifications for social survey research are discussed by
+Connelly et al. (2016)
+.
+They advise using a range of alternative measures, but not creating new measures beyond what is already established.</p>
 <p>The classifications considered are:</p>
 <ul><li><p>Employed / in paid work or not.</p></li>
-<li><p>The NS-SEC measure, which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
+<li><p>The <a href="https://www.ons.gov.uk/methodology/classificationsandstandards/otherclassifications/thenationalstatisticssocioeconomicclassificationnssecrebasedonsoc2010" class="external-link">NS-SEC measure</a>, which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
 therefore not that good at classifying people who are not employed for various reasons.</p></li>
-<li><p>The NRS social grade system. This measure is the one used in the
+<li><p>The <a href="https://humanrights.brightblue.org.uk/blog-1/2016/5/6/measuring-social-class" class="external-link">NRS social grade system</a>. This measure is the one used in the
 Tobacco and Alcohol Toolkit studies, but is not reported in the Health Survey for England. We create this variable by recategorising the NS-SEC 8 level variable.
 This is important to facilitate the link of analysis to the Toolkit Study.</p></li>
 <li><p>Manual vs. non-manual occupation. In the 2017 Tobacco control plan for England, there was a specific target to reduce the difference in rates of smoking
@@ -122,6 +126,14 @@ by grouping Managerial and professional with intermediate occupations to give th
 <li><p>Economic status - retired / employed / unemployed.</p></li>
 <li><p>Activity status for last week that adds more detail such as 'in education' and 'looking after home or family'.</p></li>
 </ul></div>
+    <div id="references">
+    <h2>References</h2>
+    <p>Connelly R, Gayle V, Lambert PS (2016).
+“A Review of occupation-based social classifications for social survey research.”
+<em>Methodological Innovations</em>, <b>9</b>.
+ISSN 2059-7991 2059-7991, <a href="https://doi.org/10.1177/2059799116638003" class="external-link">doi:10.1177/2059799116638003</a>
+.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>

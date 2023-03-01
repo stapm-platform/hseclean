@@ -7,36 +7,8 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-## Workflows
 
-To illustrate the use of the `hseclean` functions for different tasks, we have created example workflows. You can use these examples to help understand how the code works, run them to generate model inputs, or use them as a starting point for the development of a new project.    
-
-At the moment, these workflows are accessible only to the project team. To access them, you will need to be added to the STAPM Gitlab organisation.  
-
-The workflows are listed below:  
-
-### Data testing
-These are the working repos used to check the processing of the survey data using the functions in hseclean   
-
-- [English national data on tobacco and alcohol consumption](https://gitlab.com/stapm/model-inputs/eng_nat_tob_alc_data) - data processing and testing.
-- [Scottish national data on tobacco consumption](https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data) - data processing and testing.
-
-### Project work
-Where possible, put the code to clean health survey data in a script that is part of the workflow of the project in which that data is used. The code would therefore be found in the repo associated with that project. Below are links to project repos focused on processing and analysing survey data    
-
-- [Description of the clustering of tobacco and alcohol consumption behaviours using English national survey data](https://gitlab.com/stapm/projects/tobacco_alcohol_clustering) - White Rose Collaboration Fund project.  
-- [SYNTAX inputs - tobacco and alcohol consumption](https://gitlab.com/stapm/projects/syntax/syntax_hse) - working files containing inputs for the SYNTAX project.
-- [Tobacco and alcohol tax policy modelling example workflow](https://gitlab.com/stapm/example-workflows/tax_policy_modelling/-/tree/master/05_build_inputs/tobacco_and_alcohol_survey_data) - in a subfolder that builds the inputs to the simulation model.  
-
-## Get data
-
-To be able to **download data from the UK Data Service**, you will need to **register with the UK Data Service website**, which will enable you to request access to the datasets. Instructions on how to do this can be found [here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx). **Note that you might not have to clean the data yourself as we can provide you with datasets for running the models that have already been cleaned.**    
-
-In ScHARR, all data is stored and processed according to the [ScHARR Information Governance Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). The HSE and SHeS data is stored in the university networked X-drive folder `PR_Consumption_TA`, which is accessible only to team members who are using data according to the purposes stated to the UK Data Service. No individual-level data is included within this package.   
-
-## Basic functionality
-
-### Reading the HSE data files
+## Reading the HSE data files
 There are separate functions in `hseclean` to read each year of HSE data. You must specify the link to where the data is stored. The functions read in all variables related to tobacco and alcohol and selected socio-economic and other descriptor variables.   
 
 ```{r readhse, eval = F}
@@ -51,7 +23,7 @@ test_2001 <- read_2001(
 `hseclean` contains separate functions for reading the survey data for each year, e.g. `read_SHeS_2008()`. 
 
 
-### Processing socioeconomic, demographic and health variables
+## Processing socioeconomic, demographic and health variables
 
 There are separate functions that focus on processing a different theme of socioeconomic, demographic and health variables. See `vignette("covariate_data")`. Note that the order in which the cleaning functions are applied can matter - as some functions use variables that are cleaned by others.        
 
@@ -68,7 +40,7 @@ temp <- read_2017(root = root_dir) %>%
   clean_health_and_bio
 ```
 
-### Alcohol data
+## Alcohol data
 Detailed description of how to clean the alcohol data are given in `vignette("alcohol_data")`. As an example, here is the workflow to plot the frquency of drinking among people who drank in 2017.  
 
 ```{r drinkfreq, eval = F}
@@ -93,7 +65,7 @@ read_2017(root = root_dir) %>%
   ylab("average number of days drink in a week")
 ```
 
-### Clean all years of smoking and alcohol data
+## Clean all years of smoking and alcohol data
 
 See `vignette("smoking_data")`.
 
@@ -183,7 +155,7 @@ data <- combine_years(list(
 data <- clean_surveyweights(data)
 ```
 
-### Summarise data
+## Summarise data
 The function `survey::svyby()` in the `survey` R package is used by the function `prop_summary()` in `hseclean` to estimate the uncertainty around proportions calculated from a binary variable - `prop_summary()` was designed to simplify the process of estimating smoking prevalence from the HSE data, stratified by a specified set of variables.   
 
 ```{r ex2, eval = F}
@@ -196,7 +168,7 @@ prop_smokers <- prop_summary(
 )
 ```
 
-### Missing data imputation
+## Missing data imputation
 
 `hseclean` uses the function `mice::mice()` in the `mice` R package, implemented in a basic way by the `impute_data_mice()` function. See `vignette("missing_data")`.      
 

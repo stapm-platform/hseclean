@@ -1,8 +1,5 @@
 ---
-title: "Methods to process the Health Survey for England data for the modelling of policy effects on tobacco and alcohol consumption"
-subtitle: "Vignette version number 1.1.0"
-date: "Last reviewed 01/10/21"
-author: "Duncan Gillespie, Colin Angus, Laura Webster & Alan Brennan"
+title: "Methods: process the Health Survey for England data"
 biblio-style: apalike
 output: 
   rmarkdown::html_vignette:
@@ -14,13 +11,14 @@ bibliography:
 always_allow_html: yes
 urlcolor: blue
 vignette: >
-  %\VignetteIndexEntry{HSE data processing}
+  %\VignetteIndexEntry{Methods: process the Health Survey for England data}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
 
+[Click here to go to the Health Survey for England data page on the STAPM website](https://stapm.gitlab.io/Health_Survey_for_England.html)
 
 # Summary {-}
 This vignette sets out a description of how the data related to tobacco and alcohol consumption in the Health Survey for England are processed for use in the Sheffield Tobacco and Alcohol Policy Modelling (STAPM). The vignette covers: (1) the processing of alcohol consumption data; the processing of tobacco consumption data; the processing of socio-demographic covariates relevant to our tobacco and alcohol modelling; the imputation of missing data. This is a working set of notes to help keep track of the methods used to process the data.     

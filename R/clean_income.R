@@ -5,7 +5,7 @@
 #'
 #' There are a few different options for classifying income - the need to have a measure that is
 #' consistent across years of the Health Survey for England has led us to use equivalised income quintiles only.
-#' Past SAPM modelling has used years of the Health Survey for England for which a continous variable for
+#' Past SAPM modelling has used years of the Health Survey for England for which a continuous variable for
 #' equivalised income was provided. From this, we calculated our own income groups. In later years, this continuous
 #' income variable is not available (except if we were to apply for a secure access version of the data).
 #'

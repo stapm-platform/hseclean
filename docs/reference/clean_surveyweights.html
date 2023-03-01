@@ -32,23 +32,22 @@ by year, age, sex and IMD quintiles."><meta property="og:image" content="https:/
       <ul class="nav navbar-nav"><li>
   <a href="../articles/hseclean.html">Get started</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Data checks
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Scottish alcohol data</li>
-    <li>
-      <a href="https://stapm.github.io/hseclean/shes_alc_data_report.html"></a>
-    </li>
-  </ul></li>
 <li>
   <a href="../reference/index.html">Functions</a>
 </li>
-<li>
-  <a href="../articles/index.html">Technical documentation</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Methods and data checks
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a>
+    </li>
+    <li>
+      <a href="../articles/Scotland_alcohol_data_report.html">Scottish alcohol data</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/STAPM/hseclean" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -105,6 +104,24 @@ by year, age, sex and IMD quintiles.</p>
     
 
 <p>Returns data with survey weights updated</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>Survey weights are calculated after the survey data has been collected, so that when the weights are
+applied they make the survey sample representative of the general population by age and sex
+i.e., if a particular subgroup has been under-sampled, then it receives a higher survey weight.
+The definition and structure of the survey weights is described in the dataset documentation
+and a description of the survey weights has been added to the help files of the function that read the survey data.
+There are different weights for children and adults.
+The children weights adjusts for the selection of just two children per household and
+adjusts for differences between responding and non-responding households.</p>
+<p>Any processing or combining of survey weights is done in the functions that read each year of data.
+The function `hseclean::clean_surveyweights()` brings in external data on the distribution of the
+number of people in the population by age, sex and Index of Multiple Deprivation quintile
+and makes a further adjustment so that the weights reflect the observed poopulation distribution
+by those subgroups. The weights are then standardised by dividing by the mean weight within each year.
+The resulting survey weight variable for each year is `wt_int`
+(reflecting that the main survey weight used corresponds to the main respondent interviews).</p>
     </div>
 
     <div id="ref-examples">

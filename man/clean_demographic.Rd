@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_demographic.R
 \name{clean_demographic}
 \alias{clean_demographic}
-\title{Demographic variables}
+\title{Clean demographic variables}
 \usage{
 clean_demographic(data)
 }
@@ -18,10 +18,27 @@ clean_demographic(data)
 }
 }
 \description{
-Processes demographic variables.
+Creates variables for ethnicity, sex and quintiles of the Index of Multiple Deprivation (IMDQ).
 }
 \details{
-ETHNICITY
+See below
+}
+\section{Sex}{
+
+1 = Male, 2 = Female.
+}
+
+\section{Index of Multiple Deprivation quintiles}{
+
+5_most_deprived, 4, 3, 2, 1_least_deprived.  The Scottish Health Survey uses the Scottish Index of Multiple Deprivation.
+This is kept as a separate variable to the English IMD variable as each country calculated its
+own slightly different version of IMD.
+However, there has been a study harmonising IMD measures across the four UK nations \insertCite{Abel2016;textual}{hseclean}
+that could be looked at in the future if we want to compare across countries.
+}
+
+\section{Ethnicity}{
+
 In an attempt to harmonise different years of data to the recommended definitions, we have pooled the Asian and other categories.
 \itemize{
 \item White (English, Irish, Scottish, Welsh, other European)
@@ -43,6 +60,7 @@ the Scottish Health Survey 2018 only identifies 5 groups of ethnicity:
 }
 On the basis of this, only the 2 level variable (white/non-white) has been created for all years for Scotland.
 }
+
 \examples{
 
 \dontrun{
@@ -53,4 +71,7 @@ data_2001 <- clean_demographic(data = data_2001)
 
 }
 
+}
+\references{
+\insertRef{Abel2016}{hseclean}
 }

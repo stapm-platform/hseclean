@@ -4,8 +4,8 @@ pkgdown_sha: ~
 articles:
   english_hse_data_processing_methods: english_hse_data_processing_methods.html
   hseclean: hseclean.html
-  scottish_data: scottish_data.html
-last_built: 2023-03-01T07:38Z
+  Scotland_alcohol_data_report: Scotland_alcohol_data_report.html
+last_built: 2023-03-01T12:10Z
 urls:
   reference: https://stapm.github.io/hseclean/reference
   article: https://stapm.github.io/hseclean/articles

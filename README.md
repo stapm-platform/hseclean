@@ -61,6 +61,19 @@ added.
 The repository is not intended to be maintained by an open source
 community wider than the development team.
 
+## Data access
+
+To be able to download data from the UK Data Service, you will need to
+register with the UK Data Service website, which will enable you to
+request access to the datasets. Instructions on how to do this can be
+found
+[here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).
+
+In ScHARR, all data is stored and processed according to the [ScHARR
+Information Governance
+Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). No
+individual-level data is included within this package.
+
 ## Data checks
 
 Data checks are brief reports that show the results of survey data

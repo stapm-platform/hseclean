@@ -18,6 +18,24 @@ Returns data with survey weights updated
 Makes new survey weights based on the difference between the HSE sample size and the actual population size
 by year, age, sex and IMD quintiles.
 }
+\details{
+Survey weights are calculated after the survey data has been collected, so that when the weights are
+applied they make the survey sample representative of the general population by age and sex
+i.e., if a particular subgroup has been under-sampled, then it receives a higher survey weight.
+The definition and structure of the survey weights is described in the dataset documentation
+and a description of the survey weights has been added to the help files of the function that read the survey data.
+There are different weights for children and adults.
+The children weights adjusts for the selection of just two children per household and
+adjusts for differences between responding and non-responding households.
+
+Any processing or combining of survey weights is done in the functions that read each year of data.
+The function `hseclean::clean_surveyweights()` brings in external data on the distribution of the
+number of people in the population by age, sex and Index of Multiple Deprivation quintile
+and makes a further adjustment so that the weights reflect the observed poopulation distribution
+by those subgroups. The weights are then standardised by dividing by the mean weight within each year.
+The resulting survey weight variable for each year is `wt_int`
+(reflecting that the main survey weight used corresponds to the main respondent interviews).
+}
 \examples{
 
 \dontrun{

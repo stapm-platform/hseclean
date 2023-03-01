@@ -55,24 +55,23 @@
 <li>
   <a href="../articles/hseclean.html">Get started</a>
 </li>
+<li>
+  <a href="../reference/index.html">Functions</a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Data checks
+    Methods and data checks
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Scottish alcohol data</li>
+<li>
+      <a href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a>
+    </li>
     <li>
-      <a href="../articles/shes_alc_data_report.html"></a>
+      <a href="../articles/Scotland_alcohol_data_report.html">Scottish alcohol data</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../reference/index.html">Functions</a>
-</li>
-<li>
-  <a href="../articles/index.html">Technical documentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -109,44 +108,15 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Data check: Alcohol consumption in the Scottish
 Health Survey</h1>
-            <h3 data-toc-skip class="subtitle">Sheffield Tobacco and
-Alcohol Policy Modelling</h3>
             
       
       
-      <div class="hidden name"><code>shes_alc_data_report.Rmd</code></div>
+      <div class="hidden name"><code>Scotland_alcohol_data_report.Rmd</code></div>
 
     </div>
 
     
     
-<style>
-
-body{
-  font-family: 'Oxygen', sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-h1,h2,h3,h4 {
-  font-family: 'Raleway', sans-serif;
-  font-size: 24px;
-}
-
-.container { width: 1000px; }
-h3 {
-  background-color: #D4DAEC;
-  #text-indent: 100px; 
-}
-h4 {
-  text-indent: 100px;
-}
-
-
-g-table-intro h4 {
-  text-indent: 0px;
-}
-</style>
 <p><a href="https://stapm.gitlab.io/Scottish_Health_Survey.html" class="external-link">Click
 here to go to the Scottish Health Survey data page on the STAPM
 website</a></p>
@@ -164,16 +134,17 @@ data using hseclean.</p>
 <h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
 </h2>
 <p>The <a href="https://www.gov.scot/collections/scottish-health-survey" class="external-link">Scottish
-Health Survey (SHeS)</a> is a survey of the health and health-related
-behaviours of private households in Scotland that has been carried out
-annually since 2008. It is the source of data on alcohol consumption
-used to inform the alcohol component of the Sheffield Tobacco and
-Alcohol Policy Modelling. The survey asks repondents about the volume of
-certain types of drinks bought or consumed over a certain time period.
-These volumes are then standardised by converting them into alcohol
-units (one UK standard unit = 10ml of pure ethanol). The conversion of
-reported volumes to units is based on assumptions about the average
-alcohol content (ABV) of different types of drink.</p>
+Health Survey (SHeS)</a> is an annual series of surveys of the health
+and health-related behaviours of private households in Scotland that has
+been carried out annually since 2008 (and before that in 1995, 1998 and
+2003). It is the source of data on alcohol consumption used to inform
+the alcohol component of the Sheffield Tobacco and Alcohol Policy
+Modelling. The survey asks respondents about the volume of certain types
+of drinks bought or consumed over a certain time period. These volumes
+are then standardised by converting them into alcohol units (one UK
+standard unit = 10ml of pure ethanol). The conversion of reported
+volumes to units is based on assumptions about the average alcohol
+content (ABV) of different types of drink.</p>
 <p>It is generally accepted that this self-reported data underestimates
 actual consumption by as much as 50% <span class="citation">(<a href="#ref-stockwell2004under" role="doc-biblioref">Stockwell et al.
 2004</a>)</span>. This data check does not investigate the magnitude of
@@ -198,7 +169,7 @@ factors used to convert the quantity-frequency survey questions into
 estimated units of average weekly alcohol consumption.</p>
 <p><br></p>
 <div class="figure">
-<img src="articles/inst/SHeS_2018_alcohol_conversion_factors.png" alt="Table 1. Excerpt from Section 3.2.3 p 78 of the main report volume 1 of the Scottish Health Survey 2018." width="60%"><p class="caption">
+<img src="inst/SHeS_2018_alcohol_conversion_factors.png" alt="Table 1. Excerpt from Section 3.2.3 p 78 of the main report volume 1 of the Scottish Health Survey 2018." width="60%"><p class="caption">
 Table 1. Excerpt from Section 3.2.3 p 78 of the main report volume 1 of
 the Scottish Health Survey 2018.
 </p>
@@ -208,6 +179,12 @@ the Scottish Health Survey 2018.
 standardised and version controlled R code functions in the <a href="https://stapm.github.io/hseclean/">hseclean</a> R package. Project
 specific code draws on these functions to process the SHeS data into
 STAPM inputs.</p>
+<p>Someone is classed as a current drinker if they reported drinking at
+all in the last 12 months e.g. even if reporting only having 1-2 drinks
+a year. There is no alcohol data collected for children, therefore we
+retain under 16s in our data, but assign them ‘NA’ for all alcohol
+questions. Any missing data is supplemented by responses to if currently
+drinks or if always non-drinker.</p>
 <p>The hseclean method applies different assumptions to those used by
 the providers of the SHeS data to convert the quantity-frequency survey
 questions into estimated units of average weekly alcohol consumption.
@@ -302,19 +279,19 @@ units of ethanol. They are based on the pooled SHeS sample from 2008 to
 2018. For the purposes of these histograms, the upper limit for the
 amount consumed is set at 100 units/week.</p>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/01_drink_amount.png" alt="Figure 1. Distribution of average weekly alcohol consumption calculated from hseclean." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/01_drink_amount.png" alt="Figure 1. Distribution of average weekly alcohol consumption calculated from hseclean." width="80%"><p class="caption">
 Figure 1. Distribution of average weekly alcohol consumption calculated
 from hseclean.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/01_drink_amount_imd.png" alt="Figure 2. Index of Multiple Deprivation quintile specific distribution of average weekly alcohol consumption calculated from hseclean." width="100%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/01_drink_amount_imd.png" alt="Figure 2. Index of Multiple Deprivation quintile specific distribution of average weekly alcohol consumption calculated from hseclean." width="100%"><p class="caption">
 Figure 2. Index of Multiple Deprivation quintile specific distribution
 of average weekly alcohol consumption calculated from hseclean.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/01_drink_amount_sex.png" alt="Figure 3. Sex specific distribution of average weekly alcohol consumption calculated from hseclean." width="90%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/01_drink_amount_sex.png" alt="Figure 3. Sex specific distribution of average weekly alcohol consumption calculated from hseclean." width="90%"><p class="caption">
 Figure 3. Sex specific distribution of average weekly alcohol
 consumption calculated from hseclean.
 </p>
@@ -334,7 +311,7 @@ details above. Despite the different assumptions used, the validation
 check should confirm that the two methods produce approximately the same
 estimates of the average weekly amount of alcohol consumed.</p>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/01_drink_amount_shes_vs_hseclean.png" alt="Figure 4. Average weekly alcohol consumption calculated from hseclean vs. that supplied with the SHeS data for the pooled sample of 2008 to 2019." width="60%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/01_drink_amount_shes_vs_hseclean.png" alt="Figure 4. Average weekly alcohol consumption calculated from hseclean vs. that supplied with the SHeS data for the pooled sample of 2008 to 2019." width="60%"><p class="caption">
 Figure 4. Average weekly alcohol consumption calculated from hseclean
 vs. that supplied with the SHeS data for the pooled sample of 2008 to
 2019.
@@ -354,17 +331,17 @@ alcohol even if they drink alcohol only once or twice a year.</p>
 <p>For the general population age 16 to 89 years old, the proportion of
 people who drink alcohol ranges from 0.87 in 2008 to 0.82 in 2019.</p>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/02_drink_prop.png" alt="Figure 5. Proportion of people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/02_drink_prop.png" alt="Figure 5. Proportion of people who drink alcohol." width="57%"><p class="caption">
 Figure 5. Proportion of people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/02_drink_prop_sex.png" alt="Figure 6. Sex specific proportion of people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/02_drink_prop_sex.png" alt="Figure 6. Sex specific proportion of people who drink alcohol." width="72%"><p class="caption">
 Figure 6. Sex specific proportion of people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/02_drink_prop_imd.png" alt="Figure 7. Index of Multiple Deprivation specific proportion of people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/02_drink_prop_imd.png" alt="Figure 7. Index of Multiple Deprivation specific proportion of people who drink alcohol." width="80%"><p class="caption">
 Figure 7. Index of Multiple Deprivation specific proportion of people
 who drink alcohol.
 </p>
@@ -382,18 +359,18 @@ applied to the amount of alcohol consumed.</p>
 standard units of ethanol consumed per week by drinkers ranges from
 12.57 units in 2008 to 10.25 units in 2019.</p>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/03_weekdrnk.png" alt="Figure 8. Average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/03_weekdrnk.png" alt="Figure 8. Average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
 Figure 8. Average amount drunk per week by people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/03_weekdrnk_sex.png" alt="Figure 9. Sex specific average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/03_weekdrnk_sex.png" alt="Figure 9. Sex specific average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
 Figure 9. Sex specific average amount drunk per week by people who drink
 alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/03_weekdrnk_imd.png" alt="Figure 10. Index of Multiple Deprivation specific average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/03_weekdrnk_imd.png" alt="Figure 10. Index of Multiple Deprivation specific average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
 Figure 10. Index of Multiple Deprivation specific average amount drunk
 per week by people who drink alcohol.
 </p>
@@ -410,18 +387,18 @@ per week by people who drink alcohol.
 least once or twice a year peaks at 0.92 at age 19 and falls to 0.61 at
 age 89.</p>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/04_agetrend_prop.png" alt="Figure 11. Age trends in the proportion of people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/04_agetrend_prop.png" alt="Figure 11. Age trends in the proportion of people who drink alcohol." width="57%"><p class="caption">
 Figure 11. Age trends in the proportion of people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/04_agetrend_prop_sex.png" alt="Figure 12. Sex specific age trends in the proportion of people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/04_agetrend_prop_sex.png" alt="Figure 12. Sex specific age trends in the proportion of people who drink alcohol." width="72%"><p class="caption">
 Figure 12. Sex specific age trends in the proportion of people who drink
 alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/04_agetrend_prop_imd.png" alt="Figure 13. Index of Multiple Deprivation specific age trends in the proportion of people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/04_agetrend_prop_imd.png" alt="Figure 13. Index of Multiple Deprivation specific age trends in the proportion of people who drink alcohol." width="80%"><p class="caption">
 Figure 13. Index of Multiple Deprivation specific age trends in the
 proportion of people who drink alcohol.
 </p>
@@ -435,19 +412,19 @@ alcohol<a class="anchor" aria-label="anchor" href="#average-weekly-alcohol-consu
 alcohol consumed by people who drink at least once or twice a year
 peaked at 17.35 units at age 19 and fell to 3.59 units at age 89.</p>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/05_agetrend_mean.png" alt="Figure 14. Age trends in the average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/05_agetrend_mean.png" alt="Figure 14. Age trends in the average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
 Figure 14. Age trends in the average amount drunk per week by people who
 drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/05_agetrend_mean_sex.png" alt="Figure 15. Sex specific age trends in the average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/05_agetrend_mean_sex.png" alt="Figure 15. Sex specific age trends in the average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
 Figure 15. Sex specific age trends in the average amount drunk per week
 by people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/05_agetrend_mean_imd.png" alt="Figure 16. Index of Multiple Deprivation specific age trends in the average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/05_agetrend_mean_imd.png" alt="Figure 16. Index of Multiple Deprivation specific age trends in the average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
 Figure 16. Index of Multiple Deprivation specific age trends in the
 average amount drunk per week by people who drink alcohol.
 </p>
@@ -466,18 +443,18 @@ category.</p>
 <h3 id="preferences-for-beer-wine-spirits-and-alcopops">Preferences for beer, wine, spirits and alcopops<a class="anchor" aria-label="anchor" href="#preferences-for-beer-wine-spirits-and-alcopops"></a>
 </h3>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/06_drink_prefs.png" alt="Figure 17. Proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/06_drink_prefs.png" alt="Figure 17. Proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
 Figure 17. Proportions of people who drink each type of alcoholic drink.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/06_drink_prefs_sex.png" alt="Figure 18. Sex specific proportions of people who drink each type of alcoholic drink." width="95%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/06_drink_prefs_sex.png" alt="Figure 18. Sex specific proportions of people who drink each type of alcoholic drink." width="95%"><p class="caption">
 Figure 18. Sex specific proportions of people who drink each type of
 alcoholic drink.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/06_drink_prefs_imd.png" alt="Figure 19. Index of Multiple Deprivation quintile specific proportions of people who drink each type of alcoholic drink." width="100%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/06_drink_prefs_imd.png" alt="Figure 19. Index of Multiple Deprivation quintile specific proportions of people who drink each type of alcoholic drink." width="100%"><p class="caption">
 Figure 19. Index of Multiple Deprivation quintile specific proportions
 of people who drink each type of alcoholic drink.
 </p>
@@ -487,13 +464,13 @@ of people who drink each type of alcoholic drink.
 <h3 id="trends-in-beverage-preferences">Trends in beverage preferences<a class="anchor" aria-label="anchor" href="#trends-in-beverage-preferences"></a>
 </h3>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/07_drink_prefs_trend.png" alt="Figure 20. Calendar year trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/07_drink_prefs_trend.png" alt="Figure 20. Calendar year trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
 Figure 20. Calendar year trends in the proportions of people who drink
 each type of alcoholic drink.
 </p>
 </div>
 <div class="figure">
-<img src="data-checks/Scotland_alcohol_data/25_plots/08_drink_prefs_agetrend.png" alt="Figure 21. Age trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data/25_plots/08_drink_prefs_agetrend.png" alt="Figure 21. Age trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
 Figure 21. Age trends in the proportions of people who drink each type
 of alcoholic drink.
 </p>
@@ -512,7 +489,7 @@ of alcoholic drink.
 </li>
 </ul>
 </div>
-<div class="section level2">
+<div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">

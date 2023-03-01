@@ -13,7 +13,13 @@
     <loc>https://stapm.github.io/hseclean/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://stapm.github.io/hseclean/articles/Scotland_alcohol_data_report.html</loc>
+  </url>
+  <url>
     <loc>https://stapm.github.io/hseclean/articles/scottish_data.html</loc>
+  </url>
+  <url>
+    <loc>https://stapm.github.io/hseclean/articles/shes_alc_data_report.html</loc>
   </url>
   <url>
     <loc>https://stapm.github.io/hseclean/authors.html</loc>
@@ -221,8 +227,5 @@
   </url>
   <url>
     <loc>https://stapm.github.io/hseclean/reference/use_townsend.html</loc>
-  </url>
-  <url>
-    <loc>https://stapm.github.io/hseclean/shes_alc_data_report.html</loc>
   </url>
 </urlset>

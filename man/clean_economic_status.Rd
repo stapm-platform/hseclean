@@ -11,8 +11,9 @@ clean_economic_status(data)
 }
 \value{
 \itemize{
-\item employ2cat: "employed", "unemployed"
-\item nssec3_lab: "Managprof", "Intermediate", "Routinemanual", "Other". Social class/occupation based on the NS-SEC system. A four level variable for
+\item employ2cat: "employed", "unemployed" (in paid work or not)
+\item nssec3_lab: "Managprof", "Intermediate", "Routinemanual", "Other".
+Social class/occupation based on the NS-SEC system. A four level variable for
 managerial and professional occupations, intermediate occupations and routine and manual occupations. The fourth level is
 'other' that includes anyone (young/old/unemployed) who do not have an occupation.
 \item social_grade: "ABC1", "C2DE". 2 level social grade classification.
@@ -26,13 +27,17 @@ Process the data on employment and occupation.
 \details{
 First apply the function [hseclean::clean_age()] to the data because this function uses the age variable.
 
+The issues around using occupation-based social classifications for social survey research are discussed by
+\insertCite{Connelly2016a;textual}{hseclean}.
+They advise using a range of alternative measures, but not creating new measures beyond what is already established.
+
 The classifications considered are:
 
 \itemize{
 \item Employed / in paid work or not.
-\item The NS-SEC measure, which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
+\item The \href{https://www.ons.gov.uk/methodology/classificationsandstandards/otherclassifications/thenationalstatisticssocioeconomicclassificationnssecrebasedonsoc2010}{NS-SEC measure}, which was constructed to measure the employment relations and conditions of occupations (i.e. it classifies people based on their employment occupation). It is
 therefore not that good at classifying people who are not employed for various reasons.
-\item The NRS social grade system. This measure is the one used in the
+\item The \href{https://humanrights.brightblue.org.uk/blog-1/2016/5/6/measuring-social-class}{NRS social grade system}. This measure is the one used in the
 Tobacco and Alcohol Toolkit studies, but is not reported in the Health Survey for England. We create this variable by recategorising the NS-SEC 8 level variable.
 This is important to facilitate the link of analysis to the Toolkit Study.
 \item Manual vs. non-manual occupation. In the 2017 Tobacco control plan for England, there was a specific target to reduce the difference in rates of smoking
@@ -52,4 +57,7 @@ data <- clean_economic_status(data = data)
 
 }
 
+}
+\references{
+\insertRef{Connelly2016a}{hseclean}
 }

@@ -55,24 +55,23 @@
 <li>
   <a href="../articles/hseclean.html">Get started</a>
 </li>
+<li>
+  <a href="../reference/index.html">Functions</a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Data checks
+    Methods and data checks
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Scottish alcohol data</li>
+<li>
+      <a href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a>
+    </li>
     <li>
-      <a href="https://stapm.github.io/hseclean/shes_alc_data_report.html"></a>
+      <a href="../articles/Scotland_alcohol_data_report.html">Scottish alcohol data</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../reference/index.html">Functions</a>
-</li>
-<li>
-  <a href="../articles/index.html">Technical documentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -118,82 +117,8 @@
     
     
 <div class="section level2">
-<h2 id="workflows">Workflows<a class="anchor" aria-label="anchor" href="#workflows"></a>
+<h2 id="reading-the-hse-data-files">Reading the HSE data files<a class="anchor" aria-label="anchor" href="#reading-the-hse-data-files"></a>
 </h2>
-<p>To illustrate the use of the <code>hseclean</code> functions for
-different tasks, we have created example workflows. You can use these
-examples to help understand how the code works, run them to generate
-model inputs, or use them as a starting point for the development of a
-new project.</p>
-<p>At the moment, these workflows are accessible only to the project
-team. To access them, you will need to be added to the STAPM Gitlab
-organisation.</p>
-<p>The workflows are listed below:</p>
-<div class="section level3">
-<h3 id="data-testing">Data testing<a class="anchor" aria-label="anchor" href="#data-testing"></a>
-</h3>
-<p>These are the working repos used to check the processing of the
-survey data using the functions in hseclean</p>
-<ul>
-<li>
-<a href="https://gitlab.com/stapm/model-inputs/eng_nat_tob_alc_data" class="external-link">English
-national data on tobacco and alcohol consumption</a> - data processing
-and testing.</li>
-<li>
-<a href="https://gitlab.com/stapm/model-inputs/scotland_nat_tob_data" class="external-link">Scottish
-national data on tobacco consumption</a> - data processing and
-testing.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="project-work">Project work<a class="anchor" aria-label="anchor" href="#project-work"></a>
-</h3>
-<p>Where possible, put the code to clean health survey data in a script
-that is part of the workflow of the project in which that data is used.
-The code would therefore be found in the repo associated with that
-project. Below are links to project repos focused on processing and
-analysing survey data</p>
-<ul>
-<li>
-<a href="https://gitlab.com/stapm/projects/tobacco_alcohol_clustering" class="external-link">Description
-of the clustering of tobacco and alcohol consumption behaviours using
-English national survey data</a> - White Rose Collaboration Fund
-project.<br>
-</li>
-<li>
-<a href="https://gitlab.com/stapm/projects/syntax/syntax_hse" class="external-link">SYNTAX
-inputs - tobacco and alcohol consumption</a> - working files containing
-inputs for the SYNTAX project.</li>
-<li>
-<a href="https://gitlab.com/stapm/example-workflows/tax_policy_modelling/-/tree/master/05_build_inputs/tobacco_and_alcohol_survey_data" class="external-link">Tobacco
-and alcohol tax policy modelling example workflow</a> - in a subfolder
-that builds the inputs to the simulation model.</li>
-</ul>
-</div>
-</div>
-<div class="section level2">
-<h2 id="get-data">Get data<a class="anchor" aria-label="anchor" href="#get-data"></a>
-</h2>
-<p>To be able to <strong>download data from the UK Data
-Service</strong>, you will need to <strong>register with the UK Data
-Service website</strong>, which will enable you to request access to the
-datasets. Instructions on how to do this can be found <a href="https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx" class="external-link">here</a>.
-<strong>Note that you might not have to clean the data yourself as we
-can provide you with datasets for running the models that have already
-been cleaned.</strong></p>
-<p>In ScHARR, all data is stored and processed according to the <a href="https://www.sheffield.ac.uk/scharr/research/igov/policy00" class="external-link">ScHARR
-Information Governance Policy</a>. The HSE and SHeS data is stored in
-the university networked X-drive folder <code>PR_Consumption_TA</code>,
-which is accessible only to team members who are using data according to
-the purposes stated to the UK Data Service. No individual-level data is
-included within this package.</p>
-</div>
-<div class="section level2">
-<h2 id="basic-functionality">Basic functionality<a class="anchor" aria-label="anchor" href="#basic-functionality"></a>
-</h2>
-<div class="section level3">
-<h3 id="reading-the-hse-data-files">Reading the HSE data files<a class="anchor" aria-label="anchor" href="#reading-the-hse-data-files"></a>
-</h3>
 <p>There are separate functions in <code>hseclean</code> to read each
 year of HSE data. You must specify the link to where the data is stored.
 The functions read in all variables related to tobacco and alcohol and
@@ -207,9 +132,9 @@ selected socio-economic and other descriptor variables.</p>
 <p><code>hseclean</code> contains separate functions for reading the
 survey data for each year, e.g. <code><a href="../reference/read_SHeS_2008.html">read_SHeS_2008()</a></code>.</p>
 </div>
-<div class="section level3">
-<h3 id="processing-socioeconomic-demographic-and-health-variables">Processing socioeconomic, demographic and health variables<a class="anchor" aria-label="anchor" href="#processing-socioeconomic-demographic-and-health-variables"></a>
-</h3>
+<div class="section level2">
+<h2 id="processing-socioeconomic-demographic-and-health-variables">Processing socioeconomic, demographic and health variables<a class="anchor" aria-label="anchor" href="#processing-socioeconomic-demographic-and-health-variables"></a>
+</h2>
 <p>There are separate functions that focus on processing a different
 theme of socioeconomic, demographic and health variables. See
 <code>vignette("covariate_data")</code>. Note that the order in which
@@ -227,9 +152,9 @@ variables that are cleaned by others.</p>
 <span>  <span class="va">clean_income</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="va">clean_health_and_bio</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="alcohol-data">Alcohol data<a class="anchor" aria-label="anchor" href="#alcohol-data"></a>
-</h3>
+<div class="section level2">
+<h2 id="alcohol-data">Alcohol data<a class="anchor" aria-label="anchor" href="#alcohol-data"></a>
+</h2>
 <p>Detailed description of how to clean the alcohol data are given in
 <code>vignette("alcohol_data")</code>. As an example, here is the
 workflow to plot the frquency of drinking among people who drank in
@@ -255,9 +180,9 @@ workflow to plot the frquency of drinking among people who drank in
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"average number of days drink in a week"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="clean-all-years-of-smoking-and-alcohol-data">Clean all years of smoking and alcohol data<a class="anchor" aria-label="anchor" href="#clean-all-years-of-smoking-and-alcohol-data"></a>
-</h3>
+<div class="section level2">
+<h2 id="clean-all-years-of-smoking-and-alcohol-data">Clean all years of smoking and alcohol data<a class="anchor" aria-label="anchor" href="#clean-all-years-of-smoking-and-alcohol-data"></a>
+</h2>
 <p>See <code>vignette("smoking_data")</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
@@ -344,9 +269,9 @@ workflow to plot the frquency of drinking among people who drank in
 <span><span class="co"># clean the survey weights</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/clean_surveyweights.html">clean_surveyweights</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="summarise-data">Summarise data<a class="anchor" aria-label="anchor" href="#summarise-data"></a>
-</h3>
+<div class="section level2">
+<h2 id="summarise-data">Summarise data<a class="anchor" aria-label="anchor" href="#summarise-data"></a>
+</h2>
 <p>The function <code><a href="https://rdrr.io/pkg/survey/man/svyby.html" class="external-link">survey::svyby()</a></code> in the <code>survey</code>
 R package is used by the function <code><a href="../reference/prop_summary.html">prop_summary()</a></code> in
 <code>hseclean</code> to estimate the uncertainty around proportions
@@ -362,9 +287,9 @@ the HSE data, stratified by a specified set of variables.</p>
 <span>  strat_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"sex"</span>, <span class="st">"imd_quintile"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="missing-data-imputation">Missing data imputation<a class="anchor" aria-label="anchor" href="#missing-data-imputation"></a>
-</h3>
+<div class="section level2">
+<h2 id="missing-data-imputation">Missing data imputation<a class="anchor" aria-label="anchor" href="#missing-data-imputation"></a>
+</h2>
 <p><code>hseclean</code> uses the function <code><a href="https://amices.org/mice/reference/mice.html" class="external-link">mice::mice()</a></code> in
 the <code>mice</code> R package, implemented in a basic way by the
 <code><a href="../reference/impute_data_mice.html">impute_data_mice()</a></code> function. See
@@ -382,7 +307,6 @@ the <code>mice</code> R package, implemented in a basic way by the
 <span></span>
 <span><span class="co"># imp$data is a single data.table containing all 5 imputed versions of the data</span></span>
 <span><span class="va">hse_data_imputed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">imp</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
-</div>
 </div>
   </div>
 

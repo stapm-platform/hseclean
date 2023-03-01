@@ -18,7 +18,7 @@
 #' \item Categorise beverage preferences - for each of the four beverages, "does_not_drink", "drinks_some" (less than or equal to 50\% of consumption), "mostly_drinks".
 #' }
 #' In 2007 new questions were added asking which glass size was used when wine was consumed.
-#' Therefore the post HSE 2007 unit calculations are not directly comparable to previous years’ data.
+#' Therefore the post HSE 2007 unit calculations are not directly comparable to previous years' data.
 #'
 #' @param data Data table - the health survey dataset
 #' @param abv_data Data table - our assumptions on the alcohol content of different beverages in (percent units / ml)

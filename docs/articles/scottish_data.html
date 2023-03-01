@@ -64,7 +64,7 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Scottish alcohol data</li>
     <li>
-      <a href="https://stapm.github.io/hseclean/shes_alc_data_report.html"></a>
+      <a href="../articles/shes_alc_data_report.html"></a>
     </li>
   </ul>
 </li>
@@ -124,208 +124,6 @@ Gillespie, Colin Angus, Laura Webster &amp; Alan Brennan</h4>
 
     
     
-<div class="section level2">
-<h2 class="unnumbered" id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
-</h2>
-<p>This is an early-stage set of working notes that help keep track of
-how we process the Scottish Health Survey data to produce tobacco and
-alcohol consumption variables that are consistent with our processing of
-the Health Survey for England data.</p>
-</div>
-<div class="section level2">
-<h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
-</h2>
-<p>The Scottish Health Survey (SHeS) is a series of annual surveys
-covering health and health-related behaviours. Prior to 2008, the survey
-had been carried out on three separate occasions (1995, 1998, 2003). We
-use data from years 2008-2018 to inform the trends in smoking
-prevalence, the socio-demographic variation in smoking prevalence, and
-as inputs to a procedure that we use to infer the age-specific
-probabilities of smoking initiation and quitting (see our
-<code>smoke.trans</code> R package). Our upper age limit is 89 years,
-but otherwise we make use of all ages and all booster samples are
-automatically incorporated in the data we use.</p>
-<p>The aim is to combine the Health Survey for England and the Scottish
-Health Survey into one dataset. The majority of variables are the same,
-however some are missing and some are coded differently.</p>
-<p>To support the processing of the HSE data, there is the
-<code>hseclean</code> R package, which contains a collection of
-functions to read, process and summarise the HSE data. To support the
-processing of the SHeS data, we have included additional code in the
-<code>hseclean</code> functions to clean the SHeS data. The purpose of
-this vignette is to explain how we use the SHeS data to inform the
-patterns of cigarette consumption, and to explain how the
-<code>hseclean</code> package supports this.</p>
-<p>Things still to think about:<br>
-- survey design variables<br>
-- number of children<br>
-- economic/activity status variables - work out what to do with
-<code>doing something else</code>.<br>
-- Quality of life<br>
-- Relationship status: living as married?<br>
-- what to do with missing nssec8 for children?</p>
-</div>
-<div class="section level2">
-<h2 id="read-data">Read data<a class="anchor" aria-label="anchor" href="#read-data"></a>
-</h2>
-<p><code>hseclean</code> contains separate functions for reading the
-survey data for each year,
-e.g. <code><a href="../reference/read_SHeS_2008.html">hseclean::read_SHeS_2008()</a></code>.</p>
-</div>
-<div class="section level2">
-<h2 id="survey-design-variables">Survey design variables<a class="anchor" aria-label="anchor" href="#survey-design-variables"></a>
-</h2>
-<p>The first thing to consider is the influence of survey sampling
-design, which is variable among years. The variables that describe the
-sampling structure are <code>strata</code> and <code>PSU</code>
-(probabilistic sampling unit).</p>
-<p>There are also survey weights, which are calculated after the survey
-data has been collected, that when applied are supposed to make the
-survey sample representative of the general population e.g. if a
-particular subgroup has been under-sampled, then it receives a higher
-survey weight. The definition and structure of the survey weights is
-described in the dataset documentation and a description of the survey
-weights has been added to the help files of those functions. There are
-different weights for children and adults. The children weights adjusts
-for the selection of just two children per household and adjusts for
-differences between responding and non-responding households.</p>
-<p>Any processing or combining of survey weights is done in the
-functions that read each year of data. The function
-<code><a href="../reference/clean_surveyweights.html">clean_surveyweights()</a></code> assigns any missing weights the
-average weight for each year, and standardises the weights to sum to 1
-within each year. The resulting survey weight variable for each year is
-<code>wt_int</code>.</p>
-</div>
-<div class="section level2">
-<h2 id="demographic-and-socio-economic-variables">Demographic and socio-economic variables<a class="anchor" aria-label="anchor" href="#demographic-and-socio-economic-variables"></a>
-</h2>
-<p>The function <code><a href="../reference/clean_demographic.html">clean_demographic()</a></code> creates variables for
-ethnicity, sex and quintiles of the Index of Multiple Deprivation
-(IMDq).</p>
-<div class="section level3">
-<h3 id="sex">Sex<a class="anchor" aria-label="anchor" href="#sex"></a>
-</h3>
-<p>1 = Male, 2 = Female.</p>
-</div>
-<div class="section level3">
-<h3 id="imd-quintiles">IMD quintiles<a class="anchor" aria-label="anchor" href="#imd-quintiles"></a>
-</h3>
-<p>SHeS uses the Scottish Index of Multiple Deprivation. We keep this as
-a separate variable to the English IMD variable as each country
-calculated its own slightly different version of IMD. However, there has
-been a study harmonising IMD measures across the four UK nations <span class="citation">(<a href="#ref-Abel2016" role="doc-biblioref">Abel,
-Barclay, and Payne 2016</a>)</span> that we could look at in the future
-if we want to compare across countries.</p>
-<p>5_most_deprived, 4, 3, 2, 1_least_deprived.</p>
-</div>
-<div class="section level3">
-<h3 id="ethnicity">Ethnicity<a class="anchor" aria-label="anchor" href="#ethnicity"></a>
-</h3>
-<div class="section level4">
-<h4 id="hse">HSE<a class="anchor" aria-label="anchor" href="#hse"></a>
-</h4>
-<p>Previous SAPM modelling has used a simple white/non-white
-classification. The ONS recommend a harmonised ethnicity measure for use
-in social surveys <a href="https://gss.civilservice.gov.uk/wp-content/uploads/2017/08/Ethnic-Group-June-17.pdf" class="external-link">ONS,
-2017</a>. The use of ethnicity measures is also discussed in <a href="https://journals.sagepub.com/doi/full/10.1177/2059799116642885" class="external-link">Connelly
-et al. 2016</a>, who recommend testing the sensitivity of analyses to
-different specifications.</p>
-<p>In keeping with our analysis of the Health Survey for England, where
-we tried to map the HSE categories to the ONS recommended groups for
-England, however variability in the data over the years meant that the
-same categories were only feasible with years up to 2014, and thereafter
-we have to use a 2-category ethnicity variable.</p>
-<ul>
-<li>White (English, Irish, Scottish, Welsh, other European)<br>
-</li>
-<li>Mixed / multiple ethnic groups<br>
-</li>
-<li>Asian / Asian British (includes African-Indian, Indian, Pakistani,
-Bangladeshi), plus Other ethnic group (includes Chinese, Japanese,
-Philippino, Vietnamese, Arab)<br>
-</li>
-<li>Black / African / Caribbean / Black British (includes Caribbean,
-African)</li>
-</ul>
-</div>
-<div class="section level4">
-<h4 id="shes">SHeS<a class="anchor" aria-label="anchor" href="#shes"></a>
-</h4>
-<p>In 2008, the variable for ethnicity <code>EthnicI</code> categorised
-ethnicity into 13 groups:<br>
-- White: Scottish<br>
-- White: Other British<br>
-- White: Irish<br>
-- White: Any other white background (write in)<br>
-- Mixed: Any mixed background<br>
-- Asian, Asian Scottish or Asian British: Indian<br>
-- Asian, Asian Scottish or Asian British: Bangladeshi<br>
-- Asian, Asian Scottish or Asian British: Chinese<br>
-- Asian, Asian Scottish or Asian British: Any other Asian background
-(write in)<br>
-- Black, Black Scottish or Black British: Caribbean<br>
-- Black, Black Scottish or Black British: African<br>
-- Black, Black Scottish or Black British: Any other black background
-(write in)<br>
-- Any other ethnic group (write in)</p>
-<p>It was renamed in 2009 when the list of categories was expanded. The
-new variable name is <code>ethnic09</code> categorised by 21
-groups:<br>
-- White: Scottish<br>
-- White: English<br>
-- White: Welsh<br>
-- White: Northern Irish<br>
-- White: British<br>
-- White: Irish<br>
-- White: Gypsy/Traveller<br>
-- White: Polish<br>
-- White: Other white ethnic group (write in)<br>
-- Mixed: Any mixed or multiple ethnic groups (write in)<br>
-- Asian: Pakistani, Pakistani Scottish or Pakistani British<br>
-- Asian: Indian, Indian Scottish or Indian British<br>
-- Asian: Bangladeshi, Bangladeshi Scottish or Bangladeshi British<br>
-- Asian: Chinese, Chinese Scottish or Chinese British<br>
-- Asian: Other (write in)<br>
-- Black: African, African Scottish or African British<br>
-- Black: Caribbean, Caribbean Scottish or Caribbean British<br>
-- Black: Black, Black Scottish or Black British<br>
-- Black: Other Black ethnic group (write in)<br>
-- Other ethnic group: Arab<br>
-- Other ethnic group: Other (write in)</p>
-<p>It was renamed again in 2012 when the list of categories was revised.
-The new variable for ethnicity is <code>ethnic12</code>, categorised by
-19 groups:<br>
-- White: Scottish<br>
-- White: Other British<br>
-- White: Irish<br>
-- White: GypsyTraveller<br>
-- White: Polish<br>
-- White: Other (write in)<br>
-- Mixed: Any mixed or multiple ethnic groups (write in)<br>
-- Asian: Pakistani, Pakistani Scottish or Pakistani British<br>
-- Asian: Indian, Indian Scottish or Indian British<br>
-- Asian: Bangladeshi, Bangladeshi Scottish or Bangladeshi British<br>
-- Asian: Chinese, Chinese Scottish or Chinese British<br>
-- Asian: Other (write in)<br>
-- African, African Scottish or African British<br>
-- African: Other (write in)<br>
-- Caribbean or Black: Caribbean, Caribbean Scottish or Caribbean
-British<br>
-- Caribbean or Black: Black, Black Scottish or Black British<br>
-- Caribbean or Black: Other (write in)<br>
-- Other ethnic group: Arab, Arab Scottish or Arab British<br>
-- Other ethnic group: Other (write in)</p>
-<p>The wording changed slightly in 2013, but the coding remained the
-same.</p>
-<p>From 2014, the variable for ethnicity <code>ethnic5</code>,
-categorises ethnicity by 5 groups:<br>
-- White: Scottish<br>
-- White: Other British<br>
-- White: Other<br>
-- Asian<br>
-- Other minority ethnic</p>
-</div>
-</div>
 <div class="section level3">
 <h3 id="economic-status">Economic status<a class="anchor" aria-label="anchor" href="#economic-status"></a>
 </h3>
@@ -483,7 +281,6 @@ coincide approximately with the lowest 2 income quintiles.</p>
 <p>We keep the income variable in 5 quintiles as in the HSE. SHeS
 includes individual equivalised income as well as by quintile, we
 include this as variable <code>eqvinc_15</code>.</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="health-and-biometric-variables">Health and biometric variables<a class="anchor" aria-label="anchor" href="#health-and-biometric-variables"></a>
@@ -699,13 +496,6 @@ underestimates.</p>
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Abel2016" class="csl-entry">
-Abel, Gary A, Matthew E Barclay, and Rupert A Payne. 2016.
-<span>“Adjusted Indices of Multiple Deprivation to Enable Comparisons
-Within and Between Constituent Countries of the UK Including an
-Illustration Using Mortality Rates.”</span> <em>BMJ Open</em> 6 (11):
-e012750.
-</div>
 <div id="ref-Connelly2016a" class="csl-entry">
 Connelly, Roxanne, Vernon Gayle, and Paul S. Lambert. 2016. <span>“A
 Review of Occupation-Based Social Classifications for Social Survey

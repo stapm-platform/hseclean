@@ -1,10 +1,23 @@
 
-
-#' Demographic variables
+#' Clean demographic variables
 #'
-#' Processes demographic variables.
+#' @description
+#' Creates variables for ethnicity, sex and quintiles of the Index of Multiple Deprivation (IMDQ).
 #'
-#' ETHNICITY
+#' @details See below
+#'
+#' @section Sex:
+#' 1 = Male, 2 = Female.
+#'
+#' @section Index of Multiple Deprivation quintiles:
+#' 5_most_deprived, 4, 3, 2, 1_least_deprived.  The Scottish Health Survey uses the Scottish Index of Multiple Deprivation.
+#' This is kept as a separate variable to the English IMD variable as each country calculated its
+#' own slightly different version of IMD.
+#' However, there has been a study harmonising IMD measures across the four UK nations \insertCite{Abel2016;textual}{hseclean}
+#' that could be looked at in the future if we want to compare across countries.
+#'
+#'
+#' @section Ethnicity:
 #' In an attempt to harmonise different years of data to the recommended definitions, we have pooled the Asian and other categories.
 #' \itemize{
 #' \item White (English, Irish, Scottish, Welsh, other European)
@@ -36,6 +49,9 @@
 #' \item imd_quintile
 #' }
 #' @export
+#'
+#' @references
+#' \insertRef{Abel2016}{hseclean}
 #'
 #' @examples
 #'
