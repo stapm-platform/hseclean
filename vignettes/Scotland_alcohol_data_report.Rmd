@@ -243,7 +243,7 @@ include_graphics("Scotland_alcohol_data/25_plots/08_drink_prefs_agetrend.png")
 ## Reproducibility notes
 
 - Data processed using [hseclean](https://stapm.github.io/hseclean/) version `r packageDescription("hseclean", fields = "Version")` (open access)
-- Github code repository https://github.com/STAPM/hseclean
+- Github code repository https://github.com/STAPM/hseclean. Code for these plots https://github.com/STAPM/hseclean/tree/master/vignettes/Scotland_alcohol_data
 - Open Science Framework repository https://osf.io/43n7p/
 
 
