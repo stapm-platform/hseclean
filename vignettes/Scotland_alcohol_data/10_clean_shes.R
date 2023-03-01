@@ -144,7 +144,7 @@ nrow(shes_data)
 ver <- packageVersion("hseclean")
 
 # Create library directory if needed
-dir <- "data-checks/Scotland_alcohol_data/20_outputs"
+dir <- "vignettes/Scotland_alcohol_data/20_outputs"
 if(!dir.exists(dir)) {dir.create(dir)}
 
 write.table(shes_data, paste0(dir, "/alc_consumption_scot_national_2008-2019_v1_", Sys.Date(), "_hseclean_", ver, ".csv"), row.names = F, sep = ",")

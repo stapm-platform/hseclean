@@ -10,7 +10,7 @@ library(data.table)
 library(hseclean)
 library(TTR)
 
-plot_dir <- "data-checks/Scotland_alcohol_data/25_plots"
+plot_dir <- "vignettes/Scotland_alcohol_data/25_plots"
 if(!dir.exists(plot_dir)) {dir.create(plot_dir)}
 
 end_year <- 2019
