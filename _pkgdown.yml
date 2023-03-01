@@ -34,7 +34,7 @@ navbar:
      text: "Data checks"
      menu:
       - text: Scottish alcohol data
-      - href: https://stapm.github.io/hseclean/shes_alc_data_report.html
+      - href: articles/shes_alc_data_report.html
     reference:
      text: Functions
      href: reference/index.html

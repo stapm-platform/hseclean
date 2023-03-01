@@ -10,6 +10,6 @@ source(paste0(path, "35_av_weekly_consumption_detailed_check.R"))
 
 rmarkdown::render(
   input = paste0(path, "shes_alc_data_report.Rmd"),
-  output_dir = "docs",
+  output_dir = "docs/articles",
   output_file = "shes_alc_data_report",
   quiet = TRUE)
