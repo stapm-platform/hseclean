@@ -8,7 +8,7 @@
 #' Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year,
 #' Proportion=the proportion of this
 #' 'true' value to shift consumption data up to
-#' (default is 80 percent, taken from \insertCite{stockwell2018underestimation}{hseclean} which is based
+#' (default is 80 percent, taken from \insertCite{stockwell2018underestimation;textual}{hseclean} which is based
 #' on World Health Organisation assumptions)
 #' and Population=the population whose consumption is to be
 #' upshifted.

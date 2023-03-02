@@ -26,7 +26,7 @@ calculated from HMRC data on duty receipts disaggregated by UK nation or MESAS m
 Stored as package data in hseclean::per_capita_alc_for_upshift.}
 
 \item{proportion}{Numeric - the proportion of this 'true' value to shift consumption data up to
-(default is 80 percent as per WHO assumptions).}
+(default is 80 percent \insertCite{stockwell2018underestimation}{hseclean}).}
 }
 \value{
 Returns the input data with a column weekmean_adj added containing
@@ -41,7 +41,8 @@ A function of the form f(PCC, Proportion, Population) where PCC=the 'true'
 Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year,
 Proportion=the proportion of this
 'true' value to shift consumption data up to
-(default is 80 percent as per World Health Organisation assumptions)
+(default is 80 percent, taken from \insertCite{stockwell2018underestimation}{hseclean} which is based
+on World Health Organisation assumptions)
 and Population=the population whose consumption is to be
 upshifted.
 
