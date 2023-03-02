@@ -85,3 +85,7 @@ data <- alc_upshift(data, country = "Scotland",
 
 
 }
+\references{
+\insertRef{kehoe2012determining}{hseclean}
+\insertRef{stockwell2018underestimation}{hseclean}
+}

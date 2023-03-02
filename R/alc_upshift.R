@@ -8,7 +8,8 @@
 #' Per Capita Consumption being aimed for in units of per capita litres of pure ethanol per year,
 #' Proportion=the proportion of this
 #' 'true' value to shift consumption data up to
-#' (default is 80 percent as per World Health Organisation assumptions)
+#' (default is 80 percent, taken from \insertCite{stockwell2018underestimation}{hseclean} which is based
+#' on World Health Organisation assumptions)
 #' and Population=the population whose consumption is to be
 #' upshifted.
 #'
@@ -27,13 +28,18 @@
 #' calculated from HMRC data on duty receipts disaggregated by UK nation or MESAS monitoring report on alcohol sales 2022 (Scotland only)
 #' Stored as package data in hseclean::per_capita_alc_for_upshift.
 #' @param proportion Numeric - the proportion of this 'true' value to shift consumption data up to
-#' (default is 80 percent as per WHO assumptions).
+#' (default is 80 percent \insertCite{stockwell2018underestimation}{hseclean}).
 #'
 #' @importFrom data.table :=
 #' @importFrom Rdpack reprompt
 #'
 #' @return Returns the input data with a column weekmean_adj added containing
 #' the upshifted values of weekly mean alcohol consumption.
+#'
+#' @references
+#' \insertRef{kehoe2012determining}{hseclean}
+#' \insertRef{stockwell2018underestimation}{hseclean}
+#'
 #'
 #' @export
 #'
