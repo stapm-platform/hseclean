@@ -2,7 +2,7 @@
 % Please edit documentation in R/alc_upshift.R
 \name{alc_upshift}
 \alias{alc_upshift}
-\title{Upshifting alcohol consumption \lifecycle{experimental}}
+\title{Upshifting alcohol consumption}
 \usage{
 alc_upshift(
   data,

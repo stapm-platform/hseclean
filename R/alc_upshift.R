@@ -1,5 +1,5 @@
 
-#' Upshifting alcohol consumption \lifecycle{experimental}
+#' Upshifting alcohol consumption
 #'
 #' Upshift the average weekly units of alcohol consumed to adjust for
 #' the under-reporting of alcohol consumption in survey data.
