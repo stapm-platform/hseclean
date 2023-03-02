@@ -5,8 +5,9 @@ articles:
   english_hse_data_processing_methods: english_hse_data_processing_methods.html
   hseclean: hseclean.html
   Scotland_alcohol_data_report: Scotland_alcohol_data_report.html
+  Scotland_alcohol_upshifting_report: Scotland_alcohol_upshifting_report.html
   Scotland_tobacco_data_report: Scotland_tobacco_data_report.html
-last_built: 2023-03-02T13:43Z
+last_built: 2023-03-02T14:42Z
 urls:
   reference: https://stapm.github.io/hseclean/reference
   article: https://stapm.github.io/hseclean/articles

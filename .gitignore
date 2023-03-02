@@ -8,3 +8,4 @@ dev/
 **/.DS_Store
 *20_outputs
 *vignettes/*/25_plots
+*vignettes/*/plots

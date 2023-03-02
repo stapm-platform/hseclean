@@ -38,10 +38,12 @@ navbar:
      menu:
       - text: Health Survey for England methods
         href: articles/english_hse_data_processing_methods.html
-      - text: Scottish alcohol data
+      - text: Scotland alcohol data
         href: articles/Scotland_alcohol_data_report.html
-      - text: Scottish tobacco data
+      - text: Scotland tobacco data
         href: articles/Scotland_tobacco_data_report.html
+      - text: Scotland alcohol upshifting
+        href: articles/Scotland_alcohol_upshifting_report.html
     github:
      icon: fab fa-github fa-lg
      href: https://github.com/STAPM/hseclean
