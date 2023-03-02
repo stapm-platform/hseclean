@@ -32,7 +32,6 @@ It is generally accepted that this self-reported data underestimates actual cons
 
 To adjust for the under-reporting of alcohol consumption in survey data, the average weekly consumption of alcohol provided by the SHeS data can be upshifted to a proportion of a reference value for alcohol consumption. For Scotland, between the years 2008 and 2019, the reference data used is the per capita sales of alcohol from the [Monitoring and Evaluating Scotland's Alcohol Strategy (MESAS) monitoring report 2022](https://www.publichealthscotland.scot/publications/mesas-monitoring-report-2022/). The default proportion used is 80\%, as it has been recommended that alcohol consumption data from surveys should be upshifted to 80\% of official population consumption based on sales or taxation data to give better estimates of the burden of alcohol-related disease [@stockwell2018underestimation].
 
-(as per WHO assumptions).   
 
 
 # Data checks conducted
