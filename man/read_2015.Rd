@@ -2,59 +2,90 @@
 % Please edit documentation in R/read_2015.R
 \name{read_2015}
 \alias{read_2015}
-\title{Read HSE 2015}
+\title{Read the Health Survey for England 2015}
 \usage{
 read_2015(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2015/UKDA-8280-tab/tab/hse2015ai.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2015/UKDA-8280-tab/tab/hse2015ai.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2015.
 }
-\details{
-The HSE 2015 sample comprised of two main components: the core general population sample and a boost sample of children aged 2 to 15.
+\section{Survey details}{
 
-Core sample
+The HSE 2015 sample comprised of two main components: the core general
+population sample and a boost sample of children aged 2 to 15. Core sample:
+The core sample was designed to be representative of the population living in private households in England.
+8,832 addresses were randomly selected in 552 postcode sectors,
+issued over twelve months from January to December 2015.
+An additional 540 addresses in 27 postcode sectors were issued in January 2016,
+meaning that in total 9,372 addresses were issued for the core sample.
+Fieldwork was completed in April 2016. Where an address was found to have multiple dwelling units,
+one dwelling unit was selected at random. Where there were multiple households at a dwelling unit,
+one household was selected at random.
+Adults and children were interviewed at households identified at the selected addresses.
+Up to four children in each household were selected to take part at random;
+up to two aged 2 to 12 and up to two aged 13 to 15.
+A nurse visit was arranged for all participants who consented;
+this included measurements and the collection of blood and saliva samples, as well as other questions.
+Height was measured for those aged two and over, and weight for all participants.
+Nurses measured blood pressure (aged 5 and over) and waist and hip circumference (aged 11 and over).
+Non-fasting blood samples (for the analysis of total and HDL cholesterol and glycated haemoglobin)
+and urine samples were collected from adults aged 16 and over. Saliva samples for cotinine analysis were
+collected from all participants aged 4 and over. Nurses obtained written consent before taking samples from adults,
+and parents gave written consent for their children’s samples.
+Consent was also obtained from adults to send results to their GPs,
+and from parents to send their children’s results to their GPs.
+A total of 8,034 adults aged 16 and over and 2,123 children aged 0-15 were interviewed,
+including 5,378 adults and 1,297 children who had a nurse visit.
+}
 
-The core sample was designed to be representative of the population living in private households in England. 8,832 addresses were randomly selected in 552 postcode sectors, issued over twelve months from January to December 2015. An additional 540 addresses in 27 postcode sectors were issued in January 2016, meaning that in total 9,372 addresses were issued for the core sample. Fieldwork was completed in April 2016. Where an address was found to have multiple dwelling units, one dwelling unit was selected at random. Where there were multiple households at a dwelling unit, one household was selected at random.
+\section{Boost sample}{
 
-Adults and children were interviewed at households identified at the selected addresses. Up to four children in each household were selected to take part at random; up to two aged 2 to 12 and up to two aged 13 to 15.
+In 2015, the child boost sample comprised of 17,252 addresses which were drawn from the same PSUs
+as the core fieldwork.
+Households were screened for the presence of children aged 2 to 15.
+Only children were interviewed in these households,
+and like the core sample, up to four children in selected households could be interviewed:
+up to two children aged 2 to 12, and up to two aged 13 to 15.
+Children in the boost sample were not eligible for a nurse visit.
+3,631 households were identified as containing at least one eligible child and a total of 3,591
+children were interviewed in the child boost sample.
+}
 
-A nurse visit was arranged for all participants who consented; this included measurements and the collection of blood and saliva samples, as well as other questions. Height was measured for those aged two and over, and weight for all participants. Nurses measured blood pressure (aged 5 and over) and waist and hip circumference (aged 11 and over). Non-fasting blood samples (for the analysis of total and HDL cholesterol and glycated haemoglobin) and urine samples were collected from adults aged 16 and over. Saliva samples for cotinine analysis were collected from all participants aged 4 and over. Nurses obtained written consent before taking samples from adults, and parents gave written consent for their children’s samples. Consent was also obtained from adults to send results to their GPs, and from parents to send their children’s results to their GPs.
-
-A total of 8,034 adults aged 16 and over and 2,123 children aged 0-15 were interviewed, including 5,378 adults and 1,297 children who had a nurse visit.
-
-Boost sample
-
-In 2015, the child boost sample comprised of 17,252 addresses which were drawn from the same PSUs as the core fieldwork. Households were screened for the presence of children aged 2 to 15. Only children were interviewed in these households, and like the core sample, up to four children in selected households could be interviewed: up to two children aged 2 to 12, and up to two aged 13 to 15. Children in the boost sample were not eligible for a nurse visit. 3,631 households were identified as containing at least one eligible child and a total of 3,591 children were interviewed in the child boost sample.
-
-WEIGHTING
-
-5.2 Individual weight
+\section{Weighting}{
 
 For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:
 \itemize{
-\item for adults (aged 16 or more), the interview weights are a combination of the householdweight and a component which adjusts the sample to reduce bias from individual non-response within households;
+\item for adults (aged 16 or more), the interview weights are a combination of the household weight and a component which adjusts the sample to reduce bias from individual non-response within households;
 \item for children (aged 0 to 15), the weights are generated from the household weights and the child selection weights – the selection weights correct for only including a maximum of two children in a household. The combined household and child selection weight were adjusted to ensure that the weighted age/sex distribution matched that of all children in co-operating households.
 }
 For analysis of children aged 0-15 in both the Core and the Boost sample, taking into account child selection only and not adjusting for non-response, the (wt_child) variable can be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb) variable can
+}
 
-MISSING VALUES
+\section{Missing values}{
+
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -63,6 +94,17 @@ usually because of internal routing. For example, men in women only questions.
 \item -9 No answer/ Refused
 }
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

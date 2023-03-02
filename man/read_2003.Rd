@@ -2,38 +2,48 @@
 % Please edit documentation in R/read_2003.R
 \name{read_2003}
 \alias{read_2003}
-\title{Read HSE 2003}
+\title{Read the Health Survey for England 2003}
 \usage{
 read_2003(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2003/UKDA-5098-tab/tab/hse03ai.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2003/UKDA-5098-tab/tab/hse03ai.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2003.
 }
-\details{
+\section{Survey details}{
+
+
 All private households in the general population sample are eligible for inclusion in the survey
 (up to a maximum of three households per address).
 Up to two children aged 0-15 are interviewed in each household,
 as well as up to 10 adults aged 16 and over. Information was obtained directly
 from persons aged 13 and over. Information about children under 13 was obtained from a parent with the child present.
+}
 
-WEIGHTING
+\section{Weighting}{
+
 
 In 2003, non-response weighting was introduced to the HSE data. Although the HSE has generally presented a good match to the population, this decision was taken to keep up with the recent changes on many large-scale government sponsored surveys, and with the aim of reducing the possible biases.
 
@@ -50,8 +60,10 @@ Children aged 0-15: To compensate for limiting the number of children interviewe
 The variable child_wt contains the appropriate selection weights for children aged 0-15.
 
 The variables int_wt and nurse_wt for children aged 0-15 includes both the child selection weights and non- response weights.
+}
 
-MISSING VALUES
+\section{Missing values}{
+
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -68,6 +80,17 @@ obtained or not attempted.
 \item -9 No answer/ Refused
 }
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

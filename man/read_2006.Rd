@@ -2,31 +2,38 @@
 % Please edit documentation in R/read_2006.R
 \name{read_2006}
 \alias{read_2006}
-\title{Read HSE 2006}
+\title{Read the Health Survey for England 2006}
 \usage{
 read_2006(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2006/UKDA-5809-tab/tab/hse06ai.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2006/UKDA-5809-tab/tab/hse06ai.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2006.
 }
-\details{
+\section{Survey details}{
+
 The Health Survey for England 2006 was designed to provide data at both national and regional level about the population living in private households in England. The sample for the HSE 2006 comprised of two components: the core (general population) sample and a boost sample of children aged 2-15. The core sample was designed to be representative of the population living in private households in England and should be used for analyses at the national level. The core sample was split in two for some modules of the 2006 survey, further details are shown in Appendix A.
 
 A random sample of 720 PSUs (Primary Sampling Units) was selected for the core sample and 468 PSUs selected for the child boost sample. The PSUs were selected with probability proportional to the total number of addresses within them. Once selected, the PSUs were randomly allocated to the 12 months of the year (60 per month in the core sample, 39 per month in the boost) so that each quarter provided a nationally representative sample.
@@ -40,10 +47,12 @@ At boost addresses interviewers screened for households containing at least one 
 An interview with each eligible person was followed by a nurse visit both using computer assisted interviewing (CAPI). The 2006 survey for adults focused primarily on Cardiovascular Disease (CVD) and its risk factors. All adults were also asked modules of questions on general health, alcohol consumption, smoking, fruit and vegetable consumption and physical activity. Adults aged 65 plus were randomly allocated to one of two questionnaire versions to avoid lengthy interviews. This included either the CVD module and a short physical activity module, or a long physical activity module but not the CVD module (further details are provided in section 5). Adults aged 16-64 completed both the CVD and long physical activity modules.
 
 Children aged 13-15 were interviewed themselves, and parents of children aged 0-12 were asked about their children, with the child interview including questions on physical activity and fruit and vegetable consumption.
+}
 
-WEIGHTING
+\section{Weighting}{
 
-5.2 Individual weight
+
+Individual weight
 
 For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:
 \itemize{
@@ -53,8 +62,10 @@ For analyses at the individual level, the weighting variable to use is (wt_int).
 \item for children (aged 0 to 15), the weights are generated from the household weights and the child selection weights – the selection weights correct for only including a maximum of two children in a household. The combined household and child selection weight were adjusted to ensure that the weighted age/sex distribution matched that of all children in co-operating households.
 }
 For analysis of children aged 0-15 in the Core sample, taking into account child selection only and not adjusting for non-response, the (child_wt) variable can be used.
+}
 
-MISSING VALUES
+\section{Missing values}{
+
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -66,6 +77,17 @@ home who could not participate in the nurse schedule.
 \item -9 No answer/ Refused
 }
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

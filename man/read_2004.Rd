@@ -2,14 +2,15 @@
 % Please edit documentation in R/read_2004.R
 \name{read_2004}
 \alias{read_2004}
-\title{Read HSE 2004}
+\title{Read the Health Survey for England 2004}
 \usage{
 read_2004(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file_generalpop =
     "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
   file_ethnicboost =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
@@ -18,19 +19,21 @@ read_2004(
 \item{file_generalpop}{Character - the file path and name of the general population data file.}
 
 \item{file_ethnicboost}{Character - the file path and name of the ethnic boost data file.}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2004.
 }
-\details{
+\section{Survey details}{
+
+
 The Health Survey for England 2004 was designed to provide data at both national and regional level
 about the population living in private households in England. **The sample design of the 2004 survey
 had two parts: a general population sample that followed the same pattern as in previous years and a
@@ -69,8 +72,10 @@ Informants in the general population sample, unless they were members of the spe
 ethnic groups, were given a shortened version of the questionnaire covering core topics only.
 For all informants, information was obtained directly from persons aged 13 and over. Information
 about children under 13 was obtained from a parent with the child present.
+}
 
-**WEIGHTING**
+\section{Weighting}{
+
 
 General Population Data (HSE04gpa.sav)
 
@@ -123,8 +128,10 @@ individuals within household to give the interview weights (wt_int).
 All respondents in the minority ethnic group sample were eligible for a nurse visit and were also
 asked to give a sample of blood (if aged 11 or more). As there was drop-out at both these stages,
 separate weights were generated for the nurse visit sample (wt_nurse) and blood sample (wt_ blood).
+}
 
-MISSING VALUES
+\section{Missing values}{
+
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -141,6 +148,7 @@ obtained or not attempted.
 \item -9 No answer/ Refused
 }
 }
+
 \examples{
 
 \dontrun{

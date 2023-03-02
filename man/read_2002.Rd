@@ -2,32 +2,41 @@
 % Please edit documentation in R/read_2002.R
 \name{read_2002}
 \alias{read_2002}
-\title{Read HSE 2002}
+\title{Read the Health Survey for England 2002}
 \usage{
 read_2002(
   root = c("X:/", "/Volumes/Shared/"),
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2002/UKDA-4912-tab/tab/hse02ai.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2002/UKDA-4912-tab/tab/hse02ai.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
 Returns a data table. Note that:
 \itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
 \item A single sampling cluster is assigned.
-\item The probabilistic sampling unit have the year appended to them.
 }
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2002.
 }
-\details{
+\section{Survey details}{
+
 As well as providing a sample designed to give a cross-section of the population, HSE 2002 also
 focussed on the health of a number of specific groups, including: infants and children (aged 0-15),
 young adults (aged 16-24) and mothers with infants aged under 1. Addresses sampled in each postal
@@ -44,8 +53,10 @@ An interview with each eligible person (Stage 1) was followed by a visit by a nu
 made a number of measurements and in some cases obtained a blood sample and a saliva sample.
 Both interviewers and nurses used computer-assisted interviewing. Blood and saliva samples were
 sent to a laboratory for analysis.
+}
 
-WEIGHTING
+\section{Weighting}{
+
 
 In HSE 2002, the sample was boosted in order to obtain greater numbers of children, young adults
 (aged 16-24) and mothers of infants under 1. While children aged 0-15 and young adults aged 16-24
@@ -73,8 +84,10 @@ sample as a whole was same as the unweighted sample size. The scaled weight vari
 For analysis relating to adults aged 16 and over using the both boost and general population samples,
 the variable tablewt should be used.
 }
+}
 
-MISSING VALUES
+\section{Missing values}{
+
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -91,6 +104,17 @@ obtained or not attempted.
 \item -9 No answer/ Refused
 }
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

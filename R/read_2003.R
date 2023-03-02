@@ -1,7 +1,9 @@
 
-#' Read HSE 2003
+#' Read the Health Survey for England 2003
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2003.
+#'
+#' @section Survey details:
 #'
 #' All private households in the general population sample are eligible for inclusion in the survey
 #' (up to a maximum of three households per address).
@@ -9,7 +11,7 @@
 #' as well as up to 10 adults aged 16 and over. Information was obtained directly
 #' from persons aged 13 and over. Information about children under 13 was obtained from a parent with the child present.
 #'
-#' WEIGHTING
+#' @section Weighting:
 #'
 #' In 2003, non-response weighting was introduced to the HSE data. Although the HSE has generally presented a good match to the population, this decision was taken to keep up with the recent changes on many large-scale government sponsored surveys, and with the aim of reducing the possible biases.
 #'
@@ -27,7 +29,7 @@
 #'
 #' The variables int_wt and nurse_wt for children aged 0-15 includes both the child selection weights and non- response weights.
 #'
-#' MISSING VALUES
+#' @section Missing values:
 #'
 #' \itemize{
 #' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -44,15 +46,14 @@
 #' \item -9 No answer/ Refused
 #' }
 #'
-#' @param root Character - the root directory.
-#' @param file Character - the file path and name.
+#' @template read-data-description
+#'
+#' @template read-data-args
+#'
 #' @importFrom data.table :=
-#' @return Returns a data table. Note that:
-#' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-#' \item All variable names are converted to lower case.
-#' \item The cluster and probabilistic sampling unit have the year appended to them.
-#' }
+#'
+#' @return Returns a data table.
+#'
 #' @export
 #'
 #' @examples
@@ -64,48 +65,52 @@
 #' }
 #'
 read_2003 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2003/UKDA-5098-tab/tab/hse03ai.tab"
+    root = c("X:/", "/Volumes/Shared/")[1],
+    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2003/UKDA-5098-tab/tab/hse03ai.tab",
+    select_cols = c("tobalc", "all")[1]
 ) {
 
   data <- data.table::fread(
-    paste0(root[1], file),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
 
   setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , 970:1037])
-  smk_vars <- colnames(data[ , 912:969])
-  health_vars <- paste0("compm", 1:15)
+  if(select_cols == "tobalc") {
 
-  other_vars <- Hmisc::Cs(
-    mintb, addnum,
-    area, cluster, int_wt, #child_wt,
-    hserial,pserial,
-    age, sex,
-    ethnici,
-    imd2004, econact, nssec3, nssec8,
-    #econact2, #paidwk,
-    activb, #HHInc,
-    children, infants,
-    educend, topqual3,
-    eqv5,
-    #eqvinc,
+    alc_vars <- colnames(data[ , 970:1037])
+    smk_vars <- colnames(data[ , 912:969])
+    health_vars <- paste0("compm", 1:15)
 
-    marstatb, # marital status inc cohabitees
+    other_vars <- Hmisc::Cs(
+      mintb, addnum,
+      area, cluster, int_wt, #child_wt,
+      hserial,pserial,
+      age, sex,
+      ethnici,
+      imd2004, econact, nssec3, nssec8,
+      #econact2, #paidwk,
+      activb, #HHInc,
+      children, infants,
+      educend, topqual3,
+      eqv5,
+      #eqvinc,
 
-    # how much they weigh
-    htval, wtval)
+      marstatb, # marital status inc cohabitees
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+      # how much they weigh
+      htval, wtval)
 
-  names <- tolower(names)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars)
 
-  data <- data[ , names, with = F]
+    names <- tolower(names)
+
+    data <- data[ , names, with = F]
+
+  }
 
   data.table::setnames(data, c("area", "imd2004", "d7unit", "int_wt", "marstatb", "ethnici", "pserial"),
-           c("psu", "qimd", "d7unitwg", "wt_int", "marstat", "ethnicity_raw", "hse_id"))
+                       c("psu", "qimd", "d7unitwg", "wt_int", "marstat", "ethnicity_raw", "hse_id"))
 
   data[ , psu := paste0("2003_", psu)]
   data[ , cluster := paste0("2003_", cluster)]
@@ -116,7 +121,7 @@ read_2003 <- function(
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
-return(data[])
+  return(data[])
 }
 
 

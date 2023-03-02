@@ -1,20 +1,29 @@
 
-
-#' Read HSE 2014
+#' Read the Health Survey for England 2014
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2014.
 #'
-#' The HSE 2014 included a general population sample of adults and children, representative of the whole population at both national and regional level. For the sample, 9,024 addresses were randomly selected in 564 postcode sectors, issued over twelve months from January to December 2014. Where an address was found to have multiple dwelling units, one dwelling unit was selected at random and where there were multiple households at a dwelling unit, one household was selected at random.
+#' @section Survey details:
+#' The HSE 2014 included a general population sample of adults and children,
+#' representative of the whole population at both national and regional level.
+#' For the sample, 9,024 addresses were randomly selected in 564 postcode sectors,
+#' issued over twelve months from January to December 2014. Where an address was found to have multiple dwelling units,
+#' one dwelling unit was selected at random and where there were multiple households at a dwelling unit,
+#' one household was selected at random. In each selected household, all individuals were eligible for inclusion in the survey.
+#' Where there were three or more children aged 0-15 in a household,
+#' two of the children were selected at random. A nurse visit was arranged for all participants who consented.
+#' A total of 8,077 adults aged 16 and over and 2,003 children aged 0-15 were interviewed.
+#' A household response rate of 62% was achieved. Of those where a full interview was achieved,
+#' 5,491 adults and 1,249 children also had a nurse visit.
+#' Height was measured for those aged two and over and weight for all participants.
+#' Nurses measured blood pressure (aged 5 and over) and waist and hip circumference (aged 11 and over).
+#' Non-fasting blood samples (for the analysis of total and HDL cholesterol and glycated haemoglobin)
+#' and urine samples were collected from adults aged 16 and over. Saliva samples for cotinine analysis
+#' were collected from all participants aged 4 and over. Nurses obtained written consent before taking samples from adults,
+#' and parents gave written consent for their children’s samples. Consent was also obtained from adults to send results to their GPs,
+#' and from parents to send their children’s results to their GPs.
 #'
-#' In each selected household, all individuals were eligible for inclusion in the survey. Where there were three or more children aged 0-15 in a household, two of the children were selected at random. A nurse visit was arranged for all participants who consented.
-#'
-#' A total of 8,077 adults aged 16 and over and 2,003 children aged 0-15 were interviewed. A household response rate of 62% was achieved. Of those where a full interview was achieved, 5,491 adults and 1,249 children also had a nurse visit.
-#'
-#' Height was measured for those aged two and over and weight for all participants. Nurses measured blood pressure (aged 5 and over) and waist and hip circumference (aged 11 and over). Non-fasting blood samples (for the analysis of total and HDL cholesterol and glycated haemoglobin) and urine samples were collected from adults aged 16 and over. Saliva samples for cotinine analysis were collected from all participants aged 4 and over. Nurses obtained written consent before taking samples from adults, and parents gave written consent for their children’s samples. Consent was also obtained from adults to send results to their GPs, and from parents to send their children’s results to their GPs.
-#'
-#' WEIGHTING
-#'
-#' 5.2 Individual weight
+#' @section Weighting:
 #'
 #' For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:
 #' \itemize{
@@ -23,7 +32,7 @@
 #' }
 #' For analysis of children aged 0-15 in both the Core and the Boost sample, taking into account child selection only and not adjusting for non-response, the (wt_child) variable can be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb) variable can
 #'
-#' MISSING VALUES
+#' @section Missing values:
 #'
 #' \itemize{
 #' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -32,15 +41,14 @@
 #' \item -9 No answer/ Refused
 #' }
 #'
-#' @param root Character - the root directory.
-#' @param file Character - the file path and name.
+#' @template read-data-description
+#'
+#' @template read-data-args
+#'
 #' @importFrom data.table :=
-#' @return Returns a data table. Note that:
-#' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-#' \item All variable names are converted to lower case.
-#' \item The cluster and probabilistic sampling unit have the year appended to them.
-#' }
+#'
+#' @return Returns a data table.
+#'
 #' @export
 #'
 #' @examples
@@ -53,48 +61,52 @@
 #' }
 #'
 read_2014 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab"
+    root = c("X:/", "/Volumes/Shared/")[1],
+    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2014/UKDA-7919-tab/tab/hse2014ai.tab",
+    select_cols = c("tobalc", "all")[1]
 ) {
 
   ##################################################################################
   # General population
 
   data <- data.table::fread(
-    paste0(root[1], file),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , 672:831])
-  smk_vars <- colnames(data[ , 1714:1957])
-  health_vars <- paste0("complst", 1:15)
+  if(select_cols == "tobalc") {
 
-  other_vars <- Hmisc::Cs(
-    mintb, addnum,
-    psu, cluster, wt_int,
-    hserial,pserial,
-    age90, sex,
-    Origin3,
-    qimd, econact, nssec3, nssec8,
-    #econact2,
-    paidwk,
-    activb, #HHInc,
-    children, infants,
-    educEnd, topqual3,
-    eqv5, #eqvinc,
+    alc_vars <- colnames(data[ , 672:831])
+    smk_vars <- colnames(data[ , 1714:1957])
+    health_vars <- paste0("complst", 1:15)
 
-    marstatd, # marital status inc cohabitees
+    other_vars <- Hmisc::Cs(
+      mintb, addnum,
+      psu, cluster, wt_int,
+      hserial,pserial,
+      age90, sex,
+      Origin3,
+      qimd, econact, nssec3, nssec8,
+      #econact2,
+      paidwk,
+      activb, #HHInc,
+      children, infants,
+      educEnd, topqual3,
+      eqv5, #eqvinc,
 
-    # how much they weigh
-    htval, wtval)
+      marstatd, # marital status inc cohabitees
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+      # how much they weigh
+      htval, wtval)
 
-  names <- tolower(names)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars)
 
-  data <- data[ , names, with = F]
+    names <- tolower(names)
+
+    data <- data[ , names, with = F]
+
+  }
 
   data.table::setnames(data,
                        c("longend2", "marstatd", "age90", "origin3", "pserial", "hrollwk", "hrollwe", paste0("complst", 1:15)),
@@ -109,7 +121,7 @@ read_2014 <- function(
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
-return(data[])
+  return(data[])
 }
 
 

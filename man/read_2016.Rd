@@ -2,57 +2,75 @@
 % Please edit documentation in R/read_2016.R
 \name{read_2016}
 \alias{read_2016}
-\title{Read HSE 2016}
+\title{Read the Health Survey for England 2016}
 \usage{
 read_2016(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2016/UKDA-8334-tab/tab/hse2016_eul.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2016/UKDA-8334-tab/tab/hse2016_eul.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2016.
 }
-\details{
+\section{Survey details}{
+
 The HSE 2016 sample comprised of a core general population sample. There was no boost sample in 2016.
-
-The sample comprised 9,558 addresses selected at random in 531 postcode sectors, issued over twelve months from January to December 2016. Field work was completed in March 2017. Where an address was found to have multiple dwelling units, one dwelling unit was selected at random. Where there were multiple households at a dwelling unit, one household was selected at random.
-
-Adults and children were interviewed at households identified at the selected addresses. Up to four children in each household were selected to take part at random; up to two aged 2 to 12 and up to two aged 13 to 15.
-
-A nurse visit was arranged for all participants who consented; this included measurements and the collection of blood and saliva samples, as well as other questions. Height was measured for those aged two and over, and weight for all participants. Nurses measured blood pressure (aged 5 and over) and waist and hip circumference (aged 11 and over). Non-fasting blood samples and urine samples were collected from adults aged 16 and over. Saliva samples for cotinine analysis were collected from all participants aged 4 to 15. Nurses obtained written consent before taking samples from adults, and parents gave written consent for their children’s samples. Consent was also obtained from adults to send results to their GPs, and from parents to send their children’s results to their GPs.
-
-A total of 8,011 adults aged 16 and over and 2,056 children aged 0-15 were interviewed, including 5,049 adults and 1,117 children who had a nurse visit.
-
-4.1.4 English index of multiple deprivation (IMD)
-
+The sample comprised 9,558 addresses selected at random in 531 postcode sectors,
+issued over twelve months from January to December 2016.
+Field work was completed in March 2017. Where an address was found to have multiple dwelling units,
+one dwelling unit was selected at random. Where there were multiple households at a dwelling unit,
+one household was selected at random.
+Adults and children were interviewed at households identified at the selected addresses.
+Up to four children in each household were selected to take part at random;
+up to two aged 2 to 12 and up to two aged 13 to 15.
+A nurse visit was arranged for all participants who consented;
+this included measurements and the collection of blood and saliva samples,
+as well as other questions. Height was measured for those aged two and over,
+and weight for all participants. Nurses measured blood pressure (aged 5 and over)
+and waist and hip circumference (aged 11 and over). Non-fasting blood samples and urine
+samples were collected from adults aged 16 and over. Saliva samples for cotinine analysis
+were collected from all participants aged 4 to 15.
+Nurses obtained written consent before taking samples from adults,
+and parents gave written consent for their children’s samples.
+Consent was also obtained from adults to send results to their GPs,
+and from parents to send their children’s results to their GPs.
+A total of 8,011 adults aged 16 and over and 2,056 children aged 0-15 were interviewed,
+including 5,049 adults and 1,117 children who had a nurse visit.
 From 2015 HSE data contains the 2015 English index of multiple deprivation, divided into quintiles.
+}
 
-WEIGHTING
-
-5.2 Individual weight
+\section{Weighting}{
 
 For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:
 \itemize{
-\item for adults (aged 16 or more), the interview weights are a combination of the householdweight and a component which adjusts the sample to reduce bias from individual non-response within households;
+\item for adults (aged 16 or more), the interview weights are a combination of the household weight and a component which adjusts the sample to reduce bias from individual non-response within households;
 \item for children (aged 0 to 15), the weights are generated from the household weights and the child selection weights – the selection weights correct for only including a maximum of two children in a household. The combined household and child selection weight were adjusted to ensure that the weighted age/sex distribution matched that of all children in co-operating households.
 }
 For analysis of children aged 0-15 in both the Core and the Boost sample, taking into account child selection only and not adjusting for non-response, the (wt_child) variable can be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb) variable can
+}
 
-MISSING VALUES
+\section{Missing values}{
+
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -61,6 +79,17 @@ usually because of internal routing. For example, men in women only questions.
 \item -9 No answer/ Refused
 }
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

@@ -1,8 +1,9 @@
 
-
-#' Read HSE 2004
+#' Read the Health Survey for England 2004
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2004.
+#'
+#' @section Survey details:
 #'
 #' The Health Survey for England 2004 was designed to provide data at both national and regional level
 #' about the population living in private households in England. **The sample design of the 2004 survey
@@ -43,7 +44,7 @@
 #' For all informants, information was obtained directly from persons aged 13 and over. Information
 #' about children under 13 was obtained from a parent with the child present.
 #'
-#' **WEIGHTING**
+#' @section Weighting:
 #'
 #' General Population Data (HSE04gpa.sav)
 #'
@@ -97,7 +98,7 @@
 #' asked to give a sample of blood (if aged 11 or more). As there was drop-out at both these stages,
 #' separate weights were generated for the nurse visit sample (wt_nurse) and blood sample (wt_ blood).
 #'
-#' MISSING VALUES
+#' @section Missing values:
 #'
 #' \itemize{
 #' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -117,13 +118,15 @@
 #' @param root Character - the root directory.
 #' @param file_generalpop Character - the file path and name of the general population data file.
 #' @param file_ethnicboost Character - the file path and name of the ethnic boost data file.
+#' @param select_cols Character string - select either:
+#' "all" - keep all variables in the survey data;
+#' "tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+#' survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.
+#'
 #' @importFrom data.table :=
-#' @return Returns a data table. Note that:
-#' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-#' \item All variable names are converted to lower case.
-#' \item The cluster and probabilistic sampling unit have the year appended to them.
-#' }
+#'
+#' @return Returns a data table.
+#'
 #' @export
 #'
 #' @examples
@@ -141,51 +144,55 @@
 #' }
 #'
 read_2004 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file_generalpop =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
-  file_ethnicboost =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab"
+    root = c("X:/", "/Volumes/Shared/")[1],
+    file_generalpop =
+      "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04gpa.tab",
+    file_ethnicboost =
+      "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2004/UKDA-5439-tab/tab/hse04etha.tab",
+    select_cols = c("tobalc", "all")[1]
 ) {
 
   ##################################################################################
   # General population
 
   data <- data.table::fread(
-    paste0(root[1], file_generalpop),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file_generalpop),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , 1507:1574])
-  smk_vars <- colnames(data[ , 1436:1506])
-  health_vars <- paste0("compm", 1:15)
+  if(select_cols == "tobalc") {
 
-  other_vars <- Hmisc::Cs(
-    mintb, addnum,
-    area, cluster, wt_int,
-    hserial,pserial,
-    age, sex,
-    ethcind,
-    imd2004, econact, nssec3, nssec8,
-    #econact2, #paidwk,
-    activb, #HHInc,
-    children, infants,
-    educend, topqual3,
-    #eqv5,
-    eqvinc,
+    alc_vars <- colnames(data[ , 1507:1574])
+    smk_vars <- colnames(data[ , 1436:1506])
+    health_vars <- paste0("compm", 1:15)
 
-    marstatb, # marital status inc cohabitees
+    other_vars <- Hmisc::Cs(
+      mintb, addnum,
+      area, cluster, wt_int,
+      hserial,pserial,
+      age, sex,
+      ethcind,
+      imd2004, econact, nssec3, nssec8,
+      #econact2, #paidwk,
+      activb, #HHInc,
+      children, infants,
+      educend, topqual3,
+      #eqv5,
+      eqvinc,
 
-    # how much they weigh
-    htval, wtval)
+      marstatb, # marital status inc cohabitees
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+      # how much they weigh
+      htval, wtval)
 
-  names <- tolower(names)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars)
 
-  data <- data[ , names, with = F]
+    names <- tolower(names)
+
+    data <- data[ , names, with = F]
+
+  }
 
   setnames(data, c("area", "imd2004", "d7unit", "marstatb", "ethcind","pserial"),
            c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw","hse_id"))
@@ -207,13 +214,16 @@ read_2004 <- function(
   # Ethnic boost sample
 
   data_ethnicboost <- data.table::fread(
-    paste0(root[1], file_ethnicboost),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file_ethnicboost),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
 
   data.table::setnames(data_ethnicboost, names(data_ethnicboost), tolower(names(data_ethnicboost)))
 
-  data_ethnicboost <- data_ethnicboost[ , names, with = F]
+  if(select_cols == "tobalc") {
+
+    data_ethnicboost <- data_ethnicboost[ , names, with = F]
+
+  }
 
   data.table::setnames(data_ethnicboost,
                        c("area", "imd2004", "d7unit", "marstatb", "ethcind", "pserial"),
@@ -232,11 +242,11 @@ read_2004 <- function(
   # Make the interview weights for the ethnic boost sample sum to 1
   data_ethnicboost[ , wt_int := wt_int / sum(wt_int, na.rm = T)]
 
-# Due to uncertainty about how to combine the ethnic boost and general population sample
-# and smoking prevlence in the combined sample looking too low for this year
-# use only the general population sample
-#return(rbindlist(list(data, data_ethnicboost), use.names = T)[])
-return(data[])
+  # Due to uncertainty about how to combine the ethnic boost and general population sample
+  # and smoking prevlence in the combined sample looking too low for this year
+  # use only the general population sample
+  #return(rbindlist(list(data, data_ethnicboost), use.names = T)[])
+  return(data[])
 }
 
 

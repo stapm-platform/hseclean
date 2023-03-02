@@ -2,31 +2,38 @@
 % Please edit documentation in R/read_2007.R
 \name{read_2007}
 \alias{read_2007}
-\title{Read HSE 2007}
+\title{Read the Health Survey for England 2007}
 \usage{
 read_2007(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2007/UKDA-6112-tab/tab/hse07ai.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2007/UKDA-6112-tab/tab/hse07ai.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2007.
 }
-\details{
+\section{Survey details}{
+
 The Health Survey for England 2007 was designed to provide data at both national and
 regional level about the population living in private households in England. The sample for
 the HSE 2007 comprised of two components: the core (general population) sample and a
@@ -72,10 +79,12 @@ Children aged 13-15 were interviewed themselves, and parents of children aged 0-
 asked about their children, with the interview including questions on eating habits (fat and
 sugar consumption) and fruit and vegetable consumption. Children in the boost sample only
 were asked about physical activity.
+}
 
-WEIGHTING
+\section{Weighting}{
 
-5.2 Individual weight
+
+Individual weight
 
 For analyses at the individual level, the weighting variable to use is (wt_int). These weights
 are generated separately for adults and children:
@@ -93,9 +102,10 @@ For analysis of children aged 0-15 in both the Core and the Boost sample, taking
 account child selection only and not adjusting for non-response, the (wt_child) variable can
 be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb)
 variable can
+}
 
+\section{Missing values}{
 
-MISSING VALUES
 
 \itemize{
 \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -107,6 +117,17 @@ home who could not participate in the nurse schedule.
 \item -9 No answer/ Refused
 }
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

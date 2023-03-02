@@ -1,9 +1,9 @@
 
-
-#' Read HSE 2006
+#' Read the Health Survey for England 2006
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2006.
 #'
+#' @section Survey details:
 #' The Health Survey for England 2006 was designed to provide data at both national and regional level about the population living in private households in England. The sample for the HSE 2006 comprised of two components: the core (general population) sample and a boost sample of children aged 2-15. The core sample was designed to be representative of the population living in private households in England and should be used for analyses at the national level. The core sample was split in two for some modules of the 2006 survey, further details are shown in Appendix A.
 #'
 #' A random sample of 720 PSUs (Primary Sampling Units) was selected for the core sample and 468 PSUs selected for the child boost sample. The PSUs were selected with probability proportional to the total number of addresses within them. Once selected, the PSUs were randomly allocated to the 12 months of the year (60 per month in the core sample, 39 per month in the boost) so that each quarter provided a nationally representative sample.
@@ -18,9 +18,9 @@
 #'
 #' Children aged 13-15 were interviewed themselves, and parents of children aged 0-12 were asked about their children, with the child interview including questions on physical activity and fruit and vegetable consumption.
 #'
-#' WEIGHTING
+#' @section Weighting:
 #'
-#' 5.2 Individual weight
+#' Individual weight
 #'
 #' For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:
 #' \itemize{
@@ -31,7 +31,7 @@
 #' }
 #' For analysis of children aged 0-15 in the Core sample, taking into account child selection only and not adjusting for non-response, the (child_wt) variable can be used.
 #'
-#' MISSING VALUES
+#' @section Missing values:
 #'
 #' \itemize{
 #' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -43,15 +43,14 @@
 #' \item -9 No answer/ Refused
 #' }
 #'
-#' @param root Character - the root directory.
-#' @param file Character - the file path and name.
+#' @template read-data-description
+#'
+#' @template read-data-args
+#'
 #' @importFrom data.table :=
-#' @return Returns a data table. Note that:
-#' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-#' \item All variable names are converted to lower case.
-#' \item The cluster and probabilistic sampling unit have the year appended to them.
-#' }
+#'
+#' @return Returns a data table.
+#'
 #' @export
 #'
 #' @examples
@@ -63,50 +62,54 @@
 #' }
 #'
 read_2006 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2006/UKDA-5809-tab/tab/hse06ai.tab"
+    root = c("X:/", "/Volumes/Shared/")[1],
+    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2006/UKDA-5809-tab/tab/hse06ai.tab",
+    select_cols = c("tobalc", "all")[1]
 ) {
 
   ##################################################################################
   # General population
 
   data <- data.table::fread(
-    paste0(root[1], file),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7","-8",  "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7","-8",  "-9", "-90", "-90.0", "N/A"))
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , 730:801])
-  smk_vars <- colnames(data[ , 1689:1762])
-  health_vars <- paste0("compm", 1:15)
+  if(select_cols == "tobalc") {
 
-  other_vars <- Hmisc::Cs(
-    mintb, addnum,
-    psu, cluster, wt_int, child_wt,
-    hserial,pserial,
-    age, sex,
-    ethinda,
-    imd2004, econact, nssec3, nssec8,
-    #econact2, #paidwk,
-    activb, #HHInc,
-    children, infants,
-    educend, topqual3,
-    eqv5, #eqvinc,
+    alc_vars <- colnames(data[ , 730:801])
+    smk_vars <- colnames(data[ , 1689:1762])
+    health_vars <- paste0("compm", 1:15)
 
-    marstatc, # marital status inc cohabitees
+    other_vars <- Hmisc::Cs(
+      mintb, addnum,
+      psu, cluster, wt_int, child_wt,
+      hserial,pserial,
+      age, sex,
+      ethinda,
+      imd2004, econact, nssec3, nssec8,
+      #econact2, #paidwk,
+      activb, #HHInc,
+      children, infants,
+      educend, topqual3,
+      eqv5, #eqvinc,
 
-    # how much they weigh
-    htval, wtval)
+      marstatc, # marital status inc cohabitees
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+      # how much they weigh
+      htval, wtval)
 
-  names <- tolower(names)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars)
 
-  data <- data[ , names, with = F]
+    names <- tolower(names)
+
+    data <- data[ , names, with = F]
+
+  }
 
   data.table::setnames(data, c("imd2004", "d7unit", "marstatc", "ethinda", "pserial"),
-           c("qimd", "d7unitwg", "marstat", "ethnicity_raw", "hse_id"))
+                       c("qimd", "d7unitwg", "marstat", "ethnicity_raw", "hse_id"))
 
   data[ , psu := paste0("2006_", psu)]
   data[ , cluster := paste0("2006_", cluster)]
@@ -117,7 +120,7 @@ read_2006 <- function(
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
-return(data[])
+  return(data[])
 }
 
 

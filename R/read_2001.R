@@ -1,19 +1,20 @@
 
-#' Read HSE 2001
+#' Read the Health Survey for England 2001
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2001.
 #'
+#' @section Survey details:
 #' A sample of the population living in private households. All persons living in the house, including those
 #' under 2 years were eligible for inclusion. At addresses where there were more than two children under 16,
 #' two children were selected at random. Information was obtained directly from persons aged 13 and
 #' over. Information about children aged 0-12 was obtained from a parent, with the child present.
 #'
-#' WEIGHTING
+#' @section Weighting:
 #'
 #' There is no weighted variable for household adult data.
 #' For children under 16, the weighted variable Child_Wt should be used.
 #'
-#' MISSING VALUES
+#' @section Missing values:
 #'
 #' \itemize{
 #' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -30,13 +31,14 @@
 #' \item -9 No answer/ Refused
 #' }
 #'
-#' @param root Character - the root directory.
-#' @param file Character - the file path and name.
+#' @template read-data-description
+#'
+#' @template read-data-args
+#'
 #' @importFrom data.table :=
+#'
 #' @return Returns a data table. Note that:
 #' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-#' \item All variable names are converted to lower case.
 #' \item Each data point is assigned a weight of 1 as there is no weight variable supplied.
 #' \item A single sampling cluster is assigned.
 #' \item The probabilistic sampling unit have the year appended to them.
@@ -52,78 +54,81 @@
 #' }
 #'
 read_2001 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2001/UKDA-4628-tab/tab/hse01ai.tab"
+    root = c("X:/", "/Volumes/Shared/")[1],
+    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2001/UKDA-4628-tab/tab/hse01ai.tab",
+    select_cols = c("tobalc", "all")[1]
 ) {
 
   data <- data.table::fread(
-    paste0(root[1], file),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
 
   setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , 1656:1783])
-  smk_vars <- colnames(data[ , 927:984])
-  health_vars <- paste0("compm", 1:15)
+  if(select_cols == "tobalc") {
 
-  other_vars <- Hmisc::Cs(
+    alc_vars <- colnames(data[ , 1656:1783])
+    smk_vars <- colnames(data[ , 927:984])
+    health_vars <- paste0("compm", 1:15)
 
-    mintb, addnum,
+    other_vars <- Hmisc::Cs(
 
-    area, child_wt, #cluster, #, #wt_int,
+      mintb, addnum,
 
-     #HHInc,
+      area, child_wt, #cluster, #, #wt_int,
 
-    # Identifiers
-    hserial,pserial,
+      #HHInc,
 
-    eqv5,
-    #eqvinc,
+      # Identifiers
+      hserial,pserial,
 
-    # Education
-    educend, topqual3,
+      eqv5,
+      #eqvinc,
 
-    # Occupation
-    econact, nssec3, nssec8,
-    #econact2, #paidwk,
-    activb,
+      # Education
+      educend, topqual3,
 
-    # Family
-    marstatb, # marital status inc cohabitees
-    children, # Number of children in HH (2 < age <= 15)
-    infants, # Number of infants in HH (age <= 2)
+      # Occupation
+      econact, nssec3, nssec8,
+      #econact2, #paidwk,
+      activb,
 
-    # demographic
-    age,
-    ethnici, # there are a number of cultural background variables that could be used
-    nimd,
-    sex,
+      # Family
+      marstatb, # marital status inc cohabitees
+      children, # Number of children in HH (2 < age <= 15)
+      infants, # Number of infants in HH (age <= 2)
 
-    # how much they weigh
-    htval, wtval #wtval2,
+      # demographic
+      age,
+      ethnici, # there are a number of cultural background variables that could be used
+      nimd,
+      sex,
 
-  )
+      # how much they weigh
+      htval, wtval #wtval2,
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+    )
 
-  names <- tolower(names)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars)
 
-  data <- data[ , names, with = F]
+    names <- tolower(names)
+
+    data <- data[ , names, with = F]
+
+  }
 
   data.table::setnames(data,
+                       c("area", "nimd", "d7unit", "marstatb", "ethnici",
+                         "nberf", "sberf", "spirf", "sherf", "winef", "popsf",
+                         "nberqhp", "nberqsm", "nberqlg", "nberqbt", "nberqpt",
+                         "sberqhp", "sberqsm", "sberqlg", "sberqbt", "sberqpt",
+                         "sherqgs", "spirqme", "pserial"),
 
-           c("area", "nimd", "d7unit", "marstatb", "ethnici",
-             "nberf", "sberf", "spirf", "sherf", "winef", "popsf",
-             "nberqhp", "nberqsm", "nberqlg", "nberqbt", "nberqpt",
-             "sberqhp", "sberqsm", "sberqlg", "sberqbt", "sberqpt",
-             "sherqgs", "spirqme", "pserial"),
-
-           c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw",
-             "nbeer", "sbeer", "spirits", "sherry", "wine", "pops",
-             "nbeerq1", "nbeerq2", "nbeerq3", "nbeerq4", "nbeerq5",
-             "sbeerq1", "sbeerq2", "sbeerq3", "sbeerq4", "sbeerq5",
-             "sherryq", "spiritsq", "hse_id"))
+                       c("psu", "qimd", "d7unitwg", "marstat", "ethnicity_raw",
+                         "nbeer", "sbeer", "spirits", "sherry", "wine", "pops",
+                         "nbeerq1", "nbeerq2", "nbeerq3", "nbeerq4", "nbeerq5",
+                         "sbeerq1", "sbeerq2", "sbeerq3", "sbeerq4", "sbeerq5",
+                         "sherryq", "spiritsq", "hse_id"))
 
   # Tidy survey weights
   data[ , wt_int := 1]
@@ -140,7 +145,7 @@ read_2001 <- function(
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
-return(data[])
+  return(data[])
 }
 
 

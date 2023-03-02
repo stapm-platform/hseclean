@@ -2,41 +2,59 @@
 % Please edit documentation in R/read_2017.R
 \name{read_2017}
 \alias{read_2017}
-\title{Read HSE 2017}
+\title{Read the Health Survey for England 2017}
 \usage{
 read_2017(
-  root = c("X:/", "/Volumes/Shared/"),
+  root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2017/UKDA-8488-tab/tab/hse17i_eul_v1.tab",
+  select_cols = c("tobalc", "all")[1]
 )
 }
 \arguments{
-\item{root}{Character - the root directory.}
+\item{root}{Character string - the root directory. This is the section of the file path to where the data is stored
+that might vary depending on how the network drive is being accessed. The default is "X:/",
+which corresponds to the University of Sheffield's X drive in the School of Health and Related Research.
+Within the function, the root is pasted onto the front of the rest of the file path specified in the 'file' argument.
+Thus, if root = NULL, then the complete file path is given in the 'file' argument.}
 
-\item{file}{Character - the file path and name.}
+\item{file}{Character string - the file path and the name and extension of the file. The function has been
+designed and tested to work with tab delimited files '.tab'. Files are read by the function [data.table::fread].}
+
+\item{select_cols}{Character string - select either:
+"all" - keep all variables in the survey data;
+"tobalc" - keep a reduced set of variables associated with tobacco and alcohol consumption and a selected set of
+survey design and socio-demographic variables that are needed for the functions within the hseclean package to work.}
 }
 \value{
-Returns a data table. Note that:
-\itemize{
-\item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-\item All variable names are converted to lower case.
-\item The cluster and probabilistic sampling unit have the year appended to them.
-}
+Returns a data table.
 }
 \description{
 Reads and does basic cleaning on the Health Survey for England 2017.
 }
-\details{
+\section{Survey details}{
+
 The HSE 2017 sample comprised of a core general population sample. There was no boost sample in 2017.
-
-The sample comprised 9,612 addresses selected at random in 534 postcode sectors, issued over twelve months from January to December 2017. Field work was completed in March 2018.
-
-Adults and children were interviewed at households identified at the selected addresses. Up to four children in each household were selected to take part at random; up to two aged 2 to 12 and up to two aged 13 to 15.
-
-A total of 7,997 adults aged 16 and over and 1,985 children aged 0-15 were interviewed, including 5,196 adults and 1,195 children who had a nurse visit.#'
-
+The sample comprised 9,612 addresses selected at random in 534 postcode sectors,
+issued over twelve months from January to December 2017. Field work was completed in March 2018.
+Adults and children were interviewed at households identified at the selected addresses.
+Up to four children in each household were selected to take part at random;
+up to two aged 2 to 12 and up to two aged 13 to 15.
+A total of 7,997 adults aged 16 and over and 1,985 children aged 0-15 were interviewed,
+including 5,196 adults and 1,195 children who had a nurse visit.
 From 2015 HSE data contains the 2015 English index of multiple deprivation, divided into quintiles.
 }
+
+\section{How the data is read and processed}{
+
+The data is read by the function [data.table::fread]. The 'root' and 'file' arguments are
+pasted together to form the file path. The following are converted to NA:
+c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A").
+All variable names are converted to lower case.
+The cluster and probabilistic sampling unit have the year appended to them.
+Some renaming of variables is done for consistency with other years.
+}
+
 \examples{
 
 \dontrun{

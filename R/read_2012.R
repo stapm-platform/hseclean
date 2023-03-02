@@ -1,9 +1,9 @@
 
-
-#' Read HSE 2012
+#' Read the Health Survey for England 2012
 #'
 #' Reads and does basic cleaning on the Health Survey for England 2012.
 #'
+#' @section Survey details:
 #' The HSE 2012 included a general population sample of adults and children, representative of
 #' the whole population at both national and regional level. For the sample, 9,024 addresses
 #' were randomly selected in 564 postcode sectors, issued over twelve months from January to
@@ -15,9 +15,7 @@
 #' household response rate of 64% was achieved for the core sample. Among the general
 #' population sample, 5,470 adults and 1,203 children had a nurse visit.
 #'
-#' WEIGHTING
-#'
-#' 5.2 Individual weight
+#' @section Weighting:
 #'
 #' For analyses at the individual level, the weighting variable to use is (wt_int). These weights are generated separately for adults and children:
 #' \itemize{
@@ -26,7 +24,7 @@
 #' }
 #' For analysis of children aged 0-15 in both the Core and the Boost sample, taking into account child selection only and not adjusting for non-response, the (wt_child) variable can be used. For analysis of children aged 2-15 in the only Boost sample the (wt_childb) variable can
 #'
-#' MISSING VALUES
+#' @section Missing values:
 #'
 #' \itemize{
 #' \item -1 Not applicable: Used to signify that a particular variable did not apply to a given respondent
@@ -35,15 +33,14 @@
 #' \item -9 No answer/ Refused
 #' }
 #'
-#' @param root Character - the root directory.
-#' @param file Character - the file path and name.
+#' @template read-data-description
+#'
+#' @template read-data-args
+#'
 #' @importFrom data.table :=
-#' @return Returns a data table. Note that:
-#' \itemize{
-#' \item Missing data ("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A") is replaced with NA.
-#' \item All variable names are converted to lower case.
-#' \item The cluster and probabilistic sampling unit have the year appended to them.
-#' }
+#'
+#' @return Returns a data table.
+#'
 #' @export
 #'
 #' @examples
@@ -56,48 +53,52 @@
 #' }
 #'
 read_2012 <- function(
-  root = c("X:/", "/Volumes/Shared/"),
-  file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab"
+    root = c("X:/", "/Volumes/Shared/")[1],
+    file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2012/UKDA-7480-tab/tab/hse2012ai.tab",
+    select_cols = c("tobalc", "all")[1]
 ) {
 
   ##################################################################################
   # General population
 
   data <- data.table::fread(
-    paste0(root[1], file),
-    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A")
-  )
+    paste0(root, file),
+    na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
 
   data.table::setnames(data, names(data), tolower(names(data)))
 
-  alc_vars <- colnames(data[ , 502:652])
-  smk_vars <- colnames(data[ , 2117:2254])
-  health_vars <- paste0("complst", 1:15)
+  if(select_cols == "tobalc") {
 
-  other_vars <- Hmisc::Cs(
-    mintb, addnum,
-    PSU, Cluster, wt_int, #wt_sc,
-    hserial,pserial,
-    Age, Sex,
-    Origin,
-    qimd, econact, nssec3, nssec8,
-    #econact2,
-    Paidwk,
-    activb, #HHInc,
-    Children, Infants,
-    EducEnd, topqual3,
-    eqv5, #eqvinc,
+    alc_vars <- colnames(data[ , 502:652])
+    smk_vars <- colnames(data[ , 2117:2254])
+    health_vars <- paste0("complst", 1:15)
 
-    marstatc, # marital status inc cohabitees
+    other_vars <- Hmisc::Cs(
+      mintb, addnum,
+      PSU, Cluster, wt_int, #wt_sc,
+      hserial,pserial,
+      Age, Sex,
+      Origin,
+      qimd, econact, nssec3, nssec8,
+      #econact2,
+      Paidwk,
+      activb, #HHInc,
+      Children, Infants,
+      EducEnd, topqual3,
+      eqv5, #eqvinc,
 
-    # how much they weigh
-    htval, wtval)
+      marstatc, # marital status inc cohabitees
 
-  names <- c(other_vars, alc_vars, smk_vars, health_vars)
+      # how much they weigh
+      htval, wtval)
 
-  names <- tolower(names)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars)
 
-  data <- data[ , names, with = F]
+    names <- tolower(names)
+
+    data <- data[ , names, with = F]
+
+  }
 
   data.table::setnames(data,
                        c("marstatc", "origin", "pserial", paste0("complst", 1:15)),
@@ -112,7 +113,7 @@ read_2012 <- function(
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
 
-return(data[])
+  return(data[])
 }
 
 
