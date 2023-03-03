@@ -54,9 +54,8 @@ The code has been made open source for the following two reasons:
 
 ## Stage of testing and development
 
-The code is functional and is being used in project work. It is being
-reviewed and developed all the time. More tests and checks need to be
-added.
+The code is actively being used in project work. It is being reviewed
+and developed all the time; more tests and checks are being added.
 
 The repository is not intended to be maintained by an open source
 community wider than the development team.
@@ -81,11 +80,12 @@ processing using the hseclean package.
 
 ## Code repositories
 
-The code on Github is a mirror of the code in a private Gitlab
-repository where the actual development takes place. The code in the
-Github repository is linked to a repository on the Open Science
+The code on Github (<https://github.com/STAPM/hseclean>) is a mirror of
+the code in a private Gitlab repository where the actual development
+takes place (<https://gitlab.com/stapm/r-packages/hseclean>). The code
+in the Github repository is linked to a repository on the Open Science
 Framework, which provides the doi for the package citation
-<https://osf.io/43n7p/>.
+(<https://osf.io/43n7p/>).
 
 ## Citation
 
@@ -95,7 +95,7 @@ package version \[x.x.x\]. University of Sheffield.
 <https://stapm.github.io/hseclean/>. doi:
 <https://doi.org/10.17605/OSF.IO/43N7P>
 
-## Motivation for developing the package
+## Motivation for developing the R package
 
 The motivation for `hseclean` was to standardised the way that health
 survey data were cleaned and prepared for our analyses and inputs to the
