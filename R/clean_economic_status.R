@@ -94,7 +94,7 @@ clean_economic_status <- function(
     data[paidwk == 1, employ2cat := "employed"]
     data[paidwk == 2, employ2cat := "unemployed"]
 
-    data[ , paidwk := NULL]
+    #data[ , paidwk := NULL]
 
   }
 
@@ -177,7 +177,7 @@ clean_economic_status <- function(
 
 
   # Remove variables not needed
-  data[ , `:=`(econact = NULL, activb = NULL, econac12 = NULL, nssec8 = NULL, nssec3 = NULL)]
+  #data[ , `:=`(econact = NULL, activb = NULL, econac12 = NULL, nssec8 = NULL, nssec3 = NULL)]
 
 
 return(data[])
