@@ -4,7 +4,7 @@ citEntry(
   entry    = "Manual",
   title    = "hseclean: An R Package for Health Survey Data Wrangling",
   author   = "Duncan Gillespie and Laura Webster and Grace Leeming and and Damon Morris and Colin Angus and Alan Brennan",
-  year     = "2022",
+  year     = "2023",
   note   = "R package version x.x.x [replace with version used]",
   url      = "https://stapm.github.io/hseclean/",
   doi = "10.17605/OSF.IO/43N7P",
