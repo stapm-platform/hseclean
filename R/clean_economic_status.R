@@ -55,10 +55,12 @@
 #' }
 #'
 clean_economic_status <- function(
-  data
+    data
 ) {
 
-  message("First apply the function [hseclean::clean_age()] to the data because this function uses the age variable.")
+  if(!("age" %in% colnames(data))) {
+    warning("First apply the function [hseclean::clean_age()] to the data because this function uses the age variable.")
+  }
 
   country <- unique(data[ , country][1])
 
@@ -180,5 +182,5 @@ clean_economic_status <- function(
   #data[ , `:=`(econact = NULL, activb = NULL, econac12 = NULL, nssec8 = NULL, nssec3 = NULL)]
 
 
-return(data[])
+  return(data[])
 }
