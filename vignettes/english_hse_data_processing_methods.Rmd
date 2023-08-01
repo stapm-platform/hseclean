@@ -11,8 +11,8 @@ bibliography:
 always_allow_html: yes
 urlcolor: blue
 vignette: >
-  %\VignetteIndexEntry{Methods: process the Health Survey for England data}
   %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{Methods: process the Health Survey for England data}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
@@ -27,7 +27,7 @@ This vignette sets out a description of how the data related to tobacco and alco
 The Sheffield Alcohol Policy Model (SAPM) has been used to examine the effects of pricing policies, advertising restrictions and advice on why and how to reduce drinking [@Holmes2014;@purshouse2013modelling] (see the range of publications and projects on the [Sheffield Alcohol Research Group website](https://www.sheffield.ac.uk/scharr/research/themes/alpol)). Patterns of alcohol consumption in the SAPM modelling are informed primarily by the Health Survey for England data, with additional information e.g. on the division of alcohol consumption between the on- and off-trade provided by the Living Costs and Food Survey.  
 
 # Approach to coding
-The [hseclean](https://gitlab.com/stapm/r-packages/hseclean) R package was written to help standardise the processing of the Health Survey for England data to produce inputs for the STAPM simulation modelling. This helps data storage and processing to be consistent across the STAPM projects. The data is stored in `X:/ScHARR/PR_Consumption_TA/Data/`. The following code will read, clean, filter and combine the data. 
+The [hseclean](https://gitlab.com/stapm/r-packages/hseclean) R package was written to help standardise the processing of the Health Survey for England data to produce inputs for the STAPM simulation modelling. This helps data storage and processing to be consistent across the STAPM projects. The code reads, cleans, filters and combines data from multiple survey years. 
 
 # Alcohol consumption
 Alcohol consumption data in the Health Survey for England (HSE) is recorded in four main forms:   
