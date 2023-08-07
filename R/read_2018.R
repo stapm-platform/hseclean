@@ -39,6 +39,8 @@ read_2018 <- function(
     alc_vars <- colnames(data[ , c(55:58, 70:73, 805:925, 1097:1141)])
     smk_vars <- colnames(data[ , c(24, 25, 49, 64, 75, 76, 655:804, 1057:1096)])
     health_vars <- paste0("complst", 1:15)
+    eq5d_vars <- Hmisc::Cs(Mobil17, SelfCa17, UsualA17, Pain17, Anxiet17,
+                           Mobil17g3, SelfCa17g3, UsualA17g3, Pain17g3, Anxiet17g3)
 
     other_vars <- Hmisc::Cs(
       qrtint, #addnum,
@@ -58,7 +60,7 @@ read_2018 <- function(
       # how much they weigh
       htval, wtval)
 
-    names <- c(other_vars, alc_vars, smk_vars, health_vars)
+    names <- c(other_vars, alc_vars, smk_vars, health_vars, eq5d_vars)
 
     names <- tolower(names)
 
@@ -69,6 +71,12 @@ read_2018 <- function(
   data.table::setnames(data,
                        c("cluster195", "psu_scr", "qrtint", "marstatd", "origin2", "activb2", "stwork","seriala", paste0("complst", 1:15)),
                        c("cluster", "psu", "quarter", "marstat", "ethnicity_raw", "activb", "paidwk","hse_id", paste0("compm", 1:15)))
+
+  data.table::setnames(data,
+                       c("mobil17", "selfca17", "usuala17", "pain17", "anxiet17",
+                         "mobil17g3", "selfca17g3", "usuala17g3", "pain17g3", "anxiet17g3"),
+                       c("MO_5l", "SC_5l", "UA_5l", "PA_5l", "AD_5l",
+                         "MO_3l", "SC_3l", "UA_3l", "PA_3l", "AD_3l") )
 
   data[ , psu := paste0("2018_", psu)]
   data[ , cluster := paste0("2018_", cluster)]
