@@ -30,7 +30,7 @@ Authors@R:
     )
 Maintainer: Duncan Gillespie <duncan.gillespie@sheffield.ac.uk>
 Description: Functions to read the data, rename, organise and process the variables required, impute missing data, and summarise data.
-License: CC BY 4.0
+License: AGPL (>= 3)
 URL: https://stapm.github.io/hseclean/
 Encoding: UTF-8
 LazyData: true
