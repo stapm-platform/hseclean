@@ -45,6 +45,7 @@ clean_education <- function(
   ############################################################
   # Age finished education
 
+  if("educend" %in% colnames(data)){
   data[educend == 2, eduend4cat := "never_went_to_school"]
   data[educend %in% 3:4, eduend4cat := "15_or_under"]
   data[educend %in% 5:7, eduend4cat := "16-18"]
@@ -55,6 +56,7 @@ clean_education <- function(
   data[is.na(eduend4cat) & age < 18, eduend4cat := "16-18"]
 
   data[ , educend := NULL]
+  }
 
   ############################################################
   # Top qualification - degree or not
@@ -72,10 +74,20 @@ clean_education <- function(
     data[ , hedqul08 := NULL]
   }
 
+  if("educat" %in% colnames(data)){
+    data[educat %in% 1:2, degree := "degree"]
+    data[educat %in% 3:7, degree := "no_degree"]
+
+    data[ , educat := NULL]
+  }
+
   # Fill some missing values
   data[is.na(degree) & age < 18, degree := "no_degree"]
+
+  if("eduend4cat" %in% colnames(data)){
   data[is.na(degree) & eduend4cat %in% c("16-18", "15_or_under", "never_went_to_school"), degree := "no_degree"]
   data[is.na(degree) & eduend4cat == "19_or_over", degree := "degree"]
+  }
 
 
 return(data[])

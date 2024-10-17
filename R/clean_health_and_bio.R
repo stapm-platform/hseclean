@@ -59,6 +59,7 @@ clean_health_and_bio <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
 
   ################################################################
   # Presence / absence of certain categories of health condition
@@ -147,6 +148,10 @@ clean_health_and_bio <- function(
 
   # Replace missing values for weight and height with the subgroup mean value
 
+  if(country == "Wales"){
+
+  } else {
+
   data <- hseclean::impute_mean(data, c("wtval", "htval"), remove_zeros = TRUE,
                       strat_vars = c("year", "sex", "imd_quintile", "age_cat"))
 
@@ -155,6 +160,7 @@ clean_health_and_bio <- function(
   # Calculate BMI
   data[ , bmi := weight / ((.01 * height)^2)]
 
+  }
 
   return(data[])
 }

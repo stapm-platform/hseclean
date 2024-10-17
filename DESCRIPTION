@@ -1,6 +1,6 @@
 Package: hseclean
 Title: Health Survey Data Wrangling
-Version: 1.11.3
+Version: 1.12.0
 Authors@R: 
     c(
     person(given = "Duncan",
@@ -47,7 +47,7 @@ Imports:
     testthat,
     fitdistrplus,
     Rdpack
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests: 
     knitr,
     rmarkdown

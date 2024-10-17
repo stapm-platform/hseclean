@@ -81,7 +81,7 @@ alc_weekmean_adult <- function(
   # Frequency of drinking in days per week
 
   # interview questions
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     #Pos. = 1,341	Variable = NBeer	Variable label = How often drunk normal strength beer in past year (CAPI)
     #Value = 1.0	Label = Almost every day
@@ -108,7 +108,7 @@ alc_weekmean_adult <- function(
   }
 
   # Self completion questions (younger adults)
-  if(year %in% year_set2 | country == "Scotland") {
+  if((year %in% year_set2 & country == "England") | country == "Scotland") {
 
     setnames(data, "scspirit", "scspirits")
 
@@ -159,7 +159,7 @@ alc_weekmean_adult <- function(
   # nbeerm4 - Quantity of normal beer drunk in past year: Bottles (CAPI)
   # nbeerq4 - Amount of normal beer drunk on one day (bottles) (CAPI)
 
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     # if nbeerm1 == 1 then normal beer was mentioned as a beverage that was consumed
 
@@ -207,7 +207,7 @@ alc_weekmean_adult <- function(
 
   # follows same scheme as normal beer
 
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     data[ , vol_sbeer := 0]
     data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
@@ -249,7 +249,7 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% year_set2 & country == "England") {
+  if(year %in% year_set2 & country == "England" | country == "Wales") {
 
     data[ , vol_wine := 0]
     data[bwineq2 == 1 & !is.na(wineq) & wineq > 0, vol_wine := wineq * volume_data[beverage == "winesglassvol", volume]]
@@ -284,7 +284,7 @@ alc_weekmean_adult <- function(
 
   # Fortified wine (Sherry)
 
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     data[ , vol_sherry := 0]
 
@@ -296,7 +296,7 @@ alc_weekmean_adult <- function(
 
   # Spirits
 
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     data[ , vol_spirits := 0]
 
@@ -318,7 +318,7 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% year_set2 | country == "Scotland") {
+  if(year %in% year_set2 | country %in% c("Scotland","Wales")) {
 
     data[ , vol_pops := 0]
     data[popsly11 == 1 & !is.na(popsq111) & popsq111 > 0, vol_pops := popsq111 * volume_data[beverage == "popsscvol", volume]]
@@ -336,7 +336,7 @@ alc_weekmean_adult <- function(
   ##
   # Repeat with self-complete questions
 
-  if(year %in% year_set2 | country == "Scotland") {
+  if((year %in% year_set2 & country == "England") | country == "Scotland") {
 
     # Normal beer
     data[ , vol_scnbeer := 0]
@@ -414,7 +414,7 @@ alc_weekmean_adult <- function(
   #################################################################
   # Combine amount usually drunk with frequencies to get natural volumes per week
 
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     data[ , vol_nbeer := vol_nbeer * nbeer]
     data[ , vol_sbeer := vol_sbeer * sbeer]
@@ -427,7 +427,7 @@ alc_weekmean_adult <- function(
 
   }
 
-  if(year %in% c(year_set2) | country == "Scotland") {
+  if((year %in% c(year_set2) & country == "England") | country == "Scotland") {
 
     data[ , vol_scnbeer := vol_scnbeer * scnbeer]
     data[ , vol_scsbeer := vol_scsbeer * scsbeer]
@@ -457,7 +457,7 @@ alc_weekmean_adult <- function(
   #################################################################
   # Convert natural volumes (ml of beverage) into units
 
-  if(year %in% c(year_set1, year_set2) | country == "Scotland") {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     # divide by 1000 because
     # first divide by 100 to convert % abv into a proportion

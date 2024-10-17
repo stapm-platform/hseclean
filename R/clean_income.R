@@ -38,6 +38,7 @@ clean_income <- function(
   data
 ) {
 
+  country <- unique(data[ , country][1])
 
   if("eqv5" %in% colnames(data)) {
 
@@ -80,6 +81,29 @@ clean_income <- function(
     data[ , eqv5_15 := NULL]
 
   }
+
+  ####################################
+  #### Income data for Wales
+
+  if(country == "Wales"){
+
+  if("incresp" %in% colnames(data)) {
+
+    data[incresp == 5, income5cat := "5_highest_income"]
+    data[incresp == 4, income5cat := "4"]
+    data[incresp == 3, income5cat := "3"]
+    data[incresp == 2, income5cat := "2"]
+    data[incresp == 1, income5cat := "1_lowest_income"]
+
+    data[ , incresp := NULL]
+
+  } else {
+
+    data[, income5cat := NA]
+  }
+
+  }
+
 
 return(data[])
 }

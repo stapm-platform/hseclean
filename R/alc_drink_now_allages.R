@@ -123,7 +123,7 @@ alc_drink_now_allages <- function(
   ###################################################################
   # Children age 8-15 years
 
-  # No alcohol data for children in the Scottish SHeS
+  # No alcohol data for children in the Scottish SHeS or Welsh NSW
 
   if("adrinkof" %in% colnames(data)){
 

@@ -143,6 +143,7 @@ smk_life_history <- function(
   data[is.na(cig_smoker_status) | cig_smoker_status == "never", smk_start_age := NA_real_]
 
 
+
   return(data[])
 }
 

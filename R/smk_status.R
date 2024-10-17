@@ -42,6 +42,18 @@ smk_status <- function(
   ######################################################################
   # Regular cigarette smoking status (age >= 16)
 
+  if (country %in% c("Wales")){
+
+  data[smoke == 5, cig_smoker_status := "never" ]
+
+  data[smoke %in% 3:4, cig_smoker_status := "former" ]
+
+  data[smoke %in% 1:2, cig_smoker_status := "current" ]
+
+  }
+
+  if (country %in% c("England","Scotland")){
+
   ##
   # Never smokers (age >= 16)
 
@@ -103,6 +115,11 @@ smk_status <- function(
 
   }
 
+  # Remove variables no longer needed
+  remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
+  data[ , (remove_vars) := NULL]
+  }
+
   ######################################################################
   # Ever regular cigarette smoker
 
@@ -112,9 +129,6 @@ smk_status <- function(
   data[cig_smoker_status == "never", cig_ever := "never_smoker"]
 
 
-  # Remove variables no longer needed
-  remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
-  data[ , (remove_vars) := NULL]
 
 
   return(data[])

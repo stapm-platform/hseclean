@@ -101,13 +101,31 @@ clean_family <- function(
 
   }
 
+  # Relationship status (Wales)
+
+  if(country == "Wales"){
+
+    data[marstat == 1, relationship_status := "single"]
+
+    # Married, civil partnership or cohabiting
+    data[marstat %in% 2:3, relationship_status := "married"]
+
+    # Separated, divorced or widowed
+    data[marstat %in% 4:6, relationship_status := "sep_div_wid"]
+
+    # If under 18 and missing, assume single
+    data[is.na(relationship_status) & age < 18, relationship_status := "single"]
+    data[ , marstat := NULL]
+
+  }
+
   #####################################################
   # Number of children in household
 
   # This variable now not possible to get from data 2015+ or from SHeS
 
   # for years 2015+, initially set the number of children and infants to NA
-  data[year >= 2015 | country == "Scotland", `:=`(infants = NA, children = NA)]
+  data[year >= 2015 | country %in% c("Wales","Scotland"), `:=`(infants = NA, children = NA)]
 
   # Sum the number of infants and children
   data[ , kids := children + infants]
@@ -126,6 +144,8 @@ clean_family <- function(
   data[ , `:=`(infants = NULL, children = NULL)]
 
   # For years >= 2015, impute the number of kids
+
+  if(country %in% c("England","Scotland")){
   required_vars <- c("age_cat", "sex", "relationship_status", "ethnicity_2cat", "imd_quintile", "eduend4cat", "degree", "nssec3_lab", "employ2cat", "activity_lstweek")
 
   testthat::expect_equal(
@@ -136,8 +156,15 @@ clean_family <- function(
   )
 
   # impute kids
-  data[year >= 2015 | country == "Scotland", kids := predict(hseclean::impute_kids_model, newdata = data)]
+  data[year >= 2015 | country %in% c("Scotland"), kids := predict(hseclean::impute_kids_model, newdata = data)]
+  }
 
+
+  if(country == "Wales"){
+
+    # impute kids
+    data[country == "Wales", kids := NA]
+  }
 
   return(data[])
 }

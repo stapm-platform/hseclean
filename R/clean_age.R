@@ -40,7 +40,7 @@ clean_age <- function(
     data[ , age := as.double(age)]
 
     # Make agebands
-    data[year < 2015 | country == "Scotland", age_cat := c(
+    data[year < 2015 | country %in% c("Wales","Scotland"), age_cat := c(
       "0-1",
       "2-4",
       "5-7",

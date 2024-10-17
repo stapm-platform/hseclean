@@ -57,6 +57,13 @@ alc_sevenday_adult <- function(
     message("missing drinks_now variable - run alc_drink_now_allages() first.")
   }
 
+  country <- unique(data[ , country][1])
+
+  if(country == "Wales"){
+  data[drinks_now != "non_drinker" & !(d7many %in% 1:7), d7day := 2 ]
+  data[drinks_now == "non_drinker", d7day := 2 ]
+  data[d7many %in% 1:7, d7day := 1]
+  }
 
   #################################################################
   # Adults - Number of days drank in last 7
@@ -88,6 +95,11 @@ alc_sevenday_adult <- function(
     data[, nberqbt7 := 0]
   }
 
+  # NSW does not have nberqpt7
+  if(!("nberqpt7" %in% colnames(data))){
+    data[, nberqpt7 := 0]
+  }
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(nberqhp7), `:=`(nberqhp7 = 0)]
@@ -114,6 +126,10 @@ alc_sevenday_adult <- function(
   # SHeS 2010 does not have sberqbt7
   if(!("sberqbt7" %in% colnames(data))){
     data[, sberqbt7 := 0]
+  }
+  # NSW does not have nberqpt7
+  if(!("sberqpt7" %in% colnames(data))){
+    data[, sberqpt7 := 0]
   }
 
   # Set this as zero is someone already reports being a non-drinker
@@ -235,6 +251,13 @@ alc_sevenday_adult <- function(
 
   }
 
+  # In NSW, there is a "standard bottles" measure
+  if(!("popsqstb7" %in% colnames(data))) {
+
+    data[ , popsqstb7 := 0]
+
+  }
+
   # Set this as zero is someone already reports being a non-drinker
   # and for drinkers impute the remaining missing values
   data[drinks_now == "non_drinker" & is.na(popsqsm7), `:=`(popsqsm7 = 0)]
@@ -250,10 +273,13 @@ alc_sevenday_adult <- function(
   # Small cans in SHeS
   data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqsmc7 * alc_volume_data[beverage == "popsscvol", volume]]
 
+  # Standard bottles in NSW
+  data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqstb7 * alc_volume_data[beverage == "popssbvol", volume]]
+
   # Large bottles
   data[d7typ6 == 1, d7vol_pops := d7vol_pops + popsqlg7 * alc_volume_data[beverage == "popslbvol", volume]]
 
-  data[ , `:=`(popsqsm7 = NULL, popsqlg7 = NULL, popsqsmc7 = NULL)]
+  data[ , `:=`(popsqsm7 = NULL, popsqlg7 = NULL, popsqsmc7 = NULL, popsqstb7 = NULL)]
 
 
   #################################################################
