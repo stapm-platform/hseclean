@@ -8,6 +8,7 @@ home:
     href: https://stapm.gitlab.io/Scottish_Health_Survey.html
 url: https://stapm.github.io/hseclean/
 template:
+  bootstrap: 5
   params:
     bootswatch: flatly
     ganalytics: UA-167990045-1
@@ -47,12 +48,15 @@ navbar:
     github:
      icon: fab fa-github fa-lg
      href: https://github.com/STAPM/hseclean
+     aria-label: View on Github
     gitlab:
      icon: fab fa-gitlab fa-lg
      href: https://gitlab.com/stapm/r-packages/hseclean
+     aria-label: View on Gitlab
     software:
      icon: fa-code
      href: https://stapm.gitlab.io/software.html
+     aria-label: Back to the STAPM software page
 
 reference:
 - title: Read Health Survey for England
@@ -92,6 +96,13 @@ reference:
   - read_SHeS_2017
   - read_SHeS_2018
   - read_SHeS_2019
+
+- title: Read National Survey for Wales
+  contents:
+  - read_NSW_2016_17
+  - read_NSW_2017_18
+  - read_NSW_2018_19
+  - read_NSW_2019_20
 
 - title: Alcohol data
   contents:

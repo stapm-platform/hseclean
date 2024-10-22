@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Data check: Upshifted alcohol consumption for Scotland • hseclean</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -12,18 +12,12 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Data check: Upshifted alcohol consumption for Scotland">
-<meta property="og:description" content="hseclean">
-<meta property="og:image" content="https://stapm.github.io/hseclean/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-167990045-1"></script><script>
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Data check: Upshifted alcohol consumption for Scotland">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-167990045-1"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -31,94 +25,56 @@
   gtag('config', 'UA-167990045-1');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.11.3</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/hseclean.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Functions</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Methods and data checks
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a>
-    </li>
-    <li>
-      <a href="../articles/Scotland_alcohol_data_report.html">Scotland alcohol data</a>
-    </li>
-    <li>
-      <a href="../articles/Scotland_tobacco_data_report.html">Scotland tobacco data</a>
-    </li>
-    <li>
-      <a href="../articles/Scotland_alcohol_upshifting_report.html">Scotland alcohol upshifting</a>
-    </li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">hseclean</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.12.1</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/hseclean.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Functions</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-methods-and-data-checks" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Methods and data checks</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-methods-and-data-checks">
+<li><a class="dropdown-item" href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a></li>
+    <li><a class="dropdown-item" href="../articles/Scotland_alcohol_data_report.html">Scotland alcohol data</a></li>
+    <li><a class="dropdown-item" href="../articles/Scotland_tobacco_data_report.html">Scotland tobacco data</a></li>
+    <li><a class="dropdown-item" href="../articles/Scotland_alcohol_upshifting_report.html">Scotland alcohol upshifting</a></li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/STAPM/hseclean" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://gitlab.com/stapm/r-packages/hseclean" class="external-link">
-    <span class="fab fa-gitlab fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://stapm.gitlab.io/software.html" class="external-link">
-    <span class="fa fa-code"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/STAPM/hseclean" aria-label="View on Github"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://gitlab.com/stapm/r-packages/hseclean" aria-label="View on Gitlab"><span class="fa fab fa-gitlab fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://stapm.gitlab.io/software.html" aria-label="Back to the STAPM software page"><span class="fa fa-code"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Data check: Upshifted alcohol consumption for
-Scotland</h1>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Data check: Upshifted alcohol consumption for Scotland</h1>
             
       
-      
-      <div class="hidden name"><code>Scotland_alcohol_upshifting_report.Rmd</code></div>
 
+      <div class="d-none name"><code>Scotland_alcohol_upshifting_report.Rmd</code></div>
     </div>
 
     
@@ -150,9 +106,9 @@ For more information on alcohol consumption in the Scottish Health
 Survey and the assumptions made by the hseclean method, please see <a href="https://stapm.github.io/hseclean/articles/Scotland_alcohol_data_report.html">Data
 check: Alcohol consumption in the Scottish Health Survey</a>.</p>
 <p>It is generally accepted that this self-reported data underestimates
-actual consumption by as much as 50% <span class="citation">(<a href="#ref-stockwell2004under" role="doc-biblioref">Stockwell et al.
-2004</a>)</span>. This data check does not investigate the magnitude of
-such underestimation or the potential biases introduced.</p>
+actual consumption by as much as 50% <span class="citation">(<a href="#ref-stockwell2004under">Stockwell et al. 2004</a>)</span>. This
+data check does not investigate the magnitude of such underestimation or
+the potential biases introduced.</p>
 <p>To adjust for the under-reporting of alcohol consumption in survey
 data, the average weekly consumption of alcohol provided by the SHeS
 data can be upshifted to a proportion of a reference value for alcohol
@@ -162,7 +118,8 @@ and Evaluating Scotland’s Alcohol Strategy (MESAS) monitoring report
 2022</a>. The default proportion used is 80%, as it has been recommended
 that alcohol consumption data from surveys should be upshifted to 80% of
 official population consumption based on sales or taxation data to give
-better estimates of the burden of alcohol-related disease <span class="citation">(<a href="#ref-stockwell2018underestimation" role="doc-biblioref">Stockwell et al. 2018</a>)</span>.</p>
+better estimates of the burden of alcohol-related disease <span class="citation">(<a href="#ref-stockwell2018underestimation">Stockwell
+et al. 2018</a>)</span>.</p>
 </div>
 <div class="section level2">
 <h2 id="data-checks-conducted">Data checks conducted<a class="anchor" aria-label="anchor" href="#data-checks-conducted"></a>
@@ -188,13 +145,13 @@ upshifting is applied<a class="anchor" aria-label="anchor" href="#distribution-o
 <h3 id="section">2015<a class="anchor" aria-label="anchor" href="#section"></a>
 </h3>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_histograms_2015.png" alt="Figure 1. Distribution of 2015 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_histograms_2015.png" alt="Figure 1. Distribution of 2015 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
 Figure 1. Distribution of 2015 average weekly alcohol consumption
 calculated from hseclean before and after upshifting applied.
 </p>
 </div>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_barplot_2015.png" alt="Figure 2. Standardised istribution of 2015 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_barplot_2015.png" alt="Figure 2. Standardised istribution of 2015 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
 Figure 2. Standardised istribution of 2015 average weekly alcohol
 consumption calculated from hseclean before and after upshifting
 applied.
@@ -205,13 +162,13 @@ applied.
 <h3 id="section-1">2016<a class="anchor" aria-label="anchor" href="#section-1"></a>
 </h3>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_histograms_2016.png" alt="Figure 3. Distribution of 2016 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_histograms_2016.png" alt="Figure 3. Distribution of 2016 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
 Figure 3. Distribution of 2016 average weekly alcohol consumption
 calculated from hseclean before and after upshifting applied.
 </p>
 </div>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_barplot_2016.png" alt="Figure 4. Standardised istribution of 2016 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_barplot_2016.png" alt="Figure 4. Standardised istribution of 2016 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
 Figure 4. Standardised istribution of 2016 average weekly alcohol
 consumption calculated from hseclean before and after upshifting
 applied.
@@ -222,13 +179,13 @@ applied.
 <h3 id="section-2">2017<a class="anchor" aria-label="anchor" href="#section-2"></a>
 </h3>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_histograms_2017.png" alt="Figure 5. Distribution of 2017 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_histograms_2017.png" alt="Figure 5. Distribution of 2017 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
 Figure 5. Distribution of 2017 average weekly alcohol consumption
 calculated from hseclean before and after upshifting applied.
 </p>
 </div>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_barplot_2017.png" alt="Figure 6. Standardised istribution of 2017 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_barplot_2017.png" alt="Figure 6. Standardised istribution of 2017 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
 Figure 6. Standardised istribution of 2017 average weekly alcohol
 consumption calculated from hseclean before and after upshifting
 applied.
@@ -239,13 +196,13 @@ applied.
 <h3 id="section-3">2018<a class="anchor" aria-label="anchor" href="#section-3"></a>
 </h3>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_histograms_2018.png" alt="Figure 7. Distribution of 2018 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_histograms_2018.png" alt="Figure 7. Distribution of 2018 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
 Figure 7. Distribution of 2018 average weekly alcohol consumption
 calculated from hseclean before and after upshifting applied.
 </p>
 </div>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_barplot_2018.png" alt="Figure 8. Standardised istribution of 2018 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_barplot_2018.png" alt="Figure 8. Standardised istribution of 2018 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
 Figure 8. Standardised istribution of 2018 average weekly alcohol
 consumption calculated from hseclean before and after upshifting
 applied.
@@ -256,13 +213,13 @@ applied.
 <h3 id="section-4">2019<a class="anchor" aria-label="anchor" href="#section-4"></a>
 </h3>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_histograms_2019.png" alt="Figure 9. Distribution of 2019 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_histograms_2019.png" alt="Figure 9. Distribution of 2019 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="80%"><p class="caption">
 Figure 9. Distribution of 2019 average weekly alcohol consumption
 calculated from hseclean before and after upshifting applied.
 </p>
 </div>
 <div class="figure">
-<img src="Alcohol_upshifting/plots/drink_amount_barplot_2019.png" alt="Figure 10. Standardised istribution of 2019 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
+<img src="Alcohol_upshifting%2Fplots%2Fdrink_amount_barplot_2019.png" alt="Figure 10. Standardised istribution of 2019 average weekly alcohol consumption calculated from hseclean before and after upshifting applied." width="100%"><p class="caption">
 Figure 10. Standardised istribution of 2019 average weekly alcohol
 consumption calculated from hseclean before and after upshifting
 applied.
@@ -274,7 +231,7 @@ applied.
 <h2 id="reproducibility-notes">Reproducibility notes<a class="anchor" aria-label="anchor" href="#reproducibility-notes"></a>
 </h2>
 <ul>
-<li>Data processed using <a href="https://stapm.github.io/hseclean/">hseclean</a> version 1.11.3
+<li>Data processed using <a href="https://stapm.github.io/hseclean/">hseclean</a> version 1.12.1
 (open access)</li>
 <li>Github code repository <a href="https://github.com/STAPM/hseclean" class="external-link uri">https://github.com/STAPM/hseclean</a>. Code for these plots
 <a href="https://github.com/STAPM/hseclean/tree/master/vignettes/Alcohol_upshifting" class="external-link uri">https://github.com/STAPM/hseclean/tree/master/vignettes/Alcohol_upshifting</a>
@@ -286,7 +243,7 @@ applied.
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-stockwell2004under" class="csl-entry">
 Stockwell, Tim, Susan Donath, Mark Cooper-Stanbury, Tanya Chikritzhs,
 Paul Catalano, and Cid Mateo. 2004. <span>“Under-Reporting of Alcohol
@@ -302,35 +259,26 @@ of Disease.”</span> <em>Addiction</em> 113 (12): 2245–49. <a href="https://d
 </div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, Grace Leeming, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, Grace Leeming, Ryan KL Chen, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
 
 
-  
+
 
   </body>
 </html>

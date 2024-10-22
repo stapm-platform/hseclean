@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Data check: Alcohol consumption in the Scottish Health Survey • hseclean</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -12,18 +12,12 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Data check: Alcohol consumption in the Scottish Health Survey">
-<meta property="og:description" content="hseclean">
-<meta property="og:image" content="https://stapm.github.io/hseclean/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-167990045-1"></script><script>
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Data check: Alcohol consumption in the Scottish Health Survey">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-167990045-1"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -31,94 +25,56 @@
   gtag('config', 'UA-167990045-1');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">hseclean</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.11.3</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/hseclean.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Functions</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Methods and data checks
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a>
-    </li>
-    <li>
-      <a href="../articles/Scotland_alcohol_data_report.html">Scotland alcohol data</a>
-    </li>
-    <li>
-      <a href="../articles/Scotland_tobacco_data_report.html">Scotland tobacco data</a>
-    </li>
-    <li>
-      <a href="../articles/Scotland_alcohol_upshifting_report.html">Scotland alcohol upshifting</a>
-    </li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">hseclean</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.12.1</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/hseclean.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Functions</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-methods-and-data-checks" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Methods and data checks</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-methods-and-data-checks">
+<li><a class="dropdown-item" href="../articles/english_hse_data_processing_methods.html">Health Survey for England methods</a></li>
+    <li><a class="dropdown-item" href="../articles/Scotland_alcohol_data_report.html">Scotland alcohol data</a></li>
+    <li><a class="dropdown-item" href="../articles/Scotland_tobacco_data_report.html">Scotland tobacco data</a></li>
+    <li><a class="dropdown-item" href="../articles/Scotland_alcohol_upshifting_report.html">Scotland alcohol upshifting</a></li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/STAPM/hseclean" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://gitlab.com/stapm/r-packages/hseclean" class="external-link">
-    <span class="fab fa-gitlab fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://stapm.gitlab.io/software.html" class="external-link">
-    <span class="fa fa-code"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/STAPM/hseclean" aria-label="View on Github"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://gitlab.com/stapm/r-packages/hseclean" aria-label="View on Gitlab"><span class="fa fab fa-gitlab fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://stapm.gitlab.io/software.html" aria-label="Back to the STAPM software page"><span class="fa fa-code"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Data check: Alcohol consumption in the Scottish
-Health Survey</h1>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Data check: Alcohol consumption in the Scottish Health Survey</h1>
             
       
-      
-      <div class="hidden name"><code>Scotland_alcohol_data_report.Rmd</code></div>
 
+      <div class="d-none name"><code>Scotland_alcohol_data_report.Rmd</code></div>
     </div>
 
     
@@ -152,9 +108,9 @@ standard unit = 10ml of pure ethanol). The conversion of reported
 volumes to units is based on assumptions about the average alcohol
 content (ABV) of different types of drink.</p>
 <p>It is generally accepted that this self-reported data underestimates
-actual consumption by as much as 50% <span class="citation">(<a href="#ref-stockwell2004under" role="doc-biblioref">Stockwell et al.
-2004</a>)</span>. This data check does not investigate the magnitude of
-such underestimation or the potential biases introduced.</p>
+actual consumption by as much as 50% <span class="citation">(<a href="#ref-stockwell2004under">Stockwell et al. 2004</a>)</span>. This
+data check does not investigate the magnitude of such underestimation or
+the potential biases introduced.</p>
 <p>The Scottish Health Survey estimates alcohol consumption for people
 age 16 and over. Participants who reported that they drank were asked
 how often during the past 12 months they had drink each of six different
@@ -170,12 +126,13 @@ types of alcoholic drink:</p>
 <p>From these questions, the average number of days per week the
 participant had drunk was estimated. A further question then asks how
 much of each drink type they had usually drunk on each occasion.</p>
-<p>The main report for the Scottish Health Survey 2018 volume 1 <span class="citation">(<a href="#ref-mclean2018scottish" role="doc-biblioref">McLean et al. 2018</a>)</span> gives the conversion
-factors used to convert the quantity-frequency survey questions into
-estimated units of average weekly alcohol consumption.</p>
+<p>The main report for the Scottish Health Survey 2018 volume 1 <span class="citation">(<a href="#ref-mclean2018scottish">McLean et al.
+2018</a>)</span> gives the conversion factors used to convert the
+quantity-frequency survey questions into estimated units of average
+weekly alcohol consumption.</p>
 <p><br></p>
 <div class="figure">
-<img src="inst/SHeS_2018_alcohol_conversion_factors.png" alt="Table 1. Excerpt from Section 3.2.3 p 78 of the main report volume 1 of the Scottish Health Survey 2018." width="60%"><p class="caption">
+<img src="inst%2FSHeS_2018_alcohol_conversion_factors.png" alt="Table 1. Excerpt from Section 3.2.3 p 78 of the main report volume 1 of the Scottish Health Survey 2018." width="60%"><p class="caption">
 Table 1. Excerpt from Section 3.2.3 p 78 of the main report volume 1 of
 the Scottish Health Survey 2018.
 </p>
@@ -196,9 +153,9 @@ the providers of the SHeS data to convert the quantity-frequency survey
 questions into estimated units of average weekly alcohol consumption.
 The method in hseclean is based on the method used in the 2014 report by
 the Sheffield Alcohol Research Group on the potential impacts of alcohol
-minimum unit pricing in Scotland <span class="citation">(<a href="#ref-angus2016model" role="doc-biblioref">Angus et al.
-2016</a>)</span>. One of the jobs of this data check is to compare
-between the hseclean and SHeS methods.</p>
+minimum unit pricing in Scotland <span class="citation">(<a href="#ref-angus2016model">Angus et al. 2016</a>)</span>. One of the
+jobs of this data check is to compare between the hseclean and SHeS
+methods.</p>
 <p>In the current version of hseclean, the percentage alcohol by volume
 (ABV) estimates used are:</p>
 <ul>
@@ -285,19 +242,19 @@ units of ethanol. They are based on the pooled SHeS sample from 2008 to
 2018. For the purposes of these histograms, the upper limit for the
 amount consumed is set at 100 units/week.</p>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/01_drink_amount.png" alt="Figure 1. Distribution of average weekly alcohol consumption calculated from hseclean." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F01_drink_amount.png" alt="Figure 1. Distribution of average weekly alcohol consumption calculated from hseclean." width="80%"><p class="caption">
 Figure 1. Distribution of average weekly alcohol consumption calculated
 from hseclean.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/01_drink_amount_imd.png" alt="Figure 2. Index of Multiple Deprivation quintile specific distribution of average weekly alcohol consumption calculated from hseclean." width="100%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F01_drink_amount_imd.png" alt="Figure 2. Index of Multiple Deprivation quintile specific distribution of average weekly alcohol consumption calculated from hseclean." width="100%"><p class="caption">
 Figure 2. Index of Multiple Deprivation quintile specific distribution
 of average weekly alcohol consumption calculated from hseclean.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/01_drink_amount_sex.png" alt="Figure 3. Sex specific distribution of average weekly alcohol consumption calculated from hseclean." width="90%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F01_drink_amount_sex.png" alt="Figure 3. Sex specific distribution of average weekly alcohol consumption calculated from hseclean." width="90%"><p class="caption">
 Figure 3. Sex specific distribution of average weekly alcohol
 consumption calculated from hseclean.
 </p>
@@ -317,7 +274,7 @@ details above. Despite the different assumptions used, the validation
 check should confirm that the two methods produce approximately the same
 estimates of the average weekly amount of alcohol consumed.</p>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/01_drink_amount_shes_vs_hseclean.png" alt="Figure 4. Average weekly alcohol consumption calculated from hseclean vs. that supplied with the SHeS data for the pooled sample of 2008 to 2019." width="60%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F01_drink_amount_shes_vs_hseclean.png" alt="Figure 4. Average weekly alcohol consumption calculated from hseclean vs. that supplied with the SHeS data for the pooled sample of 2008 to 2019." width="60%"><p class="caption">
 Figure 4. Average weekly alcohol consumption calculated from hseclean
 vs. that supplied with the SHeS data for the pooled sample of 2008 to
 2019.
@@ -337,17 +294,17 @@ alcohol even if they drink alcohol only once or twice a year.</p>
 <p>For the general population age 16 to 89 years old, the proportion of
 people who drink alcohol ranges from 0.87 in 2008 to 0.82 in 2019.</p>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/02_drink_prop.png" alt="Figure 5. Proportion of people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F02_drink_prop.png" alt="Figure 5. Proportion of people who drink alcohol." width="57%"><p class="caption">
 Figure 5. Proportion of people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/02_drink_prop_sex.png" alt="Figure 6. Sex specific proportion of people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F02_drink_prop_sex.png" alt="Figure 6. Sex specific proportion of people who drink alcohol." width="72%"><p class="caption">
 Figure 6. Sex specific proportion of people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/02_drink_prop_imd.png" alt="Figure 7. Index of Multiple Deprivation specific proportion of people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F02_drink_prop_imd.png" alt="Figure 7. Index of Multiple Deprivation specific proportion of people who drink alcohol." width="80%"><p class="caption">
 Figure 7. Index of Multiple Deprivation specific proportion of people
 who drink alcohol.
 </p>
@@ -365,18 +322,18 @@ applied to the amount of alcohol consumed.</p>
 standard units of ethanol consumed per week by drinkers ranges from
 12.57 units in 2008 to 10.25 units in 2019.</p>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/03_weekdrnk.png" alt="Figure 8. Average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F03_weekdrnk.png" alt="Figure 8. Average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
 Figure 8. Average amount drunk per week by people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/03_weekdrnk_sex.png" alt="Figure 9. Sex specific average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F03_weekdrnk_sex.png" alt="Figure 9. Sex specific average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
 Figure 9. Sex specific average amount drunk per week by people who drink
 alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/03_weekdrnk_imd.png" alt="Figure 10. Index of Multiple Deprivation specific average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F03_weekdrnk_imd.png" alt="Figure 10. Index of Multiple Deprivation specific average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
 Figure 10. Index of Multiple Deprivation specific average amount drunk
 per week by people who drink alcohol.
 </p>
@@ -393,18 +350,18 @@ per week by people who drink alcohol.
 least once or twice a year peaks at 0.92 at age 19 and falls to 0.61 at
 age 89.</p>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/04_agetrend_prop.png" alt="Figure 11. Age trends in the proportion of people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F04_agetrend_prop.png" alt="Figure 11. Age trends in the proportion of people who drink alcohol." width="57%"><p class="caption">
 Figure 11. Age trends in the proportion of people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/04_agetrend_prop_sex.png" alt="Figure 12. Sex specific age trends in the proportion of people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F04_agetrend_prop_sex.png" alt="Figure 12. Sex specific age trends in the proportion of people who drink alcohol." width="72%"><p class="caption">
 Figure 12. Sex specific age trends in the proportion of people who drink
 alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/04_agetrend_prop_imd.png" alt="Figure 13. Index of Multiple Deprivation specific age trends in the proportion of people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F04_agetrend_prop_imd.png" alt="Figure 13. Index of Multiple Deprivation specific age trends in the proportion of people who drink alcohol." width="80%"><p class="caption">
 Figure 13. Index of Multiple Deprivation specific age trends in the
 proportion of people who drink alcohol.
 </p>
@@ -418,19 +375,19 @@ alcohol<a class="anchor" aria-label="anchor" href="#average-weekly-alcohol-consu
 alcohol consumed by people who drink at least once or twice a year
 peaked at 17.35 units at age 19 and fell to 3.59 units at age 89.</p>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/05_agetrend_mean.png" alt="Figure 14. Age trends in the average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F05_agetrend_mean.png" alt="Figure 14. Age trends in the average amount drunk per week by people who drink alcohol." width="57%"><p class="caption">
 Figure 14. Age trends in the average amount drunk per week by people who
 drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/05_agetrend_mean_sex.png" alt="Figure 15. Sex specific age trends in the average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F05_agetrend_mean_sex.png" alt="Figure 15. Sex specific age trends in the average amount drunk per week by people who drink alcohol." width="72%"><p class="caption">
 Figure 15. Sex specific age trends in the average amount drunk per week
 by people who drink alcohol.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/05_agetrend_mean_imd.png" alt="Figure 16. Index of Multiple Deprivation specific age trends in the average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F05_agetrend_mean_imd.png" alt="Figure 16. Index of Multiple Deprivation specific age trends in the average amount drunk per week by people who drink alcohol." width="80%"><p class="caption">
 Figure 16. Index of Multiple Deprivation specific age trends in the
 average amount drunk per week by people who drink alcohol.
 </p>
@@ -449,18 +406,18 @@ category.</p>
 <h3 id="preferences-for-beer-wine-spirits-and-alcopops">Preferences for beer, wine, spirits and alcopops<a class="anchor" aria-label="anchor" href="#preferences-for-beer-wine-spirits-and-alcopops"></a>
 </h3>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/06_drink_prefs.png" alt="Figure 17. Proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F06_drink_prefs.png" alt="Figure 17. Proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
 Figure 17. Proportions of people who drink each type of alcoholic drink.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/06_drink_prefs_sex.png" alt="Figure 18. Sex specific proportions of people who drink each type of alcoholic drink." width="95%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F06_drink_prefs_sex.png" alt="Figure 18. Sex specific proportions of people who drink each type of alcoholic drink." width="95%"><p class="caption">
 Figure 18. Sex specific proportions of people who drink each type of
 alcoholic drink.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/06_drink_prefs_imd.png" alt="Figure 19. Index of Multiple Deprivation quintile specific proportions of people who drink each type of alcoholic drink." width="100%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F06_drink_prefs_imd.png" alt="Figure 19. Index of Multiple Deprivation quintile specific proportions of people who drink each type of alcoholic drink." width="100%"><p class="caption">
 Figure 19. Index of Multiple Deprivation quintile specific proportions
 of people who drink each type of alcoholic drink.
 </p>
@@ -470,13 +427,13 @@ of people who drink each type of alcoholic drink.
 <h3 id="trends-in-beverage-preferences">Trends in beverage preferences<a class="anchor" aria-label="anchor" href="#trends-in-beverage-preferences"></a>
 </h3>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/07_drink_prefs_trend.png" alt="Figure 20. Calendar year trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F07_drink_prefs_trend.png" alt="Figure 20. Calendar year trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
 Figure 20. Calendar year trends in the proportions of people who drink
 each type of alcoholic drink.
 </p>
 </div>
 <div class="figure">
-<img src="Scotland_alcohol_data/25_plots/08_drink_prefs_agetrend.png" alt="Figure 21. Age trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
+<img src="Scotland_alcohol_data%2F25_plots%2F08_drink_prefs_agetrend.png" alt="Figure 21. Age trends in the proportions of people who drink each type of alcoholic drink." width="80%"><p class="caption">
 Figure 21. Age trends in the proportions of people who drink each type
 of alcoholic drink.
 </p>
@@ -487,7 +444,7 @@ of alcoholic drink.
 <h2 id="reproducibility-notes">Reproducibility notes<a class="anchor" aria-label="anchor" href="#reproducibility-notes"></a>
 </h2>
 <ul>
-<li>Data processed using <a href="https://stapm.github.io/hseclean/">hseclean</a> version 1.11.3
+<li>Data processed using <a href="https://stapm.github.io/hseclean/">hseclean</a> version 1.12.1
 (open access)</li>
 <li>Github code repository <a href="https://github.com/STAPM/hseclean" class="external-link uri">https://github.com/STAPM/hseclean</a>. Code for these plots
 <a href="https://github.com/STAPM/hseclean/tree/master/vignettes/Scotland_alcohol_data" class="external-link uri">https://github.com/STAPM/hseclean/tree/master/vignettes/Scotland_alcohol_data</a>
@@ -499,7 +456,7 @@ of alcoholic drink.
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-angus2016model" class="csl-entry">
 Angus, Colin, John Holmes, Robert Pryce, Petra Meier, and Alan Brennan.
 2016. <span>“Model-Based Appraisal of the Comparative Impact of Minimum
@@ -521,35 +478,26 @@ Graduated–Frequency and Recent Recall.”</span> <em>Addiction</em> 99
 </div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, Grace Leeming, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by <a href="https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie" class="external-link">Duncan Gillespie</a>, Laura Webster, Grace Leeming, Ryan KL Chen, <a href="https://www.sheffield.ac.uk/scharr/people/staff/damon-morris" class="external-link">Damon Morris</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/colin-angus" class="external-link">Colin Angus</a>, <a href="https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan" class="external-link">Alan Brennan</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
-  
 
 
-  
+
 
   </body>
 </html>
