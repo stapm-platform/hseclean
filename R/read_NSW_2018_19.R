@@ -79,7 +79,7 @@ read_NSW_2018_19 <- function(
       dvunitswk0
     )
 
-    smk_vars <- tolower(Hmisc::Cs(smoke))
+    smk_vars <- tolower(Hmisc::Cs(Smoke, SmAge, Dvsmokec, Dvsmokstat))
 
     health_vars <- Hmisc::Cs(dvillchap1, dvillchap2, dvillchap3, dvillchap4, dvillchap5,
                              dvillchap6, dvillchap7, dvillchap8, dvillchap9, dvillchap10,

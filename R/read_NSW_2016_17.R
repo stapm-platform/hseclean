@@ -79,7 +79,57 @@ read_NSW_2016_17 <- function(
       dvunitswk0
     )
 
-    smk_vars <- tolower(Hmisc::Cs(smoke))
+    # smk_vars <- tolower(Hmisc::Cs(Smoke, SmQuitTry, SmQuitWant, SmQuitTm, SmAge, EcigEv, EcigNow, EcigOft, EcigAge,
+    #                               SmEcigFirst, EcigReas1, EcigReas2, EcigReas3, EcigReas4, EcigReas5, EcigReas6, EcigReas7,
+    #                               EcigReas8, EcigReasOth, EcigReasDK, EcigReasRef, EcigReasOT_E, EcigReasOT_W,
+    #                               SmExp1, SmExp2, SmExp3, SmExp4, SmExp5, SmExp6, SmExp7, SmExp8, SmExp9, SmExpDK,
+    #                               SmExpRef, EcigSee1, EcigSee2, EcigSee3, EcigSee4, EcigSee5, EcigSee6, EcigSee7, EcigSee8,
+    #                               EcigSee9, EcigSee10, EcigSee11, EcigSee12, EcigSee13, EcigSeeDK, EcigSeeRef,
+    #                               Dvsmokec, Dvsmokstat, Dvtrygupbi, Dvlikgupbi,
+    #                               Dvstpsmk1m, Dvstpsmk1y, Dvecigevbi, Dvecignbi, Dvdualfirst,
+    #                               Dvexouall, Dvexounsm, Dvexinall, Dvexinnsm, Dvexpoall,
+    #                               Dvexponsm, Dvexecouall, Dvexecounsm, Dvexecinall, Dvexecinnsm,
+    #                               Dvexecall, Dvexecnsm))
+
+    smk_vars <- tolower(Hmisc::Cs(Smoke, SmAge, Dvsmokec, Dvsmokstat))
+    # SmAge only measured in some years
+
+    # key smoking variables are
+#     Smoke	Smoking - Which one of these best describes you	-99	Refused
+#     -98	Interview terminated early
+#     -88	Not selected in sub-sample
+#     -9	Don't Know (SPONTANEOUS ONLY)
+# 		-8	Question not asked due to routing
+# 		1	I smoke daily
+# 		2	I smoke occasionally but not every day
+# 		3	I used to smoke daily but do not smoke at all now
+# 		4	I used to smoke occasionally but do not smoke at all now
+# 		5	I have never smoked
+
+#     SmAge	Smoking - How old were you when you started smoking?	-99	Refused
+#     -98	Interview terminated early
+#     -88	Not selected in sub-sample
+#     -9	Don't Know (SPONTANEOUS ONLY)
+# 		-8	Question not asked due to routing
+
+#     Dvsmokec	Derived variable - Currently smoke either daily or occasionally	-99	Refused
+#     -98	Interview terminated early
+#     -88	Not selected in sub-sample
+#     -9	Don't Know (SPONTANEOUS ONLY)
+# 		-8	Question not asked due to routing
+# 		0	No
+# 		1	Yes
+#
+# Dvsmokstat	Derived variable - Smoking status	-99	Refused
+# 		-98	Interview terminated early
+# 		-88	Not selected in sub-sample
+# 		-9	Don't Know (SPONTANEOUS ONLY)
+#     -8	Question not asked due to routing
+#     1	Smoker
+#     2	Ex-smoker
+#     3	Never smoked
+#
+
 
     health_vars <- Hmisc::Cs(dvillchap1, dvillchap2, dvillchap3, dvillchap4, dvillchap5,
                              dvillchap6, dvillchap7, dvillchap8, dvillchap9, dvillchap10,
