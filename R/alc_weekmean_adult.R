@@ -75,10 +75,50 @@ alc_weekmean_adult <- function(
 
   year_set1 <- 2001:2002
   year_set2 <- 2011:2018
-
+  year_set3 <- 2016:2019 ## for Welsh data
 
   #################################################################
   # Frequency of drinking in days per week
+
+  if(year > 2019 & country == "Wales"){
+
+    data[cvdnoftbr == 1 & dnoftbrfreqwk == 1, nbeer := 1]
+    data[cvdnoftbr == 1 & dnoftbrfreqwk == 2, nbeer := 2]
+    data[cvdnoftbr == 1 & dnoftbrfreqwk == 3, nbeer := 3]
+    data[cvdnoftbr == 1 & dnoftbrfreqwk == 4, nbeer := 4]
+    data[cvdnoftbr == 2 , nbeer := 5]
+    data[cvdnoftbr == 3 , nbeer := 6]
+    data[cvdnoftbr == 4 , nbeer := 7]
+
+    data[ , `:=`(cvdnoftbr = NULL,  dnoftbrfreqwk = NULL)]
+
+    data[cvdnoftwine == 1 & dnoftwinefreqwk == 1, wine := 1]
+    data[cvdnoftwine == 1 & dnoftwinefreqwk == 2, wine := 2]
+    data[cvdnoftwine == 1 & dnoftwinefreqwk == 3, wine := 3]
+    data[cvdnoftwine == 1 & dnoftwinefreqwk == 4, wine := 4]
+    data[cvdnoftwine == 2 , wine := 5]
+    data[cvdnoftwine == 3 , wine := 6]
+    data[cvdnoftwine == 4 , wine := 7]
+
+    data[ , `:=`(cvdnoftwine = NULL,  dnoftwinefreqwk = NULL)]
+
+    data[cvdnoftspir == 1 & dnoftspirfreqwk == 1, spirits := 1]
+    data[cvdnoftspir == 1 & dnoftspirfreqwk == 2, spirits := 2]
+    data[cvdnoftspir == 1 & dnoftspirfreqwk == 3, spirits := 3]
+    data[cvdnoftspir == 1 & dnoftspirfreqwk == 4, spirits := 4]
+    data[cvdnoftspir == 2 , spirits := 5]
+    data[cvdnoftspir == 3 , spirits := 6]
+    data[cvdnoftspir == 4 , spirits := 7]
+
+    data[ , `:=`(cvdnoftspir = NULL,  dnoftspirfreqwk = NULL)]
+
+
+    ## strong beer, sherry, and alcopops not in post 2019-20 NSW data
+    data[, sbeer := NA]
+    data[, sherry := NA]
+    data[, pops := NA]
+
+  }
 
   # interview questions
   if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
@@ -169,8 +209,12 @@ alc_weekmean_adult <- function(
     # if data, then multiply the quantity consumed by the assumed volume in ml associated with serving size mentioned
 
     # half pints
+    ## NSW recorded in pints rather than half-pints after 2019-20
+    if(country == "Wales" & year > 2019){
+    data[nbeerm1 == 1 & !is.na(nbeerq1) & nbeerq1 > 0, vol_nbeer := nbeerq1 * 2 * volume_data[beverage == "nbeerhalfvol", volume]]
+    } else {
     data[nbeerm1 == 1 & !is.na(nbeerq1) & nbeerq1 > 0, vol_nbeer := nbeerq1 * volume_data[beverage == "nbeerhalfvol", volume]]
-
+    }
     # small cans
     data[nbeerm2 == 1 & !is.na(nbeerq2) & nbeerq2 > 0, vol_nbeer := vol_nbeer + nbeerq2 * volume_data[beverage == "nbeerscanvol", volume]]
 
@@ -210,6 +254,9 @@ alc_weekmean_adult <- function(
   if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
 
     data[ , vol_sbeer := 0]
+
+    ## NSW doesn't have strong beer after 2019-20
+    if(!(country == "Wales" & year > 2019)){
     data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
     data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
     data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
@@ -221,6 +268,7 @@ alc_weekmean_adult <- function(
     data[sbeerm4 == 1 & sbeerq4 == -8, vol_sbeer := NA]
 
     data[ , `:=` (sbeerm1 = NULL, sbeerm2 = NULL, sbeerm3 = NULL, sbeerm4 = NULL, sbeerq1 = NULL, sbeerq2 = NULL, sbeerq3 = NULL, sbeerq4 = NULL)]
+    }
 
   }
 
@@ -288,9 +336,12 @@ alc_weekmean_adult <- function(
 
     data[ , vol_sherry := 0]
 
+    ## NSW doesn't have sherry after 2019-20
+    if(!(country == "Wales" & year > 2019)){
     data[!is.na(sherryq) & sherryq > 0, vol_sherry := sherryq * volume_data[beverage == "sherryvol", volume]]
 
     data[ , sherryq := NULL]
+    }
 
   }
 
@@ -321,6 +372,9 @@ alc_weekmean_adult <- function(
   if(year %in% year_set2 | country %in% c("Scotland","Wales")) {
 
     data[ , vol_pops := 0]
+
+    ## NSW doesn't have strong beer after 2019-20
+    if(!(country == "Wales" & year > 2019)){
     data[popsly11 == 1 & !is.na(popsq111) & popsq111 > 0, vol_pops := popsq111 * volume_data[beverage == "popsscvol", volume]]
     data[popsly12 == 1 & !is.na(popsq112) & popsq112 > 0, vol_pops := vol_pops + popsq112 * volume_data[beverage == "popssbvol", volume]]
     data[popsly13 == 1 & !is.na(popsq113) & popsq113 > 0, vol_pops := vol_pops + popsq113 * volume_data[beverage == "popslbvol", volume]]
@@ -330,7 +384,7 @@ alc_weekmean_adult <- function(
     data[popsly13 == 1 & popsq113 == -8, vol_pops := NA]
 
     data[ , `:=` (popsly11 = NULL, popsly12 = NULL, popsly13 = NULL, popsq111 = NULL, popsq112 = NULL, popsq113 = NULL)]
-
+    }
   }
 
   ##

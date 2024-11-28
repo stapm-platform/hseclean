@@ -74,11 +74,19 @@ clean_education <- function(
     data[ , hedqul08 := NULL]
   }
 
+  ### Wales
   if("educat" %in% colnames(data)){
     data[educat %in% 1:2, degree := "degree"]
     data[educat %in% 3:7, degree := "no_degree"]
 
     data[ , educat := NULL]
+  }
+
+  if("educat2" %in% colnames(data)){
+    data[educat2 == 1, degree := "degree"]
+    data[educat2 %in% 2:7, degree := "no_degree"]
+
+    data[ , educat2 := NULL]
   }
 
   # Fill some missing values

@@ -170,6 +170,15 @@ clean_demographic <- function(
     }
 
 
+    if("ethmain" %in% colnames(data)){
+      data[ethmain %in% 1, ethnicity := "white"]
+      data[ethmain %in% 2:5, ethnicity := "non_white"]
+
+      data[, ethnicity_4cat := NA]
+      data[, ethnicity_2cat := ethnicity]
+
+      data[ , `:=`(dvethnicity = NULL,  ethnicity = NULL)]
+    }
 
   }
 

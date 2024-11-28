@@ -1,6 +1,6 @@
-#' Read the National Survey for Wales 2019-20 \lifecycle{maturing}
+#' Read the National Survey for Wales 2022-23 \lifecycle{maturing}
 #'
-#' Reads and does basic cleaning on the National Survey for Wales 2019-20.
+#' Reads and does basic cleaning on the National Survey for Wales 2022-23.
 #'
 #' @template read-data-description
 #'
@@ -21,9 +21,9 @@
 #'
 #'
 #'
-read_NSW_2019_20 <- function(
+read_NSW_2022_23 <- function(
     root = c("X:/", "/Volumes/Shared/")[1],
-    file = "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2020/UKDA-8718-tab/tab/national_survey_for_wales_respondent_file_2019-20_ukds.tab"
+    file = "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2023/UKDA-9144-tab/tab/nsw_2022-23_respondent_file_for_ukds.tab"
     ) {
 
     data <- data.table::fread(
@@ -34,52 +34,51 @@ read_NSW_2019_20 <- function(
 
     alc_vars <- Hmisc::Cs(
       #### alc_drink_now_allages
-      dnfreq, dnnow, dnocc, dnev,
+      # dnfreq, dnnow, dnocc, dnev,(OLD NAMES)
+      cvdnfreq, alc12m, cvdnocc, dnev, dnfreqwk,
       #### alc_sevenday_adult (heaviest day)
 
       #### alc_weekmean_adult
       # normal strength beer
-      dnoftbr,                                         # how often in last 12 months
+      cvdnoftbr, dnoftbrfreqwk,                         # how often in last 12 months
       dnubrmeas1, dnubrmeas2, dnubrmeas3, dnubrmeas4,  # measure drank
-      dnubrhalf, dnubrsmc, dnubrlgc, dnubrbot,         # amount of measure drank
+      dnubrpint, dnubrsmc, dnubrlgc, dnubrbot,         # amount of measure drank
       # strong beer
-      dnoftstbr,
-      dnustbrmeas1, dnustbrmeas2, dnustbrmeas3, dnustbrmeas4,
-      dnustbrhalf, dnustbrsmc, dnustbrlgc, dnustbrbot,
+
+
+
       # spirits
-      dnoftspir,                                       # how often in last 12 months
-      dnuspir,                                         # how many units
+      cvdnoftspir, dnoftspirfreqwk,                     # how often in last 12 months
+      dnuspir,                                          # how many units
       # sherry/fortified wine
-      dnoftsher,
-      dnusher,
+
+
       # wine
-      dnoftwine,                                 # how often in last 12 months
-      dnuwinemeas,                               # measure drank (main size of wine glass)
-      dnuwine,                                   # amount of measure drank
+      cvdnoftwine, dnoftwinefreqwk,               # how often in last 12 months
+      dnuwinemeas,                                 # measure drank (main size of wine glass)
+      cvdnuwine,                                   # amount of measure drank
       # RTDs
-      dnoftapop,                                  # how often in last 12 months
-      dnuapopmeas1, dnuapopmeas2, dnuapopmeas3,   # measure drank
-      dnuapopsmc, dnuapopstbot, dnuapoplgbot,     # amount of measure drank
+
 
       #### alc_sevenday_adult (for binge)
-      dn7dn, dnsame, dn7dmost,
-      dntype1, dntype2, dntype3, dntype4, dntype5, dntype6,
+      #dn7dn, dnsame, dn7dmost,
+      #dntype1, dntype2, dntype3, dntype4, dntype5, dntype6,
 
       # normal strength beer
-      dnbrhalf, dnbrsmc, dnbrlgc, dnbrbot,
+      #dnbrhalf, dnbrsmc, dnbrlgc, dnbrbot,
       # strong beer
-      dnstbrhalf, dnstbrsmc, dnstbrlgc, dnstbrbot,
+      #dnstbrhalf, dnstbrsmc, dnstbrlgc, dnstbrbot,
       # wine
-      dnwinebot, dnwinelgg, dnwinestg, dnwinesmg,
+      #dnwinebot, dnwinelgg, dnwinestg, dnwinesmg,
       # sherry
-      dnsher,
+      #dnsher,
       # spirits
-      dnspir,
+      #dnspir,
       # RTDs
-      dnaplgbot, dnapstbot, dnapsmc,
+      #dnaplgbot, dnapstbot, dnapsmc,
 
       # derived weekly units variable
-      dvunitswk0dr
+      dvcvunitswk0dr
     )
 
     smk_vars <- tolower(Hmisc::Cs(smoke))
@@ -95,11 +94,11 @@ read_NSW_2019_20 <- function(
       samplepophlthweight,
 
       #
-      incresp,
+      #incresp,
 
       # Education
       #educend,
-      educat, # Highest educational qualification - revised 2008
+      educat2, # Highest educational qualification - revised 2008
 
       # Occupation
       #nssec3, nssec8,
@@ -110,9 +109,9 @@ read_NSW_2019_20 <- function(
 
       # demographic
       age,
-      ethnicity,
+      dvethnicity,
       dvwimdovr5,
-      gender
+      sex
 
     )
 
@@ -125,93 +124,91 @@ read_NSW_2019_20 <- function(
 
     data.table::setnames(data,
 
-                         c("dvwimdovr5","ethnicity","gender",
+                         c("dvwimdovr5",
 
                            ##### alcohol weekly consumption vars
-                           "dnfreq","dnev","dnocc",
+                           "dnev","cvdnocc","alc12m",
 
                            # frequency of drink type over 12 months
-                           "dnoftbr","dnoftstbr","dnoftspir","dnoftsher","dnoftwine","dnoftapop",
+
                            # normal strength beer
                            "dnubrmeas1", "dnubrmeas2", "dnubrmeas3", "dnubrmeas4",
-                           "dnubrhalf", "dnubrsmc", "dnubrlgc", "dnubrbot",
+                           "dnubrpint", "dnubrsmc", "dnubrlgc", "dnubrbot",
                            # strong beer
-                           "dnustbrmeas1", "dnustbrmeas2", "dnustbrmeas3", "dnustbrmeas4",
-                           "dnustbrhalf", "dnustbrsmc", "dnustbrlgc", "dnustbrbot",
+
+
                            # wine
-                           "dnuwinemeas", "dnuwine",
+                           "dnuwinemeas", "cvdnuwine",
                            # sherry
-                           "dnusher",
+
                            # spirits
                            "dnuspir",
                            # RTDs
-                           "dnuapopmeas1", "dnuapopmeas2", "dnuapopmeas3",
-                           "dnuapopsmc", "dnuapopstbot", "dnuapoplgbot",
+
 
                            ##### alcohol binge vars
-                           "dn7dn", "dnsame", "dn7dmost",
-                           "dntype1", "dntype2", "dntype3", "dntype4", "dntype5", "dntype6",
+                           #"dn7dn", "dnsame", "dn7dmost",
+                           #"dntype1", "dntype2", "dntype3", "dntype4", "dntype5", "dntype6",
 
                            # normal strength beer
-                           "dnbrhalf", "dnbrsmc", "dnbrlgc", "dnbrbot",
+                           #"dnbrhalf", "dnbrsmc", "dnbrlgc", "dnbrbot",
                            # strong beer
-                           "dnstbrhalf", "dnstbrsmc", "dnstbrlgc", "dnstbrbot",
+                           #"dnstbrhalf", "dnstbrsmc", "dnstbrlgc", "dnstbrbot",
                            # wine
-                           "dnwinebot", "dnwinelgg", "dnwinestg", "dnwinesmg",
+                           #"dnwinebot", "dnwinelgg", "dnwinestg", "dnwinesmg",
                            # sherry
-                           "dnsher",
+                           #"dnsher",
                            # spirits
-                           "dnspir",
+                           #"dnspir",
                            # RTDs
-                           "dnaplgbot", "dnapstbot", "dnapsmc",
+                           #"dnaplgbot", "dnapstbot", "dnapsmc",
 
                            #### derived variable for weekly units
-                           "dvunitswk0dr",
+                           "dvcvunitswk0dr",
 
                            ###### health vars
                            "dvillchap1", "dvillchap2", "dvillchap3", "dvillchap4", "dvillchap5",
                            "dvillchap6", "dvillchap7", "dvillchap8", "dvillchap9", "dvillchap10",
                            "dvillchap11", "dvillchap12", "dvillchap13", "dvillchap14", "dvillchap15"),
 
-                         c("wimd","ethnicity_raw","sex",
+                         c("wimd",
 
                            ##### alcohol weekly consumption vars
-                           "dnoft","dnevr","dnany",
+                           "dnevr","dnany","dnnow",
 
                            # frequency of drink type over 12 months
-                           "nbeer","sbeer","spirits","sherry","wine","pops",
+
                            # normal strength beer
                            "nbeerm1", "nbeerm2", "nbeerm3", "nbeerm4",
                            "nbeerq1", "nbeerq2", "nbeerq3", "nbeerq4",
                            # strong beer
-                           "sbeerm1", "sbeerm2", "sbeerm3", "sbeerm4",
-                           "sbeerq1", "sbeerq2", "sbeerq3", "sbeerq4",
+
+
                            # wine
                            "bwineq2", "wineq",
                            # sherry
-                           "sherryq",
+
                            # spirits
                            "spiritsq",
                            # RTDs
-                           "popsly11", "popsly12", "popsly13",
-                           "popsq111", "popsq112", "popsq113",
+
 
                            ##### alcohol binge vars
-                           "d7many", "drnksame", "whichday",
-                           "d7typ1", "d7typ2", "d7typ3", "d7typ4", "d7typ5", "d7typ6",
+                           #"d7many", "drnksame", "whichday",
+                           #"d7typ1", "d7typ2", "d7typ3", "d7typ4", "d7typ5", "d7typ6",
 
                            # normal strength beer
-                           "nberqhp7", "nberqsm7", "nberqlg7", "nberqbt7",
+                           #"nberqhp7", "nberqsm7", "nberqlg7", "nberqbt7",
                            # strong beer
-                           "sberqhp7", "sberqsm7", "sberqlg7", "sberqbt7",
+                           #"sberqhp7", "sberqsm7", "sberqlg7", "sberqbt7",
                            # wine
-                           "wbtlgz", "wgls250ml", "wgls175ml", "wgls125ml",
+                           #"wbtlgz", "wgls250ml", "wgls175ml", "wgls125ml",
                            # sherry
-                           "sherqgs7",
+                           #"sherqgs7",
                            # spirits
-                           "spirqme7",
+                           #"spirqme7",
                            # RTDs
-                           "popsqlg7", "popsqstb7", "popsqsm7",
+                           #"popsqlg7", "popsqstb7", "popsqsm7",
 
                            #### derived variable for weekly units
                            "dv_wk_units",
@@ -230,10 +227,10 @@ read_NSW_2019_20 <- function(
     #data[age < 16, wt_int := NA]
 
     # Set PSU and cluster
-    data[ , psu := paste0("2019_", 1)]
-    data[ , cluster := paste0("2019_", 1)]
+    data[ , psu := paste0("2022_", 1)]
+    data[ , cluster := paste0("2022_", 1)]
 
-    data[ , year := 2019]
+    data[ , year := 2022]
     data[ , country := "Wales"]
 
     return(data[])

@@ -37,6 +37,24 @@ alc_drink_now_allages <- function(
   data
 ) {
 
+
+  ### some extra processing of later Welsh data, need to combine two variables
+  ### to get consistent drinking frequency
+
+  if("cvdnfreq" %in% colnames(data)){
+
+    data[cvdnfreq == 1 & dnfreqwk == 1, dnoft := 1]
+    data[cvdnfreq == 1 & dnfreqwk == 2, dnoft := 2]
+    data[cvdnfreq == 1 & dnfreqwk == 3, dnoft := 3]
+    data[cvdnfreq == 1 & dnfreqwk == 4, dnoft := 4]
+    data[cvdnfreq == 2 , dnoft := 5]
+    data[cvdnfreq == 3 , dnoft := 6]
+    data[cvdnfreq == 4 , dnoft := 7]
+
+    data[ , `:=`(cvdnfreq = NULL,  dnfreqwk = NULL)]
+
+  }
+
   # Categorise someone as a current drinker or not
 
   ###################################################################

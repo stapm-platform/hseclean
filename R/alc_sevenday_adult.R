@@ -52,12 +52,18 @@ alc_sevenday_adult <- function(
   alc_volume_data = hseclean::alc_volume_data
 ) {
 
+
   # Check that drinks_now variable is in the data
   if(sum(colnames(data) == "drinks_now") == 0) {
     message("missing drinks_now variable - run alc_drink_now_allages() first.")
   }
 
   country <- unique(data[ , country][1])
+  year <- as.integer(unique(data[ , year][1]))
+
+
+  ### No binge data in NSW post 2019-20
+  if(!(country == "Wales" & year > 2019)){
 
   if(country == "Wales"){
   data[drinks_now != "non_drinker" & !(d7many %in% 1:7), d7day := 2 ]
@@ -332,7 +338,7 @@ alc_sevenday_adult <- function(
   remove_vars <- c("drnksame", "whichday", colnames(data)[stringr::str_detect(colnames(data), "d7")])
   data[ , (remove_vars) := NULL]
 
-
+}
 return(data[])
 }
 

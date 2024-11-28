@@ -73,7 +73,10 @@ read_NSW_2018_19 <- function(
       # spirits
       dnspir,
       # RTDs
-      dnaplgbot, dnapstbot, dnapsmc
+      dnaplgbot, dnapstbot, dnapsmc,
+
+      # derived weekly units variable
+      dvunitswk0
     )
 
     smk_vars <- tolower(Hmisc::Cs(smoke))
@@ -159,6 +162,9 @@ read_NSW_2018_19 <- function(
                            # RTDs
                            "dnaplgbot", "dnapstbot", "dnapsmc",
 
+                           #### derived variable for weekly units
+                           "dvunitswk0",
+
                            ## health vars
                            "dvillchap1", "dvillchap2", "dvillchap3", "dvillchap4", "dvillchap5",
                            "dvillchap6", "dvillchap7", "dvillchap8", "dvillchap9", "dvillchap10",
@@ -203,6 +209,9 @@ read_NSW_2018_19 <- function(
                            "spirqme7",
                            # RTDs
                            "popsqlg7", "popsqstb7", "popsqsm7",
+
+                           #### derived variable for weekly units
+                           "dv_wk_units",
 
                            ## health vars
                            "compm1", "compm2", "compm3", "compm4", "compm5",
