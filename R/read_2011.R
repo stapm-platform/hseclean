@@ -105,7 +105,7 @@ read_2011 <- function(
 
       marstatc, # marital status inc cohabitees
 
-      landlord, gor, smkdad, smkmum,
+      landlord, gor1, smkdad, smkmum,
 
       # how much they weigh
       htval, wtval)
@@ -118,7 +118,7 @@ read_2011 <- function(
 
   }
 
-  data.table::setnames(data, c("marstatc", "origin", "pserial", "smkdad", "smkmum"), c("marstat", "ethnicity_raw", "hse_id", "fathsm", "mothsm"))
+  data.table::setnames(data, c("marstatc", "origin", "pserial", "smkdad", "smkmum", "gor1"), c("marstat", "ethnicity_raw", "hse_id", "fathsm", "mothsm", "gor"))
 
   data[ , psu := paste0("2011_", psu)]
   data[ , cluster := paste0("2011_", cluster)]
