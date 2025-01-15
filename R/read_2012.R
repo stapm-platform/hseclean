@@ -89,6 +89,8 @@ read_2012 <- function(
 
       marstatc, # marital status inc cohabitees
 
+      landlord, gor, fathsm, mothsm,
+
       # how much they weigh
       htval, wtval)
 
