@@ -82,7 +82,7 @@ read_2010 <- function(
       hserial,pserial,
       age, sex,
       origin,
-      imd2007, econact, nssec3, nssec8,
+      imd2007, econact, nssec3, nssec8, hpnssec8,
       #econact2,
       paidwk,
       activb, #HHInc,

@@ -79,7 +79,7 @@ read_2012 <- function(
       hserial,pserial,
       Age, Sex,
       Origin,
-      qimd, econact, nssec3, nssec8,
+      qimd, econact, nssec3, nssec8, hpnssec8,
       #econact2,
       Paidwk,
       activb, #HHInc,
