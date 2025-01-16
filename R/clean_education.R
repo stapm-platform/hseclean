@@ -64,7 +64,7 @@ clean_education <- function(
     data[topqual3 == 1, degree := "degree"]
     data[topqual3 %in% 2:7, degree := "no_degree"]
 
-    data[ , topqual3 := NULL]
+    #data[ , topqual3 := NULL]
   }
 
   if("hedqul08" %in% colnames(data)){
