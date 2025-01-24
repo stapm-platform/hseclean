@@ -541,9 +541,15 @@ alc_weekmean_adult <- function(
     #################################################################
     # Generate weekly total units
 
+    if(year > 2019 & country == "Wales"){
+
+    data[ , weekmean := dv_wk_units]
+
+    } else {
+
     data[ , weekmean := spirit_units + wine_units + rtd_units + beer_units]
 
-
+    }
     # update variable on whether someone drinks or not to match the
     # weekmean variable
     # this means that the data on participation in alcohol consumption is
