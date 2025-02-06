@@ -1,6 +1,6 @@
-#' Read the National Survey for Wales 2016-17 \lifecycle{maturing}
+#' Read the Welsh Health Survey 2009 \lifecycle{maturing}
 #'
-#' Reads and does basic cleaning on the National Survey for Wales 2016-17.
+#' Reads and does basic cleaning on the Welsh Health Survey 2009.
 #'
 #' @template read-data-description
 #'
@@ -156,9 +156,7 @@ read_WHS_2009 <- function(
       region,
       # dvethnicity,
       # dvwimdovr5,
-      sex
-
-    )
+      sex)
 
     names <- c(other_vars, health_vars, alc_vars, smk_vars)
 
@@ -276,10 +274,10 @@ read_WHS_2009 <- function(
     #data[age < 16, wt_int := NA]
 
     # Set PSU and cluster
-    data[ , psu := paste0("2010_", 1)]
-    data[ , cluster := paste0("2010_", 1)]
+    data[ , psu := paste0("2009_", 1)]
+    data[ , cluster := paste0("2009_", 1)]
 
-    data[ , year := 2010]
+    data[ , year := 2009]
     data[ , country := "Wales"]
 
     return(data[])

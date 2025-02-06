@@ -1,6 +1,6 @@
-#' Read the National Survey for Wales 2016-17 \lifecycle{maturing}
+#' Read the Welsh Health Survey 2010 \lifecycle{maturing}
 #'
-#' Reads and does basic cleaning on the National Survey for Wales 2016-17.
+#' Reads and does basic cleaning on the Welsh Health Survey 2010.
 #'
 #' @template read-data-description
 #'
@@ -156,9 +156,7 @@ read_WHS_2010 <- function(
       region,
       # dvethnicity,
       # dvwimdovr5,
-      sex
-
-    )
+      sex)
 
     names <- c(other_vars, health_vars, alc_vars, smk_vars)
 

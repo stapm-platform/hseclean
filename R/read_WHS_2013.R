@@ -1,6 +1,6 @@
-#' Read the National Survey for Wales 2016-17 \lifecycle{maturing}
+#' Read the Welsh Health Survey 2013 \lifecycle{maturing}
 #'
-#' Reads and does basic cleaning on the National Survey for Wales 2016-17.
+#' Reads and does basic cleaning on the Welsh Health Survey 2013.
 #'
 #' @template read-data-description
 #'
