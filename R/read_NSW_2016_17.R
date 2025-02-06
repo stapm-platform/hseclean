@@ -91,7 +91,7 @@ read_NSW_2016_17 <- function(
     #                               Dvexponsm, Dvexecouall, Dvexecounsm, Dvexecinall, Dvexecinnsm,
     #                               Dvexecall, Dvexecnsm))
 
-    smk_vars <- tolower(Hmisc::Cs(Smoke, SmAge, Dvsmokec, Dvsmokstat))
+    smk_vars <- tolower(Hmisc::Cs(Smoke, SmAge, Dvsmokec, Dvsmokstat, SmQuitTm))
     # SmAge only measured in some years
 
     # key smoking variables are
@@ -158,7 +158,8 @@ read_NSW_2016_17 <- function(
       # demographic
       age,
       dvethnicity,
-      dvwimdovr5,
+      dvwimdovr5, dvwimdinc5,
+
       gender
 
     )

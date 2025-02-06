@@ -35,7 +35,7 @@
 #' }
 #'
 clean_income <- function(
-  data
+    data
 ) {
 
   country <- unique(data[ , country][1])
@@ -87,25 +87,36 @@ clean_income <- function(
 
   if(country == "Wales"){
 
-  if("incresp" %in% colnames(data)) {
+    data[, income5cat := NA_character_]
 
-    data[incresp == 5, income5cat := "5_highest_income"]
-    data[incresp == 4, income5cat := "4"]
-    data[incresp == 3, income5cat := "3"]
-    data[incresp == 2, income5cat := "2"]
-    data[incresp == 1, income5cat := "1_lowest_income"]
+    if("incresp" %in% colnames(data)) {
 
-    data[ , incresp := NULL]
+      data[incresp == 5, income5cat := "5_highest_income"]
+      data[incresp == 4, income5cat := "4"]
+      data[incresp == 3, income5cat := "3"]
+      data[incresp == 2, income5cat := "2"]
+      data[incresp == 1, income5cat := "1_lowest_income"]
 
-  } else {
+      data[ , incresp := NULL]
 
-    data[, income5cat := NA]
+    } else {
+
+      if(!(2020 %in% data[ , year])) {
+        data[dvwimdinc5 == 5, income5cat := "5_highest_income"]
+        data[dvwimdinc5 == 4, income5cat := "4"]
+        data[dvwimdinc5 == 3, income5cat := "3"]
+        data[dvwimdinc5 == 2, income5cat := "2"]
+        data[dvwimdinc5 == 1, income5cat := "1_lowest_income"]
+
+        data[ , dvwimdinc5 := NULL]
+      }
+
+    }
+
   }
 
-  }
 
-
-return(data[])
+  return(data[])
 }
 
 

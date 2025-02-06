@@ -110,7 +110,7 @@ read_NSW_2022_23 <- function(
       # demographic
       age,
       dvethnicity,
-      dvwimdovr5,
+      dvwimdovr5, dvwimdinc5,
       sex
 
     )
