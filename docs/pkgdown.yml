@@ -1,4 +1,4 @@
-pandoc: 3.1.11
+pandoc: '3.2'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
@@ -7,7 +7,7 @@ articles:
   Scotland_alcohol_data_report: Scotland_alcohol_data_report.html
   Scotland_alcohol_upshifting_report: Scotland_alcohol_upshifting_report.html
   Scotland_tobacco_data_report: Scotland_tobacco_data_report.html
-last_built: 2024-10-22T08:19Z
+last_built: 2025-02-06T11:52Z
 urls:
   reference: https://stapm.github.io/hseclean/reference
   article: https://stapm.github.io/hseclean/articles

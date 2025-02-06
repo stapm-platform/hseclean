@@ -97,12 +97,22 @@ reference:
   - read_SHeS_2018
   - read_SHeS_2019
 
-- title: Read National Survey for Wales
+- title: Read Welsh Survey data
   contents:
+  - read_WHS_2009
+  - read_WHS_2010
+  - read_WHS_2011
+  - read_WHS_2012
+  - read_WHS_2013
+  - read_WHS_2014
+  - read_WHS_2015
   - read_NSW_2016_17
   - read_NSW_2017_18
   - read_NSW_2018_19
   - read_NSW_2019_20
+  - read_NSW_2020_21
+  - read_NSW_2021_22
+  - read_NSW_2022_23
 
 - title: Alcohol data
   contents:

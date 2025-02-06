@@ -15,7 +15,7 @@ by year, age, sex and IMD quintiles."><meta property="og:image" content="https:/
 
     <a class="navbar-brand me-2" href="../index.html">hseclean</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.12.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@ The resulting survey weight variable for each year is `wt_int`
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">clean_surveyweights</span><span class="op">(</span><span class="va">data</span>, pop_data <span class="op">=</span> <span class="fu">stapmr</span><span class="fu">::</span><span class="va"><a href="https://stapm.gitlab.io/r-packages/stapmr/reference/pop_counts.html" class="external-link">pop_counts</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">clean_surveyweights</span><span class="op">(</span><span class="va">data</span>, pop_data <span class="op">=</span> <span class="fu">stapmr</span><span class="fu">::</span><span class="va">pop_counts</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
