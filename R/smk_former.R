@@ -145,13 +145,15 @@ smk_former <- function(
 
   # years since quit
 
-  data[, years_since_quit_av := mean(years_since_quit[years_since_quit > 0], na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
-  data[(is.na(years_since_quit) | years_since_quit == 0) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  #data[, years_since_quit_av := mean(years_since_quit[years_since_quit > 0], na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
+  # data[(is.na(years_since_quit) | years_since_quit == 0) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  # data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
 
-  data[, years_since_quit_av := mean(years_since_quit[years_since_quit > 0], na.rm = T), by = c("year", "sex", "ageband")]
-  data[(is.na(years_since_quit) | years_since_quit == 0) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  #data[, years_since_quit_av := mean(years_since_quit[years_since_quit > 0], na.rm = T), by = c("year", "sex", "ageband")]
+  #data[(is.na(years_since_quit) | years_since_quit == 0) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  #data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
 
-  data[, years_since_quit_av := NULL]
+  #data[, years_since_quit_av := NULL]
 
   # years regular smoker
 

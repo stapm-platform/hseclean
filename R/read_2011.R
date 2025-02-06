@@ -95,7 +95,7 @@ read_2011 <- function(
       hserial,pserial,
       Age, Sex,
       Origin,
-      qimd, econact, nssec3, nssec8,
+      qimd, econact, nssec3, nssec8, hpnssec8,
       #econact2,
       Paidwk,
       activb, #HHInc,
@@ -104,6 +104,8 @@ read_2011 <- function(
       eqv5, #eqvinc,
 
       marstatc, # marital status inc cohabitees
+
+      landlord, gor1, smkdad, smkmum,
 
       # how much they weigh
       htval, wtval)
@@ -116,7 +118,7 @@ read_2011 <- function(
 
   }
 
-  data.table::setnames(data, c("marstatc", "origin", "pserial"), c("marstat", "ethnicity_raw", "hse_id"))
+  data.table::setnames(data, c("marstatc", "origin", "pserial", "smkdad", "smkmum", "gor1"), c("marstat", "ethnicity_raw", "hse_id", "fathsm", "mothsm", "gor"))
 
   data[ , psu := paste0("2011_", psu)]
   data[ , cluster := paste0("2011_", cluster)]
