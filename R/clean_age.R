@@ -30,7 +30,7 @@
 #' }
 #'
 clean_age <- function(
-  data
+    data
 ) {
 
   data[ , year := as.double(year)]
@@ -40,7 +40,7 @@ clean_age <- function(
     data[ , age := as.double(age)]
 
     # Make agebands
-    data[year < 2015 | country %in% c("Wales","Scotland"), age_cat := c(
+    data[year < 2015 | country %in% c("Wales", "Scotland"), age_cat := c(
       "0-1",
       "2-4",
       "5-7",
@@ -98,6 +98,30 @@ clean_age <- function(
 
   }
 
+  if("age5yrm" %in% colnames(data)) {
+
+    data[year %in% 2009:2015 & country == "Wales", age_cat := c(
+      "16-19",
+      "20-24",
+      "25-29",
+      "30-34",
+      "35-39",
+      "40-44",
+      "45-49",
+      "50-54",
+      "55-59",
+      "60-64",
+      "65-69",
+      "70-74",
+      "75-89"
+    )[age5yrm]]
+
+    data[ , age5yrm := NULL]
+
+    data[ , age := NA_real_]
+
+  }
+
   if("age35g" %in% colnames(data)) {
 
     data[year >= 2015 & age35g %in% 1:6, age_cat := c("0-1", "2-4", "5-7", "8-10", "11-12", "13-15")[age35g]]
@@ -121,5 +145,5 @@ clean_age <- function(
   #data[ , year := as.integer(year)]
   #data[ , age := as.integer(age)]
 
-return(data[])
+  return(data[])
 }
