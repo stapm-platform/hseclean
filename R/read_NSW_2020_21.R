@@ -88,7 +88,7 @@ read_NSW_2020_21 <- function(
   #                         dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
   other_vars <- Hmisc::Cs(
-    dvuniauth,
+    dvla,
     #psu,
     #strata, # stratification unit
     sampleadultweight,
@@ -232,7 +232,7 @@ read_NSW_2020_21 <- function(
   #data[age < 16, wt_int := NA]
 
   # Set PSU and cluster
-  data[ , cluster := paste0("2020_", dvuniauth)]
+  data[ , cluster := paste0("2020_", dvla)]
 
   data[ , year := 2020]
   data[ , country := "Wales"]

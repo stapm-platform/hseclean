@@ -88,6 +88,7 @@ read_NSW_2021_22 <- function(
                            dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
   other_vars <- Hmisc::Cs(
+    dvla,
 
     #psu,
     #strata, # stratification unit
@@ -229,7 +230,7 @@ read_NSW_2021_22 <- function(
   #data[age < 16, wt_int := NA]
 
   # Set PSU and cluster
-  data[ , cluster := paste0("2021_", dvuniauth)]
+  data[ , cluster := paste0("2021_", dvla)]
 
   data[ , year := 2021]
   data[ , country := "Wales"]
