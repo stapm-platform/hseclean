@@ -129,6 +129,9 @@ read_WHS_2011 <- function(
 
     other_vars <- Hmisc::Cs(
 
+      # weight, height and bmi
+      htcm, wtkg, bmi2,
+
       #psu,
       #strata, # stratification unit
       # sampleadultweight,
