@@ -142,7 +142,7 @@ read_WHS_2009 <- function(
       qualhi, # Highest educational qualification - revised 2008 [derived]
 
       # Occupation
-      # nssec8, nssec5, nssec3,
+      nssec8, nssec5, nssec3,
       work,       # work status
       employ,     # whether in employment
       ecstat3,    # econ status 3 class

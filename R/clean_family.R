@@ -168,6 +168,7 @@ clean_family <- function(
 
     data[country == "Wales" & year <= 2015 & hhchild == 1, kids_bin := 1] # small or large family
     data[country == "Wales" & year <= 2015 & hhchild == 2, kids_bin := 0] # no children
+    data[country == "Wales" & year <= 2015, hhchild := NULL]
 
   }
 

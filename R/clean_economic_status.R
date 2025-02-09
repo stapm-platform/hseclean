@@ -63,6 +63,7 @@ clean_economic_status <- function(
   }
 
   country <- unique(data[ , country][1])
+  year <- unique(data[ , year][1])
 
   if(!("econact" %in% colnames(data))) {
     data[ , econact := NA_real_]
@@ -84,11 +85,11 @@ clean_economic_status <- function(
   # NS-SEC
 
   if("nssec3" %in% colnames(data)){
-  # Label 3 level variable
-  data[nssec3 == 1, nssec3_lab := "managprof"]
-  data[nssec3 == 2 , nssec3_lab := "intermediate"]
-  data[nssec3 == 3 , nssec3_lab := "routinemanual"]
-  data[nssec3 == 99 , nssec3_lab := "other"]
+    # Label 3 level variable
+    data[nssec3 == 1, nssec3_lab := "managprof"]
+    data[nssec3 == 2 , nssec3_lab := "intermediate"]
+    data[nssec3 == 3 , nssec3_lab := "routinemanual"]
+    data[nssec3 == 99 , nssec3_lab := "other"]
   }
 
   ####################################################################
@@ -115,7 +116,16 @@ clean_economic_status <- function(
 
   data[country == "Scotland" & (econac12 %in% c(1, 3:7) | nactiv %in% c(1, 3:11)), employ2cat := "unemployed"]
 
-  data[country == "Wales" & (econstat %in% c(1, 6:11)), employ2cat := "unemployed"]
+  data[country == "Wales" & year > 2015 & (econstat %in% c(1, 6:11)), employ2cat := "unemployed"]
+
+  # WHS
+  data[country == "Wales" & year >= 2009 & year <= 2015 & nssec3 == 8, employ2cat := "unemployed"]
+  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 1, employ2cat := "employed"]
+  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 2, employ2cat := "unemployed"]
+  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & ecstat == 1, employ2cat := "employed"]
+  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & ecstat == 2, employ2cat := "unemployed"]
+
+  #data[country == "Wales" & year >= 2009 & year <= 2015, `:=`(ecstat = NULL, employ = NULL, nssec3 = NULL)]
 
   # Fill missing for children with 'unemployed'
   data[is.na(employ2cat) & age < 16, employ2cat := "unemployed"]
@@ -124,23 +134,38 @@ clean_economic_status <- function(
   ####################################################################
   # Activity status for last week combined with economic activity variable
 
-  data[year < 2015  & (econstat == 10 | econac12 == 6 | activb == 10), activity_lstweek := "home_or_family"]
-  data[year >= 2015 & (econstat == 10 | econac12 == 6 | activb == 9), activity_lstweek := "home_or_family"]
+  if(!(country == "Wales" & year <= 2015)) { # i.e. not WHS
 
-  data[year < 2015  & (econstat == 1 | econac12 == 1 |activb %in% c(1, 3)), activity_lstweek := "education"]
-  data[year >= 2015 & (econstat == 1 | econac12 == 1  |activb == 1), activity_lstweek := "education"]
+    data[year < 2015  & (econstat == 10 | econac12 == 6 | activb == 10), activity_lstweek := "home_or_family"]
+    data[year >= 2015 & (econstat == 10 | econac12 == 6 | activb == 9), activity_lstweek := "home_or_family"]
 
-  data[year < 2015  & (econstat == 9 | econac12 == 5 | econact == 3 | activb == 9), activity_lstweek := "retired"]
-  data[year >= 2015 & (econstat == 9 | econac12 == 5 | econact == 3 | activb == 8), activity_lstweek := "retired"]
+    data[year < 2015  & (econstat == 1 | econac12 == 1 |activb %in% c(1, 3)), activity_lstweek := "education"]
+    data[year >= 2015 & (econstat == 1 | econac12 == 1  |activb == 1), activity_lstweek := "education"]
 
-  data[year < 2015  & (econstat == 6 | econac12 == 4 | econact == 2 | activb %in% c(5, 6)), activity_lstweek := "unemployed"]
-  data[year >= 2015 & (econstat == 6 | econac12 == 4 | econact == 2 | activb %in% c(4, 5)), activity_lstweek := "unemployed"]
+    data[year < 2015  & (econstat == 9 | econac12 == 5 | econact == 3 | activb == 9), activity_lstweek := "retired"]
+    data[year >= 2015 & (econstat == 9 | econac12 == 5 | econact == 3 | activb == 8), activity_lstweek := "retired"]
 
-  data[year < 2015  & (econstat %in% 7:8 | econac12 == 3 | activb %in% 7:8), activity_lstweek := "sick_ill_disab"]
-  data[year >= 2015 & (econstat %in% 7:8 | econac12 == 3 | activb %in% 6:7), activity_lstweek := "sick_ill_disab"]
+    data[year < 2015  & (econstat == 6 | econac12 == 4 | econact == 2 | activb %in% c(5, 6)), activity_lstweek := "unemployed"]
+    data[year >= 2015 & (econstat == 6 | econac12 == 4 | econact == 2 | activb %in% c(4, 5)), activity_lstweek := "unemployed"]
 
-  data[year < 2015  & (econstat %in% 2:5 | econac12 == 2 | econact == 1 | activb %in% c(2, 4)), activity_lstweek := "employed"]
-  data[year >= 2015 & (econstat %in% 2:5 | econac12 == 2 | econact == 1 | activb %in% c(2, 3)), activity_lstweek := "employed"]
+    data[year < 2015  & (econstat %in% 7:8 | econac12 == 3 | activb %in% 7:8), activity_lstweek := "sick_ill_disab"]
+    data[year >= 2015 & (econstat %in% 7:8 | econac12 == 3 | activb %in% 6:7), activity_lstweek := "sick_ill_disab"]
+
+    data[year < 2015  & (econstat %in% 2:5 | econac12 == 2 | econact == 1 | activb %in% c(2, 4)), activity_lstweek := "employed"]
+    data[year >= 2015 & (econstat %in% 2:5 | econac12 == 2 | econact == 1 | activb %in% c(2, 3)), activity_lstweek := "employed"]
+
+  }
+
+  # WHS
+  if(country == "Wales" & year <= 2015) {
+
+    data[work == 10, activity_lstweek := "home_or_family"]
+    data[work == 1, activity_lstweek := "education"]
+    data[work == 9, activity_lstweek := "retired"]
+    data[work %in% 7:8, activity_lstweek := "sick_ill_disab"]
+    data[is.na(activity_lstweek) & employ2cat == "unemployed", activity_lstweek := "unemployed"]
+    data[is.na(activity_lstweek) & employ2cat == "employed", activity_lstweek := "employed"]
+  }
 
   # Fill missing using information on age
   data[is.na(activity_lstweek) & age < 18, activity_lstweek := "education"]
@@ -149,26 +174,26 @@ clean_economic_status <- function(
 
 
   ####################################################################
-  # Fixes to fll some missing values
+  # Fixes to flll some missing values
 
   if("nssec3" %in% colnames(data) ){
-  data[is.na(nssec3_lab) & activity_lstweek == "home_or_family", nssec3_lab := "other"]
-  data[is.na(nssec3_lab) & activity_lstweek == "sick_ill_disab", nssec3_lab := "other"]
-  data[is.na(nssec3_lab) & activity_lstweek == "education", nssec3_lab := "not applicable"]
-  data[is.na(nssec3_lab) & age < 18, nssec3_lab := "not applicable"]
+    data[is.na(nssec3_lab) & activity_lstweek == "home_or_family", nssec3_lab := "other"]
+    data[is.na(nssec3_lab) & activity_lstweek == "sick_ill_disab", nssec3_lab := "other"]
+    data[is.na(nssec3_lab) & activity_lstweek == "education", nssec3_lab := "not applicable"]
+    data[is.na(nssec3_lab) & age < 18, nssec3_lab := "not applicable"]
 
-  data[is.na(employ2cat) & nssec3_lab %in% c("routinemanual", "intermediate", "managprof"), employ2cat := "employed"]
-  data[is.na(employ2cat) & activity_lstweek %in% c("education", "unemployed", "home_or_family", "retired", "sick_ill_disab"), employ2cat := "unemployed"]
-  data[is.na(activity_lstweek) & employ2cat == "employed", activity_lstweek := "employed"]
+    data[is.na(employ2cat) & nssec3_lab %in% c("routinemanual", "intermediate", "managprof"), employ2cat := "employed"]
+    data[is.na(employ2cat) & activity_lstweek %in% c("education", "unemployed", "home_or_family", "retired", "sick_ill_disab"), employ2cat := "unemployed"]
+    data[is.na(activity_lstweek) & employ2cat == "employed", activity_lstweek := "employed"]
   }
 
   ####################################################################
   # Manual vs. non-manual occupation
 
   if("nssec3" %in% colnames(data) ){
-  data[ , man_nonman := nssec3_lab]
-  data[nssec3_lab %in% c("managprof", "intermediate"), man_nonman := "nonmanual"]
-  data[nssec3_lab == "routinemanual", man_nonman := "manual"]
+    data[ , man_nonman := nssec3_lab]
+    data[nssec3_lab %in% c("managprof", "intermediate"), man_nonman := "nonmanual"]
+    data[nssec3_lab == "routinemanual", man_nonman := "manual"]
   }
 
   ####################################################################
@@ -176,16 +201,16 @@ clean_economic_status <- function(
 
   # Match nssec8 to the NRS social grade classification used in the Toolkit study
   if("nssec8" %in% colnames(data)){
-  data[nssec8 %in% 1:3, social_grade := "ABC1"]
-  data[nssec8 %in% 4:99 , social_grade := "C2DE"]
+    data[nssec8 %in% 1:3, social_grade := "ABC1"]
+    data[nssec8 %in% 4:99 , social_grade := "C2DE"]
 
 
-  # Fill some missing data
-  data[is.na(social_grade) & activity_lstweek == "home_or_family", social_grade := "other"]
-  data[is.na(social_grade) & activity_lstweek == "sick_ill_disab", social_grade := "other"]
-  data[is.na(social_grade) & activity_lstweek == "education", social_grade := "not applicable"]
-  data[is.na(social_grade) & age < 18, social_grade := "not applicable"]
-  data[nssec3_lab == "other", social_grade := "other"]
+    # Fill some missing data
+    data[is.na(social_grade) & activity_lstweek == "home_or_family", social_grade := "other"]
+    data[is.na(social_grade) & activity_lstweek == "sick_ill_disab", social_grade := "other"]
+    data[is.na(social_grade) & activity_lstweek == "education", social_grade := "not applicable"]
+    data[is.na(social_grade) & age < 18, social_grade := "not applicable"]
+    data[nssec3_lab == "other", social_grade := "other"]
   }
 
   # Remove variables not needed
