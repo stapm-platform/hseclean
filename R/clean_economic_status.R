@@ -119,7 +119,7 @@ clean_economic_status <- function(
   data[country == "Wales" & year > 2015 & (econstat %in% c(1, 6:11)), employ2cat := "unemployed"]
 
   # WHS
-  if(!(country == "Wales" & year <= 2015)) {
+  if(country == "Wales" & year <= 2015) {
 
     data[country == "Wales" & year >= 2009 & year <= 2015 & nssec3 == 8, employ2cat := "unemployed"]
     data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 1, employ2cat := "employed"]
