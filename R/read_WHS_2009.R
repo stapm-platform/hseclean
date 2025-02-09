@@ -150,6 +150,7 @@ read_WHS_2009 <- function(
 
       # # Family
       # marstat,
+      hhchild,
 
       # demographic
       age5yrm,    # derived 5 year age cat with 75+ merged
@@ -275,8 +276,8 @@ read_WHS_2009 <- function(
     #data[age < 16, wt_int := NA]
 
     # Set PSU and cluster
-    data[ , psu := paste0("2009_", 1)]
-    data[ , cluster := paste0("2009_", 1)]
+    #data[ , psu := paste0("2009_", 1)]
+    #data[ , cluster := paste0("2009_", 1)]
 
     data[ , year := 2009]
     data[ , country := "Wales"]

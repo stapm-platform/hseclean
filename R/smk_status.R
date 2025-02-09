@@ -67,7 +67,7 @@ smk_status <- function(
       data[is.na(cig_smoker_status) & smokstat == 2, cig_smoker_status := "former"]
       data[is.na(cig_smoker_status) & smokstat == 3, cig_smoker_status := "never"]
 
-      data[ , `:=`(smokec = NULL, smokex = NULL, smok = NULL, smoked = NULL, smokestat = NULL)]
+      data[ , `:=`(smokee = NULL, smokec = NULL, smokex = NULL, smok = NULL, smoked = NULL, smokstat = NULL)]
 
 
     }

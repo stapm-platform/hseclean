@@ -57,10 +57,11 @@
 #' }
 #'
 clean_family <- function(
-  data
+    data
 ) {
 
   country <- unique(data[ , country][1])
+  year <- unique(data[ , year][1])
 
 
   #####################################################
@@ -103,7 +104,7 @@ clean_family <- function(
 
   # Relationship status (Wales)
 
-  if(country == "Wales"){
+  if(country == "Wales" & year > 2015){
 
     data[marstat == 1, relationship_status := "single"]
 
@@ -146,17 +147,17 @@ clean_family <- function(
   # For years >= 2015, impute the number of kids
 
   if(country %in% c("England","Scotland")){
-  required_vars <- c("age_cat", "sex", "relationship_status", "ethnicity_2cat", "imd_quintile", "eduend4cat", "degree", "nssec3_lab", "employ2cat", "activity_lstweek")
+    required_vars <- c("age_cat", "sex", "relationship_status", "ethnicity_2cat", "imd_quintile", "eduend4cat", "degree", "nssec3_lab", "employ2cat", "activity_lstweek")
 
-  testthat::expect_equal(
-    length(required_vars),
-    length(intersect(required_vars, colnames(data))),
-    info = "one of these variables is missing from data:
+    testthat::expect_equal(
+      length(required_vars),
+      length(intersect(required_vars, colnames(data))),
+      info = "one of these variables is missing from data:
   age_cat, sex, relationship_status, ethnicity_2cat, imd_quintile, eduend4cat, degree, nssec3_lab, employ2cat, activity_lstweek"
-  )
+    )
 
-  # impute kids
-  data[year >= 2015 | country %in% c("Scotland"), kids := predict(hseclean::impute_kids_model, newdata = data)]
+    # impute kids
+    data[year >= 2015 | country %in% c("Scotland"), kids := predict(hseclean::impute_kids_model, newdata = data)]
   }
 
 
@@ -164,6 +165,10 @@ clean_family <- function(
 
     # impute kids
     data[country == "Wales", kids := NA]
+
+    data[country == "Wales" & year <= 2015 & hhchild == 1, kids_bin := 1] # small or large family
+    data[country == "Wales" & year <= 2015 & hhchild == 2, kids_bin := 0] # no children
+
   }
 
   return(data[])
