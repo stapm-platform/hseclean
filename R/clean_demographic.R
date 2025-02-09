@@ -64,7 +64,7 @@
 #' }
 #'
 clean_demographic <- function(
-  data
+    data
 ) {
 
   country <- unique(data[ , country][1])
@@ -146,17 +146,17 @@ clean_demographic <- function(
   if(country == "Wales"){
 
     if("ethnicity_raw" %in% colnames(data)){
-    data[ethnicity_raw %in% c(1:4, 19), ethnicity := "white"]
-    data[ethnicity_raw %in% 5:8 , ethnicity := "mixed"]
-    data[ethnicity_raw %in% c(9:13, 17,18) , ethnicity := "asian_other"]
-    data[ethnicity_raw %in% 14:16, ethnicity := "black"]
+      data[ethnicity_raw %in% c(1:4, 19), ethnicity := "white"]
+      data[ethnicity_raw %in% 5:8 , ethnicity := "mixed"]
+      data[ethnicity_raw %in% c(9:13, 17,18) , ethnicity := "asian_other"]
+      data[ethnicity_raw %in% 14:16, ethnicity := "black"]
 
-    data[ , ethnicity_4cat := ethnicity]
-    data[ , ethnicity_2cat := ethnicity]
+      data[ , ethnicity_4cat := ethnicity]
+      data[ , ethnicity_2cat := ethnicity]
 
-    data[ethnicity %in% c("mixed", "asian_other", "black"), ethnicity_2cat := "non_white"]
+      data[ethnicity %in% c("mixed", "asian_other", "black"), ethnicity_2cat := "non_white"]
 
-    data[ , `:=`(ethnicity_raw = NULL,  ethnicity = NULL)]
+      data[ , `:=`(ethnicity_raw = NULL,  ethnicity = NULL)]
     }
 
     if("dvethnicity" %in% colnames(data)){
@@ -187,17 +187,17 @@ clean_demographic <- function(
 
   if(country %in% c("England","Scotland")){
 
-  data[ , sex := c("Male", "Female")[sex]]
+    data[ , sex := c("Male", "Female")[sex]]
 
   }
 
   if(country == "Wales"){
 
-  data[sex == 1, sex_c := "Male"]
-  data[sex == 2, sex_c := "Female"]
+    data[sex == 1, sex_c := "Male"]
+    data[sex == 2, sex_c := "Female"]
 
-  data[, sex := NULL]
-  setnames(data, "sex_c", "sex")
+    data[, sex := NULL]
+    setnames(data, "sex_c", "sex")
 
   }
 
@@ -225,16 +225,20 @@ clean_demographic <- function(
   }
 
   if(country == "Wales"){
-    data[wimd == 1, imd_quintile := "5_most_deprived"]
-    data[wimd == 2, imd_quintile := "4"]
-    data[wimd == 3, imd_quintile := "3"]
-    data[wimd == 4, imd_quintile := "2"]
-    data[wimd == 5, imd_quintile := "1_least_deprived"]
 
-    data[ , wimd := NULL]
+    if("wimd" %in% colnames(data)){
+
+      data[wimd == 1, imd_quintile := "5_most_deprived"]
+      data[wimd == 2, imd_quintile := "4"]
+      data[wimd == 3, imd_quintile := "3"]
+      data[wimd == 4, imd_quintile := "2"]
+      data[wimd == 5, imd_quintile := "1_least_deprived"]
+
+      data[ , wimd := NULL]
+    }
   }
 
-return(data[])
+  return(data[])
 }
 
 

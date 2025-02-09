@@ -44,80 +44,80 @@ smk_status <- function(
 
   if (country %in% c("Wales")){
 
-  data[smoke == 5, cig_smoker_status := "never" ]
+    data[smoke == 5, cig_smoker_status := "never" ]
 
-  data[smoke %in% 3:4, cig_smoker_status := "former" ]
+    data[smoke %in% 3:4, cig_smoker_status := "former" ]
 
-  data[smoke %in% 1:2, cig_smoker_status := "current" ]
+    data[smoke %in% 1:2, cig_smoker_status := "current" ]
 
   }
 
-  if (country %in% c("England","Scotland")){
+  if (country %in% c("England", "Scotland")){
 
-  ##
-  # Never smokers (age >= 16)
+    ##
+    # Never smokers (age >= 16)
 
-  # If never smoked, or never smoked cigarettes
-  data[smkevr == 2 | cigevr == 2, cig_smoker_status := "never"]
-
-  # If have ever smoked, but only tried once or twice
-  data[cigreg == 3, cig_smoker_status := "never"]
-
-  ##
-  # Former smokers (age >= 16)
-
-  # If used to smoke regularly or occasionally
-  data[cigreg %in% 1:2, cig_smoker_status := "former"]
-
-  ##
-  # Current smokers (age >= 16)
-
-  # If currently smoke cigarettes
-  data[cignow == 1, cig_smoker_status := "current"]
-
-
-  ######################################################################
-  # Regular cigarette smoking status (age 8-15)
-
-  ##
-  # Never smokers (age 8-15)
-  if(country == "England"){
-
-    # If never smoked cigarettes
-    data[kcigevr == 2, cig_smoker_status := "never"]
+    # If never smoked, or never smoked cigarettes
+    data[smkevr == 2 | cigevr == 2, cig_smoker_status := "never"]
 
     # If have ever smoked, but only tried once or twice
-    data[kcigreg %in% 1:2, cig_smoker_status := "never"]
+    data[cigreg == 3, cig_smoker_status := "never"]
 
     ##
-    # Former smokers (age 8-15)
+    # Former smokers (age >= 16)
 
     # If used to smoke regularly or occasionally
-    data[kcigreg == 3, cig_smoker_status := "former"]
+    data[cigreg %in% 1:2, cig_smoker_status := "former"]
 
     ##
-    # Current smokers (age 8-15)
+    # Current smokers (age >= 16)
 
     # If currently smoke cigarettes
-    data[kcigreg %in% 4:6 | kcigweek == 1 | kcignum > 0, cig_smoker_status := "current"]
+    data[cignow == 1, cig_smoker_status := "current"]
 
 
-    # If less than age 8, assume never smoker
-    data[age < 8, cig_smoker_status := "never"]
+    ######################################################################
+    # Regular cigarette smoking status (age 8-15)
 
-    data[ , kcigevr := NULL]
-  }
+    ##
+    # Never smokers (age 8-15)
+    if(country == "England"){
 
-  # no data on under 16s in Scotland
-  if(country == "Scotland"){
+      # If never smoked cigarettes
+      data[kcigevr == 2, cig_smoker_status := "never"]
 
-    data[age < 16, cig_smoker_status := NA_real_]
+      # If have ever smoked, but only tried once or twice
+      data[kcigreg %in% 1:2, cig_smoker_status := "never"]
 
-  }
+      ##
+      # Former smokers (age 8-15)
 
-  # Remove variables no longer needed
-  remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
-  data[ , (remove_vars) := NULL]
+      # If used to smoke regularly or occasionally
+      data[kcigreg == 3, cig_smoker_status := "former"]
+
+      ##
+      # Current smokers (age 8-15)
+
+      # If currently smoke cigarettes
+      data[kcigreg %in% 4:6 | kcigweek == 1 | kcignum > 0, cig_smoker_status := "current"]
+
+
+      # If less than age 8, assume never smoker
+      data[age < 8, cig_smoker_status := "never"]
+
+      data[ , kcigevr := NULL]
+    }
+
+    # no data on under 16s in Scotland
+    if(country == "Scotland"){
+
+      data[age < 16, cig_smoker_status := NA_real_]
+
+    }
+
+    # Remove variables no longer needed
+    remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
+    data[ , (remove_vars) := NULL]
   }
 
   ######################################################################
@@ -127,8 +127,6 @@ smk_status <- function(
 
   data[cig_smoker_status %in% c("current", "former"), cig_ever := "ever_smoker"]
   data[cig_smoker_status == "never", cig_ever := "never_smoker"]
-
-
 
 
   return(data[])
