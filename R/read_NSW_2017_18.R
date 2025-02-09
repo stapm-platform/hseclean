@@ -228,8 +228,7 @@ read_NSW_2017_18 <- function(
     #data[age < 16, wt_int := NA]
 
     # Set PSU and cluster
-    data[ , psu := paste0("2017_", 1)]
-    data[ , cluster := paste0("2017_", 1)]
+    data[ , cluster := paste0("2017_", dvuniauth)]
 
     data[ , year := 2017]
     data[ , country := "Wales"]
