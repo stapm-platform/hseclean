@@ -119,11 +119,15 @@ clean_economic_status <- function(
   data[country == "Wales" & year > 2015 & (econstat %in% c(1, 6:11)), employ2cat := "unemployed"]
 
   # WHS
-  data[country == "Wales" & year >= 2009 & year <= 2015 & nssec3 == 8, employ2cat := "unemployed"]
-  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 1, employ2cat := "employed"]
-  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 2, employ2cat := "unemployed"]
-  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & ecstat == 1, employ2cat := "employed"]
-  data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & ecstat == 2, employ2cat := "unemployed"]
+  if(!(country == "Wales" & year <= 2015)) {
+
+    data[country == "Wales" & year >= 2009 & year <= 2015 & nssec3 == 8, employ2cat := "unemployed"]
+    data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 1, employ2cat := "employed"]
+    data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & employ == 2, employ2cat := "unemployed"]
+    data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & ecstat == 1, employ2cat := "employed"]
+    data[is.na(employ2cat) & country == "Wales" & year >= 2009 & year <= 2015 & ecstat == 2, employ2cat := "unemployed"]
+
+  }
 
   #data[country == "Wales" & year >= 2009 & year <= 2015, `:=`(ecstat = NULL, employ = NULL, nssec3 = NULL)]
 
