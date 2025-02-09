@@ -272,8 +272,9 @@ read_WHS_2012 <- function(
     # Tidy survey weights and only keep the sub-sample that answered smoking
     # and drinking related questions (in 2016/17 this is all respondents, but
     # only a subsample in future years)
-    data[ , wt_int := wt_adult]
-    data <- data[!is.na(wt_adult), ]
+    data <- data[!is.na(wt_adult)]
+    setnames(data, "wt_adult", "wt_int")
+
     #data[age < 16, wt_int := NA]
 
     # Set PSU and cluster

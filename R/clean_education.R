@@ -39,23 +39,23 @@
 #' }
 #'
 clean_education <- function(
-  data
+    data
 ) {
 
   ############################################################
   # Age finished education
 
   if("educend" %in% colnames(data)){
-  data[educend == 2, eduend4cat := "never_went_to_school"]
-  data[educend %in% 3:4, eduend4cat := "15_or_under"]
-  data[educend %in% 5:7, eduend4cat := "16-18"]
-  data[educend == 8, eduend4cat := "19_or_over"]
-  data[educend == 1 & age < 18, eduend4cat := "16-18"]
-  data[educend == 1 & age >= 18, eduend4cat := "19_or_over"]
+    data[educend == 2, eduend4cat := "never_went_to_school"]
+    data[educend %in% 3:4, eduend4cat := "15_or_under"]
+    data[educend %in% 5:7, eduend4cat := "16-18"]
+    data[educend == 8, eduend4cat := "19_or_over"]
+    data[educend == 1 & age < 18, eduend4cat := "16-18"]
+    data[educend == 1 & age >= 18, eduend4cat := "19_or_over"]
 
-  data[is.na(eduend4cat) & age < 18, eduend4cat := "16-18"]
+    data[is.na(eduend4cat) & age < 18, eduend4cat := "16-18"]
 
-  data[ , educend := NULL]
+    data[ , educend := NULL]
   }
 
   ############################################################
@@ -89,14 +89,21 @@ clean_education <- function(
     data[ , educat2 := NULL]
   }
 
+  if("qualhi" %in% colnames(data)){
+    data[qualhi == 2, degree := "degree"]
+    data[qualhi %in% 0:1, degree := "no_degree"]
+
+    data[ , qualhi := NULL]
+  }
+
   # Fill some missing values
   data[is.na(degree) & age < 18, degree := "no_degree"]
 
   if("eduend4cat" %in% colnames(data)){
-  data[is.na(degree) & eduend4cat %in% c("16-18", "15_or_under", "never_went_to_school"), degree := "no_degree"]
-  data[is.na(degree) & eduend4cat == "19_or_over", degree := "degree"]
+    data[is.na(degree) & eduend4cat %in% c("16-18", "15_or_under", "never_went_to_school"), degree := "no_degree"]
+    data[is.na(degree) & eduend4cat == "19_or_over", degree := "degree"]
   }
 
 
-return(data[])
+  return(data[])
 }
