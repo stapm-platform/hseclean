@@ -164,11 +164,13 @@ clean_family <- function(
   if(country == "Wales"){
 
     # impute kids
-    data[country == "Wales", kids := NA]
+    data[, kids := NA]
 
-    data[country == "Wales" & year <= 2015 & hhchild == 1, kids_bin := 1] # small or large family
-    data[country == "Wales" & year <= 2015 & hhchild == 2, kids_bin := 0] # no children
-    data[country == "Wales" & year <= 2015, hhchild := NULL]
+    if(year <= 2015) {
+      data[hhchild == 1, kids_bin := 1] # small or large family
+      data[hhchild == 2, kids_bin := 0] # no children
+      data[ , hhchild := NULL]
+    }
 
   }
 
