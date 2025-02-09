@@ -79,7 +79,7 @@ read_WHS_2014 <- function(
 #                                   stpsmk, stpsmk1m, stpsmk1y))
 
     # smk_vars <- tolower(Hmisc::Cs(Smoke, SmAge, Dvsmokec, Dvsmokstat))
-    smk_vars <- tolower(Hmisc::Cs(smokec, smoked, smokee, smokstat, smokex, stpsmk, stpsmk1m, stpsmk1y))
+    smk_vars <- tolower(Hmisc::Cs(smok, smokec, smoked, smokee, smokstat, smokex, stpsmk, stpsmk1m, stpsmk1y))
     # SmAge only measured in some years
 
     # key smoking variables are

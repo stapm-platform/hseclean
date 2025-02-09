@@ -38,18 +38,36 @@ smk_status <- function(
 ) {
 
   country <- unique(data[ , country][1])
+  year <- unique(data[ , year][1])
 
   ######################################################################
   # Regular cigarette smoking status (age >= 16)
 
   if (country %in% c("Wales")){
 
-    data[smoke == 5, cig_smoker_status := "never" ]
+    if(year > 2015) {
 
-    data[smoke %in% 3:4, cig_smoker_status := "former" ]
+      # NSW
+      data[smoke == 5, cig_smoker_status := "never"]
+      data[smoke %in% 3:4, cig_smoker_status := "former"]
+      data[smoke %in% 1:2, cig_smoker_status := "current"]
 
-    data[smoke %in% 1:2, cig_smoker_status := "current" ]
+    }
 
+    if(year >= 2009 & year <= 2015) {
+
+      # WHS
+      # smokec - Currently smoke either daily or occasionally - use this
+
+      data[smokec == 1, cig_smoker_status := "current"]
+      data[smokex == 1, cig_smoker_status := "former"]
+      data[smok == 5, cig_smoker_status := "never"]
+
+      data[is.na(cig_smoker_status) & smokstat == 1, cig_smoker_status := "current"]
+      data[is.na(cig_smoker_status) & smokstat == 2, cig_smoker_status := "former"]
+      data[is.na(cig_smoker_status) & smokstat == 3, cig_smoker_status := "never"]
+
+    }
   }
 
   if (country %in% c("England", "Scotland")){
@@ -124,7 +142,6 @@ smk_status <- function(
   # Ever regular cigarette smoker
 
   # derive the ever-smoking variable to be consistent with the above
-
   data[cig_smoker_status %in% c("current", "former"), cig_ever := "ever_smoker"]
   data[cig_smoker_status == "never", cig_ever := "never_smoker"]
 
