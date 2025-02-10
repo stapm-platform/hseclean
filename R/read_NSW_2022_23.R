@@ -88,7 +88,7 @@ read_NSW_2022_23 <- function(
                              dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
     other_vars <- Hmisc::Cs(
-      dvla,
+      dvla, dvfirereg,
       #psu,
       #strata, # stratification unit
       samplepophlthweight,
@@ -124,7 +124,10 @@ read_NSW_2022_23 <- function(
 
     data.table::setnames(data,
 
-                         c("dvwimdovr5",
+                         c(
+                           "dvfirereg",
+
+                           "dvwimdovr5",
 
                            ##### alcohol weekly consumption vars
                            "dnev","cvdnocc","alc12m",
@@ -171,7 +174,10 @@ read_NSW_2022_23 <- function(
                            "dvillchap6", "dvillchap7", "dvillchap8", "dvillchap9", "dvillchap10",
                            "dvillchap11", "dvillchap12", "dvillchap13", "dvillchap14", "dvillchap15"),
 
-                         c("wimd",
+                         c(
+                           "region",
+
+                           "wimd",
 
                            ##### alcohol weekly consumption vars
                            "dnevr","dnany","dnnow",

@@ -89,7 +89,7 @@ read_NSW_2019_20 <- function(
                              dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
     other_vars <- Hmisc::Cs(
-      dvla,
+      dvla, dvfirereg,
       #psu,
       #strata, # stratification unit
       samplepophlthweight,
@@ -125,7 +125,8 @@ read_NSW_2019_20 <- function(
 
     data.table::setnames(data,
 
-                         c("dvwimdovr5","ethnicity","gender",
+                         c(
+                           "dvfirereg", "dvwimdovr5","ethnicity","gender",
 
                            ##### alcohol weekly consumption vars
                            "dnfreq","dnev","dnocc",
@@ -173,7 +174,7 @@ read_NSW_2019_20 <- function(
                            "dvillchap6", "dvillchap7", "dvillchap8", "dvillchap9", "dvillchap10",
                            "dvillchap11", "dvillchap12", "dvillchap13", "dvillchap14", "dvillchap15"),
 
-                         c("wimd","ethnicity_raw","sex",
+                         c("region", "wimd","ethnicity_raw","sex",
 
                            ##### alcohol weekly consumption vars
                            "dnoft","dnevr","dnany",
