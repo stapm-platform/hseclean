@@ -91,6 +91,8 @@ read_NSW_2017_18 <- function(
       #strata, # stratification unit
       samplepophlthweight,
 
+      tenure,
+
       #
       incresp,
 

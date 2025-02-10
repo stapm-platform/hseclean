@@ -96,6 +96,8 @@ read_NSW_2022_23 <- function(
       #
       #incresp,
 
+      tenure,
+
       # Education
       #educend,
       educat2, # Highest educational qualification - revised 2008

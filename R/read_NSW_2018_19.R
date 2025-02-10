@@ -87,6 +87,9 @@ read_NSW_2018_19 <- function(
 
     other_vars <- Hmisc::Cs(
       dvla, dvfirereg,
+
+      tenure,
+
       #psu,
       #strata, # stratification unit
       samplepophlthweight,

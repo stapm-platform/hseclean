@@ -147,6 +147,8 @@ read_WHS_2015 <- function(
     #educend,
     qualhi, # Highest educational qualification - revised 2008 [derived]
 
+    tenure3,
+
     # Occupation
     nssec8, nssec5, nssec3,
     work,       # work status

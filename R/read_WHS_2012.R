@@ -141,6 +141,8 @@ read_WHS_2012 <- function(
     #
     #incresp,
 
+    tenure3,
+
     # Education
     #educend,
     qualhi, # Highest educational qualification - revised 2008 [derived]

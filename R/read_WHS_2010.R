@@ -131,6 +131,8 @@ read_WHS_2010 <- function(
       # weight, height and bmi
       htcm, wtkg, bmi2,
 
+      tenure3,
+
       #psu,
       #strata, # stratification unit
       # sampleadultweight,

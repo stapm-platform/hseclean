@@ -152,6 +152,8 @@ read_WHS_2013 <- function(
     ecstat3,    # econ status 3 class
     ecstat,     # econ status
 
+    tenure3,
+
     # # Family
     # marstat,
     hhchild,

@@ -158,6 +158,8 @@ read_WHS_2014 <- function(
     # marstat,
     hhchild,
 
+    tenure3,
+
     # demographic
     age5yrm,    # derived 5 year age cat with 75+ merged
     region,
