@@ -136,7 +136,7 @@ read_NSW_2016_17 <- function(
                              dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
     other_vars <- Hmisc::Cs(
-      dvla, dvregions,
+      dvla, dvasecarea,
       #psu,
       #strata, # stratification unit
       sampleadultweight,
@@ -175,7 +175,7 @@ read_NSW_2016_17 <- function(
 
     data.table::setnames(data,
 
-                         c("dvregions", "dvwimdovr5","dvethnicity","gender",
+                         c("dvasecarea", "dvwimdovr5","dvethnicity","gender",
 
                            ##### alcohol weekly consumption vars
                            "dnfreq","dnev","dnocc",
