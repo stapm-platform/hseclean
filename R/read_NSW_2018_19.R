@@ -86,7 +86,7 @@ read_NSW_2018_19 <- function(
                              dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
     other_vars <- Hmisc::Cs(
-      dvla, dvfirereg,
+      dvla, dvregions,
 
       tenure,
 
@@ -125,7 +125,7 @@ read_NSW_2018_19 <- function(
 
     data.table::setnames(data,
 
-                         c("dvfirereg", "dvwimdovr5","ethnicity","gender",
+                         c("dvregions", "dvwimdovr5","ethnicity","gender",
 
                            ##### alcohol weekly consumption vars
                            "dnfreq","dnev","dnocc",

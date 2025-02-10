@@ -88,7 +88,7 @@ read_NSW_2021_22 <- function(
                            dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
 
   other_vars <- Hmisc::Cs(
-    dvla, dvfirereg,
+    dvla, dvregions,
 
     #psu,
     #strata, # stratification unit
@@ -126,7 +126,7 @@ read_NSW_2021_22 <- function(
   data.table::setnames(data,
 
                        c(
-                         "dvfirereg",
+                         "dvregions",
                          "dvwimdovr5",
                          "cveconstat2",
 
