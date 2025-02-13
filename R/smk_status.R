@@ -136,6 +136,19 @@ smk_status <- function(
 
     }
 
+    # for England - the above over estimates former smoking and under estimates never smoking
+    # compared to the HSE's reporting tables, which specifically define former smoking
+    # as former *regular* cigarette smokers
+    # to align with these tables use the "cigsta3" derived variable where present
+
+    # review data processing for Scotland and Wales to be as consistent as possible with regular smoking
+
+    if(country == "England" & "cigsta3" %in% names(data)) {
+      data[cigsta3 == 1, cig_smoker_status := "current"]
+      data[cigsta3 == 2, cig_smoker_status := "former"]
+      data[cigsta3 == 3, cig_smoker_status := "never"]
+    }
+
     # Remove variables no longer needed
     remove_vars <- c("smkevr", "cigevr", "cigreg", "cignow", colnames(data)[stringr::str_detect(colnames(data), "cigst")])
     data[ , (remove_vars) := NULL]
