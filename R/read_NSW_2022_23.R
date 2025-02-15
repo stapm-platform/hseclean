@@ -113,7 +113,7 @@ read_NSW_2022_23 <- function(
       age,
       dvethnicity,
       dvwimdovr5, dvwimdinc5,
-      sex
+      sex, numchild
 
     )
 

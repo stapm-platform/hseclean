@@ -162,7 +162,7 @@ read_NSW_2016_17 <- function(
       dvethnicity,
       dvwimdovr5, dvwimdinc5,
 
-      gender
+      gender, numchild
 
     )
 

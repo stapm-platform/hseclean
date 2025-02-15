@@ -112,7 +112,7 @@ read_NSW_2018_19 <- function(
       age,
       ethnicity,
       dvwimdovr5, dvwimdinc5,
-      gender
+      gender, numchild
 
     )
 

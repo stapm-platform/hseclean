@@ -166,11 +166,21 @@ clean_family <- function(
     # impute kids
     data[, kids := NA]
 
+    # WHS
     if(year <= 2015) {
       data[hhchild == 1, kids_bin := 1] # small or large family
       data[hhchild == 2, kids_bin := 0] # no children
       data[ , hhchild := NULL]
     }
+
+    # NSW
+    if(year > 2015) {
+      data[numchild > 0, kids_bin := 1] # small or large family
+      data[numchild == 0, kids_bin := 0] # no children
+      data[ , kids := numchild]
+      data[ , numchild := NULL]
+    }
+
 
   }
 

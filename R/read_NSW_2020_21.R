@@ -113,7 +113,7 @@ read_NSW_2020_21 <- function(
     age,
     dvethnicity,
     dvwimdovr5,
-    sex
+    sex, numchild
 
   )
 
