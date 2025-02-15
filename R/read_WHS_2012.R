@@ -123,7 +123,7 @@ read_WHS_2012 <- function(
   health_vars <- Hmisc::Cs(llti2,
                            lltilot, lltiany,                     # limited a lot/at all by illness or disability
                            llticd1, llticd2, llticd3, llticd4,
-                           lltich1, lltich2, lltich3, lltich4)
+                           lltich1, lltich2, lltich3, lltich4, mental)
   ### there's also a comprehensive set of binary variables and whether they have received treatment for it,
   ### as well as SF12 and SF36 scores
 

@@ -145,56 +145,62 @@ clean_health_and_bio <- function(
   }
 
   # WHS
-  # Limiting long term illness ICD Chapter
-  if("lltich1" %in% colnames(data)) {
 
-    data[ , hse_cancer := "no_cancer"]
-    data[lltich1 == 1 | lltich2 == 1 | lltich3 == 1 | lltich4 == 1, hse_cancer := "cancer"]
+  if(country == "Wales" & year <= 2015) {
 
-    data[ , hse_endocrine := "no_endocrine"]
-    data[lltich1 == 2 | lltich2 == 2 | lltich3 == 2 | lltich4 == 2, hse_endocrine := "endocrine"]
+    data[mental == 0, hse_mental := "no_mental"]
+    data[mental == 1, hse_mental := "mental"]
 
-    data[ , hse_mental := "no_mental"]
-    data[lltich1 == 3 | lltich2 == 3 | lltich3 == 3 | lltich4 == 3, hse_mental := "mental"]
+    # Limiting long term illness ICD Chapter
+    if("lltich1" %in% colnames(data)) {
 
-    data[ , hse_nervous := "no_nervous"]
-    data[lltich1 == 4 | lltich2 == 4 | lltich3 == 4 | lltich4 == 4, hse_nervous := "nervous"]
+      data[ , hse_cancer_lim := "no_cancer"]
+      data[lltich1 == 1 | lltich2 == 1 | lltich3 == 1 | lltich4 == 1, hse_cancer_lim := "cancer"]
 
-    data[ , hse_eye := "no_eye"]
-    data[lltich1 == 5 | lltich2 == 5 | lltich3 == 5 | lltich4 == 5, hse_eye := "eye"]
+      data[ , hse_endocrine_lim := "no_endocrine"]
+      data[lltich1 == 2 | lltich2 == 2 | lltich3 == 2 | lltich4 == 2, hse_endocrine_lim := "endocrine"]
 
-    data[ , hse_ear := "no_ear"]
-    data[lltich1 == 6 | lltich2 == 6 | lltich3 == 6 | lltich4 == 6, hse_ear := "ear"]
+      data[ , hse_mental_lim := "no_mental"]
+      data[lltich1 == 3 | lltich2 == 3 | lltich3 == 3 | lltich4 == 3, hse_mental_lim := "mental"]
 
-    data[ , hse_heart := "no_heart"]
-    data[lltich1 == 7 | lltich2 == 7 | lltich3 == 7 | lltich4 == 7, hse_heart := "heart"]
+      data[ , hse_nervous_lim := "no_nervous"]
+      data[lltich1 == 4 | lltich2 == 4 | lltich3 == 4 | lltich4 == 4, hse_nervous_lim := "nervous"]
 
-    data[ , hse_respir := "no_respir"]
-    data[lltich1 == 8 | lltich2 == 8 | lltich3 == 8 | lltich4 == 8, hse_respir := "respir"]
+      data[ , hse_eye_lim := "no_eye"]
+      data[lltich1 == 5 | lltich2 == 5 | lltich3 == 5 | lltich4 == 5, hse_eye_lim := "eye"]
 
-    data[ , hse_digest := "no_digest"]
-    data[lltich1 == 9 | lltich2 == 9 | lltich3 == 9 | lltich4 == 9, hse_digest := "digest"]
+      data[ , hse_ear_lim := "no_ear"]
+      data[lltich1 == 6 | lltich2 == 6 | lltich3 == 6 | lltich4 == 6, hse_ear_lim := "ear"]
 
-    data[ , hse_urinary := "no_urinary"]
-    data[lltich1 == 10 | lltich2 == 10 | lltich3 == 10 | lltich4 == 10, hse_urinary := "urinary"]
+      data[ , hse_heart_lim := "no_heart"]
+      data[lltich1 == 7 | lltich2 == 7 | lltich3 == 7 | lltich4 == 7, hse_heart_lim := "heart"]
 
-    data[ , hse_muscskel := "no_muscskel"]
-    data[lltich1 == 11 | lltich2 == 11 | lltich3 == 11 | lltich4 == 11, hse_muscskel := "muscskel"]
+      data[ , hse_respir_lim := "no_respir"]
+      data[lltich1 == 8 | lltich2 == 8 | lltich3 == 8 | lltich4 == 8, hse_respir_lim := "respir"]
 
-    data[ , hse_infect := "no_infect"]
-    data[lltich1 == 12 | lltich2 == 12 | lltich3 == 12 | lltich4 == 12, hse_infect := "infect"]
+      data[ , hse_digest_lim := "no_digest"]
+      data[lltich1 == 9 | lltich2 == 9 | lltich3 == 9 | lltich4 == 9, hse_digest_lim := "digest"]
 
-    data[ , hse_blood := "no_blood"]
-    data[lltich1 == 13 | lltich2 == 13 | lltich3 == 13 | lltich4 == 13, hse_blood := "blood"]
+      data[ , hse_urinary_lim := "no_urinary"]
+      data[lltich1 == 10 | lltich2 == 10 | lltich3 == 10 | lltich4 == 10, hse_urinary_lim := "urinary"]
 
-    data[ , hse_skin := "no_skin"]
-    data[lltich1 == 14 | lltich2 == 14 | lltich3 == 14 | lltich4 == 14, hse_skin := "skin"]
+      data[ , hse_muscskel_lim := "no_muscskel"]
+      data[lltich1 == 11 | lltich2 == 11 | lltich3 == 11 | lltich4 == 11, hse_muscskel_lim := "muscskel"]
 
-    #data[ , `:=`(lltich1 = NULL, lltich2 = NULL, lltich3 = NULL, lltich4 = NULL, llti = NULL, lltibi = NULL,
-    #             lltiicd1 = NULL, lltiicd2 = NULL, lltiicd3 = NULL, lltiicd4 = NULL)]
+      data[ , hse_infect_lim := "no_infect"]
+      data[lltich1 == 12 | lltich2 == 12 | lltich3 == 12 | lltich4 == 12, hse_infect_lim := "infect"]
 
+      data[ , hse_blood_lim := "no_blood"]
+      data[lltich1 == 13 | lltich2 == 13 | lltich3 == 13 | lltich4 == 13, hse_blood_lim := "blood"]
+
+      data[ , hse_skin_lim := "no_skin"]
+      data[lltich1 == 14 | lltich2 == 14 | lltich3 == 14 | lltich4 == 14, hse_skin_lim := "skin"]
+
+      #data[ , `:=`(lltich1 = NULL, lltich2 = NULL, lltich3 = NULL, lltich4 = NULL, llti = NULL, lltibi = NULL,
+      #             lltiicd1 = NULL, lltiicd2 = NULL, lltiicd3 = NULL, lltiicd4 = NULL)]
+
+    }
   }
-
   ################################################################
   # Height and weight
 

@@ -122,7 +122,7 @@ read_WHS_2009 <- function(
     #                          dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
     health_vars <- Hmisc::Cs(llti, lltibi,
                              llticd1, llticd2, llticd3, llticd4,
-                             lltich1, lltich2, lltich3, lltich4)
+                             lltich1, lltich2, lltich3, lltich4, mental)
     ### there's also a comprehensive set of binary variables and whether they have received treatment for it,
     ### as well as SF12 and SF36 scores
 
