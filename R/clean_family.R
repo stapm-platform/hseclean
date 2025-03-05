@@ -126,7 +126,7 @@ clean_family <- function(
   # This variable now not possible to get from data 2015+ or from SHeS
 
   # for years 2015+, initially set the number of children and infants to NA
-  data[year >= 2015 | country %in% c("Wales","Scotland"), `:=`(infants = NA, children = NA)]
+  data[year >= 2015 | country %in% c("Scotland"), `:=`(infants = NA, children = NA)]
 
   # Sum the number of infants and children
   data[ , kids := children + infants]

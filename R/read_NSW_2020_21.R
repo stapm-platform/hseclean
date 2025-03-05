@@ -23,7 +23,7 @@
 #'
 read_NSW_2020_21 <- function(
     root = c("X:/", "/Volumes/Shared/")[1],
-    file = "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2021/UKDA-8870-tab/tab/national_survey_for_wales_2020-21_respondent_file_to_ukds.tab"
+    file = "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2020/UKDA-8870-tab/tab/national_survey_for_wales_2020-21_respondent_file_to_ukds.tab"
 ) {
 
   data <- data.table::fread(
@@ -83,9 +83,11 @@ read_NSW_2020_21 <- function(
 
   smk_vars <- tolower(Hmisc::Cs(Smoke, SmAge, Dvsmokec, Dvsmokstat))
 
-  #health_vars <- Hmisc::Cs(dvillchap1, dvillchap2, dvillchap3, dvillchap4, dvillchap5,
+  health_vars <- Hmisc::Cs(
+  #                        dvillchap1, dvillchap2, dvillchap3, dvillchap4, dvillchap5,
   #                         dvillchap6, dvillchap7, dvillchap8, dvillchap9, dvillchap10,
-  #                         dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
+  #                         dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15,
+                             dvhtcm, dvwtkg, dvbmi2)
 
   other_vars <- Hmisc::Cs(
     dvla, dvregions,
@@ -117,7 +119,7 @@ read_NSW_2020_21 <- function(
 
   )
 
-  names <- c(other_vars, #health_vars,
+  names <- c(other_vars, health_vars,
              alc_vars, smk_vars)
 
   names <- tolower(names)

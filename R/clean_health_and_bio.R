@@ -212,6 +212,10 @@ clean_health_and_bio <- function(
 
       setnames(data, c("wtkg", "htcm", "bmi2"), c("weight", "height", "bmi"))
 
+    } else if (year > 2015) {
+
+      setnames(data, c("dvwtkg", "dvhtcm", "dvbmi2"), c("weight", "height", "bmi"))
+
     }
 
   } else {

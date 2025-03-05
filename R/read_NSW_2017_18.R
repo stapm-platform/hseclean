@@ -20,7 +20,7 @@
 #' }
 read_NSW_2017_18 <- function(
     root = c("X:/", "/Volumes/Shared/")[1],
-    file = "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2018/UKDA-8390-tab/tab/nsw_2017-18_respondent_file_final_ukds.tab"
+    file = "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2017/UKDA-8390-tab/tab/nsw_2017-18_respondent_file_final_ukds.tab"
     ) {
 
     data <- data.table::fread(
@@ -83,7 +83,8 @@ read_NSW_2017_18 <- function(
 
     health_vars <- Hmisc::Cs(dvillchap1, dvillchap2, dvillchap3, dvillchap4, dvillchap5,
                              dvillchap6, dvillchap7, dvillchap8, dvillchap9, dvillchap10,
-                             dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15)
+                             dvillchap11, dvillchap12, dvillchap13, dvillchap14, dvillchap15,
+                             dvhtcm, dvwtkg, dvbmi2)
 
     other_vars <- Hmisc::Cs(
       dvla, dvregions,

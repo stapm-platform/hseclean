@@ -44,6 +44,8 @@ prop_summary <- function(
   data_p[get(var_name) %in% levels_1, bin_var := 1]
   data_p[get(var_name) %in% levels_0, bin_var := 0]
 
+  data_p[ , cluster := as.factor(cluster)]
+
   # Lonely PSU (center any single-PSU strata around the sample grand mean rather than the stratum mean)
   options(survey.lonely.psu = "adjust")
 
