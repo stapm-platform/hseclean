@@ -7,7 +7,7 @@
 read_NSW_2016_17(
   root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2017/UKDA-8301-tab/tab/national_survey_for_wales_2016-17_respondent_data_anonymised_ukds.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2016/UKDA-8301-tab/tab/national_survey_for_wales_2016-17_respondent_data_anonymised_ukds.tab"
 )
 }
 \arguments{

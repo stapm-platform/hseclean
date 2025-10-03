@@ -7,7 +7,7 @@
 read_NSW_2022_23(
   root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2023/UKDA-9144-tab/tab/nsw_2022-23_respondent_file_for_ukds.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2022/UKDA-9144-tab/tab/nsw_2022-23_respondent_file_for_ukds.tab"
 )
 }
 \arguments{

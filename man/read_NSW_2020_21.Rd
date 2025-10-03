@@ -7,7 +7,7 @@
 read_NSW_2020_21(
   root = c("X:/", "/Volumes/Shared/")[1],
   file =
-    "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2021/UKDA-8870-tab/tab/national_survey_for_wales_2020-21_respondent_file_to_ukds.tab"
+    "HAR_PR/PR/Consumption_TA/HSE/National Survey for Wales (NSW)/NSW 2020/UKDA-8870-tab/tab/national_survey_for_wales_2020-21_respondent_file_to_ukds.tab"
 )
 }
 \arguments{
