@@ -82,7 +82,7 @@ alc_weekmean_adult <- function(
   
   
   # interview questions
-  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland")) {
     
     data[ , nbeer := hseclean::alc_drink_freq(nbeer)] # normal beer
     data[ , sbeer := hseclean::alc_drink_freq(sbeer)] # strong beer
@@ -92,6 +92,26 @@ alc_weekmean_adult <- function(
     data[ , pops := hseclean::alc_drink_freq(pops)] # alcopops/rtds
   }
   
+  # WALES
+  if(country %in% c("Wales")) {
+    
+    if (year %in% year_set3){
+      
+      data[ , nbeer := hseclean::alc_drink_freq(nbeer)] # normal beer
+      data[ , sbeer := hseclean::alc_drink_freq(sbeer)] # strong beer
+      data[ , spirits := hseclean::alc_drink_freq(spirits)] # spirits
+      data[ , sherry := hseclean::alc_drink_freq(sherry)] # sherry
+      data[ , wine := hseclean::alc_drink_freq(wine)] # wine
+      data[ , pops := hseclean::alc_drink_freq(pops)] # alcopops/rtds
+    } else {
+      data[ , nbeer := NA] # normal beer
+      data[ , sbeer := NA] # strong beer
+      data[ , spirits := NA] # spirits
+      data[ , sherry := NA] # sherry
+      data[ , wine := NA] # wine
+      data[ , pops := NA] # alcopops/rtds
+    }
+  }
   #################################################################
   # Amount usually drunk
   
@@ -154,9 +174,9 @@ alc_weekmean_adult <- function(
   
   # follows same scheme as normal beer
   
-  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
-    
-    data[ , vol_sbeer := 0]
+  data[ , vol_sbeer := 0]
+  
+  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland")) {
     
     # half pints
     ## HSE 2019 records in pints not half pints
@@ -172,13 +192,7 @@ alc_weekmean_adult <- function(
       data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
     }
     
-    ## NSW doesn't have strong beer after 2019-20
-    if(country == "Wales" & year > 2019){
-      data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
-      data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
-      data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
-      data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
-    }
+    
     data[sbeerm1 == 1 & sbeerq1 == -8, vol_sbeer := NA]
     data[sbeerm2 == 1 & sbeerq2 == -8, vol_sbeer := NA]
     data[sbeerm3 == 1 & sbeerq3 == -8, vol_sbeer := NA]
@@ -197,7 +211,21 @@ alc_weekmean_adult <- function(
     
   }
   
+  ## NSW doesn't have strong beer after 2019-20
+  if(country == "Wales"){
+    if (year %in% year_set3){
+      data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
+      data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
+      data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
+      data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
+    } else {
+      data[, vol_sbeer := NA] 
+    }
+  }
   
+  
+  
+  ########
   # Wine
   
   # If variables are not present, create them with NA so code works
@@ -293,14 +321,14 @@ alc_weekmean_adult <- function(
     }
   }
   
-  ##
-  # Repeat with self-complete questions
+  ##############################################
+  # REPEAT WITH SELF-COMPLETE QUESTIONS
   
   # Frequency of drinking in days per week
   
-  
   # interview questions
-  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
+  #if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
+  if((year %in% c(year_set1, year_set2) & country == "England") | country %in% c("Scotland")) {
     
     data[ , scnbeer := hseclean::alc_drink_freq(scnbeer)] # normal beer
     data[ , scsbeer := hseclean::alc_drink_freq(scsbeer)] # strong beer
@@ -329,7 +357,7 @@ alc_weekmean_adult <- function(
     
     #data[ , `:=` (scnbeeq1 = NULL, scnbeeq2 = NULL, scnbeeq3 = NULL)]
     
-    
+    ####################
     # Strong beer
     data[ , vol_scsbeer := 0]
     data[!is.na(scsbeeq1) & scsbeeq1 > 0, vol_scsbeer := scsbeeq1 * volume_data[beverage == "sbeerhalfvol", volume] * 2]
@@ -346,8 +374,9 @@ alc_weekmean_adult <- function(
     
     #data[ , `:=` (scsbeeq1 = NULL, scsbeeq2 = NULL, scsbeeq3 = NULL)]
     
-    
+    ############
     # Wine
+    
     data[ , vol_scwine := 0]
     
     # HSE 2019 has rearranged the questions by which they ask about wine.
@@ -491,6 +520,7 @@ alc_weekmean_adult <- function(
     #################################################################
     # Generate weekly total units
     
+    
     if(year > 2019 & country == "Wales"){
       
       data[ , weekmean := dv_wk_units]
@@ -565,4 +595,3 @@ alc_weekmean_adult <- function(
   
   return(data[])
 }
-
