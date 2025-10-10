@@ -224,6 +224,17 @@ alc_weekmean_adult <- function(
     #data[ , `:=` (bwineq2 = NULL, wineq = NULL)]
   }
   
+  if(country == "Scotland") {
+    
+    data[ , vol_wine := 0]
+    data[!is.na(wineq) & wineq > 0, vol_wine := scwineq3 * volume_data[beverage == "winesglassvol", volume]]
+    data[!is.na(wineq) & wineq > 0, vol_wine := vol_wine + scwineq2 * volume_data[beverage == "wineglassvol", volume]]
+    data[!is.na(wineq) & wineq > 0, vol_wine := vol_wine + scwineq1 * volume_data[beverage == "winelglassvol", volume]]
+    data[!is.na(wineq) & wineq > 0, vol_wine := vol_wine + scwineq4 * volume_data[beverage == "winebtlvol", volume]]
+    
+    #data[ , `:=` (bwineq2 = NULL, wineq = NULL)]
+  }
+  
   
   # Fortified wine (Sherry)
   
