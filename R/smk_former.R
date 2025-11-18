@@ -122,38 +122,23 @@ smk_former <- function(
   #############################################################
   # Missing data
 
-  # For children 8-15, assume any missing time since quit is 1 year - [edit: expanded to years less than 18]
+  # For children younger than 18, assume any missing time since quit is less than 1 year
 
-  data[is.na(years_since_quit) & cig_smoker_status == "former" & age < 18, years_since_quit := 1]
+  data[is.na(years_since_quit) & cig_smoker_status == "former" & age < 18, years_since_quit := 0]
 
-  # For children 8-15, assume any missing time as smoker is 1 year
+  # and assume any missing time as smoker is 1 year
   data[is.na(years_reg_smoker) & cig_smoker_status == "former" & age < 18, years_reg_smoker := 1]
 
-  # Years since quitting
-  data[years_since_quit < 1, years_since_quit := NA]
-
-  data[cig_smoker_status == "former" & years_since_quit < 0.5, cig_smoker_status := "current"]
-  data[cig_smoker_status == "former" & years_since_quit >= 0.5 & years_since_quit < 1, years_since_quit := 1]
+  # Make sure years since quitting is always integer
+  data[ , years_since_quit := floor(years_since_quit)]
 
   # Back-fill missing data in smoker status
   data[is.na(cig_smoker_status) & years_since_quit >= 1, cig_smoker_status := "former"]
   data[is.na(cig_smoker_status) & years_reg_smoker >= 1, cig_smoker_status := "former"]
 
-  # Mean-impute missing values for years since quitting and years regular smoker
+  # Mean-impute missing values for years regular smoker
 
   data[ , ageband := c("<13", "13-17", "18-24", "25-34", "35-54", "55+")[findInterval(age, c(-1, 13, 18, 25, 35, 55, 1000))]]
-
-  # years since quit
-
-  #data[, years_since_quit_av := mean(years_since_quit[years_since_quit > 0], na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
-  # data[(is.na(years_since_quit) | years_since_quit == 0) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
-  # data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
-
-  #data[, years_since_quit_av := mean(years_since_quit[years_since_quit > 0], na.rm = T), by = c("year", "sex", "ageband")]
-  #data[(is.na(years_since_quit) | years_since_quit == 0) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
-  #data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
-
-  #data[, years_since_quit_av := NULL]
 
   # years regular smoker
 
@@ -165,18 +150,12 @@ smk_former <- function(
 
   data[, years_reg_smoker_av := NULL]
 
-
   data[, ageband := NULL]
-
-  # data <- hseclean::impute_mean(data[cig_smoker_status == "former"],
-  #                               var_names = c("years_since_quit", "years_reg_smoker"),
-  #                               strat_vars = c("year", "age_cat")
-  #                               )
 
   data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), `:=`(years_since_quit = NA, years_reg_smoker = NA)]
 
-  data[, years_since_quit := as.double(ceiling(years_since_quit))]
-  data[, years_reg_smoker := as.double(ceiling(years_reg_smoker))]
+  data[, years_since_quit := as.double(floor(years_since_quit))]
+  data[, years_reg_smoker := as.double(floor(years_reg_smoker))]
 
 
   return(data[])
