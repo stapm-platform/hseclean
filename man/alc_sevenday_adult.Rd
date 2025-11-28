@@ -23,6 +23,8 @@ alc_sevenday_adult(
 \item peakday - total units on heaviest drinking day
 \item d7nbeer_units
 \item d7sbeer_units
+\item d7ncider_units (HSE 2022+ only)
+\item d7scider_units (HSE 2022+ only)
 \item d7spirits_units
 \item d7sherry_units
 \item d7wine_units
@@ -39,7 +41,12 @@ UK standard units of alcohol drunk on the heaviest drinking day by using the dat
 different beverages were drunk, and combining this with our standard assumptions about beverage volume and alcohol content.
 
 In 2007 new questions were added asking which glass size was used when wine was consumed.
-Therefore the post HSE 2007 unit calculations are not directly comparable to previous years’ data.
+Therefore the post HSE 2007 unit calculations are not directly comparable to previous years' data.
+
+In HSE 2022, cider was split into normal (<6% ABV) and strong (>=6% ABV) cider for the first time.
+The d7typ variable mapping also changed in 2022:
+- Pre-2022: d7typ3=spirits, d7typ4=sherry, d7typ5=wine, d7typ6=rtds
+- HSE 2022+: d7typ3=ncider, d7typ4=scider, d7typ5=spirits, d7typ6=sherry, d7typ7=wine, d7typ8=rtds
 }
 \examples{
 
