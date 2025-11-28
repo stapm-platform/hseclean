@@ -256,29 +256,33 @@ alc_weekmean_adult <- function(
   # Cider - HSE 2022+ only (split into normal and strong)
 
   if(year >= 2022 & country == "England") {
-
+    
     data[ , vol_ncider := 0]
-
+    
     # Pints (2022+ records in pints not half pints)
-    data[ncidm1 == 1 & !is.na(ncida) & ncida > 0, vol_ncider := ncida * volume_data[beverage == "nciderpintvol", volume]]
+    #data[ncidm1 == 1 & !is.na(ncida) & ncida > 0, vol_ncider := ncida * volume_data[beverage == "nciderpintvol", volume]]
+    data[ncidm1 == 1 & !is.na(ncida) & ncida > 0, vol_ncider := ncida * volume_data[beverage == "nciderhalfvol", volume]*2]
+    
     # Small cans
     data[ncidm2 == 1 & !is.na(ncidb) & ncidb > 0, vol_ncider := vol_ncider + ncidb * volume_data[beverage == "nciderscanvol", volume]]
     # Large cans
     data[ncidm3 == 1 & !is.na(ncidc) & ncidc > 0, vol_ncider := vol_ncider + ncidc * volume_data[beverage == "nciderlcanvol", volume]]
     # Bottles
     data[ncidm4 == 1 & !is.na(ncidd) & ncidd > 0, vol_ncider := vol_ncider + ncidd * volume_data[beverage == "nciderbtlvol", volume]]
-
+    
     data[ , vol_scider := 0]
-
+    
     # Pints
-    data[scidm1 == 1 & !is.na(scida) & scida > 0, vol_scider := scida * volume_data[beverage == "sciderpintvol", volume]]
+    #data[scidm1 == 1 & !is.na(scida) & scida > 0, vol_scider := scida * volume_data[beverage == "sciderpintvol", volume]]
+    data[scidm1 == 1 & !is.na(scida) & scida > 0, vol_scider := scida * volume_data[beverage == "sciderhalfvol", volume]*2]
+    
     # Small cans
     data[scidm2 == 1 & !is.na(scidb) & scidb > 0, vol_scider := vol_scider + scidb * volume_data[beverage == "sciderscanvol", volume]]
     # Large cans
     data[scidm3 == 1 & !is.na(scidc) & scidc > 0, vol_scider := vol_scider + scidc * volume_data[beverage == "sciderlcanvol", volume]]
     # Bottles
     data[scidm4 == 1 & !is.na(scidd) & scidd > 0, vol_scider := vol_scider + scidd * volume_data[beverage == "sciderbtlvol", volume]]
-
+    
   }
 
   ########
