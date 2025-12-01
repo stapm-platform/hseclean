@@ -150,6 +150,17 @@ smk_former <- function(
   
   data[, years_reg_smoker_av := NULL]
   
+  # years since quitting
+  
+  data[, years_since_quit_av := mean(years_since_quit, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
+  data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  
+  data[, years_since_quit_av := mean(years_since_quit, na.rm = T), by = c("year", "sex", "ageband")]
+  data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  
+  data[, years_since_quit_av := NULL]
+  
+  
   data[, ageband := NULL]
   
   data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), `:=`(years_since_quit = NA, years_reg_smoker = NA)]
