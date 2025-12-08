@@ -18,11 +18,9 @@ Returns a data table of the year of data selected.
 Reads and does basic cleaning of a selected year of the Health Survey for England.
 }
 \examples{
-
 \dontrun{
 
 data_2001 <- read_hse(year = 2001, root = "X:/")
-
 }
 
 }
