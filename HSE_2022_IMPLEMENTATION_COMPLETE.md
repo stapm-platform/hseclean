@@ -152,10 +152,10 @@ data[is.na(ncidqpt7), ncidqpt7 := 0]
 
 ## Results After Fix
 
-✅ **266 people** with non-zero normal cider units (expected ~267)
-✅ **37 people** with non-zero strong cider units (exactly as expected)
-✅ **Cider correctly included in `peakday`** calculations
-✅ **All volume and ABV lookups working** correctly
+**266 people** with non-zero normal cider units (expected ~267)
+**37 people** with non-zero strong cider units (exactly as expected)
+**Cider correctly included in `peakday`** calculations
+**All volume and ABV lookups working** correctly
 
 ### Example Output
 
@@ -190,9 +190,9 @@ Sample of people with cider in 7-day recall:
 ## Backward Compatibility
 
 All changes are isolated within `if(is_hse_2022)` blocks, ensuring:
-- ✅ Pre-2022 data continues to work as before
-- ✅ Cider is included in beer for pre-2022 years (as per historical HSE convention)
-- ✅ No changes to existing variable names or calculations for other beverage types
+- Pre-2022 data continues to work as before
+- Cider is included in beer for pre-2022 years (as per historical HSE convention)
+- No changes to existing variable names or calculations for other beverage types
 
 ## Testing
 
@@ -235,15 +235,6 @@ Alternative diagnostic script: `diagnose_is_hse_2022.R`
 - `HSE_2022_CIDER_FIX_SUMMARY.md`: Initial bug fix summary
 - `DEBUG_is_hse_2022_FLAG.md`: Debugging notes
 - `HSE_2022_IMPLEMENTATION_COMPLETE.md`: This document
-
-## Next Steps for Review
-
-1. ✅ All DEBUG messages removed
-2. ✅ Inline documentation added
-3. ✅ Backward compatibility verified
-4. ⏳ Clean up temporary diagnostic files (optional - keep for reference)
-5. ⏳ Run final comprehensive test
-6. ⏳ Ready for code review and merge
 
 ## Technical Notes
 
