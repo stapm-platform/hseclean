@@ -503,18 +503,24 @@ alc_weekmean_adult <- function(
   
   #################################################################
   # Combine amount usually drunk with frequencies to get natural volumes per week
-  
-  if(year %in% c(year_set1, year_set2) | country %in% c("Scotland","Wales")) {
-    
+
+  if(year %in% c(year_set1, year_set2, year_set4) | country %in% c("Scotland","Wales")) {
+
     data[ , vol_nbeer := vol_nbeer * nbeer]
     data[ , vol_sbeer := vol_sbeer * sbeer]
     data[ , vol_spirits := vol_spirits * spirits]
     data[ , vol_sherry := vol_sherry * sherry]
     data[ , vol_wine := vol_wine * wine]
     data[ , vol_pops := vol_pops * pops]
-    
+
+    # Cider - HSE 2022+ only
+    if(year >= 2022) {
+      data[ , vol_ncider := vol_ncider * ncider]
+      data[ , vol_scider := vol_scider * scider]
+    }
+
     #data[ , `:=`(nbeer = NULL, sbeer = NULL, spirit = NULL, sherry = NULL, wine = NULL, pops = NULL)]
-    
+
   }
   
   if((year %in% c(year_set2) & country == "England") | country == "Scotland") {
