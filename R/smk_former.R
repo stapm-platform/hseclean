@@ -37,50 +37,50 @@
 smk_former <- function(
     data
 ) {
-
+  
   # check for which country data is being processed
   country <- unique(data[ , country][1])
-
+  
   #############################################################
   # How long ago did you stop smoking cigarettes?
   # Asked to former smokers who smoked regularly or occasionally
   # If less than 1 year = 0
-
+  
   data[year >= 2015 & country == "England", endsmoke := NA_real_]
-
+  
   data[ , endsmoke := as.double(endsmoke)]
-
+  
   data[(year < 2015 | country == "Scotland") & (endsmoke >= 97 | endsmoke < 0), endsmoke := NA_real_]
-
+  
   data[cig_smoker_status == "former", years_since_quit := endsmoke]
-
+  
   data[ , endsmoke := NULL]
-
+  
   #############################################################
   # For approximately how many years did you smoke cigarettes regularly?
   # If less than 1 year = 0
-
+  
   data[year >= 2015 & country == "England", smokyrs := NA_real_]
-
+  
   data[ , smokyrs := as.double(smokyrs)]
-
+  
   data[(year < 2015 | country == "Scotland") & (smokyrs >= 97 | smokyrs < 0), smokyrs := NA_real_]
-
+  
   data[cig_smoker_status == "former", years_reg_smoker := smokyrs]
-
+  
   data[ , smokyrs := NULL]
-
+  
   #############################################################
-
+  
   # In England,
   # for years 2015+ endsmoke and smkyrs are not provided by single years
-
+  
   # endsmoke
-
+  
   data[ , endsmoke_cat := NA_character_]
-
+  
   data[year < 2015 | country == "Scotland", endsmokg := NA]
-
+  
   data[endsmokg == 1 & cig_smoker_status == "former", endsmoke_cat := "0-4"]
   data[endsmokg == 2 & cig_smoker_status == "former", endsmoke_cat := "5-9"]
   data[endsmokg == 3 & cig_smoker_status == "former", endsmoke_cat := "10-14"]
@@ -89,20 +89,20 @@ smk_former <- function(
   data[endsmokg == 6 & cig_smoker_status == "former", endsmoke_cat := "30-39"]
   data[endsmokg == 7 & cig_smoker_status == "former", endsmoke_cat := "40-49"]
   data[endsmokg == 8 & cig_smoker_status == "former", endsmoke_cat := "50-59"]
-
+  
   data[ , endsmokg := NULL]
-
+  
   # Assign single years of time since quit by just picking an age within the category given
-  data[!is.na(endsmoke_cat), years_since_quit := sapply(endsmoke_cat, hseclean::num_sim)]
-
+  data[!is.na(endsmoke_cat), years_since_quit := sapply(endsmoke_cat, hseclean::num_sim, lkup = hseclean::quit_years_lkup)]
+  
   data[ , endsmoke_cat := NULL]
-
+  
   # smokyrs
-
+  
   data[ , smokyrs_cat := NA_character_]
-
+  
   data[year < 2015 | country == "Scotland", smokyrsg := NA]
-
+  
   data[smokyrsg == 1 & cig_smoker_status == "former", smokyrs_cat := "0-4"]
   data[smokyrsg == 2 & cig_smoker_status == "former", smokyrs_cat := "5-9"]
   data[smokyrsg == 3 & cig_smoker_status == "former", smokyrs_cat := "10-14"]
@@ -111,53 +111,64 @@ smk_former <- function(
   data[smokyrsg == 6 & cig_smoker_status == "former", smokyrs_cat := "30-39"]
   data[smokyrsg == 7 & cig_smoker_status == "former", smokyrs_cat := "40-49"]
   data[smokyrsg == 8 & cig_smoker_status == "former", smokyrs_cat := "50-59"]
-
+  
   data[ , smokyrsg := NULL]
-
+  
   # Assign single years of time since quit by just picking an age within the category given
   data[!is.na(smokyrs_cat), years_reg_smoker := sapply(smokyrs_cat, hseclean::num_sim)]
-
+  
   data[ , smokyrs_cat := NULL]
-
+  
   #############################################################
   # Missing data
-
+  
   # For children younger than 18, assume any missing time since quit is less than 1 year
-
+  
   data[is.na(years_since_quit) & cig_smoker_status == "former" & age < 18, years_since_quit := 0]
-
+  
   # and assume any missing time as smoker is 1 year
   data[is.na(years_reg_smoker) & cig_smoker_status == "former" & age < 18, years_reg_smoker := 1]
-
+  
   # Make sure years since quitting is always integer
   data[ , years_since_quit := floor(years_since_quit)]
-
+  
   # Back-fill missing data in smoker status
   data[is.na(cig_smoker_status) & years_since_quit >= 1, cig_smoker_status := "former"]
   data[is.na(cig_smoker_status) & years_reg_smoker >= 1, cig_smoker_status := "former"]
-
+  
   # Mean-impute missing values for years regular smoker
-
+  
   data[ , ageband := c("<13", "13-17", "18-24", "25-34", "35-54", "55+")[findInterval(age, c(-1, 13, 18, 25, 35, 55, 1000))]]
-
+  
   # years regular smoker
-
+  
   data[, years_reg_smoker_av := mean(years_reg_smoker[years_reg_smoker > 0], na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
   data[(is.na(years_reg_smoker) | years_reg_smoker == 0) & cig_smoker_status == "former", years_reg_smoker := years_reg_smoker_av]
-
+  
   data[, years_reg_smoker_av := mean(years_reg_smoker[years_reg_smoker > 0], na.rm = T), by = c("year", "sex", "ageband")]
   data[(is.na(years_reg_smoker) | years_reg_smoker == 0) & cig_smoker_status == "former", years_reg_smoker := years_reg_smoker_av]
-
+  
   data[, years_reg_smoker_av := NULL]
-
+  
+  # years since quitting
+  
+  data[, years_since_quit_av := mean(years_since_quit, na.rm = T), by = c("year", "sex", "imd_quintile", "ageband")]
+  data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  
+  data[, years_since_quit_av := mean(years_since_quit, na.rm = T), by = c("year", "sex", "ageband")]
+  data[is.na(years_since_quit) & cig_smoker_status == "former", years_since_quit := years_since_quit_av]
+  
+  data[, years_since_quit_av := NULL]
+  
+  
   data[, ageband := NULL]
-
+  
   data[is.na(cig_smoker_status) | cig_smoker_status %in% c("current", "never"), `:=`(years_since_quit = NA, years_reg_smoker = NA)]
-
+  
   data[, years_since_quit := as.double(floor(years_since_quit))]
   data[, years_reg_smoker := as.double(floor(years_reg_smoker))]
-
-
+  
+  
   return(data[])
 }
 

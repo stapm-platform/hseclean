@@ -69,19 +69,20 @@ read_2003 <- function(
     file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2003/UKDA-5098-tab/tab/hse03ai.tab",
     select_cols = c("tobalc", "all")[1]
 ) {
-
+  
   data <- data.table::fread(
     paste0(root, file),
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "N/A"))
-
+  
   setnames(data, names(data), tolower(names(data)))
-
+  
   if(select_cols == "tobalc") {
-
+    
     alc_vars <- colnames(data[ , 970:1037])
     smk_vars <- colnames(data[ , 912:969])
     health_vars <- paste0("compm", 1:15)
-
+    eq5d_vars <- colnames(data[, 287:292])
+    
     other_vars <- Hmisc::Cs(
       mintb, addnum,
       area, cluster, int_wt, #child_wt,
@@ -95,34 +96,31 @@ read_2003 <- function(
       educend, topqual3,
       eqv5,
       #eqvinc,
-
+      
       marstatb, # marital status inc cohabitees
-
+      
       # how much they weigh
       htval, wtval)
-
-    names <- c(other_vars, alc_vars, smk_vars, health_vars)
-
+    
+    names <- c(other_vars, alc_vars, smk_vars, health_vars, eq5d_vars)
+    
     names <- tolower(names)
-
+    
     data <- data[ , names, with = F]
-
+    
   }
-
+  
   data.table::setnames(data, c("area", "imd2004", "d7unit", "int_wt", "marstatb", "ethnici", "pserial"),
                        c("psu", "qimd", "d7unitwg", "wt_int", "marstat", "ethnicity_raw", "hse_id"))
-
+  
   data[ , psu := paste0("2003_", psu)]
   data[ , cluster := paste0("2003_", cluster)]
-
+  
   data[ , year := 2003]
   data[ , country := "England"]
-
+  
   data[ , quarter := c(1:4)[findInterval(mintb, c(1, 4, 7, 10))]]
   data[ , mintb := NULL]
-
+  
   return(data[])
 }
-
-
-

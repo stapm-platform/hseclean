@@ -4,10 +4,13 @@
 \alias{num_sim}
 \title{Simulate single years from age/time category}
 \usage{
-num_sim(x)
+num_sim(x, lkup = NULL)
 }
 \arguments{
 \item{x}{Character - the age/time category e.g. "15-20".}
+
+\item{lkup}{Data.table. Defaults to NULL. Must have column names ind, var, p. 
+E.g. ind = endsmoke_cat, var = years_since_quit, p = probability.}
 }
 \value{
 Returns an integer.
@@ -17,6 +20,7 @@ Used to overcome the loss of variables (age, time since quit) in single years in
 }
 \details{
 Takes a category with beginning and end separated by "-" and randomly assigns each observation a number within the age category.
+Or uses a lookup file to sample from the probability distribution of single values within each category.
 }
 \examples{
 

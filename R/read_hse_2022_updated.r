@@ -18,7 +18,7 @@
 #'
 #' }
 #'
-read_2022 <- function(
+read_2022_test <- function(
   root = c("X:/", "/Volumes/Shared/")[1],
   file = "HAR_PR/PR/Consumption_TA/HSE/Health Survey for England (HSE)/HSE 2022/UKDA-9469-tab/tab/hse_2022_eul_v1.tab",
   select_cols = c("tobalc", "all")[1]

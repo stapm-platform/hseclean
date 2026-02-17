@@ -67,36 +67,10 @@ alc_sevenday_adult <- function(
   country <- unique(data[ , country][1])
   year <- as.integer(unique(data[ , year][1]))
 
-  # Auto-detect and load HSE 2022 ABV data if needed
+  # Auto-detect and load HSE 2022 ABV / volumes data if needed
   if(year == 2022 & country == "England") {
-    tryCatch({
-      if("abv_data_2022" %in% getNamespaceExports("hseclean")) {
-        abv_data <- hseclean::abv_data_2022
-        message("Auto-detected HSE 2022: Using 2022-specific ABV values for 7-day recall...")
-      } else if(exists("abv_data_2022", envir = .GlobalEnv)) {
-        abv_data <- get("abv_data_2022", envir = .GlobalEnv)
-        message("Auto-detected HSE 2022: Using 2022-specific ABV values from global environment...")
-      } else {
-        message("HSE 2022 detected but abv_data_2022 not found. Using default ABV values.")
-      }
-    }, error = function(e) {
-      message("Error loading 2022 ABV data: ", e$message, ". Using default ABV values.")
-    })
-
-    # Auto-detect and load HSE 2022 volume data if needed
-    tryCatch({
-      if("alc_volume_data_2022" %in% getNamespaceExports("hseclean")) {
-        alc_volume_data <- hseclean::alc_volume_data_2022
-        message("Auto-detected HSE 2022: Using 2022-specific volume assumptions for 7-day recall...")
-      } else if(exists("alc_volume_data_2022", envir = .GlobalEnv)) {
-        alc_volume_data <- get("alc_volume_data_2022", envir = .GlobalEnv)
-        message("Auto-detected HSE 2022: Using 2022-specific volume assumptions from global environment...")
-      } else {
-        message("HSE 2022 detected but alc_volume_data_2022 not found. Using default volume assumptions.")
-      }
-    }, error = function(e) {
-      message("Error loading 2022 volume data: ", e$message, ". Using default volume assumptions.")
-    })
+    abv_data <- hseclean::abv_data_2022
+    alc_volume_data <- hseclean::alc_volume_data_2022
   }
 
   # Detect HSE 2022+ by presence of cider split (d7typ3 = ncider indicator)
