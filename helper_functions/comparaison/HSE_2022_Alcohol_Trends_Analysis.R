@@ -42,7 +42,7 @@ data_2022 <- clean_age(data_2022)
 data_2022 <- alc_drink_now_allages(data_2022)
 data_2022 <- alc_weekmean_adult(data_2022)
 
-cat("  ✓ HSE 2022 processing complete\n\n")
+cat(" HSE 2022 processing complete\n\n")
 
 # ==============================================================================
 # STEP 2: Calculate Key Population Statistics for 2022

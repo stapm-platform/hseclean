@@ -45,7 +45,7 @@ data_2022 <- read_2022(
   select_cols = c("tobalc")
 )
 
-cat("✓ Data loaded successfully\n")
+cat("Data loaded successfully\n")
 cat("  Dimensions:", dim(data_2022)[1], "rows x", dim(data_2022)[2], "columns\n")
 cat("  Year:", unique(data_2022$year), "\n")
 cat("  Country:", unique(data_2022$country), "\n\n")
@@ -63,9 +63,9 @@ cat("TEST 3: Checking key variables...\n")
 key_vars <- c("hse_id", "age16g5", "sex", "year", "country", "psu", "cluster", "wt_int")
 missing_vars <- key_vars[!key_vars %in% names(data_2022)]
 if (length(missing_vars) == 0) {
-  cat("✓ All key variables present\n\n")
+  cat("All key variables present\n\n")
 } else {
-  cat("✗ Missing variables:", paste(missing_vars, collapse = ", "), "\n\n")
+  cat("Missing variables:", paste(missing_vars, collapse = ", "), "\n\n")
 }
 
 # Test 4: Process the data through the pipeline
@@ -83,7 +83,7 @@ if (!USE_PACKAGE) {
 } else {
   hse22_processed <- alc_weekmean_adult(hse22)
 }
-cat("✓ Processing complete\n\n")
+cat("Processing complete\n\n")
 
 # Test 5: Check output variables
 cat("TEST 5: Checking output alcohol variables...\n")

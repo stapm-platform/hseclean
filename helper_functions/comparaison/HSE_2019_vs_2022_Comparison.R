@@ -35,7 +35,7 @@ if (USE_PACKAGE_MODE && requireNamespace("hseclean", quietly = TRUE)) {
     load("data/abv_data_2022.rda")
     cat("  ✓ 2022-specific ABV data loaded\n")
   } else {
-    cat("  ⚠ Warning: 2022-specific ABV data not found\n")
+    cat("  Warning: 2022-specific ABV data not found\n")
     cat("  Run source('create_2022_abv.R') first\n\n")
     stop("Missing 2022 ABV data")
   }
@@ -256,10 +256,7 @@ cat("==========================================\n")
 cat("BY IMD COMPARISON\n")
 cat("==========================================\n\n")
 
-# Note: Different IMD categorizations between years
-cat("NOTE: HSE 2019 uses qimd (5 quintiles, 2015 boundaries)\n")
-cat("      HSE 2022 uses qim4 (4 quartiles)\n")
-cat("      ⚠️  Different categorizations make direct comparison difficult\n\n")
+
 
 # Debug: Check what IMD variables exist
 cat("DEBUG: IMD variables in adults_2019:", paste(grep("imd|qim", names(adults_2019), value=TRUE, ignore.case=TRUE), collapse=", "), "\n")
@@ -414,20 +411,6 @@ cat(sprintf("   - 2022: M=%.2f, F=%.2f (ratio: %.2f)\n",
     by_sex_2022[sex == 2]$mean_all,
     by_sex_2022[sex == 1]$mean_all / by_sex_2022[sex == 2]$mean_all))
 
-cat("\n4. Age patterns:\n")
-cat("   - Peak consumption typically in middle age (40-60)\n")
-cat("   - Highest abstention in youngest (16-19) and oldest (80+) groups\n")
-cat("   - Check age-specific tables above for patterns\n")
-
-cat("\n5. IMD/Deprivation:\n")
-cat("   - ⚠ CHECK: Abstention pattern by deprivation looks unusual\n")
-cat("   - Expected: Higher deprivation → Higher abstention\n")
-cat("   - Review IMD tables above carefully\n")
-
-cat("\n6. ABV assumptions:\n")
-cat("   - 2019 uses standard ABV values\n")
-cat("   - 2022 uses 2022-specific ABV values (higher beer/cider ABVs)\n")
-cat("   - This should slightly increase 2022 unit calculations (all else equal)\n")
 
 cat("\n==========================================\n")
 cat("COMPARISON COMPLETE\n")

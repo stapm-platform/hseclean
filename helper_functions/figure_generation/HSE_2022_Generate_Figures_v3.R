@@ -1,6 +1,4 @@
-# HSE 2022 - Publication-Ready Innovative Visualizations
-# ==============================================================================
-# Modern, informative figures that tell a compelling story
+# HSE 2022 - 
 # ==============================================================================
 
 library(data.table)
@@ -10,10 +8,7 @@ library(tidyr)
 library(scales)
 library(patchwork)  # For combining plots
 
-cat("==========================================\n")
-cat("HSE 2022 INNOVATIVE FIGURES\n")
-cat("Publication-Ready Visualizations\n")
-cat("==========================================\n\n")
+
 
 # Load functions
 if (requireNamespace("hseclean", quietly = TRUE)) {
@@ -62,7 +57,7 @@ adults <- data_2022[age >= 16]
 # HSE coding: 1 = Male, 2 = Female
 adults[, sex := factor(sex, levels = c(1, 2), labels = c("Male", "Female"))]
 
-cat("  ✓ Processed:", nrow(adults), "adults\n\n")
+cat("  Processed:", nrow(adults), "adults\n\n")
 
 # ==============================================================================
 # FIGURE 1: Population Pyramid of Drinking Patterns
@@ -429,15 +424,4 @@ cat("\n==========================================\n")
 cat("ALL FIGURES COMPLETE\n")
 cat("==========================================\n\n")
 cat("Output directory:", output_dir, "\n")
-cat("Created 6 innovative publication-ready figures:\n")
-cat("  1. Population pyramid of drinking patterns\n")
-cat("  2. Risk distribution by sex (stacked)\n")
-cat("  3. Beverage consumption heatmap\n")
-cat("  4. Cider strength analysis (two-panel)\n")
-cat("  5. Abstention gradient across lifespan\n")
-cat("  6. Distribution around 14-unit threshold\n")
-cat("\nAll figures feature:\n")
-cat("  ✓ Clear storytelling\n")
-cat("  ✓ Multiple data dimensions\n")
-cat("  ✓ Professional design\n")
-cat("  ✓ Publication quality (300 DPI)\n\n")
+

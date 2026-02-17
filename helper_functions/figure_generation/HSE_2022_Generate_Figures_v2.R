@@ -1,6 +1,4 @@
-# HSE 2022 Alcohol Analysis - Professional Figure Generation
-# ==============================================================================
-# Publication-quality figures with refined design and white backgrounds
+# HSE 2022 Alcohol Analysis 
 # ==============================================================================
 
 library(data.table)
@@ -11,11 +9,7 @@ library(stringr)
 library(Hmisc)
 library(scales)
 
-# Setup
-cat("==========================================\n")
-cat("HSE 2022 FIGURE GENERATION (v2)\n")
-cat("Publication-Quality Design\n")
-cat("==========================================\n\n")
+
 
 # Load hseclean or source functions
 if (requireNamespace("hseclean", quietly = TRUE)) {

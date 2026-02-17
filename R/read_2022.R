@@ -75,9 +75,8 @@ read_2022 <- function(
   }
 
   # remove "_22" and "_19" suffixes
-  data.table::setnames(data, names(data), stringr::str_remove_all(names(data), "_22"))
-  data.table::setnames(data, names(data), stringr::str_remove_all(names(data), "_19"))
-
+  data.table::setnames(data, names(data), stringr::str_remove_all(names(data), "22$"))
+data.table::setnames(data, names(data), stringr::str_remove_all(names(data), "19$"))
   # relabel - safe renaming that only renames variables that exist
   old_names <- c(
     "cluster302", "psu_scr", "qrtint", "marstatd", "origin2", "activb2", "stwork", "seriala", "qimd19", "startsmk19",
