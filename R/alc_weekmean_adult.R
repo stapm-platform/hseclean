@@ -59,7 +59,7 @@
 #'
 #' }
 #'
-alc_weekmean_adult_test <- function(
+alc_weekmean_adult <- function(
     data,
     abv_data = hseclean::abv_data,
     volume_data = hseclean::alc_volume_data
