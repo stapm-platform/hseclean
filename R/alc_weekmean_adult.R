@@ -59,7 +59,7 @@
 #'
 #' }
 #'
-alc_weekmean_adult <- function(
+alc_weekmean_adult_test <- function(
     data,
     abv_data = hseclean::abv_data,
     volume_data = hseclean::alc_volume_data
@@ -106,19 +106,21 @@ alc_weekmean_adult <- function(
   
   
   # interview questions
-  if(year %in% c(year_set1, year_set2, year_set4) | country %in% c("Scotland")) {
-    
-    data[ , nbeer := hseclean::alc_drink_freq(nbeer)] # normal beer
-    data[ , sbeer := hseclean::alc_drink_freq(sbeer)] # strong beer
-    data[ , spirits := hseclean::alc_drink_freq(spirits)] # spirits
-    data[ , sherry := hseclean::alc_drink_freq(sherry)] # sherry
-    data[ , wine := hseclean::alc_drink_freq(wine)] # wine
-    data[ , pops := hseclean::alc_drink_freq(pops)] # alcopops/rtds
-    
-    # Cider - split into normal/strong from 2022 onwards
-    if(year >= 2022) {
-      data[ , ncider := hseclean::alc_drink_freq(ncider)] # normal cider
-      data[ , scider := hseclean::alc_drink_freq(scider)] # strong cider
+  if (!(country %in% "Wales")) {
+    if(year %in% c(year_set1, year_set2, year_set4) | country %in% c("Scotland")) {
+      
+      data[ , nbeer := hseclean::alc_drink_freq(nbeer)] # normal beer
+      data[ , sbeer := hseclean::alc_drink_freq(sbeer)] # strong beer
+      data[ , spirits := hseclean::alc_drink_freq(spirits)] # spirits
+      data[ , sherry := hseclean::alc_drink_freq(sherry)] # sherry
+      data[ , wine := hseclean::alc_drink_freq(wine)] # wine
+      data[ , pops := hseclean::alc_drink_freq(pops)] # alcopops/rtds
+      
+      # Cider - split into normal/strong from 2022 onwards
+      if(year >= 2022) {
+        data[ , ncider := hseclean::alc_drink_freq(ncider)] # normal cider
+        data[ , scider := hseclean::alc_drink_freq(scider)] # strong cider
+      }
     }
   }
   
@@ -206,31 +208,32 @@ alc_weekmean_adult <- function(
   
   data[ , vol_sbeer := 0]
   
-  if(year %in% c(year_set1, year_set2, year_set4) | country %in% c("Scotland")) {
-    
-    # half pints
-    ## HSE 2019 records in pints not half pints
-    if(country == "England" & year >= 2019){
-      data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * 2 * volume_data[beverage == "sbeerhalfvol", volume]]
-      data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
-      data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
-      data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
-    } else {
-      data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
-      data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
-      data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
-      data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
+  if (country != "Wales"){
+    if(year %in% c(year_set1, year_set2, year_set4) | country %in% c("Scotland")) {
+      
+      # half pints
+      ## HSE 2019 records in pints not half pints
+      if(country == "England" & year >= 2019){
+        data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * 2 * volume_data[beverage == "sbeerhalfvol", volume]]
+        data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
+        data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
+        data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
+      } else {
+        data[sbeerm1 == 1 & !is.na(sbeerq1) & sbeerq1 > 0, vol_sbeer := sbeerq1 * volume_data[beverage == "sbeerhalfvol", volume]]
+        data[sbeerm2 == 1 & !is.na(sbeerq2) & sbeerq2 > 0, vol_sbeer := vol_sbeer + sbeerq2 * volume_data[beverage == "sbeerscanvol", volume]]
+        data[sbeerm3 == 1 & !is.na(sbeerq3) & sbeerq3 > 0, vol_sbeer := vol_sbeer + sbeerq3 * volume_data[beverage == "sbeerlcanvol", volume]]
+        data[sbeerm4 == 1 & !is.na(sbeerq4) & sbeerq4 > 0, vol_sbeer := vol_sbeer + sbeerq4 * volume_data[beverage == "sbeerbtlvol", volume]]
+      }
+      
+      
+      data[sbeerm1 == 1 & sbeerq1 == -8, vol_sbeer := NA]
+      data[sbeerm2 == 1 & sbeerq2 == -8, vol_sbeer := NA]
+      data[sbeerm3 == 1 & sbeerq3 == -8, vol_sbeer := NA]
+      data[sbeerm4 == 1 & sbeerq4 == -8, vol_sbeer := NA]
+      
+      #data[ , `:=` (sbeerm1 = NULL, sbeerm2 = NULL, sbeerm3 = NULL, sbeerm4 = NULL, sbeerq1 = NULL, sbeerq2 = NULL, sbeerq3 = NULL, sbeerq4 = NULL)]
     }
-    
-    
-    data[sbeerm1 == 1 & sbeerq1 == -8, vol_sbeer := NA]
-    data[sbeerm2 == 1 & sbeerq2 == -8, vol_sbeer := NA]
-    data[sbeerm3 == 1 & sbeerq3 == -8, vol_sbeer := NA]
-    data[sbeerm4 == 1 & sbeerq4 == -8, vol_sbeer := NA]
-    
-    #data[ , `:=` (sbeerm1 = NULL, sbeerm2 = NULL, sbeerm3 = NULL, sbeerm4 = NULL, sbeerq1 = NULL, sbeerq2 = NULL, sbeerq3 = NULL, sbeerq4 = NULL)]
   }
-  
   # for England in some early years, a different quantity measure is used
   
   if(year %in% year_set1 & country == "England") {
@@ -561,10 +564,10 @@ alc_weekmean_adult <- function(
     data[ , pops_units := vol_pops * abv_data[beverage == "popsabv", abv] / 1000]
     
     # Cider units - only for 2022+
-    if(year >= 2022) {
+    if(year >= 2022 & country == "England") {
       data[ , ncider_units := vol_ncider * abv_data[beverage == "nciderabv", abv] / 1000]
       data[ , scider_units := vol_scider * abv_data[beverage == "sciderabv", abv] / 1000]
-    }
+    } 
     
     #data[ , `:=`(vol_nbeer = NULL, vol_sbeer = NULL, vol_spirits = NULL, vol_sherry = NULL, vol_wine = NULL, vol_pops = NULL)]
     
@@ -574,7 +577,7 @@ alc_weekmean_adult <- function(
     # Condense into 4 beverage categories
     # protect NAs if both NA.
     # For 2022+, include cider with beer
-    if(year >= 2022) {
+    if(year >= 2022 & country == "England") {
       data[, beer_units := rowSums(.SD, na.rm = TRUE), .SDcols = c("nbeer_units", "sbeer_units", "ncider_units", "scider_units")]
       data[nbeer_units == 0 & sbeer_units == 0 & ncider_units == 0 & scider_units == 0, beer_units := NA]
     } else {
