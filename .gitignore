@@ -11,3 +11,5 @@ dev/
 *vignettes/*/plots
 .Rhistory
 .positai
+.Rproj.user
+.positai
