@@ -17,3 +17,5 @@ README.Rmd
 ^slides$
 ^posters$
 ^vignettes$
+^\.positai$
+^\.claude$
