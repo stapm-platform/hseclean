@@ -51,7 +51,7 @@ read_2018 <- function(
       stwork,
       activb2,
       #Ag015g4, #Children, Infants,
-      educend, topqual3,
+      educend, topqual3, GOR1,
       eqv5, #eqvinc,
       
       marstatd, # marital status inc cohabitees

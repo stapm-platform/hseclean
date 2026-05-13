@@ -18,7 +18,7 @@ clean_demographic(data)
 }
 }
 \description{
-Creates variables for ethnicity, sex and quintiles of the Index of Multiple Deprivation (IMDQ).
+Creates variables for ethnicity, region, sex, and quintiles of the Index of Multiple Deprivation (IMDQ).
 }
 \details{
 See below

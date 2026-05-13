@@ -93,7 +93,7 @@ read_2013 <- function(
       Paidwk,
       Activb, #HHInc,
       Children, Infants,
-      EducEnd, topqual3,
+      EducEnd, topqual3, gor1,
       eqv5, #eqvinc,
 
       marstatd, # marital status inc cohabitees

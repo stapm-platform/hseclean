@@ -93,7 +93,7 @@ read_2014 <- function(
       paidwk,
       activb, #HHInc,
       children, infants,
-      educEnd, topqual3,
+      educEnd, topqual3, gor1,
       eqv5, #eqvinc,
       
       marstatd, # marital status inc cohabitees

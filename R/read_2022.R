@@ -57,7 +57,7 @@ read_2022 <- function(
       stwork,
       activb2,
       # Ag015g4, #Children, Infants,
-      educend, topqual3,
+      educend, topqual3, GOR1,
       eqv5, # eqvinc,
 
       marstatd_22, # marital status inc cohabitees
@@ -71,7 +71,7 @@ read_2022 <- function(
     names <- tolower(names)
 
     data <- data[, names, with = F]
-    message("HSE 2022 debug: Column selection completed, ", ncol(data), " columns selected")
+   # message("HSE 2022 debug: Column selection completed, ", ncol(data), " columns selected")
   }
 
   # remove "_22" and "_19" suffixes
@@ -140,9 +140,9 @@ read_2022 <- function(
     
     # Check if key variables were renamed
     key_vars_after <- intersect(c("nbeer", "sbeer", "ncider", "scider"), names(data))
-    cat("DEBUG: Key variables after renaming:", paste(key_vars_after, collapse = ", "), "\n")
+    #cat("DEBUG: Key variables after renaming:", paste(key_vars_after, collapse = ", "), "\n")
   } else {
-    cat("DEBUG: No variables found to rename\n")
+    #cat("DEBUG: No variables found to rename\n")
   }
 
   data[, psu := paste0("2022_", psu)]
@@ -154,7 +154,7 @@ read_2022 <- function(
   # Debug: Check if key variables exist after all processing
   key_vars <- c("nbeer", "sbeer", "ncider", "scider")
   found_vars <- intersect(key_vars, names(data))
-  message("HSE 2022 read_2022() result: Found ", length(found_vars), " of 4 key variables: ", paste(found_vars, collapse = ", "))
+  #message("HSE 2022 read_2022() result: Found ", length(found_vars), " of 4 key variables: ", paste(found_vars, collapse = ", "))
 
   return(data[])
 }

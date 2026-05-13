@@ -2,7 +2,7 @@
 #' Clean demographic variables
 #'
 #' @description
-#' Creates variables for ethnicity, sex and quintiles of the Index of Multiple Deprivation (IMDQ).
+#' Creates variables for ethnicity, region, sex, and quintiles of the Index of Multiple Deprivation (IMDQ).
 #'
 #' @details See below
 #'
@@ -236,6 +236,47 @@ clean_demographic <- function(
 
       data[ , wimd := NULL]
     }
+  }
+  
+  ###################################################
+  # Label region
+  
+  if(country == "England"){
+    
+    ### 2010
+    
+    if("gor" %in% colnames(data)){
+      
+      data[gor == "A", region := "North East"]
+      data[gor == "B", region := "North West"]
+      data[gor == "D", region := "Yorkshire and The Humber"]
+      data[gor == "E", region := "East Midlands"]
+      data[gor == "F", region := "West Midlands"]
+      data[gor == "G", region := "East of England"]
+      data[gor == "H", region := "London"]
+      data[gor == "J", region := "South East"]
+      data[gor == "K", region := "South West"]
+      
+      data[, gor := NULL]
+      
+    }
+    
+    ### 2011 - current
+    if("gor1" %in% colnames(data)){
+      
+      data[gor1 == "1", region := "North East"]
+      data[gor1 == "2", region := "North West"]
+      data[gor1 == "3", region := "Yorkshire and The Humber"]
+      data[gor1 == "4", region := "East Midlands"]
+      data[gor1 == "5", region := "West Midlands"]
+      data[gor1 == "6", region := "East of England"]
+      data[gor1 == "7", region := "London"]
+      data[gor1 == "8", region := "South East"]
+      data[gor1 == "9", region := "South West"]
+      
+      data[, gor1 := NULL]
+    }
+    
   }
 
   return(data[])

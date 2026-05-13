@@ -50,7 +50,6 @@ Imports:
     testthat,
     fitdistrplus,
     Rdpack
-RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown
@@ -59,3 +58,4 @@ Depends:
     R (>= 3.5),
     nnet
 RdMacros: Rdpack, lifecycle
+Config/roxygen2/version: 8.0.0

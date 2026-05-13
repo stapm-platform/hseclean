@@ -20,6 +20,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Duncan Gillespie \email{duncan.gillespie@sheffield.ac.uk} (\href{https://orcid.org/0000-0003-3450-5747}{ORCID})
   \item Laura Webster
   \item Grace Leeming (\href{https://orcid.org/0000-0003-4836-7840}{ORCID})
   \item Ryan KL Chen

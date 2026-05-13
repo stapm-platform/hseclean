@@ -108,7 +108,7 @@ read_2015 <- function(
       paidwk,
       activb2,
       #Ag015g4, #Children, Infants,
-      educend, topqual3,
+      educend, topqual3, Gor1,
       eqv5, #eqvinc,
 
       marstatd, # marital status inc cohabitees
