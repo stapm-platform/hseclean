@@ -30,11 +30,11 @@ read_2022 <- function(
     na.strings = c("NA", "", "-1", "-2", "-6", "-7", "-8", "-9", "-90", "-90.0", "-99", "N/A")
   )
   
-  message("HSE 2022 debug: Raw data loaded, ", nrow(data), " rows, ", ncol(data), " columns")
+  #message("HSE 2022 debug: Raw data loaded, ", nrow(data), " rows, ", ncol(data), " columns")
 
   data.table::setnames(data, names(data), tolower(names(data)))
   
-  message("HSE 2022 debug: Column names converted to lowercase")
+  #message("HSE 2022 debug: Column names converted to lowercase")
 
   if (select_cols == "tobalc") {
     # Do a scan of the data dictionary to get the column numbers of all drinking variables
@@ -63,7 +63,10 @@ read_2022 <- function(
       marstatd_22, # marital status inc cohabitees
 
       # # how much they weigh
-      htval, wtval
+      htval, wtval,
+      
+      ### AUDIT
+      AUDScore, AUDITG, AUDIT2
     )
 
     names <- c(other_vars, alc_vars, smk_vars)
