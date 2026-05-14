@@ -75,18 +75,21 @@ alc_weekmean_adult <- function(
   # Auto-detect and use 2022-specific ABV data for HSE 2022 ONLY
   if(year == 2022 & country == "England") {
     # Try to use 2022-specific ABV data if it exists
-    tryCatch({
-      if("abv_data_2022" %in% getNamespaceExports("hseclean")) {
-        abv_data <- hseclean::abv_data_2022
-        message("Auto-detected HSE 2022: Using 2022-specific ABV values (Normal beer: 4.4%, Strong beer: 7.6%, Normal cider: 4.6%, Strong cider: 7.4%)")
-      } else if(exists("abv_data_2022", envir = .GlobalEnv)) {
-        abv_data <- get("abv_data_2022", envir = .GlobalEnv)
-        message("Auto-detected HSE 2022: Using 2022-specific ABV values from global environment")
-      }
-    }, error = function(e) {
+    
+    abv_data <- hseclean::abv_data_2022
+    
+    #tryCatch({
+    #  if("abv_data_2022" %in% getNamespaceExports("hseclean")) {
+    #    abv_data <- hseclean::abv_data_2022
+    #    message("Auto-detected HSE 2022: Using 2022-specific ABV values (Normal beer: 4.4%, Strong beer: 7.6%, Normal cider: 4.6%, Strong cider: 7.4%)")
+    #  } else if(exists("abv_data_2022", envir = .GlobalEnv)) {
+    #    abv_data <- get("abv_data_2022", envir = .GlobalEnv)
+    #    message("Auto-detected HSE 2022: Using 2022-specific ABV values from global environment")
+    #  }
+    #}, error = function(e) {
       # If 2022 ABV data not available, use default passed to function
-      message("HSE 2022 detected but 2022-specific ABV data not found - using default ABV values")
-    })
+      #message("HSE 2022 detected but 2022-specific ABV data not found - using default ABV values")
+    #})
   }
   
   year_set1 <- 2001:2002

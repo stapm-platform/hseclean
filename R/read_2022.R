@@ -63,10 +63,7 @@ read_2022 <- function(
       marstatd_22, # marital status inc cohabitees
 
       # # how much they weigh
-      htval, wtval,
-      
-      ### AUDIT
-      AUDScore, AUDITG, AUDIT2
+      htval, wtval
     )
 
     names <- c(other_vars, alc_vars, smk_vars)
@@ -139,7 +136,7 @@ read_2022 <- function(
     
     # Perform the renaming
     data.table::setnames(data, existing_old_names, corresponding_new_names)
-    cat("DEBUG: Renamed", length(existing_old_names), "variables\n")
+    #cat("DEBUG: Renamed", length(existing_old_names), "variables\n")
     
     # Check if key variables were renamed
     key_vars_after <- intersect(c("nbeer", "sbeer", "ncider", "scider"), names(data))
