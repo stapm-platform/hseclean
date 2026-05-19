@@ -71,6 +71,23 @@ alc_audit <- function(
   data[audit10 == 1, audit10 := 0]
   data[audit10 == 3, audit10 := 4]
   
+  ## If the answer to Audit 1 "How often do you have a drink containing alcohol?" is "Never",l
+  ## respondents are re-routed to the next set of questions. If audit1 is 0 and audit2-10 missing, fill 
+  ## in the missings as zeroes
+  
+  data[audit1 == 0 & is.na(audit2), audit2 := 0]
+  data[audit1 == 0 & is.na(audit3), audit3 := 0]
+  data[audit1 == 0 & is.na(audit4), audit4 := 0]
+  data[audit1 == 0 & is.na(audit5), audit5 := 0]
+  data[audit1 == 0 & is.na(audit6), audit6 := 0]
+  data[audit1 == 0 & is.na(audit7), audit7 := 0]
+  data[audit1 == 0 & is.na(audit8), audit8 := 0]
+  data[audit1 == 0 & is.na(audit9), audit9 := 0]
+  data[audit1 == 0 & is.na(audit10), audit10 := 0]
+
+  
+  ## Construct AUDIT (0-40) and AUDIT-C (0-12) scores
+  
   data[, audit := audit1 + audit2 + audit3 + audit4 + audit5 + audit6 + audit7 + audit8 + audit9 + audit10]
   data[, audit_c := audit1 + audit2 + audit3]
   
