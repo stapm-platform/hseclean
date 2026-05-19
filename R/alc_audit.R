@@ -91,11 +91,13 @@ alc_audit <- function(
   data[, audit := audit1 + audit2 + audit3 + audit4 + audit5 + audit6 + audit7 + audit8 + audit9 + audit10]
   data[, audit_c := audit1 + audit2 + audit3]
   
+  data[audit %in% 0, audit_cat := "abstainer"]
   data[audit %in% 1:7, audit_cat := "low_risk"]
   data[audit %in% 8:15, audit_cat := "medium_risk"]
   data[audit %in% 16:19, audit_cat := "higher_risk"]
   data[audit %in% 20:40, audit_cat := "possible_dependence"]
   
+  data[audit_c %in% 0, audit_c_cat := "abstainer"]
   data[audit_c %in% 1:4, audit_c_cat := "low_risk"]
   data[audit_c %in% 5:7, audit_c_cat := "medium_risk"]
   data[audit_c %in% 8:10, audit_c_cat := "higher_risk"]
