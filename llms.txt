@@ -1,0 +1,462 @@
+# Health Survey Data Wrangling
+
+## The Sheffield Tobacco and Alcohol Policy Modelling Platform
+
+This R package was developed as part of the Sheffield Tobacco and
+Alcohol Policy Modelling <https://stapm-platform.github.io/> by the
+[School of Health and Related Research at the University of
+Sheffield](https://www.sheffield.ac.uk/scharr).
+
+The aim of the research programme is to identify and evaluate approaches
+to reducing the harm from tobacco and alcohol, with the aim of improving
+commissioning in a public health policy context, i.e. providing
+knowledge to support benefits achieved by policymakers.
+
+The two objectives of the research programme are:
+
+- To evaluate the health and economic effects of past trends, policy
+  changes or interventions that have affected alcohol consumption and/or
+  tobacco smoking
+- To appraise the health and economic outcomes of potential future
+  trends, changes to alcohol and/or tobacco policy or new interventions
+
+The STAPM modelling is not linked to the tobacco or alcohol industry and
+is conducted without industry funding or influence.
+
+## Purpose of making the code open source
+
+The code has been made open source for the following two reasons:
+
+- Transparency. Open science, allowing review and feedback to the
+  project team on the code and methods used.
+- Methodology sharing. For people to understand the code and methods
+  used so they might use aspects of it in their own work, e.g., because
+  they are doing something partially related that isn’t exactly the same
+  job and might like to ‘dip into’ elements of this code for
+  inspiration.
+
+## Stage of testing and development
+
+The code is actively being used in project work. It is being reviewed
+and developed all the time; more tests and checks are being added.
+
+The repository is not intended to be maintained by an open source
+community wider than the development team.
+
+## Data access
+
+To be able to download data from the UK Data Service, you will need to
+register with the UK Data Service website, which will enable you to
+request access to the datasets. Instructions on how to do this can be
+found
+[here](https://www.ukdataservice.ac.uk/get-data/how-to-access.aspx).
+
+In ScHARR, all data is stored and processed according to the [ScHARR
+Information Governance
+Policy](https://www.sheffield.ac.uk/scharr/research/igov/policy00). No
+individual-level data is included within this package.
+
+## Data checks
+
+Data checks are brief reports that show the results of survey data
+processing using the hseclean package.
+
+## Code repositories
+
+The code is developed openly on GitHub
+(<https://github.com/stapm-platform/hseclean>). The repository is linked
+to a repository on the Open Science Framework, which provides the doi
+for the package citation (<https://osf.io/43n7p/>).
+
+## Motivation for developing the R package
+
+The motivation for `hseclean` was to standardised the way that health
+survey data were cleaned and prepared for our analyses and inputs to the
+STAPM decision-analytic model. The data are annual surveys covering
+health and health-related behaviours for England and Scotland. The suite
+of functions within `hseclean` reads the data for each year, renames,
+organises and processes the variables including multiple imputation and
+basic data summaries.
+
+`hseclean` was created as part of a programme of work on the health
+economics of tobacco and alcohol at the School of Health and Related
+Research (ScHARR), The University of Sheffield. This programme is based
+around the construction of the Sheffield Tobacco and Alcohol Policy
+Model (STAPM), which aims to use comparable methodologies to evaluate
+the impacts of tobacco and alcohol policies.
+
+We have subsequently added functions to process the Scottish Health
+Survey (SHeS) into a form that matches our processing of the Health
+Survey for England.
+
+## Functionality
+
+hseclean works with data from annual surveys covering health and
+health-related behaviours for England and Scotland. It does not function
+without this data. However no datasets are provisioned. The code is
+designed to work with the tab delimited versions of the data downloaded
+from the [UK Data Service](https://ukdataservice.ac.uk/).
+
+The package is primarily designed for users at the University of
+Sheffield, working off the university’s networked drives. This is where
+most of the testing has taken place so there might be unexpected issues
+out of that environment.
+
+What the software does in general and how it relates to data is
+documented in the vignettes under “Technical Documentation”.
+
+## Usage
+
+`hseclean` is a package for reading and cleaning the Health Survey for
+England and Scottish Health Survey data.
+
+The **inputs** are the tab delimited survey data files for each year.
+
+The **processes** applied by the functions in `hseclean` give options
+to:
+
+1.  Read tobacco and alcohol related variables and the information on
+    individual characteristics that we use in our analyses.  
+2.  Clean alcohol consumption data, applying assumptions about beverage
+    size and alcohol content.  
+3.  Clean data on current smoking and smoking history.  
+4.  Clean data on individual characteristics including age, sex,
+    ethnicity, economic status, family, health and income.  
+5.  Multiply impute missing data.  
+6.  Summarise categorical variables using proportions, considering
+    survey design.
+
+The **output** of these processes is a cleaned dataset that is ready for
+further analysis. This dataset can be saved so that you don’t need to
+run the cleaning processes in `hseclean` each time you want to use the
+cleaned data.
+
+## Installation
+
+`hseclean` is publicly available via Github.
+
+By default the user should install the latest tagged version of the
+package. Otherwise, if you want to reproduce project work and know the
+version of the package used, install that version.
+
+If on a University of Sheffield managed computer, install the R, RStudio
+and Rtools bundle from the Software Centre. Install Rtools - using the
+[installr](https://cran.r-project.org/web/packages/installr/index.html)
+package can make this easier. Then install the latest or a specified
+version of `hseclean` from Github with:
+
+``` r
+
+#install.packages("devtools")
+
+devtools::install_git(
+  "https://github.com/stapm-platform/hseclean.git", 
+  ref = "x.x.x",
+  build_vignettes = FALSE)
+
+# ref = "x.x.x" is the version to install - change to the version you want e.g. "1.2.3"
+```
+
+Or clone the package repo locally and use the ‘install and restart’
+button in the Build tab of RStudio. This option is more convenient when
+testing development versions.
+
+Then load the package, and some other packages that are useful. Note
+that the code within `hseclean` uses the
+[`data.table::data.table()`](https://rdrr.io/pkg/data.table/man/data.table.html)
+syntax.
+
+``` r
+
+# Load the package
+library(hseclean)
+
+# Other useful packages
+library(dplyr) # for data manipulation and summary
+library(magrittr) # for pipes
+library(ggplot2) # for plotting
+```
+
+# Package index
+
+## Read Health Survey for England
+
+- [`read_hse()`](https://stapm-platform.github.io/hseclean/reference/read_hse.md)
+  :
+
+  Read HSE data **\[deprecated\]**
+
+- [`read_2001()`](https://stapm-platform.github.io/hseclean/reference/read_2001.md)
+  : Read the Health Survey for England 2001
+
+- [`read_2002()`](https://stapm-platform.github.io/hseclean/reference/read_2002.md)
+  : Read the Health Survey for England 2002
+
+- [`read_2003()`](https://stapm-platform.github.io/hseclean/reference/read_2003.md)
+  : Read the Health Survey for England 2003
+
+- [`read_2004()`](https://stapm-platform.github.io/hseclean/reference/read_2004.md)
+  : Read the Health Survey for England 2004
+
+- [`read_2005()`](https://stapm-platform.github.io/hseclean/reference/read_2005.md)
+  : Read the Health Survey for England 2005
+
+- [`read_2006()`](https://stapm-platform.github.io/hseclean/reference/read_2006.md)
+  : Read the Health Survey for England 2006
+
+- [`read_2007()`](https://stapm-platform.github.io/hseclean/reference/read_2007.md)
+  : Read the Health Survey for England 2007
+
+- [`read_2008()`](https://stapm-platform.github.io/hseclean/reference/read_2008.md)
+  : Read the Health Survey for England 2008
+
+- [`read_2009()`](https://stapm-platform.github.io/hseclean/reference/read_2009.md)
+  : Read the Health Survey for England 2009
+
+- [`read_2010()`](https://stapm-platform.github.io/hseclean/reference/read_2010.md)
+  : Read the Health Survey for England 2010
+
+- [`read_2011()`](https://stapm-platform.github.io/hseclean/reference/read_2011.md)
+  : Read the Health Survey for England 2011
+
+- [`read_2012()`](https://stapm-platform.github.io/hseclean/reference/read_2012.md)
+  : Read the Health Survey for England 2012
+
+- [`read_2013()`](https://stapm-platform.github.io/hseclean/reference/read_2013.md)
+  : Read the Health Survey for England 2013
+
+- [`read_2014()`](https://stapm-platform.github.io/hseclean/reference/read_2014.md)
+  : Read the Health Survey for England 2014
+
+- [`read_2015()`](https://stapm-platform.github.io/hseclean/reference/read_2015.md)
+  : Read the Health Survey for England 2015
+
+- [`read_2016()`](https://stapm-platform.github.io/hseclean/reference/read_2016.md)
+  : Read the Health Survey for England 2016
+
+- [`read_2017()`](https://stapm-platform.github.io/hseclean/reference/read_2017.md)
+  : Read the Health Survey for England 2017
+
+- [`read_2018()`](https://stapm-platform.github.io/hseclean/reference/read_2018.md)
+  : Read the Health Survey for England 2018
+
+- [`read_2019()`](https://stapm-platform.github.io/hseclean/reference/read_2019.md)
+  :
+
+  Read the Health Survey for England 2019 **\[maturing\]**
+
+- [`read_2021()`](https://stapm-platform.github.io/hseclean/reference/read_2021.md)
+  :
+
+  Read the Health Survey for England 2019 **\[maturing\]**
+
+- [`read_2022()`](https://stapm-platform.github.io/hseclean/reference/read_2022.md)
+  :
+
+  Read the Health Survey for England 2022 **\[maturing\]**
+
+## Read Scottish Health Survey
+
+- [`read_SHeS_2008()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2008.md)
+  : Read Scottish Health Survey 2008
+- [`read_SHeS_2009()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2009.md)
+  : Read Scottish Health Survey 2009
+- [`read_SHeS_2010()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2010.md)
+  : Read Scottish Health Survey 2010
+- [`read_SHeS_2011()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2011.md)
+  : Read Scottish Health Survey 2011
+- [`read_SHeS_2012()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2012.md)
+  : Read Scottish Health Survey 2012
+- [`read_SHeS_2013()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2013.md)
+  : Read Scottish Health Survey 2013
+- [`read_SHeS_2014()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2014.md)
+  : Read Scottish Health Survey 2014
+- [`read_SHeS_2015()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2015.md)
+  : Read Scottish Health Survey 2015
+- [`read_SHeS_2016()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2016.md)
+  : Read Scottish Health Survey 2016
+- [`read_SHeS_2017()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2017.md)
+  : Read Scottish Health Survey 2017
+- [`read_SHeS_2018()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2018.md)
+  : Read Scottish Health Survey 2018
+- [`read_SHeS_2019()`](https://stapm-platform.github.io/hseclean/reference/read_SHeS_2019.md)
+  : Read Scottish Health Survey 2019
+
+## Read Welsh Survey data
+
+- [`read_WHS_2009()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2009.md)
+  :
+
+  Read the Welsh Health Survey 2009 **\[maturing\]**
+
+- [`read_WHS_2010()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2010.md)
+  :
+
+  Read the Welsh Health Survey 2010 **\[maturing\]**
+
+- [`read_WHS_2011()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2011.md)
+  :
+
+  Read the Welsh Health Survey 2011 **\[maturing\]**
+
+- [`read_WHS_2012()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2012.md)
+  :
+
+  Read the Welsh Health Survey 2012 **\[maturing\]**
+
+- [`read_WHS_2013()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2013.md)
+  :
+
+  Read the Welsh Health Survey 2013 **\[maturing\]**
+
+- [`read_WHS_2014()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2014.md)
+  :
+
+  Read the Welsh Health Survey 2014 **\[maturing\]**
+
+- [`read_WHS_2015()`](https://stapm-platform.github.io/hseclean/reference/read_WHS_2015.md)
+  :
+
+  Read the Welsh Health Survey 2015 **\[maturing\]**
+
+- [`read_NSW_2016_17()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2016_17.md)
+  :
+
+  Read the National Survey for Wales 2016-17 **\[maturing\]**
+
+- [`read_NSW_2017_18()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2017_18.md)
+  :
+
+  Read the National Survey for Wales 2017-18 **\[maturing\]**
+
+- [`read_NSW_2018_19()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2018_19.md)
+  :
+
+  Read the National Survey for Wales 2018-19 **\[maturing\]**
+
+- [`read_NSW_2019_20()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2019_20.md)
+  :
+
+  Read the National Survey for Wales 2019-20 **\[maturing\]**
+
+- [`read_NSW_2020_21()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2020_21.md)
+  :
+
+  Read the National Survey for Wales 2020-21 **\[maturing\]**
+
+- [`read_NSW_2021_22()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2021_22.md)
+  :
+
+  Read the National Survey for Wales 2021-22 **\[maturing\]**
+
+- [`read_NSW_2022_23()`](https://stapm-platform.github.io/hseclean/reference/read_NSW_2022_23.md)
+  :
+
+  Read the National Survey for Wales 2022-23 **\[maturing\]**
+
+## Alcohol data
+
+- [`alc_audit()`](https://stapm-platform.github.io/hseclean/reference/alc_audit.md)
+  : Alcohol Use Disorder Identification Test (AUDIT)
+- [`alc_drink_freq()`](https://stapm-platform.github.io/hseclean/reference/alc_drink_freq.md)
+  : Drink frequency
+- [`alc_drink_now_allages()`](https://stapm-platform.github.io/hseclean/reference/alc_drink_now_allages.md)
+  : Whether someone drinks and frequency of drinking
+- [`alc_sevenday_adult()`](https://stapm-platform.github.io/hseclean/reference/alc_sevenday_adult.md)
+  : Alcohol consumption in last seven-days (adults)
+- [`alc_sevenday_child()`](https://stapm-platform.github.io/hseclean/reference/alc_sevenday_child.md)
+  : Alcohol consumption in last seven-days (children)
+- [`alc_weekmean_adult()`](https://stapm-platform.github.io/hseclean/reference/alc_weekmean_adult.md)
+  : Alcohol average weekly consumption (adults)
+- [`alc_upshift()`](https://stapm-platform.github.io/hseclean/reference/alc_upshift.md)
+  : Upshifting alcohol consumption
+
+## Smoking data
+
+- [`smk_amount()`](https://stapm-platform.github.io/hseclean/reference/smk_amount.md)
+  : Characteristics of smoking
+
+- [`smk_life_history()`](https://stapm-platform.github.io/hseclean/reference/smk_life_history.md)
+  : Ages of smoking initiation, quit and censoring
+
+- [`smk_quit()`](https://stapm-platform.github.io/hseclean/reference/smk_quit.md)
+  :
+
+  Quitting smoking **\[experimental\]**
+
+- [`smk_status()`](https://stapm-platform.github.io/hseclean/reference/smk_status.md)
+  : Cigarette smoking status
+
+- [`smk_former()`](https://stapm-platform.github.io/hseclean/reference/smk_former.md)
+  : Former smokers: time since quit and time as smoker
+
+## Covariate data
+
+- [`clean_age()`](https://stapm-platform.github.io/hseclean/reference/clean_age.md)
+  : Age variables
+- [`clean_demographic()`](https://stapm-platform.github.io/hseclean/reference/clean_demographic.md)
+  : Clean demographic variables
+- [`clean_economic_status()`](https://stapm-platform.github.io/hseclean/reference/clean_economic_status.md)
+  : Economic status
+- [`clean_education()`](https://stapm-platform.github.io/hseclean/reference/clean_education.md)
+  : Education variables
+- [`clean_family()`](https://stapm-platform.github.io/hseclean/reference/clean_family.md)
+  : Family status
+- [`clean_health_and_bio()`](https://stapm-platform.github.io/hseclean/reference/clean_health_and_bio.md)
+  : Health and biometric variables
+- [`clean_income()`](https://stapm-platform.github.io/hseclean/reference/clean_income.md)
+  : Income
+- [`use_townsend()`](https://stapm-platform.github.io/hseclean/reference/use_townsend.md)
+  : Use the Townsend Index of Deprivation
+
+## Data wrangling
+
+- [`combine_years()`](https://stapm-platform.github.io/hseclean/reference/combine_years.md)
+  : Combine years of data
+- [`select_data()`](https://stapm-platform.github.io/hseclean/reference/select_data.md)
+  : Select variables and apply filters
+- [`num_sim()`](https://stapm-platform.github.io/hseclean/reference/num_sim.md)
+  : Simulate single years from age/time category
+- [`impute_data_mice()`](https://stapm-platform.github.io/hseclean/reference/impute_data_mice.md)
+  : Chained multiple imputation of a set of variables
+- [`prop_summary()`](https://stapm-platform.github.io/hseclean/reference/prop_summary.md)
+  : Summarise the percentages of people with certain levels of a
+  variable
+- [`clean_surveyweights()`](https://stapm-platform.github.io/hseclean/reference/clean_surveyweights.md)
+  : Process the survey weights
+- [`impute_mean()`](https://stapm-platform.github.io/hseclean/reference/impute_mean.md)
+  : Fills missing values with subgroup mean value
+
+## Plotting
+
+- [`theme_publication()`](https://stapm-platform.github.io/hseclean/reference/theme_publication.md)
+  : Publication-ready ggplot2 theme
+
+## Data
+
+- [`imdq_to_townsend`](https://stapm-platform.github.io/hseclean/reference/imdq_to_townsend.md)
+  : Probabilistic mapping of Index of Multiple Deprivation to Townsend
+  quintiles
+- [`abv_data`](https://stapm-platform.github.io/hseclean/reference/abv_data.md)
+  : Alcohol content assumptions
+- [`alc_volume_data`](https://stapm-platform.github.io/hseclean/reference/alc_volume_data.md)
+  : Beverage volume assumptions
+- [`impute_kids_model`](https://stapm-platform.github.io/hseclean/reference/impute_kids_model.md)
+  : Multinomial model of number of kids in the household 2012-2014
+- [`per_capita_alc_for_upshift`](https://stapm-platform.github.io/hseclean/reference/per_capita_alc_for_upshift.md)
+  : Per capita sales of alcohol for use in upshifting procedure from
+  HMRC data on duty receipts disaggregated by UK nation
+- [`per_capita_alc_for_upshift_scotland`](https://stapm-platform.github.io/hseclean/reference/per_capita_alc_for_upshift_scotland.md)
+  : Per capita sales of alcohol for use in upshifting procedure from
+  MESAS data on alcohol sales in Scotland.
+
+# Articles
+
+### All vignettes
+
+- [Methods: process the Health Survey for England
+  data](https://stapm-platform.github.io/hseclean/articles/english_hse_data_processing_methods.md):
+- [Methods: process the Health Survey for England
+  data](https://stapm-platform.github.io/hseclean/articles/english_hse_data_processing_methods2.md):
+- [Get
+  started](https://stapm-platform.github.io/hseclean/articles/hseclean.md):
