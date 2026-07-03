@@ -1,42 +1,36 @@
-destination: docs
+url: https://stapm-platform.github.io/hseclean
+
 home:
   title: Health Survey Data Wrangling
-  links:
-  - text: Health Survey for England
-    href: https://stapm.gitlab.io/Health_Survey_for_England.html
-  - text: Scottish Health Survey
-    href: https://stapm.gitlab.io/Scottish_Health_Survey.html
-url: https://stapm.github.io/hseclean/
+
 template:
   bootstrap: 5
-  params:
-    bootswatch: flatly
-    ganalytics: UA-167990045-1
+  bootswatch: flatly
+
 authors:
   Duncan Gillespie:
-    href: https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie
+    href: https://sheffield.ac.uk/smph/duncan-gillespie
   Damon Morris:
-    href: https://www.sheffield.ac.uk/scharr/people/staff/damon-morris
+    href: https://sheffield.ac.uk/smph/damon-morris
   Colin Angus:
-    href: https://www.sheffield.ac.uk/scharr/people/staff/colin-angus
+    href: https://sheffield.ac.uk/smph/colin-angus
   Alan Brennan:
-    href: https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan
+    href: https://sheffield.ac.uk/smph/people/academic/population-health/alan-brennan
 
 navbar:
   structure:
-    left:  [home, intro, reference, articles]
-    right: [github, gitlab, software]
+    left:  [intro, reference, articles]
+    right: [github]
   components:
-    home: ~
     intro:
-     text: Get started
-     href: articles/hseclean.html
+      text: Get started
+      href: articles/hseclean.html
     reference:
-     text: Functions
-     href: reference/index.html
+      text: Functions
+      href: reference/index.html
     articles:
-     text: Methods and data checks
-     menu:
+      text: Methods and data checks
+      menu:
       - text: Health Survey for England methods
         href: articles/english_hse_data_processing_methods.html
       - text: Scotland alcohol data
@@ -46,17 +40,9 @@ navbar:
       - text: Scotland alcohol upshifting
         href: articles/Scotland_alcohol_upshifting_report.html
     github:
-     icon: fab fa-github fa-lg
-     href: https://github.com/STAPM/hseclean
-     aria-label: View on Github
-    gitlab:
-     icon: fab fa-gitlab fa-lg
-     href: https://gitlab.com/stapm/r-packages/hseclean
-     aria-label: View on Gitlab
-    software:
-     icon: fa-code
-     href: https://stapm.gitlab.io/software.html
-     aria-label: Back to the STAPM software page
+      icon: fab fa-github fa-lg
+      href: https://github.com/stapm-platform/hseclean
+      aria-label: View on GitHub
 
 reference:
 - title: Read Health Survey for England
@@ -81,6 +67,8 @@ reference:
   - read_2017
   - read_2018
   - read_2019
+  - read_2021
+  - read_2022
 
 - title: Read Scottish Health Survey
   contents:
@@ -116,6 +104,7 @@ reference:
 
 - title: Alcohol data
   contents:
+  - alc_audit
   - alc_drink_freq
   - alc_drink_now_allages
   - alc_sevenday_adult
@@ -152,6 +141,10 @@ reference:
   - clean_surveyweights
   - impute_mean
 
+- title: Plotting
+  contents:
+  - theme_publication
+
 - title: Data
   contents:
   - imdq_to_townsend
@@ -160,15 +153,3 @@ reference:
   - impute_kids_model
   - per_capita_alc_for_upshift
   - per_capita_alc_for_upshift_scotland
-
-
-
-
-
-
-
-
-
-
-
-

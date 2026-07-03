@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Health Survey Data Wrangling <img src="logo.png" align="right" style="padding-left:10px;background-color:white;" width="100" height="100" />
+# Health Survey Data Wrangling <img src="logo.png" align="right" style="padding-left:10px;background-color:white;" width="140" height="150" />
 
 <!-- badges: start -->
 
@@ -10,17 +10,14 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-
-<!-- badger::badge_doi("10.17605/OSF.IO/43N7P", "green") -->
-
 [![](https://img.shields.io/badge/doi-10.17605/OSF.IO/43N7P-green.svg)](https://doi.org/10.17605/OSF.IO/43N7P)
 <!-- badges: end -->
 
 ## The Sheffield Tobacco and Alcohol Policy Modelling Platform
 
 This R package was developed as part of the Sheffield Tobacco and
-Alcohol Policy Modelling <https://stapm.gitlab.io/> by the [School of
-Health and Related Research at the University of
+Alcohol Policy Modelling <https://stapm-platform.github.io/> by the
+[School of Health and Related Research at the University of
 Sheffield](https://www.sheffield.ac.uk/scharr).
 
 The aim of the research programme is to identify and evaluate approaches
@@ -30,12 +27,11 @@ knowledge to support benefits achieved by policymakers.
 
 The two objectives of the research programme are:
 
--   To evaluate the health and economic effects of past trends, policy
-    changes or interventions that have affected alcohol consumption
-    and/or tobacco smoking
--   To appraise the health and economic outcomes of potential future
-    trends, changes to alcohol and/or tobacco policy or new
-    interventions
+- To evaluate the health and economic effects of past trends, policy
+  changes or interventions that have affected alcohol consumption and/or
+  tobacco smoking
+- To appraise the health and economic outcomes of potential future
+  trends, changes to alcohol and/or tobacco policy or new interventions
 
 The STAPM modelling is not linked to the tobacco or alcohol industry and
 is conducted without industry funding or influence.
@@ -44,13 +40,13 @@ is conducted without industry funding or influence.
 
 The code has been made open source for the following two reasons:
 
--   Transparency. Open science, allowing review and feedback to the
-    project team on the code and methods used.
--   Methodology sharing. For people to understand the code and methods
-    used so they might use aspects of it in their own work, e.g.,
-    because they are doing something partially related that isn’t
-    exactly the same job and might like to ‘dip into’ elements of this
-    code for inspiration.
+- Transparency. Open science, allowing review and feedback to the
+  project team on the code and methods used.
+- Methodology sharing. For people to understand the code and methods
+  used so they might use aspects of it in their own work, e.g., because
+  they are doing something partially related that isn’t exactly the same
+  job and might like to ‘dip into’ elements of this code for
+  inspiration.
 
 ## Stage of testing and development
 
@@ -80,20 +76,10 @@ processing using the hseclean package.
 
 ## Code repositories
 
-The code on Github (<https://github.com/STAPM/hseclean>) is a mirror of
-the code in a private Gitlab repository where the actual development
-takes place (<https://gitlab.com/stapm/r-packages/hseclean>). The code
-in the Github repository is linked to a repository on the Open Science
-Framework, which provides the doi for the package citation
-(<https://osf.io/43n7p/>).
-
-## Citation
-
-Gillespie D, Webster L, Leeming G, Morris D, Angus C, Brennan A
-(\[YEAR\]). hseclean: An R Package for Health Survey Data Wrangling. R
-package version \[x.x.x\]. University of Sheffield.
-<https://stapm.github.io/hseclean/>. doi:
-<https://doi.org/10.17605/OSF.IO/43N7P>
+The code is developed openly on GitHub
+(<https://github.com/stapm-platform/hseclean>). The repository is linked
+to a repository on the Open Science Framework, which provides the doi
+for the package citation (<https://osf.io/43n7p/>).
 
 ## Motivation for developing the R package
 
@@ -176,7 +162,7 @@ version of `hseclean` from Github with:
 #install.packages("devtools")
 
 devtools::install_git(
-  "https://github.com/stapm/hseclean.git", 
+  "https://github.com/stapm-platform/hseclean.git", 
   ref = "x.x.x",
   build_vignettes = FALSE)
 

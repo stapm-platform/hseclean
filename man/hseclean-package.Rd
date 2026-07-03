@@ -11,7 +11,9 @@ Functions to read the data, rename, organise and process the variables required,
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://stapm.github.io/hseclean/}
+  \item \url{https://github.com/stapm-platform/hseclean}
+  \item \url{https://stapm-platform.github.io/hseclean}
+  \item Report bugs at \url{https://github.com/stapm-platform/hseclean/issues}
 }
 
 }
@@ -21,12 +23,18 @@ Useful links:
 Authors:
 \itemize{
   \item Duncan Gillespie \email{duncan.gillespie@sheffield.ac.uk} (\href{https://orcid.org/0000-0003-3450-5747}{ORCID})
-  \item Laura Webster
-  \item Grace Leeming (\href{https://orcid.org/0000-0003-4836-7840}{ORCID})
-  \item Ryan KL Chen
   \item Damon Morris (\href{https://orcid.org/0000-0001-6757-5333}{ORCID})
-  \item Colin Angus \email{c.r.angus@sheffield.ac.uk}
+  \item Grace Leeming (\href{https://orcid.org/0000-0003-4836-7840}{ORCID})
   \item Alan Brennan \email{a.brennan@sheffield.ac.uk}
+  \item Colin Angus \email{c.r.angus@sheffield.ac.uk}
+}
+
+Other contributors:
+\itemize{
+  \item Laura Webster [contributor]
+  \item Ryan KL Chen [contributor]
+  \item Charlotte Head [contributor]
+  \item Maria Hanini [contributor]
 }
 
 }

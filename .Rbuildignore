@@ -9,7 +9,6 @@
 ^pkgdown$
 ^LICENSE\.md$
 ^\.github
-^\.gitlab-ci\.yml$
 ^examples$
 README.Rmd
 ^hseclean\.Rproj$
