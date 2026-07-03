@@ -2,6 +2,11 @@ url: https://stapm-platform.github.io/hseclean
 
 home:
   title: Health Survey Data Wrangling
+  links:
+  - text: Health Survey for England
+    href: https://stapm-platform.github.io/Health_Survey_for_England.html
+  - text: Scottish Health Survey
+    href: https://stapm-platform.github.io/Scottish_Health_Survey.html
 
 template:
   bootstrap: 5
@@ -9,18 +14,18 @@ template:
 
 authors:
   Duncan Gillespie:
-    href: https://sheffield.ac.uk/smph/duncan-gillespie
+    href: https://www.sheffield.ac.uk/scharr/people/staff/duncan-gillespie
   Damon Morris:
-    href: https://sheffield.ac.uk/smph/damon-morris
+    href: https://www.sheffield.ac.uk/scharr/people/staff/damon-morris
   Colin Angus:
-    href: https://sheffield.ac.uk/smph/colin-angus
+    href: https://www.sheffield.ac.uk/scharr/people/staff/colin-angus
   Alan Brennan:
-    href: https://sheffield.ac.uk/smph/people/academic/population-health/alan-brennan
+    href: https://www.sheffield.ac.uk/scharr/people/staff/alan-brennan
 
 navbar:
   structure:
     left:  [intro, reference, articles]
-    right: [github]
+    right: [software, github]
   components:
     intro:
       text: Get started
@@ -29,16 +34,12 @@ navbar:
       text: Functions
       href: reference/index.html
     articles:
-      text: Methods and data checks
-      menu:
-      - text: Health Survey for England methods
-        href: articles/english_hse_data_processing_methods.html
-      - text: Scotland alcohol data
-        href: articles/Scotland_alcohol_data_report.html
-      - text: Scotland tobacco data
-        href: articles/Scotland_tobacco_data_report.html
-      - text: Scotland alcohol upshifting
-        href: articles/Scotland_alcohol_upshifting_report.html
+      text: Methods
+      href: articles/index.html
+    software:
+      icon: fa-code
+      href: https://stapm-platform.github.io/
+      aria-label: Back to the STAPM software page
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/stapm-platform/hseclean

@@ -1,0 +1,116 @@
+# Upshifting alcohol consumption
+
+Upshift the average weekly units of alcohol consumed to adjust for the
+under-reporting of alcohol consumption in survey data.
+
+## Usage
+
+``` r
+alc_upshift(
+  data,
+  country = c("England", "Scotland")[1],
+  year_select,
+  pcc_data = c("HMRC", "MESAS")[1],
+  proportion = 0.8
+)
+```
+
+## Arguments
+
+- data:
+
+  Data.table - "Population" - the individual level data on alcohol
+  consumption to be upshifted. The variable to be upshifted should be
+  named "weekmean" and contain the average weekly alcohol consumption of
+  an individual in UK standard units of ethanol.
+
+- country:
+
+  Character string - either "England" or "Scotland".
+
+- year_select:
+
+  Integer - Year for which upshifting will be done
+
+- pcc_data:
+
+  Data.table - "PCC" - the values of per capita alcohol consumption
+  calculated from HMRC data on duty receipts disaggregated by UK nation
+  or MESAS monitoring report on alcohol sales 2022 (Scotland only)
+  Stored as package data in hseclean::per_capita_alc_for_upshift.
+
+- proportion:
+
+  Numeric - the proportion of this 'true' value to shift consumption
+  data up to (default is 80 percent (Stockwell et al. 2018) ).
+
+## Value
+
+Returns the input data with a column weekmean_adj added containing the
+upshifted values of weekly mean alcohol consumption.
+
+## Details
+
+A function of the form f(PCC, Proportion, Population) where PCC=the
+'true' Per Capita Consumption being aimed for in units of per capita
+litres of pure ethanol per year, Proportion=the proportion of this
+'true' value to shift consumption data up to (default is 80 percent,
+taken from Stockwell et al. (2018) which is based on World Health
+Organisation assumptions) and Population=the population whose
+consumption is to be upshifted.
+
+The fixed values used to generate the standard deviations of the gamma
+distributions are taken from Kehoe et al. (2012) .
+
+Note that the result could be an upshift or a downshift depending on the
+reference pcc value and the distribution of consumption in the survey
+data.
+
+## References
+
+Kehoe T, Gmel G, Shield KD, Gmel G, Rehm J (2012). “Determining the best
+population-level alcohol consumption model and its impact on estimates
+of alcohol-attributable harms.” *Population Health Metrics*, **10**(1),
+1–19.
+[doi:10.1186/1478-7954-10-6](https://doi.org/10.1186/1478-7954-10-6) .
+Stockwell T, Zhao J, Sherk A, Rehm J, Shield K, Naimi T (2018).
+“Underestimation of alcohol consumption in cohort studies and
+implications for alcohol's contribution to the global burden of
+disease.” *Addiction*, **113**(12), 2245–2249.
+[doi:10.1111/add.14392](https://doi.org/10.1111/add.14392) .
+
+## Examples
+
+``` r
+
+if (FALSE) { # \dontrun{
+
+# Scottish Health Survey example
+# 2018
+
+library(hseclean)
+library(data.table)
+library(magrittr)
+
+# Location of Scottish data
+root_dir <- "X:/HAR_PR/PR/Consumption_TA/HSE/Scottish Health Survey (SHeS)/"
+
+data <- read_SHeS_2018(root = root_dir) %>%
+  clean_age %>% clean_demographic %>%
+  alc_drink_now_allages %>%
+  alc_weekmean_adult %>%
+  select_data(ages = 16:89, years = 2018,
+    keep_vars = c("wt_int", "year", "age", "sex", "weekmean"),
+    complete_vars = c("wt_int", "sex", "weekmean"))
+
+data <- alc_upshift(data, country = "Scotland",
+  pcc_data = hseclean::per_capita_alc_for_upshift,
+  proportion = 0.8)
+
+} # }
+
+
+
+
+
+```
