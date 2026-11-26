@@ -47,6 +47,8 @@ read_2024 <- function(
     
     # health variables do not appear to be present in the 2022 survey
     # health_vars <- paste0("complst", 1:15)
+    eq5d_vars <- Hmisc::Cs(Mobil24, SelfCa24, UsualA24, Pain24, Anxiet24,
+                           Mobil24g3, SelfCa24g3, UsualA24g3, Pain24g3, Anxiet24g3)
 
     other_vars <- Hmisc::Cs(
       qrtint, # addnum,
@@ -68,7 +70,7 @@ read_2024 <- function(
       htval, wtval
     )
 
-    names <- c(other_vars, alc_vars, smk_vars)
+    names <- c(other_vars, alc_vars, smk_vars, eq5d_vars)
 
     names <- tolower(names)
 
@@ -147,6 +149,12 @@ read_2024 <- function(
   } else {
     #cat("DEBUG: No variables found to rename\n")
   }
+  
+  data.table::setnames(data,
+                       c("mobil24", "selfca24", "usuala24", "pain24", "anxiet24",
+                         "mobil24g3", "selfca24g3", "usuala24g3", "pain24g3", "anxiet24g3"),
+                       c("mobility_5l", "selfcare_5l", "usualact_5l", "pain_5l", "anxiety_5l",
+                         "mobility", "selfcare", "usualact", "pain", "anxiety") )
 
   data[, psu := paste0("2024_", psu)]
   data[, cluster := paste0("2024_", cluster)]
