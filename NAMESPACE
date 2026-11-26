@@ -42,6 +42,7 @@ export(read_2018)
 export(read_2019)
 export(read_2021)
 export(read_2022)
+export(read_2024)
 export(read_NSW_2016_17)
 export(read_NSW_2017_18)
 export(read_NSW_2018_19)
@@ -79,9 +80,11 @@ export(theme_publication)
 export(use_townsend)
 import(data.table)
 importFrom(Rdpack,reprompt)
-importFrom(data.table,":=")
-importFrom(data.table,rbindlist)
-importFrom(data.table,setnames)
+importFrom(data.table,
+  ":=",
+  rbindlist,
+  setnames
+)
 importFrom(lifecycle,deprecate_soft)
 importFrom(stats,predict)
 importFrom(survey,svymean)
