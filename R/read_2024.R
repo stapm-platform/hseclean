@@ -55,7 +55,7 @@ read_2024 <- function(
       seriala,
       age16g5, age35g, sex,
       origin2,
-      qimd19, # nssec3, nssec8,
+      qimd19, nssec3, nssec8,
       stwork,
       activb2,
       # Ag015g4, #Children, Infants,
