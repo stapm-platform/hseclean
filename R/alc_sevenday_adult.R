@@ -68,7 +68,7 @@ alc_sevenday_adult <- function(
   year <- as.integer(unique(data[ , year][1]))
 
   # Auto-detect and load HSE 2022 ABV / volumes data if needed
-  if(year == 2022 & country == "England") {
+  if(year >= 2022 & country == "England") {
     abv_data <- hseclean::abv_data_2022
     alc_volume_data <- hseclean::alc_volume_data_2022
   }
